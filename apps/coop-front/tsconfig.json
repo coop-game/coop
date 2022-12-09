@@ -1,0 +1,38 @@
+{
+  "extends": "tsconfig/nextjs.json",
+  "compilerOptions": {
+    // "target": "es5",
+    // "lib": ["dom", "dom.iterable", "esnext"],
+    // "allowJs": true,
+    // "skipLibCheck": true,
+    // "strict": true,
+    // "forceConsistentCasingInFileNames": true,
+    // "noEmit": true,
+    // "esModuleInterop": true,
+    // "module": "esnext",
+    // "moduleResolution": "node",
+    // "resolveJsonModule": true,
+    // "isolatedModules": true,
+    // "jsx": "preserve",
+    // "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@common/*": ["src/common/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@theme/*": ["src/theme/*"],
+      "@styles/*": ["styles/*"],
+      "@pages/*": ["pages/*"]
+    },
+    "jsxImportSource": "@emotion/react"
+  },
+  "include": [
+    "types",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "next-sitemap.config.js",
+    "**/*.ttf"
+  ],
+  "exclude": ["node_modules"]
+}
