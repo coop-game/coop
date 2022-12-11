@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Button } from "@coop/core";
 import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
@@ -17,7 +16,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <div>asdfafd???</div>
+      <div>sdf</div>
       <Tldraw></Tldraw>
     </div>
   );

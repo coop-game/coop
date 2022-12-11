@@ -24,7 +24,7 @@
   "source": "./src/index.ts",
   "scripts": {
     "dev": "yarn lfg -d",
-    "build": "yarn lfg",
+    "build2": "yarn lfg",
     "lint": "TIMING=1 eslint src/ --ext .ts,.tsx",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "test": "jest",
