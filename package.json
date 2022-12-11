@@ -11,6 +11,7 @@
     "build:core": "cross-env turbo run build --filter=@coop/core",
     "build:draw": "cross-env turbo run build --filter=@coop/draw",
     "dev:front": "cross-env turbo run dev --parallel --no-cache --filter=coop-front",
+    "prepare": "husky install",
     "dev": "turbo run dev --no-cache --parallel --continue",
     "lint": "turbo run lint",
     "test": "turbo run test",
@@ -22,7 +23,7 @@
     "@commitlint/config-conventional": "^15.0.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.4.1",
-    "husky": "^7.0.4",
+    "husky": "^8.0.0",
     "prettier": "^2.5.1",
     "turbo": "latest"
   }
