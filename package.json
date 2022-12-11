@@ -26,5 +26,6 @@
     "husky": "^8.0.0",
     "prettier": "^2.5.1",
     "turbo": "latest"
-  }
+  },
+  "packageManager": "yarn@3.3.0"
 }
