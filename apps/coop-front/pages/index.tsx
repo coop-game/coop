@@ -4,9 +4,7 @@ import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
-const Tldraw = dynamic(() => import("@coop/draw").then((mod) => mod.Tldraw), {
-  ssr: false,
-});
+const Draw = dynamic(() => import("@components/Draw"), { ssr: false });
 
 export default function Home() {
   const [state, setState] = useState(false);
@@ -16,8 +14,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <div>sdfsdf</div>
-      <Tldraw></Tldraw>
+      <Draw></Draw>
     </div>
   );
 }
