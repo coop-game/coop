@@ -14,12 +14,13 @@
     "@storybook/react": "^6.5.14",
     "@storybook/testing-library": "^0.0.13",
     "babel-loader": "^8.3.0",
-    "ui": "*"
+    "@coop/core": "*",
+    "@coop/draw": "*"
   },
   "dependencies": {},
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build": "build-storybook"
+    "build2": "build-storybook"
   }
 }

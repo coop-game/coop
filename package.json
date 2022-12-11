@@ -1,26 +1,26 @@
 {
-  "name": "my-turborepo",
+  "name": "turborepo-design-system",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "scripts": {
-    "build": "turbo run build",
-    "start": "turbo run start",
-    "dev": "turbo run dev --parallel",
+    "build": "cross-env turbo run build",
+    "dev": "turbo run dev --no-cache --parallel --continue",
     "lint": "turbo run lint",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "eslint-config-custom": "*",
-    "prettier": "latest",
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.4.1",
+    "husky": "^7.0.4",
+    "prettier": "^2.5.1",
     "turbo": "latest"
-  },
-  "engines": {
-    "node": ">=14.0.0"
-  },
-  "dependencies": {},
-  "packageManager": "yarn@1.22.19"
+  }
 }

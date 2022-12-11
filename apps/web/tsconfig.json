@@ -1,0 +1,18 @@
+{
+  "exclude": [
+    "node_modules"
+  ],
+  "extends": "@coop/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "rootDir": "src",
+    "outDir": "dist",
+    "incremental": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src"
+  ]
+}

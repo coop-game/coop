@@ -1,73 +1,65 @@
-# Turborepo starter
+# Monorepo Turborepo boilerplate
 
-This is an official Yarn v1 starter turborepo.
+This is a monorepo boilerplate powered by [Turborepo](https://turborepo.org/).
 
 ## What's inside?
 
-This turborepo uses [Yarn](https://classic.yarnpkg.com/) as a package manager. It includes the following packages/apps:
+This Turborepo includes the following packages and apps:
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- `docs`: A placeholder documentation site powered by [Next.js](https://nextjs.org)
+- `web`: A website site powered by [Next.js](https://nextjs.org)
+- `spa`: A SPA website site powered by [create-react-app](https://create-react-app.dev/)
+- `@my/core`: core React components
+- `@my/theme-kit`: A react UI theme kit powered by [Tailwind](https://tailwindcss.com/) and [Headlessui](https://headlessui.dev)
+- `@my/utils`: shared React utilities
+- `@my/tsconfig`: shared `tsconfig.json`s used throughout the monorepo
+- `eslint-preset-my`: ESLint preset
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+Each package and app is 100% [Typescript](https://www.typescriptlang.org/).
 
 ### Utilities
 
 This turborepo has some additional tools already setup for you:
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
+- [Typescript](https://www.typescriptlang.org/) for static type checking
 - [ESLint](https://eslint.org/) for code linting
 - [Prettier](https://prettier.io) for code formatting
+- [CommitLint](https://commitlint.js.org/#/) for commit linting
 
-### Build
+## Using this boilerplate
 
-To build all apps and packages, run the following command:
+If you want to use this in the interim, you run the following command:
 
-```
-cd my-turborepo
-yarn run build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-yarn run dev
+```sh
+git clone https://github.com/MahdiTa97/turborepo-boilerplate
+cd turborepo-boilerplate
+yarn install
 ```
 
-### Remote Caching
+### Changing the NPM organization scope
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+The NPM organization scope for this design system starter is `@my`. To change this, it's a bit manual at the moment, but you'll need to do the following:
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+- Rename folders in `packages/*` to replace `my` with your desired scope
+- Search and replace `my` with your desired scope
+- Re-run `yarn install`
 
+### Publishing packages
+
+#### NPM
+
+If you want to publish package to the public NPM registry and make them publicly available, this is already setup for you.
+
+To publish packages to a private NPM organization scope, **remove** the following from each of the `package.json`'s
+
+```diff
+- "publishConfig": {
+-  "access": "public"
+- },
 ```
-cd my-turborepo
-npx turbo login
-```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+#### GitHub Package Registry
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Pipelines](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+See [Working with the npm registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#publishing-a-package-using-publishconfig-in-the-packagejson-file)
