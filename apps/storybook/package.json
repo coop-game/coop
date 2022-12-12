@@ -5,6 +5,8 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.20.5",
+    "@coop/core": "*",
+    "@coop/draw": "*",
     "@storybook/addon-actions": "^6.5.14",
     "@storybook/addon-essentials": "^6.5.14",
     "@storybook/addon-interactions": "^6.5.14",
@@ -13,11 +15,8 @@
     "@storybook/manager-webpack5": "^6.5.14",
     "@storybook/react": "^6.5.14",
     "@storybook/testing-library": "^0.0.13",
-    "babel-loader": "^8.3.0",
-    "@coop/core": "*",
-    "@coop/draw": "*"
+    "babel-loader": "^8.3.0"
   },
-  "dependencies": {},
   "scripts": {
     "dev": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
