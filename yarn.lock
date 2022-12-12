@@ -5066,6 +5066,14 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
+"@y-presence/client@*":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@y-presence/client/-/client-2.0.1.tgz#0fab0963a3225f94f8d0d9834502babaec4fa6ed"
+  integrity sha512-E6tANH7ztoIpTLCM9RcLaZsWOvKG15YfWX4L08Wiryq03Nv+bbzFvV2TGq4QCVHfsTcD2AJ2hQP46lMwzI3sng==
+  dependencies:
+    y-webrtc "^10.2.3"
+    y-websocket "^1.4.3"
+
 "@y-presence/client@1.1.8":
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/@y-presence/client/-/client-1.1.8.tgz#54b12d189fba1b9ddddc1048cb7b29d44950cdc9"
@@ -5073,6 +5081,15 @@
   dependencies:
     y-webrtc ">=10.2.2"
     y-websocket ">=1.3.18"
+
+"@y-presence/react@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@y-presence/react/-/react-2.0.1.tgz#210895b709c64c48cc1cf1775a7a7ceac99632c6"
+  integrity sha512-cUwihDtzaTP6aqeY19JPpxQEL6enghkboUxE3Mi8AlgUfRtlwm/GI4COFnkXAgOvMJtKllPSt8nPcX0OUwdbcA==
+  dependencies:
+    "@y-presence/client" "*"
+    y-webrtc "^10.2.3"
+    y-websocket "^1.4.3"
 
 "@zag-js/element-size@0.1.0":
   version "0.1.0"
@@ -14505,7 +14522,7 @@ y-webrtc@>=10.2.2, y-webrtc@^10.2.3:
   optionalDependencies:
     ws "^7.2.0"
 
-y-websocket@>=1.3.18, y-websocket@^1.4.5:
+y-websocket@>=1.3.18, y-websocket@^1.4.3, y-websocket@^1.4.5:
   version "1.4.5"
   resolved "https://registry.yarnpkg.com/y-websocket/-/y-websocket-1.4.5.tgz#8da81b466997bcc4660059f542d0a6ce62581478"
   integrity sha512-5d9LTSy0GQKqSd/FKRo5DMBlsiTlCipbKcIgPLlno+5xHtfT8bm3uQdcbY9JvLfckojilLZWauXJu0vzDZX05w==

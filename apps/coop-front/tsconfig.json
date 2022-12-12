@@ -8,7 +8,8 @@
       "@components/*": ["src/components/*"],
       "@theme/*": ["src/theme/*"],
       "@styles/*": ["styles/*"],
-      "@pages/*": ["pages/*"]
+      "@pages/*": ["pages/*"],
+      "@types/*": ["types/*"]
     },
     "jsxImportSource": "@emotion/react"
   },

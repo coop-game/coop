@@ -1,35 +1,90 @@
 import { useFileSystem } from "@coop/draw";
 import dynamic from "next/dynamic";
-import  {useMultiplayerState, useYjs}  from "./../hooks/useMultiplayerState";
-import React, { useEffect, useMemo } from "react";
+import  { useMultiplayerState}  from "./../hooks/useMultiplayerState";
+import React, { useEffect, useMemo, useState } from "react";
 import { nanoid } from "nanoid";
-// import useYjs from "src/hooks/useYjs";
+
+import { RoomProvider, useOthers, useUpdatePresence } from "@y-presence/react";
+import { UserPresence } from "./../../types/global";
+import { css } from "@emotion/react";
+import Cursor from "./Cursor";
+import { useRecoilValue } from "recoil";
+import { WebrtcProvider } from "y-webrtc";
+import * as awarenessProtocol from "y-protocols/awareness";
+import * as math from "lib0/math";
+import * as random from "lib0/random";
+
+import NewCursor, {CursorComponent} from "@components/NewCursor"
+
+// import { yjsState } from "@common/recoil/recoil.atom";
+
+import * as Y from "yjs";
+import { yjsStateType } from "@common/recoil/recoil.atom";
+
+export const USER_COLORS = [
+  "#1a1c2c",
+  "#E57373",
+  "#9575CD",
+  "#4FC3F7",
+  "#81C784",
+  "#144cb5",
+  "#FF8A65",
+  "#F06292",
+  "#7986CB"
+];
+
+// const random = (arr: string[]): string => {
+//   return arr[Math.floor(Math.random() * arr.length)];
+// };
+
+// const color = random(USER_COLORS);
+const color = "#1a1c2c";
+
 
 const Tldraw = dynamic(() => import("@coop/draw").then((mod) => mod.Tldraw), {
   ssr: false,
 });
 
-function Editor({ roomId }: { roomId: string }) {
-  const { 
-    onNewProject,
-    onSaveProject,
-    onSaveProjectAs,
-    onOpenProject,
-    onOpenMedia
-  } = useFileSystem();
+function Editor({ roomId,yjsValue }: { roomId: string,yjsValue:yjsStateType }) {
 
-
-  const yjs = useYjs(roomId)
+  // const yjsValue = useRecoilValue(yjsState);
   const { 
     onMount,
     onChangePage,
     onUndo,
     onRedo,
     onChangePresence
-   } = useMultiplayerState({roomId});
-  
+   } = useMultiplayerState({...yjsValue,customUserId:"하이루"});
+
+
+
+  //  const [loading, setLoading] = useState(true);
+
+  //  useEffect(() => {
+  //    setLoading(!!yjsValue.provider.room?.synced)
+  //  }, [yjsValue.provider.room?.synced]);
+
+  //  const others = useOthers<UserPresence>();
+  //  const updatePresence = useUpdatePresence<UserPresence>();
+
+  //  const handlePointMove = React.useCallback(
+  //    (e: React.PointerEvent) => {
+  //      updatePresence({
+  //        cursor: {
+  //          x: e.clientX,
+  //          y: e.clientY
+  //        }
+  //      });
+  //    },
+  //    [updatePresence]
+  //  );
+
+
+  // <div onPointerMove={handlePointMove}>
+  // </div>
   return (
-    <div>
+    <>
+      {/* <div>{`${others.length+1} 명 있음`}</div> */}
       <Tldraw
         showMenu={false}
         // autofocus
@@ -40,22 +95,78 @@ function Editor({ roomId }: { roomId: string }) {
         onUndo={onUndo}
         onRedo={onRedo}
         onChangePresence={onChangePresence}
-        onNewProject={onNewProject}
-        onSaveProject={onSaveProject}
-        onSaveProjectAs={onSaveProjectAs}
-        onOpenProject={onOpenProject}
-        onOpenMedia={onOpenMedia}
-      />
-    </div>
+        components={
+          {Cursor:NewCursor as CursorComponent}
+        }
+        />
+       {/* {
+        loading && others.map((user) => {
+          return <Cursor key={user.id} {...user.presence} />;
+          })
+       } */}
+
+      </>
   );
 }
 
-export default function Draw() {
-  const roomId = nanoid();
-  console.log("provider",roomId)
+function Draw() {
+  // const yjsValue = useRecoilValue(yjsState);
+  const [yjsValue,setYjsValue] = useState< yjsStateType| null>(null)
+
+  useEffect(()=>{
+    // console.log(window.location)
+    const roomId  = window.location.search;
+    const doc = new Y.Doc();
+    const provider = new WebrtcProvider(roomId, doc, {
+    signaling: ["ws://krkorea.iptime.org:3012"],
+    password: null,
+    awareness: new awarenessProtocol.Awareness(doc),
+    maxConns: 20 + math.floor(random.rand() * 15),
+    filterBcConns: true,
+    peerOpts: {
+      config: {
+        iceServers: [
+          {
+            urls: ["turn:turn.my-first-programming.kr"],
+            username: "test",
+            credential: "test1234",
+          },
+        ],
+      },
+    },
+  })
+  setYjsValue({
+    roomId,
+    doc,
+    provider,
+  })
+  },[window.location.search])
+
+  if(yjsValue === null){
+    return <div>loading...</div>
+  }
+
+  const onSubmitHandler =(e:React.FormEvent<HTMLFormElement>) =>{
+    console.log(e)
+  }
+
   return (
+    <>
+    <form onSubmit={onSubmitHandler}>
+      <input type="text" title="roomid" name="roomId"/>
+    </form>
+    <div>?????</div>
+    <div>{yjsValue?.roomId}</div>
     <div className="tldraw">
-      <Editor roomId={roomId} />
+        {/* <RoomProvider<UserPresence>
+        awareness={yjsValue.provider.awareness}
+        initialPresence={{ name: yjsValue.roomId, color: color }}
+      > */}
+      <Editor yjsValue={yjsValue} roomId={yjsValue.roomId} />
+      {/* </RoomProvider> */}
     </div>
+    </>
   );
 }
+
+export default Draw;

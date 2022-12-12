@@ -11,6 +11,17 @@ export type TldrawPresence = {
   id: string;
   tdUser?: TDUser;
 }
+
+export interface UserPresence {
+  cursor?: {
+    x: number;
+    y: number;
+  };
+  name: string;
+  color: string;
+}
+
+
 declare global {
   /**
    * Now declare things that go in the global namespace,
