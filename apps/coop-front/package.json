@@ -26,6 +26,7 @@
     "eslint-config-next": "13.0.6",
     "framer-motion": "6",
     "lib0": "^0.2.58",
+    "nanoid": "^4.0.0",
     "next": "13.0.6",
     "next-auth": "^4.18.0",
     "react": "18.2.0",

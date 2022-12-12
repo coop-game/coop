@@ -11,11 +11,41 @@ import {
 } from "../store";
 import type { TldrawPresence } from "./../../types/global";
 
+
+import * as Y from "yjs";
+import { WebrtcProvider } from "y-webrtc";
+import * as awarenessProtocol from "y-protocols/awareness";
+import * as math from "lib0/math";
+import * as random from "lib0/random";
+
 const room = new Room(awareness);
 
 console.log("room", room);
 
 export function useMultiplayerState(roomId: string) {
+
+  // const provider = new WebrtcProvider(roomId, doc, {
+  //   signaling: ["ws://krkorea.iptime.org:3012"],
+  //   password: null,
+  //   awareness: new awarenessProtocol.Awareness(doc),
+  //   maxConns: 20 + math.floor(random.rand() * 15),
+  //   filterBcConns: true,
+  //   peerOpts: {
+  //     config: {
+  //       iceServers: [
+  //         {
+  //           urls: ["turn:turn.my-first-programming.kr"],
+  //           username: "test",
+  //           credential: "test1234",
+  //         },
+  //       ],
+  //     },
+  //   },
+  // });
+  // // Export the provider's awareness API
+  // const awareness = provider.awareness;
+
+
   const [app, setApp] = useState<TldrawApp>();
   const [loading, setLoading] = useState(true);
 

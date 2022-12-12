@@ -29,7 +29,7 @@ export const provider = new WebrtcProvider(roomID, doc, {
     },
   },
 });
-
+console.log("provider",provider)
 // Export the provider's awareness API
 export const awareness = provider.awareness;
 console.log(awareness);

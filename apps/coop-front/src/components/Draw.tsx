@@ -1,8 +1,9 @@
 import { useFileSystem } from "@coop/draw";
 import dynamic from "next/dynamic";
-import { useMultiplayerState } from "./../hooks/useMultiplayerState";
-import { roomID } from "./../store";
-import React, { useEffect } from "react";
+import  {useMultiplayerState}  from "./../hooks/useMultiplayerState";
+import React, { useEffect, useMemo } from "react";
+import { nanoid } from "nanoid";
+// import useYjs from "src/hooks/useYjs";
 
 const Tldraw = dynamic(() => import("@coop/draw").then((mod) => mod.Tldraw), {
   ssr: false,
@@ -10,6 +11,14 @@ const Tldraw = dynamic(() => import("@coop/draw").then((mod) => mod.Tldraw), {
 
 function Editor({ roomId }: { roomId: string }) {
   const fileSystemEvents = useFileSystem();
+  // const {  
+  //   awareness,
+  //   doc,
+  //   provider,
+  //   undoManager,
+  //   yBindings,
+  //   yShapes
+  // } = useYjs(roomId);
   const { onMount, ...events } = useMultiplayerState(roomId);
 
   return (
@@ -28,9 +37,11 @@ function Editor({ roomId }: { roomId: string }) {
 }
 
 export default function Draw() {
+  const roomId = nanoid();
+  console.log("provider",roomId)
   return (
     <div className="tldraw">
-      <Editor roomId={roomID} />
+      <Editor roomId={roomId} />
     </div>
   );
 }

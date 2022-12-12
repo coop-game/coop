@@ -14,6 +14,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
+      <div>asdfasdfsa</div>
       <Draw></Draw>
     </div>
   );
