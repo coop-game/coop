@@ -28,7 +28,7 @@ export const roomIdSelector = selector({
   get: async ({ get }) => {
     return get(roomState)
   },
-  set: ({ set },newValue) => set(roomState,newValue)),
+  // set: ({ set },newValue) => set(roomState,newValue)),
     // {
     // roomId:nanoid(),
     // share:null,

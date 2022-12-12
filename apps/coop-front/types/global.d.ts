@@ -1,4 +1,5 @@
 import { TDUser } from "@coop/draw";
+import { Presence } from "@y-presence/client";
 
 declare global {
   interface IMAGE {
@@ -6,9 +7,9 @@ declare global {
   }
 }
 
-export interface TldrawPresence {
+export type TldrawPresence = {
   id: string;
-  tdUser: TDUser;
+  tdUser?: TDUser;
 }
 declare global {
   /**

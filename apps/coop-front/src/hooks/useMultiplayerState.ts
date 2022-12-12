@@ -1,15 +1,7 @@
 import { TDBinding, TDShape, TDUser, TldrawApp } from "@coop/draw";
 import { useCallback, useEffect, useState } from "react";
 import { Room } from "@y-presence/client";
-import {
-  awareness,
-  doc,
-  provider,
-  undoManager,
-  yBindings,
-  yShapes,
-} from "../store";
-import type { TldrawPresence } from "./../../types/global";
+// import type { TldrawPresence } from "./../../types/global";
 
 
 import * as Y from "yjs";
@@ -17,14 +9,51 @@ import { WebrtcProvider } from "y-webrtc";
 import * as awarenessProtocol from "y-protocols/awareness";
 import * as math from "lib0/math";
 import * as random from "lib0/random";
+interface TldrawPresence  {
+  id: string;
+  tdUser?: TDUser;
+}
 
-const room = new Room(awareness);
 
-console.log("room", room);
+export const doc = new Y.Doc();
 
-export function useMultiplayerState(roomId: string) {
+export const roomID = `y-tldraw-1`;
 
-  // const provider = new WebrtcProvider(roomId, doc, {
+export const provider = new WebrtcProvider(roomID, doc, {
+  signaling: ["ws://krkorea.iptime.org:3012"],
+  password: null,
+  awareness: new awarenessProtocol.Awareness(doc),
+  maxConns: 20 + math.floor(random.rand() * 15),
+  filterBcConns: true,
+  peerOpts: {
+    config: {
+      iceServers: [
+        {
+          urls: ["turn:turn.my-first-programming.kr"],
+          username: "test",
+          credential: "test1234",
+        },
+      ],
+    },
+  },
+});
+
+
+
+
+console.log("provider",provider)
+// Export the provider's awareness API
+export const awareness = provider.awareness;
+console.log(awareness);
+
+export const yShapes: Y.Map<TDShape> = doc.getMap("shapes");
+export const yBindings: Y.Map<TDBinding> = doc.getMap("bindings");
+
+// Create an undo manager for the shapes and binding maps
+export const undoManager = new Y.UndoManager([yShapes, yBindings]);
+
+export function useYjs(roomId:string){
+  // const provider = new WebrtcProvider(roomID, doc, {
   //   signaling: ["ws://krkorea.iptime.org:3012"],
   //   password: null,
   //   awareness: new awarenessProtocol.Awareness(doc),
@@ -42,15 +71,31 @@ export function useMultiplayerState(roomId: string) {
   //     },
   //   },
   // });
-  // // Export the provider's awareness API
-  // const awareness = provider.awareness;
+  // console.log("provider",provider)
+  // Export the provider's awareness API
+  // const room = new Room<TldrawPresence>(awareness,{id:"test"});
+  // return {provider,awareness,room,roomId}
+  return {provider,roomId}
+}
 
+
+interface useMultiplayerStateType {
+  // provider:WebrtcProvider,
+  // awareness:awarenessProtocol.Awareness,
+  // room:Room<TldrawPresence>,
+  roomId:string
+}
+// export function useMultiplayerState({ provider,awareness,room,roomId }: useMultiplayerStateType) {
+export function useMultiplayerState({roomId}:useMultiplayerStateType) {
+
+  const room = new Room(awareness);
 
   const [app, setApp] = useState<TldrawApp>();
   const [loading, setLoading] = useState(true);
 
   const onMount = useCallback(
     (app: TldrawApp) => {
+      console.log("app",app)
       app.loadRoom(roomId);
       app.pause();
       setApp(app);
@@ -66,10 +111,6 @@ export function useMultiplayerState(roomId: string) {
     ) => {
       undoManager.stopCapturing();
       doc.transact(() => {
-        console.log("shapes", shapes);
-        console.log("bindings", bindings);
-        console.log("yShapes", yShapes);
-        console.log("yBindings", yBindings);
         Object.entries(shapes).forEach(([id, shape]) => {
           if (!shape) {
             yShapes.delete(id);
@@ -102,7 +143,7 @@ export function useMultiplayerState(roomId: string) {
    */
   const onChangePresence = useCallback((app: TldrawApp, user: TDUser) => {
     if (!app.room) return;
-    room.setPresence<TldrawPresence>({ id: app.room.userId, tdUser: user });
+    room.setPresence({ id: app.room.userId, tdUser: user });
   }, []);
 
   /**
@@ -111,7 +152,7 @@ export function useMultiplayerState(roomId: string) {
   useEffect(() => {
     if (!app || !room) return;
 
-    const unsubOthers = room.subscribe<TldrawPresence>(
+    const unsubOthers = room.subscribe(
       "others",
       (users: any[]) => {
         if (!app.room) return;
