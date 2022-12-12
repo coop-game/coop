@@ -7,7 +7,6 @@ import { nanoid } from "nanoid";
 import { RoomProvider, useOthers, useUpdatePresence } from "@y-presence/react";
 import { UserPresence } from "./../../types/global";
 import { css } from "@emotion/react";
-import Cursor from "./Cursor";
 import { useRecoilValue } from "recoil";
 import { WebrtcProvider } from "y-webrtc";
 import * as awarenessProtocol from "y-protocols/awareness";
@@ -21,33 +20,12 @@ import NewCursor, {CursorComponent} from "@components/NewCursor"
 import * as Y from "yjs";
 import { yjsStateType } from "@common/recoil/recoil.atom";
 
-export const USER_COLORS = [
-  "#1a1c2c",
-  "#E57373",
-  "#9575CD",
-  "#4FC3F7",
-  "#81C784",
-  "#144cb5",
-  "#FF8A65",
-  "#F06292",
-  "#7986CB"
-];
-
-// const random = (arr: string[]): string => {
-//   return arr[Math.floor(Math.random() * arr.length)];
-// };
-
-// const color = random(USER_COLORS);
-const color = "#1a1c2c";
-
-
 const Tldraw = dynamic(() => import("@coop/draw").then((mod) => mod.Tldraw), {
   ssr: false,
 });
 
 function Editor({ roomId,yjsValue }: { roomId: string,yjsValue:yjsStateType }) {
 
-  // const yjsValue = useRecoilValue(yjsState);
   const { 
     onMount,
     onChangePage,
@@ -57,34 +35,8 @@ function Editor({ roomId,yjsValue }: { roomId: string,yjsValue:yjsStateType }) {
    } = useMultiplayerState({...yjsValue,customUserId:"하이루"});
 
 
-
-  //  const [loading, setLoading] = useState(true);
-
-  //  useEffect(() => {
-  //    setLoading(!!yjsValue.provider.room?.synced)
-  //  }, [yjsValue.provider.room?.synced]);
-
-  //  const others = useOthers<UserPresence>();
-  //  const updatePresence = useUpdatePresence<UserPresence>();
-
-  //  const handlePointMove = React.useCallback(
-  //    (e: React.PointerEvent) => {
-  //      updatePresence({
-  //        cursor: {
-  //          x: e.clientX,
-  //          y: e.clientY
-  //        }
-  //      });
-  //    },
-  //    [updatePresence]
-  //  );
-
-
-  // <div onPointerMove={handlePointMove}>
-  // </div>
   return (
     <>
-      {/* <div>{`${others.length+1} 명 있음`}</div> */}
       <Tldraw
         showMenu={false}
         // autofocus
@@ -99,12 +51,6 @@ function Editor({ roomId,yjsValue }: { roomId: string,yjsValue:yjsStateType }) {
           {Cursor:NewCursor as CursorComponent}
         }
         />
-       {/* {
-        loading && others.map((user) => {
-          return <Cursor key={user.id} {...user.presence} />;
-          })
-       } */}
-
       </>
   );
 }
@@ -158,12 +104,7 @@ function Draw() {
     <div>?????</div>
     <div>{yjsValue?.roomId}</div>
     <div className="tldraw">
-        {/* <RoomProvider<UserPresence>
-        awareness={yjsValue.provider.awareness}
-        initialPresence={{ name: yjsValue.roomId, color: color }}
-      > */}
       <Editor yjsValue={yjsValue} roomId={yjsValue.roomId} />
-      {/* </RoomProvider> */}
     </div>
     </>
   );
