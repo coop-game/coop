@@ -1,5 +1,5 @@
-import { atom, selector } from 'recoil';
-import { nanoid } from 'nanoid'
+import { atom, selector } from "recoil";
+import { nanoid } from "nanoid";
 
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
@@ -8,31 +8,30 @@ import * as math from "lib0/math";
 import * as random from "lib0/random";
 
 export interface ProblemType {
-  player:string;
-  answer:string;
-  drawList:Array<any>
+  player: string;
+  answer: string;
+  drawList: Array<any>;
 }
 
-export interface draweeShareType { 
-  lobby:boolean,
-  problemIndex:number, // y.doc text
-  problemList:Array<ProblemType>
- };
+export interface draweeShareType {
+  lobby: boolean;
+  problemIndex: number; // y.doc text
+  problemList: Array<ProblemType>;
+}
 
- export interface draweeType{
-  roomId:string,
-  share:draweeShareType | null
- }
-
+export interface draweeType {
+  roomId: string;
+  share: draweeShareType | null;
+}
 
 export interface yjsStateType {
-  roomId:string,
-  doc:Y.Doc,
-  provider:WebrtcProvider,
+  roomId: string;
+  doc: Y.Doc;
+  provider: WebrtcProvider;
 }
 
-const roomId  = nanoid();
-const doc = new Y.Doc();
+// const roomId  = nanoid();
+// const doc = new Y.Doc();
 // const provider = new WebrtcProvider(roomId, doc, {
 //   signaling: ["ws://krkorea.iptime.org:3012"],
 //   password: null,
@@ -52,13 +51,10 @@ const doc = new Y.Doc();
 //   },
 // })
 
-
-
 // export const yjsState = atom<yjsStateType | null>({
 //   key: 'ROOM_STATE',
 //   default: null
 // });
-
 
 // export const yjsSelector = selector({
 //   key: 'YjsSelector',
@@ -87,6 +83,3 @@ const doc = new Y.Doc();
 //     })
 //   } : newValue),
 // });
-
-
-

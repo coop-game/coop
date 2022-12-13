@@ -62,37 +62,33 @@ return provider;
 //   });
 // },5000)
 
-
-
-
 // console.log("provider",provider)
 
 interface useMultiplayerStateType {
-  roomId:string,
-  customUserId:string
+  roomId: string;
+  customUserId: string;
 }
 // export function useMultiplayerState({ provider,awareness,room,roomId }: useMultiplayerStateType) {
-export function useMultiplayerState({roomId,doc,provider,customUserId}:yjsStateType & {customUserId:string}) {
+export function useMultiplayerState({
+  roomId,
+  doc,
+  provider,
+  customUserId,
+}: yjsStateType & { customUserId: string }) {
+  const yShapes: Y.Map<TDShape> = doc.getMap("shapes");
+  const yBindings: Y.Map<TDBinding> = doc.getMap("bindings");
 
- const yShapes: Y.Map<TDShape> = doc.getMap("shapes");
- const yBindings: Y.Map<TDBinding> = doc.getMap("bindings");
+  //  setTimeout(()=>{
+  //   //  console.log(yShapes);
+  //   //  console.log(yBindings);
+  //   yShapes.clear();
+  //   yBindings.clear();
+  //  },3000)
 
- 
-//  setTimeout(()=>{
-//   //  console.log(yShapes);
-//   //  console.log(yBindings);
-//   yShapes.clear();
-//   yBindings.clear();
-//  },3000)
-
-
-
- const undoManager = new Y.UndoManager([yShapes, yBindings]);
+  const undoManager = new Y.UndoManager([yShapes, yBindings]);
 
   const [app, setApp] = useState<TldrawApp>();
   const [loading, setLoading] = useState(true);
-
-
 
   const onMount = useCallback(
     (app: TldrawApp) => {
@@ -139,12 +135,12 @@ export function useMultiplayerState({roomId,doc,provider,customUserId}:yjsStateT
   }, []);
 
   const room = new Room(provider.awareness);
-  console.log(provider)
+  console.log(provider);
 
   const onChangePresence = useCallback((app: TldrawApp, user: TDUser) => {
     if (!app.room) return;
     user.id += `|${customUserId}`;
-    room.setPresence({ id: app.room.userId, tdUser:user  });
+    room.setPresence({ id: app.room.userId, tdUser: user });
   }, []);
 
   /**
@@ -153,36 +149,31 @@ export function useMultiplayerState({roomId,doc,provider,customUserId}:yjsStateT
   useEffect(() => {
     if (!app || !room) return;
 
-    const unsubOthers = room.subscribe(
-      "others",
-      (users: any[]) => {
-        if (!app.room) return;
+    const unsubOthers = room.subscribe("others", (users: any[]) => {
+      if (!app.room) return;
 
-        const ids = users
-          .filter((user: { presence: any }) => user.presence)
-          .map((user: { presence: any }) => user.presence!.tdUser.id);
+      const ids = users
+        .filter((user: { presence: any }) => user.presence)
+        .map((user: { presence: any }) => user.presence!.tdUser.id);
 
-        Object.values(app.room.users).forEach((user) => {
-          if (user && !ids.includes(user.id) && user.id !== app.room?.userId) {
-            app.removeUser(user.id);
-          }
-        });
+      Object.values(app.room.users).forEach((user) => {
+        if (user && !ids.includes(user.id) && user.id !== app.room?.userId) {
+          app.removeUser(user.id);
+        }
+      });
 
-        app.updateUsers(
-          users
-            .filter((user) => user.presence)
-            .map((other) => other.presence!.tdUser)
-            .filter(Boolean)
-        );
-      }
-    );
+      app.updateUsers(
+        users
+          .filter((user) => user.presence)
+          .map((other) => other.presence!.tdUser)
+          .filter(Boolean)
+      );
+    });
 
     return () => {
       unsubOthers();
     };
   }, [app]);
-
-
 
   useEffect(() => {
     if (!app) return;
@@ -215,11 +206,9 @@ export function useMultiplayerState({roomId,doc,provider,customUserId}:yjsStateT
     };
   }, [app]);
 
-
-
-  useEffect(()=>{
-    console.log("provider.roomName : " ,provider.roomName)
-  },[provider.roomName])
+  useEffect(() => {
+    console.log("provider.roomName : ", provider.roomName);
+  }, [provider.roomName]);
 
   return {
     onMount,

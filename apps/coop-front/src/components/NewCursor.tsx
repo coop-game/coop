@@ -1,22 +1,26 @@
-import React from "react"
+import React from "react";
 
 export interface TLUser<T = any> {
-    id: string
-    color: string
-    point: number[]
-    selectedIds: string[]
-    session?: boolean
-    metadata?: T
-  }
+  id: string;
+  color: string;
+  point: number[];
+  selectedIds: string[];
+  session?: boolean;
+  metadata?: T;
+}
 
-export type CursorComponent<T = any> = (props: Pick<TLUser<T>, 'id' | 'color' | 'metadata'>) => any
+export type CursorComponent<T = any> = (
+  props: Pick<TLUser<T>, "id" | "color" | "metadata">
+) => any;
 
-const NewCursor: CursorComponent = ({id,color}) => {
-    return (
-        <div style={{
-            position:"relative"
-            }}>
-            <svg
+const NewCursor: CursorComponent = ({ id, color }) => {
+  return (
+    <div
+      style={{
+        position: "relative",
+      }}
+    >
+      <svg
         className="cursor"
         width="24"
         height="36"
@@ -30,28 +34,27 @@ const NewCursor: CursorComponent = ({id,color}) => {
           fill={color}
         />
       </svg>
-            <div
-                style={{
-                backgroundColor: color,
-                borderRadius: 4,
-                position: "absolute",
-                top: 14,
-                left: 4,
-                padding: "5px 10px"
-                }}
-            >
-                <p
-                    style={{
-                        whiteSpace: "nowrap",
-                        fontSize: 13,
-                        color: "white"
-                    }}
-                    >
-                    {id.split('|')[1]}
-                </p>
-            </div>
-        </div>
-      
-    )
-  }
+      <div
+        style={{
+          backgroundColor: color,
+          borderRadius: 4,
+          position: "absolute",
+          top: 14,
+          left: 4,
+          padding: "5px 10px",
+        }}
+      >
+        <p
+          style={{
+            whiteSpace: "nowrap",
+            fontSize: 13,
+            color: "white",
+          }}
+        >
+          {id.split("|")[1]}
+        </p>
+      </div>
+    </div>
+  );
+};
 export default React.memo(NewCursor);
