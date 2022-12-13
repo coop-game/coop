@@ -27,5 +27,9 @@
     "prettier": "^2.5.1",
     "turbo": "latest"
   },
-  "packageManager": "yarn@3.3.0"
+  "packageManager": "yarn@3.3.0",
+  "dependencies": {
+    "@fontsource/jua": "^4.5.11",
+    "@next/font": "^13.0.6"
+  }
 }

@@ -1,10 +1,15 @@
 import { extendTheme } from "@chakra-ui/react";
+import "@fontsource/jua/400.css";
 
 const customColor = {
   colors: {
     transparent: "transparent",
     black: "#000",
     white: "#fff",
+    primary: "#F7F5E0",
+    second: "#E2E0A5",
+    third: "#D3504A",
+    fourth: "#A63636",
     gray: {
       50: "#f7fafc",
       // ...
@@ -15,11 +20,11 @@ const customColor = {
 };
 
 const breakpoints = {
-  sm: "30em",
-  md: "48em",
-  lg: "62em",
-  xl: "80em",
-  "2xl": "96em",
+  sm: "320px",
+  md: "768px",
+  lg: "960px",
+  xl: "1200px",
+  "2xl": "1536px",
 };
 
 const space = {
@@ -93,7 +98,7 @@ const theme = extendTheme({
   sizes,
   colors: { ...customColor },
   fonts: {
-    body: "system-ui, sans-serif",
+    body: `'Jua', sans-serif`,
     heading: "Georgia, serif",
     mono: "Menlo, monospace",
   },
