@@ -9,9 +9,9 @@ import { RecoilRoot } from "recoil";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
-       <RecoilRoot>
-      <Component {...pageProps} />
-       </RecoilRoot>
+      <RecoilRoot>
+        <Component {...pageProps} />
+      </RecoilRoot>
     </ChakraProvider>
   );
 }
