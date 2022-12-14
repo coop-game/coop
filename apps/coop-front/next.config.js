@@ -9,7 +9,7 @@ const nextConfig = {
       { loader: "@next/font/google", options: { subsets: ["korean"] } },
     ],
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
 };
 
