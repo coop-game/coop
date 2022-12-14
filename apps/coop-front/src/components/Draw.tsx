@@ -19,9 +19,11 @@ import NewCursor, { CursorComponent } from "@components/NewCursor";
 import * as Y from "yjs";
 import { yjsStateType } from "@common/recoil/recoil.atom";
 
-const Tldraw = dynamic(() => import("@coop/draw").then((mod) => mod.Tldraw), {
-  ssr: false,
-});
+import { Tldraw } from "@coop/draw";
+
+// const Tldraw = dynamic(() => import("@coop/draw").then((mod) => mod.Tldraw), {
+//   ssr: false,
+// });
 
 function Editor({
   roomId,

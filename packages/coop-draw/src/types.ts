@@ -436,6 +436,11 @@ export enum SizeStyle {
   Large = "large",
 }
 
+export enum SizeStyleExcludeMedium {
+  Small = "small",
+  Large = "large",
+}
+
 export enum DashStyle {
   Draw = "draw",
   Solid = "solid",

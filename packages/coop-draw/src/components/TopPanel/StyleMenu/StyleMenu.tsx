@@ -112,16 +112,20 @@ export const StyleMenu = React.memo(function ColorMenu() {
           </MenuGrid>
           <FormattedMessage id="style.menu.size" />
           <MenuGrid>
-            {Object.values(SizeStyle).map((sizeStyle) => (
-              <ToolButton
-                variant="icon"
-                key={sizeStyle}
-                isActive={sizeStyle === displayedStyle.size}
-                onClick={() => handleSizeChange(sizeStyle)}
-              >
-                {SIZE_ICONS[sizeStyle as SizeStyleExcludeMedium]}
-              </ToolButton>
-            ))}
+            <ToolButton
+              variant="icon"
+              isActive={SizeStyle.Small === displayedStyle.size}
+              onClick={() => handleSizeChange(SizeStyle.Small)}
+            >
+              {SIZE_ICONS[SizeStyle.Small as SizeStyleExcludeMedium]}
+            </ToolButton>
+            <ToolButton
+              variant="icon"
+              isActive={SizeStyle.Large === displayedStyle.size}
+              onClick={() => handleSizeChange(SizeStyle.Large)}
+            >
+              {SIZE_ICONS[SizeStyle.Large as SizeStyleExcludeMedium]}
+            </ToolButton>
           </MenuGrid>
         </ScrollArea.Viewport>
         <ScrollArea.Scrollbar
