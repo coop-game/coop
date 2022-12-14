@@ -20,9 +20,10 @@ const selectedIdsSelector = (s: TDSnapshot) =>
 
 const STYLE_KEYS = Object.keys(defaultTextStyle) as (keyof ShapeStyles)[];
 
+type SizeStyleExcludeMedium = Exclude<SizeStyle, SizeStyle.Medium>;
+
 const SIZE_ICONS = {
   [SizeStyle.Small]: <SizeSmallIcon />,
-  // [SizeStyle.Medium]: <SizeMediumIcon />,
   [SizeStyle.Large]: <SizeLargeIcon />,
 };
 
@@ -118,7 +119,7 @@ export const StyleMenu = React.memo(function ColorMenu() {
                 isActive={sizeStyle === displayedStyle.size}
                 onClick={() => handleSizeChange(sizeStyle)}
               >
-                {SIZE_ICONS[sizeStyle as SizeStyle]}
+                {SIZE_ICONS[sizeStyle as SizeStyleExcludeMedium]}
               </ToolButton>
             ))}
           </MenuGrid>

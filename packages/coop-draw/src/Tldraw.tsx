@@ -29,7 +29,9 @@ import { TDDocument, TDStatus } from "~types";
 
 const ErrorBoundary = _Errorboundary as any;
 
-export interface TldrawProps extends TDCallbacks {
+// export type TldrawProps = Record<any, >;
+export type TldrawProps = TldrawProps2 & TDCallbacks;
+export interface TldrawProps2 {
   /**
    * (optional) If provided, the component will load / persist state under this key.
    */

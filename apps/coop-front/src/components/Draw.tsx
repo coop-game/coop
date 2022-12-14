@@ -1,4 +1,3 @@
-import { useFileSystem } from "@coop/draw";
 import dynamic from "next/dynamic";
 import { useMultiplayerState } from "./../hooks/useMultiplayerState";
 import React, { useEffect, useMemo, useState } from "react";
@@ -52,7 +51,7 @@ function Editor({
         onUndo={onUndo}
         onRedo={onRedo}
         onChangePresence={onChangePresence}
-        components={{ Cursor: NewCursor as CursorComponent }}
+        components={{ Cursor: NewCursor as any }}
       />
     </div>
   );
@@ -89,7 +88,8 @@ function Draw() {
       doc,
       provider,
     });
-  }, [window.location.search]);
+    // }, [window.location.search]);
+  }, []);
 
   if (yjsValue === null) {
     return <div>loading...</div>;

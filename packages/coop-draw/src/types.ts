@@ -432,7 +432,7 @@ export enum ColorStyle {
 
 export enum SizeStyle {
   Small = "small",
-  // Medium = 'medium',
+  Medium = "medium",
   Large = "large",
 }
 

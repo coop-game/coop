@@ -9,9 +9,13 @@
       "@theme/*": ["src/theme/*"],
       "@styles/*": ["styles/*"],
       "@pages/*": ["pages/*"],
-      "@types/*": ["types/*"]
+      "@types/*": ["types/*"],
+      "@coop/draw": ["../../packages/coop-draw/*"]
     },
-    "jsxImportSource": "@emotion/react"
+    "jsxImportSource": "@emotion/react",
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true
   },
   "include": [
     "types",
@@ -22,6 +26,11 @@
   ],
   "exclude": ["node_modules"],
   "references": [
-    { "path": "../../packages/coop-draw" },
+    {
+      "path": "../../packages/coop-draw"
+    },
+    {
+      "path": "../../packages/coop-core"
+    }
   ]
 }

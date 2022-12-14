@@ -2,73 +2,9 @@ import { TDBinding, TDShape, TDUser, TldrawApp } from "@coop/draw";
 import { useCallback, useEffect, useState } from "react";
 
 import * as Y from "yjs";
-import { WebrtcProvider } from "y-webrtc";
-import * as awarenessProtocol from "y-protocols/awareness";
-import * as math from "lib0/math";
-import * as random from "lib0/random";
-import { nanoid } from "nanoid";
 import { yjsStateType } from "@common/recoil/recoil.atom";
 import { Room } from "@y-presence/client";
 
-/* 
-export let doc = new Y.Doc();
-
-export const roomID = `y-tldraw-1`;
-
-
-export let provider = (() => {
-  console.log("create provider")
-  const provider = new WebrtcProvider(nanoid(), doc, {
-  signaling: ["ws://krkorea.iptime.org:3012"],
-  password: null,
-  awareness: new awarenessProtocol.Awareness(doc),
-  maxConns: 20 + math.floor(random.rand() * 15),
-  filterBcConns: true,
-  peerOpts: {
-    config: {
-      iceServers: [
-        {
-          urls: ["turn:turn.my-first-programming.kr"],
-          username: "test",
-          credential: "test1234",
-        },
-      ],
-    },
-  },
-});
-return provider;
-})() */
-
-// setTimeout(()=>{
-//   // doc = new Y.Doc();
-//   provider.destroy();
-//   provider = new WebrtcProvider(roomID, doc, {
-//     signaling: ["ws://krkorea.iptime.org:3012"],
-//     password: null,
-//     awareness: new awarenessProtocol.Awareness(doc),
-//     maxConns: 20 + math.floor(random.rand() * 15),
-//     filterBcConns: true,
-//     peerOpts: {
-//       config: {
-//         iceServers: [
-//           {
-//             urls: ["turn:turn.my-first-programming.kr"],
-//             username: "test",
-//             credential: "test1234",
-//           },
-//         ],
-//       },
-//     },
-//   });
-// },5000)
-
-// console.log("provider",provider)
-
-interface useMultiplayerStateType {
-  roomId: string;
-  customUserId: string;
-}
-// export function useMultiplayerState({ provider,awareness,room,roomId }: useMultiplayerStateType) {
 export function useMultiplayerState({
   roomId,
   doc,
@@ -78,13 +14,7 @@ export function useMultiplayerState({
   const yShapes: Y.Map<TDShape> = doc.getMap("shapes");
   const yBindings: Y.Map<TDBinding> = doc.getMap("bindings");
 
-  //  setTimeout(()=>{
-  //   //  console.log(yShapes);
-  //   //  console.log(yBindings);
-  //   yShapes.clear();
-  //   yBindings.clear();
-  //  },3000)
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const undoManager = new Y.UndoManager([yShapes, yBindings]);
 
   const [app, setApp] = useState<TldrawApp>();
@@ -123,16 +53,17 @@ export function useMultiplayerState({
         });
       });
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
   const onUndo = useCallback(() => {
     undoManager.undo();
-  }, []);
+  }, [undoManager]);
 
   const onRedo = useCallback(() => {
     undoManager.redo();
-  }, []);
+  }, [undoManager]);
 
   const room = new Room(provider.awareness);
   console.log(provider);
@@ -141,6 +72,7 @@ export function useMultiplayerState({
     if (!app.room) return;
     user.id += `|${customUserId}`;
     room.setPresence({ id: app.room.userId, tdUser: user });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /**
@@ -173,6 +105,7 @@ export function useMultiplayerState({
     return () => {
       unsubOthers();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [app]);
 
   useEffect(() => {
@@ -204,6 +137,7 @@ export function useMultiplayerState({
       window.removeEventListener("beforeunload", handleDisconnect);
       yShapes.unobserveDeep(handleChanges);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [app]);
 
   useEffect(() => {
