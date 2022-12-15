@@ -1,27 +1,37 @@
 import { TDBinding, TDShape, TDUser, TldrawApp } from "@coop/draw";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import * as Y from "yjs";
-import { yjsStateType } from "@common/recoil/recoil.atom";
+import { doc, providerClass, yjsStateType } from "@common/recoil/recoil.atom";
 import { Room } from "@y-presence/client";
+import { useRecoilState } from "recoil";
+import { WebrtcProvider } from "y-webrtc";
 
 export function useMultiplayerState({
   roomId,
-  doc,
   provider,
+  room,
   customUserId,
-}: yjsStateType & { customUserId: string }) {
+}: {
+  roomId: string;
+  provider: WebrtcProvider;
+  room: Room;
+  customUserId: string;
+}) {
   const yShapes: Y.Map<TDShape> = doc.getMap("shapes");
   const yBindings: Y.Map<TDBinding> = doc.getMap("bindings");
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const undoManager = new Y.UndoManager([yShapes, yBindings]);
+  const undoManager = useMemo(
+    () => new Y.UndoManager([yShapes, yBindings]),
+    [yShapes, yBindings]
+  );
 
   const [app, setApp] = useState<TldrawApp>();
   const [loading, setLoading] = useState(true);
 
   const onMount = useCallback(
     (app: TldrawApp) => {
+      console.log("룸이 바뀜");
       app.loadRoom(roomId);
       app.pause();
       setApp(app);
@@ -53,8 +63,7 @@ export function useMultiplayerState({
         });
       });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [undoManager, yBindings, yShapes]
   );
 
   const onUndo = useCallback(() => {
@@ -65,15 +74,16 @@ export function useMultiplayerState({
     undoManager.redo();
   }, [undoManager]);
 
-  const room = new Room(provider.awareness);
-  console.log(provider);
+  // const room = new Room(provider.awareness);
 
-  const onChangePresence = useCallback((app: TldrawApp, user: TDUser) => {
-    if (!app.room) return;
-    user.id += `|${customUserId}`;
-    room.setPresence({ id: app.room.userId, tdUser: user });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const onChangePresence = useCallback(
+    (app: TldrawApp, user: TDUser) => {
+      if (!app.room) return;
+      user.id += `|${customUserId}`;
+      room.setPresence({ id: app.room.userId, tdUser: user });
+    },
+    [customUserId, room]
+  );
 
   /**
    * Update app users whenever there is a change in the room users
@@ -105,8 +115,7 @@ export function useMultiplayerState({
     return () => {
       unsubOthers();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [app]);
+  }, [app, room]);
 
   useEffect(() => {
     if (!app) return;
@@ -137,12 +146,11 @@ export function useMultiplayerState({
       window.removeEventListener("beforeunload", handleDisconnect);
       yShapes.unobserveDeep(handleChanges);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [app]);
+  }, [app, provider, room, yBindings, yShapes]);
 
-  useEffect(() => {
-    console.log("provider.roomName : ", provider.roomName);
-  }, [provider.roomName]);
+  // useEffect(() => {
+  //   console.log("provider.roomName : ", provider.roomName, app, room);
+  // }, [provider, app, room]);
 
   return {
     onMount,

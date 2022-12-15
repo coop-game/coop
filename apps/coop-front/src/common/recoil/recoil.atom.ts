@@ -6,6 +6,7 @@ import { WebrtcProvider } from "y-webrtc";
 import * as awarenessProtocol from "y-protocols/awareness";
 import * as math from "lib0/math";
 import * as random from "lib0/random";
+import { Room } from "@y-presence/client";
 
 export interface ProblemType {
   player: string;
@@ -26,60 +27,83 @@ export interface draweeType {
 
 export interface yjsStateType {
   roomId: string;
-  doc: Y.Doc;
-  provider: WebrtcProvider;
+  room?: Room;
+  provider?: WebrtcProvider;
 }
 
-// const roomId  = nanoid();
-// const doc = new Y.Doc();
-// const provider = new WebrtcProvider(roomId, doc, {
-//   signaling: ["ws://krkorea.iptime.org:3012"],
-//   password: null,
-//   awareness: new awarenessProtocol.Awareness(doc),
-//   maxConns: 20 + math.floor(random.rand() * 15),
-//   filterBcConns: true,
-//   peerOpts: {
-//     config: {
-//       iceServers: [
-//         {
-//           urls: ["turn:turn.my-first-programming.kr"],
-//           username: "test",
-//           credential: "test1234",
-//         },
-//       ],
-//     },
-//   },
-// })
+export const doc = new Y.Doc();
+
+export class providerClass {
+  provider: WebrtcProvider | null;
+  room: Room | null;
+
+  constructor() {
+    this.provider = null;
+    this.room = null;
+  }
+
+  clearProvider = () => {
+    console.log("clearProvider");
+    this.provider.destroy();
+    this.provider = null;
+    this.room.destroy();
+    this.room = null;
+  };
+
+  createProvider = (roomId: string) => {
+    console.log("creactProvider");
+    if (this.provider === null) {
+      this.provider = new WebrtcProvider(roomId, doc, {
+        signaling: ["ws://krkorea.iptime.org:3012"],
+        password: null,
+        awareness: new awarenessProtocol.Awareness(doc),
+        maxConns: 20 + math.floor(random.rand() * 15),
+        filterBcConns: true,
+        peerOpts: {
+          config: {
+            iceServers: [
+              {
+                urls: ["turn:turn.my-first-programming.kr"],
+                username: "test",
+                credential: "test1234",
+              },
+            ],
+          },
+        },
+      });
+      console.log(this.provider);
+    }
+    if (this.room === null) {
+      this.room = new Room(this.provider.awareness);
+    }
+  };
+}
+
+export const providerState = new providerClass();
+
+// export function providerState() {
+//   this.provider = null;
+//   this.setProvider = (newProvider: WebrtcProvider) => {
+//     this.provider = newProvider;
+//   };
+//   this.clearProvider = () => {
+//     if (this.provider !== null) {
+//       this.provider.destroy();
+//     }
+//   };
+// }
+
+// export let provider: WebrtcProvider | null = null;
 
 // export const yjsState = atom<yjsStateType | null>({
-//   key: 'ROOM_STATE',
-//   default: null
+//   key: "ROOM_STATE",
+//   default: null,
 // });
 
 // export const yjsSelector = selector({
-//   key: 'YjsSelector',
+//   key: "YjsSelector",
 //   get: async ({ get }) => {
-//     return get(yjsState)
+//     return get(yjsState);
 //   },
-//   set: ({set}, newValue) => set(yjsState, newValue === null ? {
-//     doc,
-//     provider : new WebrtcProvider(roomId, doc, {
-//       signaling: ["ws://krkorea.iptime.org:3012"],
-//       password: null,
-//       awareness: new awarenessProtocol.Awareness(doc),
-//       maxConns: 20 + math.floor(random.rand() * 15),
-//       filterBcConns: true,
-//       peerOpts: {
-//         config: {
-//           iceServers: [
-//             {
-//               urls: ["turn:turn.my-first-programming.kr"],
-//               username: "test",
-//               credential: "test1234",
-//             },
-//           ],
-//         },
-//       },
-//     })
-//   } : newValue),
+//   set: ({ set }, newValue) => set(yjsSelector, { ...newValue }),
 // });

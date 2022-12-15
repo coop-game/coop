@@ -10,7 +10,7 @@ declare global {
 export type TldrawPresence = {
   id: string;
   tdUser?: TDUser;
-}
+};
 
 export interface UserPresence {
   cursor?: {
@@ -21,20 +21,19 @@ export interface UserPresence {
   color: string;
 }
 
+// declare global {
+//   /**
+//    * Now declare things that go in the global namespace,
+//    * or augment existing declarations in the global namespace.
+//    */
+//   interface WebrtcProvider {
+//     id: number;
+//     name: string;
+//     salary: number;
+//   }
 
-declare global {
-  /**
-   * Now declare things that go in the global namespace,
-   * or augment existing declarations in the global namespace.
-   */
-  interface WebrtcProvider {
-    id: number;
-    name: string;
-    salary: number;
-  }
-
-  type Person = {
-    name: string;
-    age: number;
-  };
-}
+//   type Person = {
+//     name: string;
+//     age: number;
+//   };
+// }

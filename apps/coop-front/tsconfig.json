@@ -5,6 +5,8 @@
     "paths": {
       "@common/*": ["src/common/*"],
       "@assets/*": ["src/assets/*"],
+      "@asset/*": ["src/asset/*"],
+      "@asset": ["src/asset/index.ts"],
       "@components/*": ["src/components/*"],
       "@theme/*": ["src/theme/*"],
       "@styles/*": ["styles/*"],
