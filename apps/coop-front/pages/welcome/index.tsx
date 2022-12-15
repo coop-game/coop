@@ -3,7 +3,7 @@ import Image from "next/image";
 import DraweeLogo from "../../src/asset/DraweeLogo.png";
 import { css, keyframes } from "@emotion/react";
 import TopContent from "./components/TopContent";
-import MiddleContent from "./components/MiddleContent";
+import MiddleContent from "./components/MiddleContent/index";
 
 function welcome() {
   return (
@@ -13,7 +13,7 @@ function welcome() {
         <TopContent />
       </Flex>
       {/* 중간 그린다 부분 */}
-      <Flex direction="column">
+      <Flex direction="column" w="100%" display="flex" alignItems="center">
         <MiddleContent></MiddleContent>
       </Flex>
       {/* 중간 맞춘다 부분 */}
