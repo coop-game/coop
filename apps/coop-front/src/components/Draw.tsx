@@ -101,7 +101,6 @@ function Draw() {
           providerState.createProvider(inputState);
           setRoomId(inputState);
           setInputState("");
-          // setRoomId(null);
         }}
       >
         Button

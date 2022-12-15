@@ -81,29 +81,15 @@ export class providerClass {
 
 export const providerState = new providerClass();
 
-// export function providerState() {
-//   this.provider = null;
-//   this.setProvider = (newProvider: WebrtcProvider) => {
-//     this.provider = newProvider;
-//   };
-//   this.clearProvider = () => {
-//     if (this.provider !== null) {
-//       this.provider.destroy();
-//     }
-//   };
-// }
+export const userState = atom<{ roomId: string; nickname: string } | null>({
+  key: "USER_STATE",
+  default: null,
+});
 
-// export let provider: WebrtcProvider | null = null;
-
-// export const yjsState = atom<yjsStateType | null>({
-//   key: "ROOM_STATE",
-//   default: null,
-// });
-
-// export const yjsSelector = selector({
-//   key: "YjsSelector",
-//   get: async ({ get }) => {
-//     return get(yjsState);
-//   },
-//   set: ({ set }, newValue) => set(yjsSelector, { ...newValue }),
-// });
+export const userSelector = selector({
+  key: "userSelector",
+  get: ({ get }) => {
+    return get(userState);
+  },
+  set: ({ set }, newValue) => set(userState, { ...newValue }),
+});
