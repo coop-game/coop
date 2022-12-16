@@ -4,75 +4,47 @@ import stock2 from "../../../../../src/asset/stock2.jpg";
 import stock3 from "../../../../../src/asset/stock3.jpg";
 import stock4 from "../../../../../src/asset/stock4.jpg";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
-import { css, keyframes } from "@emotion/react";
+import { css } from "@emotion/react";
+import { motion } from "framer-motion";
+
+const images = [stock1, stock2, stock3, stock4];
 
 function MiddleContentPictureSlide({ index }: { index: number }) {
-  const [position, setPosition] = useState(1);
-  const positionRef = useRef<HTMLDivElement>(null);
-  if (positionRef !== null && positionRef.current) {
-    positionRef.current.onanimationend = () => {
-      setPosition(index);
-    };
-  }
-  console.log("position", position);
-  const pictureMove = keyframes`
-  from {
-    transform: translateX(${position});
-  } to{
-    transform: translateX(${(+index - 1) * -25}%);
-  }
-`;
   return (
     <div
       css={css`
-        position: relative;
-        width: max-content;
-        overflow-x: hidden;
+        overflow: hidden;
+        width: 99vw;
+        height: 700px;
       `}
     >
-      <div
-        ref={positionRef}
+      <motion.div
+        animate={{
+          x: `${(+index - 1) * -100 - 50}%`,
+          // y:`${index === images.length ? : }`,
+          scale: 1,
+          rotate: 0,
+        }}
+        transition={{ ease: "easeOut", duration: 1 }}
         css={css`
-          transform: translateX(${(position - 1) * -25}%);
           display: flex;
-          width: 100%;
-          animation: ${pictureMove} 1s ease;
+          max-height: 50em;
+          max-width: 80em;
+          position: relative;
+          left: 50%;
         `}
       >
-        <Box
-          left="50%"
-          transform="translateX(-50%)"
-          width="800px"
-          position="relative"
-        >
-          <Image src={stock1} alt="테스트 이미지"></Image>
-        </Box>
-        <Box
-          left="50%"
-          transform="translateX(-50%)"
-          width="800px"
-          position="relative"
-        >
-          <Image src={stock2} alt="테스트 이미지"></Image>
-        </Box>
-        <Box
-          left="50%"
-          transform="translateX(-50%)"
-          width="800px"
-          position="relative"
-        >
-          <Image src={stock3} alt="테스트 이미지"></Image>
-        </Box>
-        <Box
-          left="50%"
-          transform="translateX(-50%)"
-          width="800px"
-          position="relative"
-        >
-          <Image src={stock4} alt="테스트 이미지"></Image>
-        </Box>
-      </div>
+        {images.map((v, idx) => {
+          return (
+            <Image
+              key={idx}
+              layout="responsive"
+              src={v}
+              alt="테스트 이미지"
+            ></Image>
+          );
+        })}
+      </motion.div>
     </div>
   );
 }

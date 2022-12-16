@@ -2,6 +2,7 @@ import { Box, Center, Text } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import MiddleContentPictureSlide from "./src/contents";
 import MiddleContentScrollDetector from "./src/detect";
+import { css } from "@emotion/react";
 
 type view = {
   index: number;
@@ -47,6 +48,7 @@ function MiddleContent() {
   return (
     <Box
       position="relative"
+      zIndex="10"
       marginTop={{ base: "250px", sm: "200px", md: "80px" }}
       width="100%"
     >
@@ -57,11 +59,13 @@ function MiddleContent() {
           justifyContent="center"
           top="0px"
           width="100%"
+
         >
           <Text w="100%" left="0px" fontSize="6xl" maxWidth="1024px">
             그린다
           </Text>
-          <Box position="absolute" top="15vh">
+          <Box position="absolute" top="15vh"
+>
             <MiddleContentPictureSlide index={nowDetect} />
           </Box>
         </Box>
