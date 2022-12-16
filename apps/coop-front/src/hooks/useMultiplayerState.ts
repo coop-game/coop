@@ -8,12 +8,10 @@ import { useRecoilState } from "recoil";
 import { WebrtcProvider } from "y-webrtc";
 
 export function useMultiplayerState({
-  roomId,
   provider,
   room,
   customUserId,
 }: {
-  roomId: string;
   provider: WebrtcProvider;
   room: Room;
   customUserId: string;
@@ -32,13 +30,14 @@ export function useMultiplayerState({
   const onMount = useCallback(
     (app: TldrawApp) => {
       console.log("룸이 바뀜");
-      app.loadRoom(roomId);
+      app.loadRoom(provider.roomName);
       app.pause();
       setApp(app);
     },
-    [roomId]
+    [provider.roomName]
   );
 
+  // draw 좌표 전송 부분
   const onChangePage = useCallback(
     (
       app: TldrawApp,
@@ -46,6 +45,7 @@ export function useMultiplayerState({
       bindings: Record<string, TDBinding | undefined>
     ) => {
       undoManager.stopCapturing();
+      console.log("shapes bindings", shapes, bindings);
       doc.transact(() => {
         Object.entries(shapes).forEach(([id, shape]) => {
           if (!shape) {
@@ -66,6 +66,7 @@ export function useMultiplayerState({
     [undoManager, yBindings, yShapes]
   );
 
+  // 뒤로가기 앞으로가기
   const onUndo = useCallback(() => {
     undoManager.undo();
   }, [undoManager]);
@@ -74,11 +75,11 @@ export function useMultiplayerState({
     undoManager.redo();
   }, [undoManager]);
 
-  // const room = new Room(provider.awareness);
-
+  // 이부분이 수상?
   const onChangePresence = useCallback(
     (app: TldrawApp, user: TDUser) => {
       if (!app.room) return;
+      console.log("user", user);
       user.id += `|${customUserId}`;
       room.setPresence({ id: app.room.userId, tdUser: user });
     },
@@ -88,6 +89,7 @@ export function useMultiplayerState({
   /**
    * Update app users whenever there is a change in the room users
    */
+  // 룸 유저가 바뀌면 갱신한다는건데 이부분이 좀 모르겠네 더
   useEffect(() => {
     if (!app || !room) return;
 
@@ -117,6 +119,7 @@ export function useMultiplayerState({
     };
   }, [app, room]);
 
+  // 연결을 끊는 부분?
   useEffect(() => {
     if (!app) return;
 

@@ -1,48 +1,65 @@
 import DraweeLogo from "@asset/DraweeLogo.png";
 import Image from "next/image";
-import { Flex } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import Users from "@components/Users";
 import dynamic from "next/dynamic";
 import { providerState } from "@common/recoil/recoil.atom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
+import { nanoid } from "nanoid";
+
+type userProfile = {
+  id?: string;
+  nickname?: string;
+};
 
 export const LobbyMain = () => {
-  const { provider } = providerState;
-  const [userProfiles, setUserProfiles] = useState<
-    Array<{
-      id: string;
-      nickname: string;
-    }>
-  >([]);
+  const { provider, room } = providerState;
+  const [userProfiles, setUserProfiles] = useState<Array<userProfile>>([]);
 
-  useEffect(() => {
-    const temp = [];
-    provider?.awareness?.states.forEach((v) => {
-      const tdUser = v?.presence?.tdUser.id.split("|");
-      if (tdUser !== undefined) {
-        const user = { id: tdUser[0], nickname: tdUser[1] };
-        temp.push(user);
+  const filterMap = useCallback(() => {
+    const userProfiles = [];
+    provider.awareness.getStates().forEach((v) => {
+      console.log(v);
+      if (v?.user) {
+        const user: userProfile = {};
+        user.id = v.id;
+        user.nickname = v.user.name;
+        userProfiles.push(user);
       }
     });
-    setUserProfiles(temp);
-  }, [provider?.awareness?.states?.size]);
+    return userProfiles;
+  }, [provider.awareness]);
+
+  useEffect(() => {
+    provider.awareness.on(
+      "change",
+      ({
+        added,
+        updated,
+        removed,
+      }: {
+        added: any;
+        updated: any;
+        removed: any;
+      }) => {
+        console.log("added : ", added);
+        console.log("updated : ", updated);
+        console.log("removed : ", removed);
+        console.log(Array.from(provider.awareness.getStates()));
+        setUserProfiles(filterMap());
+      }
+    );
+    provider.awareness.setLocalStateField("user", {
+      name: "테스트" + nanoid(),
+      color: "#ffb61e",
+    });
+  }, [filterMap, provider, room]);
 
   if (provider === null) {
     return <div>provider가 비어있습니다. 메인으로 되돌아가면 됨 link!!</div>;
   }
-  //   const userProfiles = [
-  //     { id: "asdf", nickname: "asdf" },
-  //     { id: "asdf", nickname: "asdf" },
-  //     { id: "asdf", nickname: "asdf" },
-  //     { id: "asdf", nickname: "asdf" },
-  //     { id: "asdf", nickname: "asdf" },
-  //     { id: "asdf", nickname: "asdf" },
-  //     { id: "asdf", nickname: "asdf" },
-  //     { id: "asdf", nickname: "asdf" },
-  //     { id: "asdf", nickname: "asdf" },
-  //     { id: "asdf", nickname: "asdf" },
-  //     { id: "asdf", nickname: "asdf" },
-  //   ];
+
   return (
     <Flex w={"100%"} h={"100vh"} alignItems={"center"} p={"3em"}>
       <Flex
@@ -80,7 +97,11 @@ export const LobbyMain = () => {
             border="3px solid gray"
             boxShadow="dark-lg"
             rounded="md"
-          ></Flex>
+          >
+            <Link href="/draw" passHref legacyBehavior>
+              <Button>다음으로 넘어가기</Button>
+            </Link>
+          </Flex>
         </Flex>
       </Flex>
     </Flex>

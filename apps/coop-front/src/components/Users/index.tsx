@@ -3,8 +3,8 @@ import { css } from "@emotion/react";
 import User from "./User";
 
 export type userProfileType = {
-  id: string;
-  nickname: string;
+  id?: string;
+  nickname?: string;
 };
 
 type UsersPropsType = {

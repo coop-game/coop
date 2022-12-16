@@ -10,10 +10,6 @@ function DrawPage() {
     setState(true);
   }, []);
 
-  return (
-    <div className={styles.container}>
-      <Draw></Draw>
-    </div>
-  );
+  return <div className={styles.container}>{state && <Draw></Draw>}</div>;
 }
 export default DrawPage;
