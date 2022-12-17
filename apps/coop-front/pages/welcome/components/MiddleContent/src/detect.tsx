@@ -6,19 +6,13 @@ function MiddleContentScrollDetector({
   detectComponent,
   index,
 }: {
-  detectComponent: ({
-    index,
-    viewport,
-  }: {
-    index: number;
-    viewport: boolean;
-  }) => void;
+  detectComponent: ({ index }: { index: number }) => void;
   index: number;
 }) {
   const { targetRef, isDetect } = useObserver();
   useEffect(() => {
     if (isDetect) {
-      detectComponent({ index, viewport: isDetect });
+      detectComponent({ index });
     }
   }, [isDetect]);
   return (
