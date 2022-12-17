@@ -90,6 +90,7 @@ const onconnection = (conn) => {
         message = JSON.parse(message);
       }
       if (message && message.type && !closed) {
+        console.log(message.type);
         switch (message.type) {
           case "subscribe":
             /** @type {Array<string>} */ (message.topics || []).forEach(

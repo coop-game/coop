@@ -81,7 +81,7 @@ export class providerClass {
 
 export const providerState = new providerClass();
 
-export const userState = atom<{ roomId: string; nickname: string } | null>({
+export const userState = atom<{ roomId?: string; nickname?: string } | null>({
   key: "USER_STATE",
   default: null,
 });
@@ -92,4 +92,24 @@ export const userSelector = selector({
     return get(userState);
   },
   set: ({ set }, newValue) => set(userState, { ...newValue }),
+});
+
+export type CPChatType = {
+  nickname: string;
+  message: string;
+};
+
+export const ChattingState = atom<CPChatType[]>({
+  key: "CHATTING_STATE",
+  default: [],
+});
+
+export const ChattingSelector = selector({
+  key: "chattingSelector",
+  get: ({ get }) => {
+    return get(ChattingState);
+  },
+  set: ({ set }, newValue: CPChatType[]) => {
+    set(ChattingState, newValue);
+  },
 });
