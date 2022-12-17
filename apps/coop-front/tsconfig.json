@@ -12,7 +12,10 @@
       "@styles/*": ["styles/*"],
       "@pages/*": ["pages/*"],
       "@types/*": ["types/*"],
-      "@coop/draw": ["../../packages/coop-draw/*"]
+      "@coop/draw": ["../../packages/coop-draw/*"],
+      "@translations/*": ["translations/*"],
+      "@translations/": ["src/translations/index"],
+      "@hooks/*": ["src/hooks/*"]
     },
     "jsxImportSource": "@emotion/react",
     "strict": false,
