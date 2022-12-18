@@ -13,8 +13,8 @@ function MiddleContentPictureSlide({
     <div
       css={css`
         overflow: hidden;
-        width: 99vw;
-        height: 700px;
+        width: 100%;
+        height: 800px;
       `}
     >
       <motion.div
@@ -33,7 +33,9 @@ function MiddleContentPictureSlide({
         `}
       >
         {images.map((v, idx) => {
-          return <Image key={idx} src={v} alt="테스트 이미지"></Image>;
+          return (
+            <Image key={idx} width="1280" src={v} alt="테스트 이미지"></Image>
+          );
         })}
       </motion.div>
     </div>

@@ -43,7 +43,7 @@ function MiddleContent({ nextContent }: { nextContent: nextContentType }) {
           <Text w="100%" left="0px" fontSize="6xl" maxWidth="1024px">
             그린다
           </Text>
-          <Box position="absolute" top="15vh">
+          <Box position="absolute" w="100%" top="15vh">
             <MiddleContentPictureSlide index={nowDetect} images={images} />
           </Box>
         </Box>
