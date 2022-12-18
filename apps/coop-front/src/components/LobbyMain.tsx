@@ -2,7 +2,11 @@ import DraweeLogo from "@asset/images/DraweeLogo.png";
 import Image from "next/image";
 import { Button, Flex } from "@chakra-ui/react";
 import Users from "@components/Users";
-import { providerState, userSelector } from "@common/recoil/recoil.atom";
+import {
+  providerState,
+  userSelector,
+  yRoomUsers,
+} from "@common/recoil/recoil.atom";
 import Link from "next/link";
 import { useTranslation } from "@hooks/useTransitions";
 import { useToast } from "@chakra-ui/react";
@@ -22,6 +26,7 @@ export const LobbyMain = () => {
     useRecoilValue(userSelector) ?? {};
   const { userProfiles } = useProfileUpdate({ nickname, avatarIndex, color });
   const { provider, room } = providerState;
+  console.log(yRoomUsers.toArray());
 
   if (provider === null) {
     return <div></div>;

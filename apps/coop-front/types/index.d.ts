@@ -3,6 +3,7 @@ export type CPUserType = {
   nickname?: string;
   avatarIndex?: number;
   color?: string;
+  ownerId?: string;
 };
 
 export type CPChatType = {

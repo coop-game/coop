@@ -34,6 +34,10 @@ export interface yjsStateType {
 
 export const doc = new Y.Doc();
 
+// export const yRoomOwner = doc.getMap("roomOwner");
+
+export const yRoomUsers = doc.getArray("roomUsers");
+
 export class providerClass {
   provider: WebrtcProvider | null;
   room: Room | null;
@@ -76,6 +80,7 @@ export class providerClass {
     }
     if (this.room === null) {
       this.room = new Room(this.provider.awareness);
+      yRoomUsers.push([doc.clientID]);
     }
   };
 }
