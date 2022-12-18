@@ -88,5 +88,7 @@
   "room.id": "방 제목",
   "user.required.nickname": "닉네임 필요합니다.",
   "lobby.invite.button": "초대하기",
-  "lobby.next.button": "다음으로 넘어가기"
+  "lobby.next.button": "다음으로 넘어가기",
+  "chatting.input.placeholder": "채팅을 입력하세요",
+  "chatting.input": "채팅"
 }

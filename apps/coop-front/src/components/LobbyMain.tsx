@@ -10,6 +10,7 @@ import { useRecoilValue } from "recoil";
 import Chatting from "./Chatting";
 import useProfileUpdate from "@hooks/useProfileUpdate";
 import useCheckCreatedProvider from "@hooks/useCheckCreatedProvider";
+import { css } from "@emotion/react";
 
 export const LobbyMain = () => {
   const translation = useTranslation("ko-kr").messages;
@@ -63,27 +64,47 @@ export const LobbyMain = () => {
             boxShadow="dark-lg"
             rounded="md"
             flexDirection={"column"}
+            css={css`
+              /* justify-content: space-between; */
+              justify-content: flex-end;
+              /* align-items: space-between; */
+            `}
           >
-            <Chatting></Chatting>
-            <Button
-              onClick={() => {
-                navigator.clipboard.writeText(
-                  `${process.env.NEXT_PUBLIC_HOSTNAME}/?roomId=${roomId}`
-                );
-                toast({
-                  title: "초대하기",
-                  description: "초대주소가 복사되었습니다.",
-                  status: "success",
-                  duration: 1000,
-                  isClosable: true,
-                });
-              }}
+            <Flex
+              css={css`
+                flex-grow: 3;
+                overflow: hidden;
+              `}
             >
-              {translation["lobby.invite.button"]}
-            </Button>
-            <Link href="/draw" passHref legacyBehavior>
-              <Button>{translation["lobby.next.button"]}</Button>
-            </Link>
+              <Chatting></Chatting>
+            </Flex>
+            <Flex
+              css={css`
+                flex-grow: 1;
+                max-height: 45px;
+                width: 100%;
+              `}
+            >
+              <Button
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    `${process.env.NEXT_PUBLIC_HOSTNAME}/?roomId=${roomId}`
+                  );
+                  toast({
+                    title: "초대하기",
+                    description: "초대주소가 복사되었습니다.",
+                    status: "success",
+                    duration: 1000,
+                    isClosable: true,
+                  });
+                }}
+              >
+                {translation["lobby.invite.button"]}
+              </Button>
+              <Link href="/draw" passHref legacyBehavior>
+                <Button>{translation["lobby.next.button"]}</Button>
+              </Link>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>

@@ -1,64 +1,77 @@
-import { Button, Input } from "@chakra-ui/react";
+import { Button, Flex, Input } from "@chakra-ui/react";
 import {
   ChattingSelector,
   doc,
   userSelector,
 } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
-import { CPChatType } from "@types";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-
-const yarray = doc.getArray<CPChatType>("chatting");
+import useChattingUpdate from "@hooks/useChattingUpdate";
+import { useTranslation } from "@hooks/useTransitions";
+import React from "react";
+import { useRecoilValue } from "recoil";
 
 const Chatting = () => {
-  const [inputString, setInputString] = useState("");
-  const { nickname } = useRecoilValue(userSelector) ?? {};
-  const [chattingState, setChattingState] = useRecoilState(ChattingSelector);
+  const chattingState = useRecoilValue(ChattingSelector);
+  const { inputString, setInputString, messagesEndRef, onClickHandler } =
+    useChattingUpdate();
 
-  useEffect(() => {
-    yarray.observe(() => {
-      const arr = yarray.toArray();
-      console.log("arr", arr);
-      setChattingState([...arr]);
-    });
-  }, [setChattingState]);
-  const onClickHandler = () => {
-    const newChat = {
-      nickname,
-      message: inputString,
-    };
-    yarray.push([newChat]);
-    setInputString("");
+  const translation = useTranslation("ko-kr").messages;
+
+  const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      onClickHandler();
+    }
   };
+  console.log(translation["chatting.input.placeholder"]);
+
   return (
-    <div>
+    <Flex
+      css={css`
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+      `}
+    >
       <div
         css={css`
-          height: 500px;
           overflow-y: scroll;
         `}
       >
-        {chattingState.map(({ nickname, message }, idx) => {
+        {chattingState.map(({ nickname, message, id }, idx) => {
           return (
             <div key={nickname + idx}>
               <div>{nickname}</div>
+              {doc.clientID === id && <div>나임</div>}
               <div>{message}</div>
             </div>
           );
         })}
+        <div ref={messagesEndRef}></div>
       </div>
-      <Input
-        variant="flushed"
-        placeholder="Flushed"
-        value={inputString}
-        onChange={(e) => {
-          setInputString(e.target.value);
-        }}
-      />
-      <Button onClick={onClickHandler}>채팅</Button>
-    </div>
+      <div
+        css={css`
+          padding: 3px;
+        `}
+      >
+        <Input
+          placeholder={translation["chatting.input.placeholder"]}
+          value={inputString}
+          onChange={(e) => {
+            setInputString(e.target.value);
+          }}
+          onKeyPress={onKeyPressHandler}
+        />
+        <Button
+          css={css`
+            width: 100%;
+          `}
+          onClick={onClickHandler}
+        >
+          {translation["chatting.input"]}
+        </Button>
+      </div>
+    </Flex>
   );
 };
 export default Chatting;

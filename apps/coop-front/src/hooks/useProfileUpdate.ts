@@ -21,6 +21,7 @@ const useProfileUpdate = ({
         user.id = v.id;
         user.nickname = v.user.name;
         user.avatarIndex = v.user.avatarIndex;
+        user.color = v.user.color;
         userProfiles.push(user);
       }
     });
