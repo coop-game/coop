@@ -87,7 +87,7 @@ export const userState = atom<{ roomId?: string; nickname?: string } | null>({
 });
 
 export const userSelector = selector({
-  key: "userSelector",
+  key: "USER_SELECTOR",
   get: ({ get }) => {
     return get(userState);
   },
@@ -105,7 +105,7 @@ export const ChattingState = atom<CPChatType[]>({
 });
 
 export const ChattingSelector = selector({
-  key: "chattingSelector",
+  key: "CHATTING_SELECTOR",
   get: ({ get }) => {
     return get(ChattingState);
   },

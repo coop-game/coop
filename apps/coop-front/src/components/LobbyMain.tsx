@@ -2,71 +2,24 @@ import DraweeLogo from "@asset/DraweeLogo.png";
 import Image from "next/image";
 import { Button, Flex } from "@chakra-ui/react";
 import Users from "@components/Users";
-import dynamic from "next/dynamic";
 import { providerState, userSelector } from "@common/recoil/recoil.atom";
-import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { nanoid } from "nanoid";
 import { useTranslation } from "@hooks/useTransitions";
 import { useToast } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import Chatting from "./Chatting";
-import { useRouter } from "next/router";
-
-type userProfile = {
-  id?: string;
-  nickname?: string;
-};
+import useProfileUpdate from "@hooks/useProfileUpdate";
+import useCheckCreatedProvider from "@hooks/useCheckCreatedProvider";
 
 export const LobbyMain = () => {
-  const [userProfiles, setUserProfiles] = useState<Array<userProfile>>([]);
   const translation = useTranslation("ko-kr").messages;
   const toast = useToast();
+  useCheckCreatedProvider(
+    "/ErrorPage/?errorMessage=잘못된 접근입니다.&statusCode=403"
+  );
   const { roomId, nickname } = useRecoilValue(userSelector) ?? {};
-  const router = useRouter();
+  const { userProfiles } = useProfileUpdate({ nickname });
   const { provider, room } = providerState;
-  if (provider === null) {
-    router.push("/ErrorPage/?errorMessage=잘못된 접근입니다.&statusCode=403");
-  }
-
-  const filterMap = useCallback(() => {
-    const userProfiles = [];
-    provider?.awareness.getStates().forEach((v) => {
-      console.log(v);
-      if (v?.user) {
-        const user: userProfile = {};
-        user.id = v.id;
-        user.nickname = v.user.name;
-        userProfiles.push(user);
-      }
-    });
-    return userProfiles;
-  }, [provider?.awareness]);
-
-  useEffect(() => {
-    provider?.awareness.on(
-      "change",
-      ({
-        added,
-        updated,
-        removed,
-      }: {
-        added: any;
-        updated: any;
-        removed: any;
-      }) => {
-        console.log("added : ", added);
-        console.log("updated : ", updated);
-        console.log("removed : ", removed);
-        console.log(Array.from(provider.awareness.getStates()));
-        setUserProfiles(filterMap());
-      }
-    );
-    provider?.awareness.setLocalStateField("user", {
-      name: nickname,
-      color: "#ffb61e",
-    });
-  }, [filterMap, provider, room, nickname]);
 
   if (provider === null) {
     return <div></div>;
