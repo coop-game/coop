@@ -3,8 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
-import { useEffect, useState } from "react";
-import DraweeLogo from "@asset/DraweeLogo.png";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import DraweeLogo from "@asset/images/DraweeLogo.png";
+import lodashRandom from "lodash/random";
 
 import {
   Button,
@@ -23,14 +24,33 @@ import { nanoid } from "nanoid";
 import { getTranslation } from "src/translations";
 import { useTranslation } from "@hooks/useTransitions";
 import { useRecoilState } from "recoil";
+import AvatarImage from "@components/AvatarImage";
 
 export default function Home({ roomId }: { roomId: string }) {
   const translation = useTranslation("ko-kr").messages;
-  const [_, setUserState] = useRecoilState(userSelector);
+  const [userState, setUserState] = useRecoilState(userSelector);
   const router = useRouter();
 
   const [nickname, setNickname] = useState("");
   const [isError, setIsError] = useState(true);
+  const [avatarIndex, setAvatarIndex] = useState(0);
+
+  const randomAvatarHandler = useCallback(() => {
+    setAvatarIndex(lodashRandom(9));
+  }, []);
+
+  const pushLobbyHander = () => {
+    if (nickname !== "") {
+      if (!!providerState.provider) {
+        providerState.clearProvider();
+      }
+      providerState.createProvider(roomId);
+      setUserState({ roomId, nickname, avatarIndex });
+      router.push("/lobby");
+    } else {
+      setIsError(true);
+    }
+  };
 
   return (
     <div>
@@ -71,10 +91,12 @@ export default function Home({ roomId }: { roomId: string }) {
               rounded="md"
               p={10}
               flexDirection={"column"}
+              minHeight={"500px"}
             >
-              <Stack height={"100%"}>
-                <div>asdf</div>
-              </Stack>
+              <AvatarImage
+                avatarIndex={avatarIndex}
+                randomAvatarHandler={randomAvatarHandler}
+              ></AvatarImage>
               <FormControl isInvalid={isError}>
                 <FormLabel>{translation["user.nickname"]}</FormLabel>
                 <Input
@@ -89,26 +111,11 @@ export default function Home({ roomId }: { roomId: string }) {
                   {!isError ? (
                     <FormHelperText>로비로 GOGO</FormHelperText>
                   ) : (
-                    <FormErrorMessage>{`${translation["user.nickname"]} is required.`}</FormErrorMessage>
+                    <FormErrorMessage>{`${translation["user.required.nickname"]}`}</FormErrorMessage>
                   )}
                 </Flex>
                 <Flex width={"100%"} justifyContent={"flex-end"}>
-                  <Button
-                    onClick={() => {
-                      if (nickname !== "") {
-                        if (!!providerState.provider) {
-                          providerState.clearProvider();
-                        }
-                        providerState.createProvider(roomId);
-                        setUserState({ roomId, nickname });
-                        router.push("/lobby");
-                      } else {
-                        setIsError(true);
-                      }
-                    }}
-                  >
-                    GO LOBBY
-                  </Button>
+                  <Button onClick={pushLobbyHander}>GO LOBBY</Button>
                 </Flex>
               </FormControl>
             </Flex>

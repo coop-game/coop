@@ -1,11 +1,11 @@
 import { Button, Input } from "@chakra-ui/react";
 import {
-  CPChatType,
   ChattingSelector,
   doc,
   userSelector,
 } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
+import { CPChatType } from "@types";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";

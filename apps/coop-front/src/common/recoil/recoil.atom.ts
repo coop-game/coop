@@ -7,6 +7,7 @@ import * as awarenessProtocol from "y-protocols/awareness";
 import * as math from "lib0/math";
 import * as random from "lib0/random";
 import { Room } from "@y-presence/client";
+import { CPChatType, CPUserType } from "@types";
 
 export interface ProblemType {
   player: string;
@@ -81,7 +82,7 @@ export class providerClass {
 
 export const providerState = new providerClass();
 
-export const userState = atom<{ roomId?: string; nickname?: string } | null>({
+export const userState = atom<CPUserType | null>({
   key: "USER_STATE",
   default: null,
 });
@@ -93,11 +94,6 @@ export const userSelector = selector({
   },
   set: ({ set }, newValue) => set(userState, { ...newValue }),
 });
-
-export type CPChatType = {
-  nickname: string;
-  message: string;
-};
 
 export const ChattingState = atom<CPChatType[]>({
   key: "CHATTING_STATE",

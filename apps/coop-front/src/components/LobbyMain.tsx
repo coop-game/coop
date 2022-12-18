@@ -1,4 +1,4 @@
-import DraweeLogo from "@asset/DraweeLogo.png";
+import DraweeLogo from "@asset/images/DraweeLogo.png";
 import Image from "next/image";
 import { Button, Flex } from "@chakra-ui/react";
 import Users from "@components/Users";
@@ -17,8 +17,8 @@ export const LobbyMain = () => {
   useCheckCreatedProvider(
     "/ErrorPage/?errorMessage=잘못된 접근입니다.&statusCode=403"
   );
-  const { roomId, nickname } = useRecoilValue(userSelector) ?? {};
-  const { userProfiles } = useProfileUpdate({ nickname });
+  const { roomId, nickname, avatarIndex } = useRecoilValue(userSelector) ?? {};
+  const { userProfiles } = useProfileUpdate({ nickname, avatarIndex });
   const { provider, room } = providerState;
 
   if (provider === null) {

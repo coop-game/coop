@@ -124,5 +124,7 @@
   "dialog.no": "No",
   "dialog.yes": "Yes",
   "enter.file.name": "Enter file name",
-  "tldraw-beta": "Try the new tldraw"
+  "tldraw-beta": "Try the new tldraw",
+
+  "user.required.nickname": "nickname is required"
 }

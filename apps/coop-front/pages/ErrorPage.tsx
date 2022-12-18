@@ -34,6 +34,6 @@ export async function getServerSideProps(context) {
     props: {
       statusCode: context?.query?.statusCode ?? null,
       errorMessage: context?.query?.errorMessage ?? null,
-    }, // will be passed to the page component as props
+    },
   };
 }

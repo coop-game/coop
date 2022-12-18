@@ -84,8 +84,9 @@
   "backward": "뒤로",
   "back": "맨 뒤로",
   "language": "언어",
+
   "room.id": "방 제목",
-  "user.nickname": "닉네임",
+  "user.required.nickname": "닉네임 필요합니다.",
   "lobby.invite.button": "초대하기",
   "lobby.next.button": "다음으로 넘어가기"
 }

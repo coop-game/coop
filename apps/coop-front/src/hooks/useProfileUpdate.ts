@@ -1,22 +1,26 @@
+import { Avatar } from "@chakra-ui/react";
 import { providerState } from "@common/recoil/recoil.atom";
+import { CPUserProfile } from "@types";
 import { useCallback, useEffect, useState } from "react";
 
-type userProfile = {
-  id?: string;
-  nickname?: string;
-};
-const useProfileUpdate = ({ nickname }: { nickname: string }) => {
-  const [userProfiles, setUserProfiles] = useState<Array<userProfile>>([]);
+const useProfileUpdate = ({
+  nickname,
+  avatarIndex,
+}: {
+  nickname: string;
+  avatarIndex: number;
+}) => {
+  const [userProfiles, setUserProfiles] = useState<Array<CPUserProfile>>([]);
   const { provider, room } = providerState;
 
   const filterMap = useCallback(() => {
     const userProfiles = [];
     provider?.awareness.getStates().forEach((v) => {
-      console.log(v);
       if (v?.user) {
-        const user: userProfile = {};
+        const user: CPUserProfile = {};
         user.id = v.id;
         user.nickname = v.user.name;
+        user.avatarIndex = v.user.avatarIndex;
         userProfiles.push(user);
       }
     });
@@ -44,9 +48,10 @@ const useProfileUpdate = ({ nickname }: { nickname: string }) => {
     );
     provider?.awareness.setLocalStateField("user", {
       name: nickname,
+      avatarIndex,
       color: "#ffb61e",
     });
-  }, [filterMap, provider, room, nickname]);
+  }, [filterMap, provider, room, nickname, avatarIndex]);
   return { userProfiles };
 };
 export default useProfileUpdate;

@@ -1,13 +1,10 @@
 import { Avatar, Flex, Text, Badge, Box, css } from "@chakra-ui/react";
-import { userProfileType } from ".";
 import { Tooltip } from "@chakra-ui/react";
+import AvatarImage from "@components/AvatarImage";
+import { CPUserProfile } from "@types";
 import { useState } from "react";
 
-type UserPropsType = {
-  userProfile: userProfileType;
-};
-
-const User = ({ userProfile }: UserPropsType) => {
+const User = ({ userProfile }: { userProfile: CPUserProfile }) => {
   const [isLabelOpen, setIsLabelOpen] = useState(false);
   return (
     <Flex
@@ -31,7 +28,14 @@ const User = ({ userProfile }: UserPropsType) => {
           onMouseLeave={() => setIsLabelOpen(false)}
           onClick={() => setIsLabelOpen(true)}
         >
-          <Avatar src="https://bit.ly/sage-adebayo" />
+          <Avatar
+            css={css`
+              border-radius: 100%;
+              background: rgb(200, 100, 100, 30%);
+              border: 3px solid rgb(200, 100, 100, 70%);
+            `}
+            src={`./images/avatar/${userProfile.avatarIndex}.png`}
+          />
         </Flex>
       </Tooltip>
       <Box ml="3" flexGrow={3} display={{ base: "none", md: "block" }}>

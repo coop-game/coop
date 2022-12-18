@@ -1,14 +1,10 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import User from "./User";
-
-export type userProfileType = {
-  id?: string;
-  nickname?: string;
-};
+import { CPUserProfile } from "@types";
 
 type UsersPropsType = {
-  userProfiles: Array<userProfileType>;
+  userProfiles: Array<CPUserProfile>;
 };
 const Users = ({ userProfiles }: UsersPropsType) => {
   return (
@@ -25,11 +21,7 @@ const Users = ({ userProfiles }: UsersPropsType) => {
       rounded="md"
     >
       {userProfiles.map((userProfile, idx) => {
-        return (
-          <div key={userProfile.id + idx}>
-            <User userProfile={userProfile} />
-          </div>
-        );
+        return <User key={userProfile.id + idx} userProfile={userProfile} />;
       })}
     </Flex>
   );
