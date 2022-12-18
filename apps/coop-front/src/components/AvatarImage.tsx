@@ -1,12 +1,17 @@
 import { Button, Flex, Stack } from "@chakra-ui/react";
+import { userSelector, userState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
 import Image from "next/image";
+import { useState } from "react";
+import { useRecoilValue } from "recoil";
 
 const AvatarImage = ({
   avatarIndex,
+  borderColor,
   randomAvatarHandler,
 }: {
   avatarIndex: number;
+  borderColor: string;
   randomAvatarHandler?: () => void;
 }) => {
   return (
@@ -29,7 +34,7 @@ const AvatarImage = ({
         css={css`
           border-radius: 100%;
           background: rgb(200, 100, 100, 30%);
-          border: 3px solid rgb(200, 100, 100, 70%);
+          border: 3px solid ${borderColor};
         `}
       >
         <Image

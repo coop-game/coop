@@ -2,6 +2,7 @@ export type CPUserType = {
   roomId?: string;
   nickname?: string;
   avatarIndex?: number;
+  color?: string;
 };
 
 export type CPChatType = {

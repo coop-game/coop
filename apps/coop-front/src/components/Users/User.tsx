@@ -1,11 +1,14 @@
-import { Avatar, Flex, Text, Badge, Box, css } from "@chakra-ui/react";
+import { Avatar, Flex, Text, Badge, Box } from "@chakra-ui/react";
 import { Tooltip } from "@chakra-ui/react";
 import AvatarImage from "@components/AvatarImage";
 import { CPUserProfile } from "@types";
+import { css } from "@emotion/react";
 import { useState } from "react";
 
 const User = ({ userProfile }: { userProfile: CPUserProfile }) => {
   const [isLabelOpen, setIsLabelOpen] = useState(false);
+  const { nickname, color, id, avatarIndex } = userProfile;
+  console.log("userProfile", color);
   return (
     <Flex
       w={"100%"}
@@ -17,7 +20,7 @@ const User = ({ userProfile }: { userProfile: CPUserProfile }) => {
         hasArrow
         color="black"
         bg="gray.300"
-        label={userProfile.nickname}
+        label={nickname}
         isOpen={isLabelOpen}
       >
         <Flex
@@ -31,21 +34,21 @@ const User = ({ userProfile }: { userProfile: CPUserProfile }) => {
           <Avatar
             css={css`
               border-radius: 100%;
-              background: rgb(200, 100, 100, 30%);
-              border: 3px solid rgb(200, 100, 100, 70%);
+              /* background: rgb(200, 100, 100, 30%); */
+              border: 3px solid ${color};
             `}
-            src={`./images/avatar/${userProfile.avatarIndex}.png`}
+            src={`./images/avatar/${avatarIndex}.png`}
           />
         </Flex>
       </Tooltip>
       <Box ml="3" flexGrow={3} display={{ base: "none", md: "block" }}>
         <Text fontWeight="bold">
-          {userProfile.nickname}
+          {nickname}
           <Badge ml="1" colorScheme="yellow">
             GOLD
           </Badge>
         </Text>
-        <Text fontSize="sm">{userProfile.id}</Text>
+        <Text fontSize="sm">{id}</Text>
       </Box>
     </Flex>
   );

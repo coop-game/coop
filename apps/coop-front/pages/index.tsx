@@ -34,9 +34,13 @@ export default function Home({ roomId }: { roomId: string }) {
   const [nickname, setNickname] = useState("");
   const [isError, setIsError] = useState(true);
   const [avatarIndex, setAvatarIndex] = useState(0);
+  const getRandomColor = () =>
+    "#" + Math.floor(Math.random() * 16777215).toString(16);
+  const [color, setColor] = useState(getRandomColor());
 
   const randomAvatarHandler = useCallback(() => {
     setAvatarIndex(lodashRandom(9));
+    setColor(getRandomColor());
   }, []);
 
   const pushLobbyHander = () => {
@@ -45,7 +49,7 @@ export default function Home({ roomId }: { roomId: string }) {
         providerState.clearProvider();
       }
       providerState.createProvider(roomId);
-      setUserState({ roomId, nickname, avatarIndex });
+      setUserState({ roomId, nickname, avatarIndex, color });
       router.push("/lobby");
     } else {
       setIsError(true);
@@ -95,6 +99,7 @@ export default function Home({ roomId }: { roomId: string }) {
             >
               <AvatarImage
                 avatarIndex={avatarIndex}
+                borderColor={color}
                 randomAvatarHandler={randomAvatarHandler}
               ></AvatarImage>
               <FormControl isInvalid={isError}>

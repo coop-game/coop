@@ -18,8 +18,9 @@ export const LobbyMain = () => {
   useCheckCreatedProvider(
     "/ErrorPage/?errorMessage=잘못된 접근입니다.&statusCode=403"
   );
-  const { roomId, nickname, avatarIndex } = useRecoilValue(userSelector) ?? {};
-  const { userProfiles } = useProfileUpdate({ nickname, avatarIndex });
+  const { roomId, nickname, avatarIndex, color } =
+    useRecoilValue(userSelector) ?? {};
+  const { userProfiles } = useProfileUpdate({ nickname, avatarIndex, color });
   const { provider, room } = providerState;
 
   if (provider === null) {
@@ -64,11 +65,6 @@ export const LobbyMain = () => {
             boxShadow="dark-lg"
             rounded="md"
             flexDirection={"column"}
-            css={css`
-              /* justify-content: space-between; */
-              justify-content: flex-end;
-              /* align-items: space-between; */
-            `}
           >
             <Flex
               css={css`
@@ -83,9 +79,13 @@ export const LobbyMain = () => {
                 flex-grow: 1;
                 max-height: 45px;
                 width: 100%;
+                justify-content: space-between;
               `}
             >
               <Button
+                css={css`
+                  width: 50%;
+                `}
                 onClick={() => {
                   navigator.clipboard.writeText(
                     `${process.env.NEXT_PUBLIC_HOSTNAME}/?roomId=${roomId}`
@@ -102,7 +102,13 @@ export const LobbyMain = () => {
                 {translation["lobby.invite.button"]}
               </Button>
               <Link href="/draw" passHref legacyBehavior>
-                <Button>{translation["lobby.next.button"]}</Button>
+                <Button
+                  css={css`
+                    width: 50%;
+                  `}
+                >
+                  {translation["lobby.next.button"]}
+                </Button>
               </Link>
             </Flex>
           </Flex>

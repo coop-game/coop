@@ -6,9 +6,11 @@ import { useCallback, useEffect, useState } from "react";
 const useProfileUpdate = ({
   nickname,
   avatarIndex,
+  color,
 }: {
   nickname: string;
   avatarIndex: number;
+  color: string;
 }) => {
   const [userProfiles, setUserProfiles] = useState<Array<CPUserProfile>>([]);
   const { provider, room } = providerState;
@@ -50,7 +52,7 @@ const useProfileUpdate = ({
     provider?.awareness.setLocalStateField("user", {
       name: nickname,
       avatarIndex,
-      color: "#ffb61e",
+      color,
     });
   }, [filterMap, provider, room, nickname, avatarIndex]);
   return { userProfiles };

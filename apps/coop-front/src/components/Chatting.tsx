@@ -35,15 +35,31 @@ const Chatting = () => {
     >
       <div
         css={css`
+          word-break: break-all;
           overflow-y: scroll;
         `}
       >
         {chattingState.map(({ nickname, message, id }, idx) => {
           return (
-            <div key={nickname + idx}>
-              <div>{nickname}</div>
-              {doc.clientID === id && <div>나임</div>}
-              <div>{message}</div>
+            <div
+              key={nickname + idx}
+              css={css`
+                display: flex;
+                flex-direction: column;
+                align-items: ${doc.clientID === id ? "flex-start" : "flex-end"};
+                padding: 10px;
+              `}
+            >
+              <div>{nickname} </div>
+              <div
+                css={css`
+                  background: #00eaff;
+                  padding: 5px;
+                  border-radius: 8px;
+                `}
+              >
+                {message}
+              </div>
             </div>
           );
         })}
@@ -58,7 +74,7 @@ const Chatting = () => {
           placeholder={translation["chatting.input.placeholder"]}
           value={inputString}
           onChange={(e) => {
-            setInputString(e.target.value);
+            setInputString(e.target.value.substring(0, 50));
           }}
           onKeyPress={onKeyPressHandler}
         />

@@ -29,10 +29,11 @@ const useChattingUpdate = () => {
   }, [setChattingState]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView();
   }, [chattingState]);
 
   const onClickHandler = () => {
+    if (inputString === "") return;
     const newChat = {
       id: doc.clientID,
       nickname,
