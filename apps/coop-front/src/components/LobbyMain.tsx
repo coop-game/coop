@@ -1,9 +1,10 @@
 import DraweeLogo from "@asset/images/DraweeLogo.png";
 import Image from "next/image";
-import { Button, Flex } from "@chakra-ui/react";
+import { Button, Flex, Spinner } from "@chakra-ui/react";
 import Users from "@components/Users";
 import {
   providerState,
+  userProfilesSelector,
   userSelector,
   yRoomUsers,
 } from "@common/recoil/recoil.atom";
@@ -24,9 +25,20 @@ export const LobbyMain = () => {
   );
   const { roomId, nickname, avatarIndex, color } =
     useRecoilValue(userSelector) ?? {};
-  const { userProfiles } = useProfileUpdate({ nickname, avatarIndex, color });
+  useProfileUpdate({
+    nickname,
+    avatarIndex,
+    color,
+  });
+  const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
+
+  // const { userProfiles, isOwner } = useProfileUpdate({
+  //   nickname,
+  //   avatarIndex,
+  //   color,
+  // });
   const { provider, room } = providerState;
-  console.log(yRoomUsers.toArray());
+  // console.log(yRoomUsers.toArray());
 
   if (provider === null) {
     return <div></div>;
@@ -79,43 +91,51 @@ export const LobbyMain = () => {
             >
               <Chatting></Chatting>
             </Flex>
-            <Flex
-              css={css`
-                flex-grow: 1;
-                max-height: 45px;
-                width: 100%;
-                justify-content: space-between;
-              `}
-            >
-              <Button
+            {!isOwner && (
+              <div>
+                <Spinner color="red.500" />
+                방장이 선택하는 중입니다.
+              </div>
+            )}
+            {isOwner && (
+              <Flex
                 css={css`
-                  width: 50%;
+                  flex-grow: 1;
+                  max-height: 45px;
+                  width: 100%;
+                  justify-content: space-between;
                 `}
-                onClick={() => {
-                  navigator.clipboard.writeText(
-                    `${process.env.NEXT_PUBLIC_HOSTNAME}/?roomId=${roomId}`
-                  );
-                  toast({
-                    title: "초대하기",
-                    description: "초대주소가 복사되었습니다.",
-                    status: "success",
-                    duration: 1000,
-                    isClosable: true,
-                  });
-                }}
               >
-                {translation["lobby.invite.button"]}
-              </Button>
-              <Link href="/draw" passHref legacyBehavior>
                 <Button
                   css={css`
                     width: 50%;
                   `}
+                  onClick={() => {
+                    navigator.clipboard.writeText(
+                      `${process.env.NEXT_PUBLIC_HOSTNAME}/?roomId=${roomId}`
+                    );
+                    toast({
+                      title: "초대하기",
+                      description: "초대주소가 복사되었습니다.",
+                      status: "success",
+                      duration: 1000,
+                      isClosable: true,
+                    });
+                  }}
                 >
-                  {translation["lobby.next.button"]}
+                  {translation["lobby.invite.button"]}
                 </Button>
-              </Link>
-            </Flex>
+                <Link href="/draw" passHref legacyBehavior>
+                  <Button
+                    css={css`
+                      width: 50%;
+                    `}
+                  >
+                    {translation["lobby.next.button"]}
+                  </Button>
+                </Link>
+              </Flex>
+            )}
           </Flex>
         </Flex>
       </Flex>

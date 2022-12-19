@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const User = ({ userProfile }: { userProfile: CPUserProfile }) => {
   const [isLabelOpen, setIsLabelOpen] = useState(false);
-  const { nickname, color, id, avatarIndex } = userProfile;
+  const { nickname, color, id, avatarIndex, isOwner } = userProfile;
   console.log("userProfile", color);
   return (
     <Flex
@@ -44,9 +44,11 @@ const User = ({ userProfile }: { userProfile: CPUserProfile }) => {
       <Box ml="3" flexGrow={3} display={{ base: "none", md: "block" }}>
         <Text fontWeight="bold">
           {nickname}
-          <Badge ml="1" colorScheme="yellow">
-            GOLD
-          </Badge>
+          {isOwner && (
+            <Badge ml="1" colorScheme="yellow">
+              Owner
+            </Badge>
+          )}
         </Text>
         <Text fontSize="sm">{id}</Text>
       </Box>

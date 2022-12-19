@@ -120,6 +120,7 @@ const onconnection = (conn) => {
             );
             break;
           case "publish":
+            // console.log(message)
             if (message.topic) {
               const receivers = topics.get(message.topic);
               if (receivers) {

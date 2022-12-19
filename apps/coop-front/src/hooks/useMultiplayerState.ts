@@ -80,6 +80,7 @@ export function useMultiplayerState({
     (app: TldrawApp, user: TDUser) => {
       if (!app.room) return;
       console.log("user", user);
+      console.log("provider", provider);
       user.id += `|${customUserId}`;
       room.setPresence({ id: app.room.userId, tdUser: user });
     },

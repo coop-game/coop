@@ -3,7 +3,8 @@ export type CPUserType = {
   nickname?: string;
   avatarIndex?: number;
   color?: string;
-  ownerId?: string;
+  utcTimeStamp?: string;
+  isOwner?: boolean;
 };
 
 export type CPChatType = {
@@ -17,4 +18,6 @@ export type CPUserProfile = {
   nickname?: string;
   avatarIndex?: number;
   color?: string;
+  utcTimeStamp?: string;
+  isOwner?: boolean;
 };

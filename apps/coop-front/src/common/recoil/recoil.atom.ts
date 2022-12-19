@@ -7,7 +7,7 @@ import * as awarenessProtocol from "y-protocols/awareness";
 import * as math from "lib0/math";
 import * as random from "lib0/random";
 import { Room } from "@y-presence/client";
-import { CPChatType, CPUserType } from "@types";
+import { CPChatType, CPUserProfile, CPUserType } from "@types";
 
 export interface ProblemType {
   player: string;
@@ -98,6 +98,28 @@ export const userSelector = selector({
     return get(userState);
   },
   set: ({ set }, newValue) => set(userState, { ...newValue }),
+});
+
+type CPUserProfilesState = {
+  isOwner?: boolean;
+  userProfiles?: CPUserProfile[];
+};
+
+export const userProfilesState = atom<CPUserProfilesState>({
+  key: "USER_PROFILES_STATE",
+  default: {
+    isOwner: false,
+    userProfiles: [],
+  },
+});
+
+export const userProfilesSelector = selector({
+  key: "USER_PROFILES_SELECTOR",
+  get: ({ get }) => {
+    return get(userProfilesState);
+  },
+  set: ({ set }, newValue) =>
+    set(userProfilesState, (prev) => ({ ...prev, ...newValue })),
 });
 
 export const ChattingState = atom<CPChatType[]>({
