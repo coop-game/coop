@@ -1,7 +1,7 @@
 import { Button, Center, Flex, Text } from "@chakra-ui/react";
 import Image from "next/image";
 
-import DraweeLogo from "../../../../src/asset/DraweeLogo.png";
+import DraweeLogo from "@asset/images/DraweeLogo.png";
 
 function BottomContent() {
   return (

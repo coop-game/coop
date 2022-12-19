@@ -1,6 +1,6 @@
 import { Box, Button, Center, Flex, Text } from "@chakra-ui/react";
 import Image from "next/image";
-import DraweeLogo from "../../../src/asset/DraweeLogo.png";
+import DraweeLogo from "@asset/images/DraweeLogo.png";
 import { css, keyframes } from "@emotion/react";
 
 const scroll = keyframes`
