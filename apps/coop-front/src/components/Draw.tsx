@@ -1,47 +1,58 @@
-import { useFileSystem } from "@coop/draw";
-import dynamic from "next/dynamic";
-import  {useMultiplayerState}  from "./../hooks/useMultiplayerState";
-import React, { useEffect, useMemo } from "react";
-import { nanoid } from "nanoid";
-// import useYjs from "src/hooks/useYjs";
+import { useMultiplayerState } from "./../hooks/useMultiplayerState";
 
-const Tldraw = dynamic(() => import("@coop/draw").then((mod) => mod.Tldraw), {
-  ssr: false,
-});
+import { css } from "@emotion/react";
 
-function Editor({ roomId }: { roomId: string }) {
-  const fileSystemEvents = useFileSystem();
-  // const {  
-  //   awareness,
-  //   doc,
-  //   provider,
-  //   undoManager,
-  //   yBindings,
-  //   yShapes
-  // } = useYjs(roomId);
-  const { onMount, ...events } = useMultiplayerState(roomId);
+import NewCursor, { CursorComponent } from "@components/NewCursor";
+
+// import { yjsState } from "@common/recoil/recoil.atom";
+
+import * as Y from "yjs";
+import { providerState } from "@common/recoil/recoil.atom";
+
+import { Tldraw } from "@coop/draw";
+
+function Editor({}) {
+  const { onMount, onChangePage, onUndo, onRedo, onChangePresence } =
+    useMultiplayerState({
+      provider: providerState?.provider,
+      room: providerState?.room,
+      customUserId: "하이루",
+    });
 
   return (
-    <div>
+    <div
+      css={css`
+        position: relative;
+        width: 80vw;
+        height: 80vh;
+      `}
+    >
       <Tldraw
         showMenu={false}
-        autofocus
-        disableAssets
+        // autofocus
+        // disableAssets
         showPages={false}
         onMount={onMount}
-        {...fileSystemEvents}
-        {...events}
+        onChangePage={onChangePage}
+        onUndo={onUndo}
+        onRedo={onRedo}
+        onChangePresence={onChangePresence}
+        components={{ Cursor: NewCursor as any }}
       />
     </div>
   );
 }
 
-export default function Draw() {
-  const roomId = nanoid();
-  console.log("provider",roomId)
+function Draw() {
   return (
-    <div className="tldraw">
-      <Editor roomId={roomId} />
-    </div>
+    <>
+      <div>{providerState?.provider.roomName}</div>
+      {providerState.provider !== null && (
+        <div className="tldraw">
+          <Editor />
+        </div>
+      )}
+    </>
   );
 }
+export default Draw;

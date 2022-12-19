@@ -5,12 +5,22 @@
     "paths": {
       "@common/*": ["src/common/*"],
       "@assets/*": ["src/assets/*"],
+      "@asset/*": ["src/asset/*"],
+      "@asset": ["src/asset/images/index.ts"],
       "@components/*": ["src/components/*"],
       "@theme/*": ["src/theme/*"],
       "@styles/*": ["styles/*"],
-      "@pages/*": ["pages/*"]
+      "@pages/*": ["pages/*"],
+      "@types": ["types/index"],
+      "@coop/draw": ["../../packages/coop-draw/*"],
+      "@translations/*": ["translations/*"],
+      "@translations/": ["src/translations/index"],
+      "@hooks/*": ["src/hooks/*"]
     },
-    "jsxImportSource": "@emotion/react"
+    "jsxImportSource": "@emotion/react",
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true
   },
   "include": [
     "types",
@@ -20,5 +30,12 @@
     "next-sitemap.config.js"
   ],
   "exclude": ["node_modules"],
-  "references": [{ "path": "../../packages/coop-draw" }]
+  "references": [
+    {
+      "path": "../../packages/coop-draw"
+    },
+    {
+      "path": "../../packages/coop-core"
+    }
+  ]
 }

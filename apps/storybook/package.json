@@ -18,7 +18,7 @@
     "babel-loader": "^8.3.0"
   },
   "scripts": {
-    "dev": "start-storybook -p 6006",
+    "dev2": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build2": "build-storybook"
   }

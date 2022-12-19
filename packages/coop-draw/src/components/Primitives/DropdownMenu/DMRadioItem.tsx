@@ -1,26 +1,26 @@
-import { RadioItem } from '@radix-ui/react-dropdown-menu'
-import { styled } from '~styles/stitches.config'
+import { RadioItem } from "@radix-ui/react-dropdown-menu";
+import { styled } from "~styles/stitches.config";
 
 export const DMRadioItem = styled(RadioItem, {
-  height: '32px',
-  width: '32px',
-  backgroundColor: '$panel',
-  borderRadius: '4px',
-  padding: '0',
-  margin: '0',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  outline: 'none',
-  border: 'none',
-  pointerEvents: 'all',
-  cursor: 'pointer',
+  height: "32px",
+  width: "32px",
+  backgroundColor: "$panel",
+  borderRadius: "4px",
+  padding: "0",
+  margin: "0",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  outline: "none",
+  border: "none",
+  pointerEvents: "all",
+  cursor: "pointer",
 
   variants: {
     isActive: {
       true: {
-        backgroundColor: '$selected',
-        color: 'white',
+        backgroundColor: "$selected",
+        color: "white",
       },
       false: {},
     },
@@ -33,15 +33,15 @@ export const DMRadioItem = styled(RadioItem, {
   compoundVariants: [
     {
       isActive: false,
-      bp: 'small',
+      bp: "small",
       css: {
-        '&:focus': {
-          backgroundColor: '$hover',
+        "&:focus": {
+          backgroundColor: "$hover",
         },
-        '&:hover:not(:disabled)': {
-          backgroundColor: '$hover',
+        "&:hover:not(:disabled)": {
+          backgroundColor: "$hover",
         },
       },
     },
   ],
-})
+});

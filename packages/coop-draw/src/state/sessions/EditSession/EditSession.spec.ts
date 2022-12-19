@@ -1,4 +1,4 @@
-import { TldrawTestApp } from '~test'
+import { TldrawTestApp } from "~test";
 import {
   ColorStyle,
   DashStyle,
@@ -7,30 +7,30 @@ import {
   TDDocument,
   TDShapeType,
   TextShape,
-} from '~types'
+} from "~types";
 
 const textDoc: TDDocument = {
   version: 0,
-  id: 'doc',
-  name: 'New Document',
+  id: "doc",
+  name: "New Document",
   pages: {
     page1: {
-      id: 'page1',
+      id: "page1",
       shapes: {
         text1: {
-          id: 'text1',
-          parentId: 'page1',
-          name: 'Text',
+          id: "text1",
+          parentId: "page1",
+          name: "Text",
           childIndex: 1,
           type: TDShapeType.Text,
           point: [0, 0],
-          text: 'Hello',
+          text: "Hello",
           style: {
             dash: DashStyle.Draw,
             size: SizeStyle.Medium,
             color: ColorStyle.Blue,
           },
-          label: '',
+          label: "",
         },
       },
       bindings: {},
@@ -38,7 +38,7 @@ const textDoc: TDDocument = {
   },
   pageStates: {
     page1: {
-      id: 'page1',
+      id: "page1",
       selectedIds: [],
       camera: {
         point: [0, 0],
@@ -47,128 +47,134 @@ const textDoc: TDDocument = {
     },
   },
   assets: {},
-}
+};
 
-describe('When creating a shape...', () => {
-  it('begins, updateSession', () => {
-    const app = new TldrawTestApp().selectTool(TDShapeType.Text).doubleClickCanvas()
+describe("When creating a shape...", () => {
+  it("begins, updateSession", () => {
+    const app = new TldrawTestApp()
+      .selectTool(TDShapeType.Text)
+      .doubleClickCanvas();
 
     // We should be in the editing session
-    expect(app.session?.type).toBe(SessionType.Edit)
+    expect(app.session?.type).toBe(SessionType.Edit);
 
     // We should be able to edit the shape
-    const id = app.shapes[0].id
+    const id = app.shapes[0].id;
 
     app.onShapeChange({
       id,
-      text: 'Hello',
-    })
+      text: "Hello",
+    });
 
-    expect(app.getShape<TextShape>(id).text).toBe('Hello')
-  })
+    expect(app.getShape<TextShape>(id).text).toBe("Hello");
+  });
 
-  it('cancels session', () => {
-    const app = new TldrawTestApp().selectTool(TDShapeType.Text).doubleClickCanvas()
+  it("cancels session", () => {
+    const app = new TldrawTestApp()
+      .selectTool(TDShapeType.Text)
+      .doubleClickCanvas();
 
-    const id = app.shapes[0].id
-
-    app
-      .onShapeChange({
-        id,
-        text: 'Hello',
-      })
-      .cancel()
-
-    // Removes the editing shape
-    expect(app.session?.type).toBeUndefined()
-    expect(app.getShape(id)).toBeUndefined()
-
-    // The shape was never added to the undo stack
-    app.undo()
-    expect(app.getShape(id)).toBeUndefined()
-    app.redo()
-    expect(app.getShape(id)).toBeUndefined()
-  })
-
-  it('completes session', () => {
-    const app = new TldrawTestApp().selectTool(TDShapeType.Text).doubleClickCanvas()
-
-    const id = app.shapes[0].id
+    const id = app.shapes[0].id;
 
     app
       .onShapeChange({
         id,
-        text: 'Hello',
+        text: "Hello",
       })
-      .completeSession()
+      .cancel();
 
     // Removes the editing shape
-    expect(app.session?.type).toBeUndefined()
-    expect(app.getShape(id)).toBeDefined()
+    expect(app.session?.type).toBeUndefined();
+    expect(app.getShape(id)).toBeUndefined();
 
     // The shape was never added to the undo stack
-    app.undo()
-    expect(app.getShape(id)).toBeUndefined()
+    app.undo();
+    expect(app.getShape(id)).toBeUndefined();
+    app.redo();
+    expect(app.getShape(id)).toBeUndefined();
+  });
+
+  it("completes session", () => {
+    const app = new TldrawTestApp()
+      .selectTool(TDShapeType.Text)
+      .doubleClickCanvas();
+
+    const id = app.shapes[0].id;
+
+    app
+      .onShapeChange({
+        id,
+        text: "Hello",
+      })
+      .completeSession();
+
+    // Removes the editing shape
+    expect(app.session?.type).toBeUndefined();
+    expect(app.getShape(id)).toBeDefined();
+
+    // The shape was never added to the undo stack
+    app.undo();
+    expect(app.getShape(id)).toBeUndefined();
 
     // The shape was added to the undo stack
-    app.redo()
-    expect(app.getShape(id)).toBeDefined()
-  })
-})
+    app.redo();
+    expect(app.getShape(id)).toBeDefined();
+  });
+});
 
-describe('When editing an existing a shape...', () => {
-  it('begins, updateSession', () => {
-    const app = new TldrawTestApp().loadDocument(textDoc)
+describe("When editing an existing a shape...", () => {
+  it("begins, updateSession", () => {
+    const app = new TldrawTestApp().loadDocument(textDoc);
 
-    app.doubleClickShape('text1')
+    app.doubleClickShape("text1");
 
-    expect(app.session?.type).toBe(SessionType.Edit)
-  })
+    expect(app.session?.type).toBe(SessionType.Edit);
+  });
 
-  it('cancels session', () => {
+  it("cancels session", () => {
     const app = new TldrawTestApp()
       .loadDocument(textDoc)
 
-      .doubleClickShape('text1')
+      .doubleClickShape("text1")
       .onShapeChange({
-        id: 'text1',
-        text: 'Hello World!',
+        id: "text1",
+        text: "Hello World!",
       })
-      .cancel()
+      .cancel();
 
     // Cancelling will cancel the session and restore the original text
-    expect(app.session?.type).toBeUndefined()
-    expect(app.getShape<TextShape>('text1').text).toBe('Hello')
+    expect(app.session?.type).toBeUndefined();
+    expect(app.getShape<TextShape>("text1").text).toBe("Hello");
 
     // The changes were never added to the undo stack
-    app.undo()
-    expect(app.getShape<TextShape>('text1').text).toBe('Hello')
+    app.undo();
+    expect(app.getShape<TextShape>("text1").text).toBe("Hello");
 
     // The redo will restore the shape
-    app.redo()
-    expect(app.getShape<TextShape>('text1').text).toBe('Hello')
-  })
+    app.redo();
+    expect(app.getShape<TextShape>("text1").text).toBe("Hello");
+  });
 
-  it('completes session', () => {
+  it("completes session", () => {
     const app = new TldrawTestApp()
       .loadDocument(textDoc)
-      .doubleClickShape('text1')
+      .doubleClickShape("text1")
       .onShapeChange({
-        id: 'text1',
-        text: 'Hello World!',
+        id: "text1",
+        text: "Hello World!",
       })
-      .completeSession()
+      .completeSession();
 
     // Cancelling will cancel the session and restore the original text
-    expect(app.session?.type).toBeUndefined()
-    expect(app.getShape<TextShape>('text1').text).toBe('Hello World!')
+    expect(app.session?.type).toBeUndefined();
+    expect(app.getShape<TextShape>("text1").text).toBe("Hello World!");
 
     // The changes were never added to the undo stack
-    app.undo()
-    expect(app.getShape<TextShape>('text1').text).toBe('Hello')
+    app.undo();
+    expect(app.getShape<TextShape>("text1").text).toBe("Hello");
 
     // The redo will restore the shape
-    app.redo()
-    expect(app.getShape<TextShape>('text1').text).toBe('Hello World!')
-  })
-})
+    app.redo();
+    expect(app.getShape<TextShape>("text1").text).toBe("Hello World!");
+  });
+});
