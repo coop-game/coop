@@ -16,6 +16,7 @@ import Chatting from "./Chatting";
 import useProfileUpdate from "@hooks/useProfileUpdate";
 import useCheckCreatedProvider from "@hooks/useCheckCreatedProvider";
 import { css } from "@emotion/react";
+import usePages from "@hooks/usePages";
 
 export const LobbyMain = () => {
   const translation = useTranslation("ko-kr").messages;
@@ -31,14 +32,8 @@ export const LobbyMain = () => {
     color,
   });
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
-
-  // const { userProfiles, isOwner } = useProfileUpdate({
-  //   nickname,
-  //   avatarIndex,
-  //   color,
-  // });
   const { provider, room } = providerState;
-  // console.log(yRoomUsers.toArray());
+  const { pagePushHandler } = usePages();
 
   if (provider === null) {
     return <div></div>;
@@ -125,15 +120,14 @@ export const LobbyMain = () => {
                 >
                   {translation["lobby.invite.button"]}
                 </Button>
-                <Link href="/draw" passHref legacyBehavior>
-                  <Button
-                    css={css`
-                      width: 50%;
-                    `}
-                  >
-                    {translation["lobby.next.button"]}
-                  </Button>
-                </Link>
+                <Button
+                  css={css`
+                    width: 50%;
+                  `}
+                  onClick={(e) => pagePushHandler()}
+                >
+                  {translation["lobby.next.button"]}
+                </Button>
               </Flex>
             )}
           </Flex>

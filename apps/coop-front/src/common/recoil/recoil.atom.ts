@@ -7,7 +7,14 @@ import * as awarenessProtocol from "y-protocols/awareness";
 import * as math from "lib0/math";
 import * as random from "lib0/random";
 import { Room } from "@y-presence/client";
-import { CPChatType, CPUserProfile, CPUserType } from "@types";
+import {
+  CPChatType,
+  CPPage,
+  CPPages,
+  CPUserProfile,
+  CPUserProfilesState,
+  CPUserType,
+} from "@types";
 
 export interface ProblemType {
   player: string;
@@ -36,7 +43,8 @@ export const doc = new Y.Doc();
 
 // export const yRoomOwner = doc.getMap("roomOwner");
 
-export const yRoomUsers = doc.getArray("roomUsers");
+export const yRoomUsers = doc.getArray<number>("roomUsers");
+export const yPages = doc.getArray<CPPage>("pages");
 
 export class providerClass {
   provider: WebrtcProvider | null;
@@ -55,7 +63,7 @@ export class providerClass {
     this.room = null;
   };
 
-  createProvider = (roomId: string) => {
+  createProvider = (roomId: string, isCreater: boolean) => {
     console.log("creactProvider");
     if (this.provider === null) {
       this.provider = new WebrtcProvider(roomId, doc, {
@@ -81,6 +89,13 @@ export class providerClass {
     if (this.room === null) {
       this.room = new Room(this.provider.awareness);
       yRoomUsers.push([doc.clientID]);
+      console.log(
+        "this.provider.awareness.getStates()",
+        this.provider.awareness.getStates().size
+      );
+      if (isCreater) {
+        yPages.push([{ path: "/lobby" }]);
+      }
     }
   };
 }
@@ -99,11 +114,6 @@ export const userSelector = selector({
   },
   set: ({ set }, newValue) => set(userState, { ...newValue }),
 });
-
-type CPUserProfilesState = {
-  isOwner?: boolean;
-  userProfiles?: CPUserProfile[];
-};
 
 export const userProfilesState = atom<CPUserProfilesState>({
   key: "USER_PROFILES_STATE",

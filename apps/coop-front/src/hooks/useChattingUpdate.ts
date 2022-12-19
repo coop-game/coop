@@ -6,7 +6,7 @@ import {
 } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
 import { CPChatType } from "@types";
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -18,15 +18,19 @@ const useChattingUpdate = () => {
 
   const [inputString, setInputString] = useState("");
   const messagesEndRef = useRef<null | HTMLDivElement>();
+
+  const observeFunction = useCallback(() => {
+    const arr = yarray.toArray();
+    setChattingState([...arr]);
+  }, [setChattingState]);
+
   useEffect(() => {
-    yarray.observe(() => {
-      const arr = yarray.toArray();
-      setChattingState([...arr]);
-    });
+    yarray.observe(observeFunction);
     return () => {
+      yarray.unobserve(observeFunction);
       setChattingState([]);
     };
-  }, [setChattingState]);
+  }, [observeFunction, setChattingState]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView();

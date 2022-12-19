@@ -26,7 +26,13 @@ import { useTranslation } from "@hooks/useTransitions";
 import { useRecoilState } from "recoil";
 import AvatarImage from "@components/AvatarImage";
 
-export default function Home({ roomId }: { roomId: string }) {
+export default function Home({
+  roomId,
+  isCreater,
+}: {
+  roomId: string;
+  isCreater: boolean;
+}) {
   const translation = useTranslation("ko-kr").messages;
   const [userState, setUserState] = useRecoilState(userSelector);
   const router = useRouter();
@@ -48,7 +54,7 @@ export default function Home({ roomId }: { roomId: string }) {
       if (!!providerState.provider) {
         providerState.clearProvider();
       }
-      providerState.createProvider(roomId);
+      providerState.createProvider(roomId, isCreater);
       setUserState({ roomId, nickname, avatarIndex, color });
       router.push("/lobby");
     } else {
@@ -145,6 +151,9 @@ export async function getServerSideProps(context) {
   const roomId = context.query?.roomId;
   console.log(roomId);
   return {
-    props: { roomId: roomId === undefined ? nanoid() : roomId },
+    props: {
+      roomId: roomId === undefined ? nanoid() : roomId,
+      isCreater: roomId === undefined,
+    },
   };
 }
