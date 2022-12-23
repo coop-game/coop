@@ -7,9 +7,9 @@ import NewCursor, { CursorComponent } from "@components/NewCursor";
 // import { yjsState } from "@common/recoil/recoil.atom";
 
 import * as Y from "yjs";
-import { providerState } from "@common/recoil/recoil.atom";
 
 import { Tldraw } from "@coop/draw";
+import { providerState } from "@common/yjsStore/userStore";
 
 function Editor({}) {
   const { onMount, onChangePage, onUndo, onRedo, onChangePresence } =

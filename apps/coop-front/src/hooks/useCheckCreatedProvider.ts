@@ -1,4 +1,4 @@
-import { providerState } from "@common/recoil/recoil.atom";
+import { providerState } from "@common/yjsStore/userStore";
 import { useRouter } from "next/router";
 
 const useCheckCreatedProvider = (path = "/") => {

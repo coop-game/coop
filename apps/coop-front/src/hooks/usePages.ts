@@ -1,26 +1,45 @@
-import { doc, yPages } from "@common/recoil/recoil.atom";
-import { CPPages } from "@types";
+import {
+  getChangeGameStateHandler,
+  yGameState,
+} from "@common/yjsStore/userStore";
+import { CPGameState } from "@types";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-const usePages = () => {
-  const router = useRouter();
-  useEffect(() => {
-    yPages.observe(() => {
-      console.log("observe ?????");
-      const pages: CPPages = yPages.toArray();
-      if (pages.length > 0 && pages[0].path !== router.pathname) {
-        router.push(`/${pages[0].path}`);
-      }
-    });
-  }, [router]);
+import { useCallback, useEffect, useState } from "react";
 
-  const pagePushHandler = () => {
-    doc.transact(() => {
-      yPages.push([{ path: "/draw" }]);
-      yPages.delete(0, 1);
-    });
-    // router.push(path);
-  };
-  return { pagePushHandler };
+const usePages = (roomId: string) => {
+  const router = useRouter();
+  const [gameState, setGameState] = useState(null);
+
+  const observeFunction = useCallback(() => {
+    const gameState = yGameState.get(roomId);
+    if (!gameState) {
+      router.push("/");
+      return;
+    }
+    if (gameState.nowPage !== router.pathname) {
+      router.push(gameState.nowPage);
+    }
+    setGameState(gameState);
+  }, [roomId, router]);
+
+  useEffect(() => {
+    yGameState.observe(observeFunction);
+    return () => {
+      yGameState.unobserve(observeFunction);
+    };
+  }, [observeFunction]);
+
+  // const changeGameStateHandler = (
+  //   partialGameState = {} as Partial<CPGameState>
+  // ) => {
+  //   const gameState = yGameState.get(roomId);
+  //   const newGameState = { ...gameState, ...partialGameState };
+  //   yGameState.set(roomId, newGameState);
+  // };
+
+  const changeGameStateHandler = getChangeGameStateHandler(roomId);
+
+  return { gameState, changeGameStateHandler };
 };
+
 export default usePages;

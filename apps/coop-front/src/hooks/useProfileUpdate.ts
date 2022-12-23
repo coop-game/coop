@@ -1,25 +1,12 @@
-import { useRecoilState } from "recoil";
-import { Avatar } from "@chakra-ui/react";
-import {
-  doc,
-  providerState,
-  userProfilesSelector,
-  userProfilesState,
-} from "@common/recoil/recoil.atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userProfilesSelector, userSelector } from "@common/recoil/recoil.atom";
 import { CPUserProfile } from "@types";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
+import { doc, providerState } from "@common/yjsStore/userStore";
 
-const useProfileUpdate = ({
-  nickname,
-  avatarIndex,
-  color,
-}: {
-  nickname: string;
-  avatarIndex: number;
-  color: string;
-}) => {
-  // const [userProfiles, setUserProfiles] = useState<Array<CPUserProfile>>([]);
-  // const [isOwner, setIsOwner] = useState(false);
+const useProfileUpdate = () => {
+  const { nickname, avatarIndex, color, utcTimeStamp } =
+    useRecoilValue(userSelector) ?? {};
   const [_, setUserProfiles] = useRecoilState(userProfilesSelector);
 
   const { provider, room } = providerState;
@@ -27,29 +14,28 @@ const useProfileUpdate = ({
   const filterMap = useCallback(() => {
     const userProfiles: Array<CPUserProfile> = [];
     provider?.awareness.getStates().forEach((v) => {
-      if (v?.user) {
-        const user: CPUserProfile = {};
-        user.id = v.id;
-        user.nickname = v.user.name;
-        user.avatarIndex = v.user.avatarIndex;
-        user.color = v.user.color;
-        user.utcTimeStamp = v.user.utcTimeStamp;
-        userProfiles.push(user);
+      if (v?.userProfile) {
+        const userProfile: CPUserProfile = {};
+        userProfile.id = v.id;
+        userProfile.nickname = v.userProfile.name;
+        userProfile.avatarIndex = v.userProfile.avatarIndex;
+        userProfile.color = v.userProfile.color;
+        userProfile.utcTimeStamp = v.userProfile.utcTimeStamp;
+        userProfiles.push(userProfile);
       }
     });
     userProfiles.sort((a, b) => {
-      return Number(a.utcTimeStamp) - Number(b.utcTimeStamp);
+      return a.utcTimeStamp - b.utcTimeStamp;
     });
 
     return userProfiles.map((v, idx) => {
       const isOwner = idx === 0;
       if (isOwner === true && Number(v.id) === doc.clientID) {
-        // setIsOwner(true);
         setUserProfiles({ isOwner: true });
       }
       return { ...v, isOwner };
     });
-  }, [provider?.awareness]);
+  }, [provider?.awareness, setUserProfiles]);
 
   useEffect(() => {
     provider?.awareness.on(
@@ -63,24 +49,25 @@ const useProfileUpdate = ({
         updated: any;
         removed: any;
       }) => {
-        console.log("added : ", added);
-        console.log("updated : ", updated);
-        console.log("removed : ", removed);
-        console.log(Array.from(provider.awareness.getStates()));
-        // setUserProfiles(filterMap());
         setUserProfiles({ userProfiles: filterMap() });
       }
     );
-    const date = new Date();
-    const utcTimeStamp = date.getTime() + date.getTimezoneOffset() * 60 * 1000;
 
-    provider?.awareness.setLocalStateField("user", {
+    provider?.awareness.setLocalStateField("userProfile", {
       name: nickname,
       avatarIndex,
       color,
       utcTimeStamp,
     });
-  }, [filterMap, provider, room, nickname, avatarIndex]);
-  // return { userProfiles, isOwner };
+  }, [
+    filterMap,
+    provider,
+    room,
+    nickname,
+    avatarIndex,
+    color,
+    setUserProfiles,
+    utcTimeStamp,
+  ]);
 };
 export default useProfileUpdate;

@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 import Image from "next/image";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
+import { RepeatIcon } from "@chakra-ui/icons";
 
 const AvatarImage = ({
   avatarIndex,
@@ -24,6 +25,7 @@ const AvatarImage = ({
       minWidth="200px"
       minHeight="250px"
       gap="10px"
+      position="relative"
     >
       <Stack
         width="200px"
@@ -45,7 +47,16 @@ const AvatarImage = ({
         ></Image>
       </Stack>
       {randomAvatarHandler && (
-        <Button onClick={randomAvatarHandler}>????</Button>
+        <Button
+          css={css`
+            position: absolute;
+            right: 0;
+            bottom: 0;
+          `}
+          onClick={randomAvatarHandler}
+        >
+          <RepeatIcon />
+        </Button>
       )}
     </Flex>
   );

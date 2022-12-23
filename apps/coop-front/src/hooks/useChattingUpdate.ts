@@ -1,9 +1,6 @@
 import { Button, Flex, Input } from "@chakra-ui/react";
-import {
-  ChattingSelector,
-  doc,
-  userSelector,
-} from "@common/recoil/recoil.atom";
+import { ChattingSelector, userSelector } from "@common/recoil/recoil.atom";
+import { doc } from "@common/yjsStore/userStore";
 import { css } from "@emotion/react";
 import { CPChatType } from "@types";
 import React, { useCallback, useEffect, useRef } from "react";

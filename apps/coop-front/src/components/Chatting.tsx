@@ -1,9 +1,6 @@
 import { Button, Flex, Input } from "@chakra-ui/react";
-import {
-  ChattingSelector,
-  doc,
-  userSelector,
-} from "@common/recoil/recoil.atom";
+import { ChattingSelector, userSelector } from "@common/recoil/recoil.atom";
+import { doc, providerState } from "@common/yjsStore/userStore";
 import { css } from "@emotion/react";
 import useChattingUpdate from "@hooks/useChattingUpdate";
 import { useTranslation } from "@hooks/useTransitions";
@@ -19,6 +16,7 @@ const Chatting = () => {
 
   const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      console.log(providerState);
       onClickHandler();
     }
   };

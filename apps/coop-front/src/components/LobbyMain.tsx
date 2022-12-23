@@ -1,13 +1,8 @@
 import DraweeLogo from "@asset/images/DraweeLogo.png";
 import Image from "next/image";
-import { Button, Flex, Spinner } from "@chakra-ui/react";
+import { Button, Flex, Spinner, useDisclosure } from "@chakra-ui/react";
 import Users from "@components/Users";
-import {
-  providerState,
-  userProfilesSelector,
-  userSelector,
-  yRoomUsers,
-} from "@common/recoil/recoil.atom";
+import { userProfilesSelector, userSelector } from "@common/recoil/recoil.atom";
 import Link from "next/link";
 import { useTranslation } from "@hooks/useTransitions";
 import { useToast } from "@chakra-ui/react";
@@ -17,6 +12,9 @@ import useProfileUpdate from "@hooks/useProfileUpdate";
 import useCheckCreatedProvider from "@hooks/useCheckCreatedProvider";
 import { css } from "@emotion/react";
 import usePages from "@hooks/usePages";
+import { providerState } from "@common/yjsStore/userStore";
+import { GAME_TYPE } from "src/constant/games";
+import { CPGameState } from "@types";
 
 export const LobbyMain = () => {
   const translation = useTranslation("ko-kr").messages;
@@ -24,20 +22,36 @@ export const LobbyMain = () => {
   useCheckCreatedProvider(
     "/ErrorPage/?errorMessage=잘못된 접근입니다.&statusCode=403"
   );
-  const { roomId, nickname, avatarIndex, color } =
-    useRecoilValue(userSelector) ?? {};
-  useProfileUpdate({
-    nickname,
-    avatarIndex,
-    color,
-  });
+  const { roomId } = useRecoilValue(userSelector) ?? {};
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
   const { provider, room } = providerState;
-  const { pagePushHandler } = usePages();
+  const { changeGameStateHandler } = usePages(roomId);
+  useProfileUpdate();
 
   if (provider === null) {
     return <div></div>;
   }
+
+  const onClickInviteHandler = () => {
+    navigator.clipboard.writeText(
+      `${process.env.NEXT_PUBLIC_HOSTNAME}/?roomId=${roomId}`
+    );
+    toast({
+      title: "초대하기",
+      description: "초대주소가 복사되었습니다.",
+      status: "success",
+      duration: 1000,
+      isClosable: true,
+    });
+  };
+
+  const onClickGameStartHandler = () => {
+    changeGameStateHandler({
+      nowPage: GAME_TYPE.DRAWEE.firstPath,
+      isGameStart: true,
+      gamePages: GAME_TYPE.DRAWEE.defaultPages,
+    });
+  };
 
   return (
     <Flex w={"100%"} h={"100vh"} alignItems={"center"} p={"3em"}>
@@ -105,18 +119,7 @@ export const LobbyMain = () => {
                   css={css`
                     width: 50%;
                   `}
-                  onClick={() => {
-                    navigator.clipboard.writeText(
-                      `${process.env.NEXT_PUBLIC_HOSTNAME}/?roomId=${roomId}`
-                    );
-                    toast({
-                      title: "초대하기",
-                      description: "초대주소가 복사되었습니다.",
-                      status: "success",
-                      duration: 1000,
-                      isClosable: true,
-                    });
-                  }}
+                  onClick={onClickInviteHandler}
                 >
                   {translation["lobby.invite.button"]}
                 </Button>
@@ -124,7 +127,7 @@ export const LobbyMain = () => {
                   css={css`
                     width: 50%;
                   `}
-                  onClick={(e) => pagePushHandler()}
+                  onClick={onClickGameStartHandler}
                 >
                   {translation["lobby.next.button"]}
                 </Button>

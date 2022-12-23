@@ -19,12 +19,14 @@ import {
   InputLeftAddon,
   Stack,
 } from "@chakra-ui/react";
-import { providerState, userSelector } from "@common/recoil/recoil.atom";
+import { userSelector } from "@common/recoil/recoil.atom";
 import { nanoid } from "nanoid";
 import { getTranslation } from "src/translations";
 import { useTranslation } from "@hooks/useTransitions";
 import { useRecoilState } from "recoil";
 import AvatarImage from "@components/AvatarImage";
+import { providerState } from "@common/yjsStore/userStore";
+import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
 
 export default function Home({
   roomId,
@@ -55,7 +57,8 @@ export default function Home({
         providerState.clearProvider();
       }
       providerState.createProvider(roomId, isCreater);
-      setUserState({ roomId, nickname, avatarIndex, color });
+      const utcTimeStamp = getUtcTimeStamp();
+      setUserState({ roomId, nickname, avatarIndex, color, utcTimeStamp });
       router.push("/lobby");
     } else {
       setIsError(true);

@@ -2,10 +2,9 @@ import { TDBinding, TDShape, TDUser, TldrawApp } from "@coop/draw";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import * as Y from "yjs";
-import { doc, providerClass, yjsStateType } from "@common/recoil/recoil.atom";
 import { Room } from "@y-presence/client";
-import { useRecoilState } from "recoil";
 import { WebrtcProvider } from "y-webrtc";
+import { doc } from "@common/yjsStore/userStore";
 
 export function useMultiplayerState({
   provider,
@@ -84,7 +83,7 @@ export function useMultiplayerState({
       user.id += `|${customUserId}`;
       room.setPresence({ id: app.room.userId, tdUser: user });
     },
-    [customUserId, room]
+    [customUserId, provider, room]
   );
 
   /**
