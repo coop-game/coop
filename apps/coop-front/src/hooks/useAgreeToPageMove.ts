@@ -18,24 +18,26 @@ const useAgreeToPageMove = (roomId: string) => {
 
   const onClickAgreeHandler = () => {
     setIsAgree(true);
-    const agreeSet = new Set(Array.from(gameState.agreeSet));
-    agreeSet.add(provider.awareness.clientID);
-    console.log("onClickAgreeHandler", agreeSet);
+    // const agreeSet = new Set(Array.from(gameState.agreeSet));
+    // agreeSet.add(provider.awareness.clientID);
+    const agreeList = Array.from(
+      new Set([...gameState.agreeList, provider.awareness.clientID])
+    );
+    console.log("onClickAgreeHandler", agreeList);
     changeGameStateHandler({
-      agreeSet,
+      agreeList,
     });
   };
 
   useEffect(() => {
     if (provider?.awareness && isAgree === true) {
       const users = provider?.awareness.getStates();
-      console.log(gameState, gameState.agreeSet instanceof Set);
       console.log(
-        users.size === gameState.agreeSet.size,
+        users.size === gameState.agreeList.length,
         users.size,
-        gameState.agreeSet.size
+        gameState.agreeList.length
       );
-      if (users.size === gameState.agreeSet.size) {
+      if (users.size === gameState.agreeList.length) {
         console.log("useAgreeToPageMove gameState update");
         const newPage: CPGamePage = {
           path: "/draw",
@@ -44,7 +46,7 @@ const useAgreeToPageMove = (roomId: string) => {
           questioner: provider.awareness.clientID,
         };
         changeGameStateHandler({
-          // agreeSet: new Set(),
+          agreeList: [],
           gamePages: [...gameState.gamePages, newPage],
           gamePagesIndex: gameState.gamePagesIndex + 1,
         });
@@ -52,7 +54,7 @@ const useAgreeToPageMove = (roomId: string) => {
     }
   }, [
     changeGameStateHandler,
-    gameState.agreeSet,
+    gameState.agreeList,
     gameState.gamePages,
     gameState.gamePagesIndex,
     isAgree,

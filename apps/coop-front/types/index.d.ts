@@ -47,6 +47,7 @@ export type CPGameState = {
   isGameStart: boolean;
   gamePages: CPGamePages;
   gamePagesIndex: number;
-  agreeSet: Set<number>;
+  // agreeSet: Set<number>;
+  agreeList: number[];
   // nowPage: CPNowPageType;
 };

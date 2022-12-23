@@ -72,7 +72,7 @@ export class providerClass {
           isGameStart: false,
           gamePages: [],
           gamePagesIndex: -1,
-          agreeSet: new Set(),
+          agreeList: [],
         };
         yGameState.set(roomId, gameState);
       }

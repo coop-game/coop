@@ -15,11 +15,10 @@ import { useRecoilValue } from "recoil";
 import usePages from "@hooks/usePages";
 
 const CreateQuestion = () => {
-  const { input, setInput, onChangeHandler } = useInput("");
+  const { input, onChangeHandler } = useInput("");
   const { roomId } = useRecoilValue(userSelector) ?? {};
   useSyncPageFromGameState();
   useUpdateGameState(roomId);
-  // usePages(roomId);
   const { isAgree, onClickAgreeHandler } = useAgreeToPageMove(roomId);
   const router = useRouter();
   useProfileUpdate();
@@ -47,9 +46,15 @@ const CreateQuestion = () => {
           return <div key={v.id}>{`${v.id}`}</div>;
         })}
       </div> */}
+      {/* <div>
+          {gameState &&
+            Array.from(gameState.agreeSet).map((v) => {
+              return <div key={v}>{`${v}`}</div>;
+            })}
+        </div> */}
       <div>
         {gameState &&
-          Array.from(gameState.agreeSet).map((v) => {
+          gameState.agreeList.map((v) => {
             return <div key={v}>{`${v}`}</div>;
           })}
       </div>

@@ -11,13 +11,16 @@ import * as Y from "yjs";
 import { Tldraw } from "@coop/draw";
 import { providerState } from "@common/yjsStore/userStore";
 import useProfileUpdate from "@hooks/useProfileUpdate";
+import { useRecoilValue } from "recoil";
+import { userSelector } from "@common/recoil/recoil.atom";
 
 function Editor({}) {
+  const userState = useRecoilValue(userSelector);
   const { onMount, onChangePage, onUndo, onRedo, onChangePresence } =
     useMultiplayerState({
       provider: providerState?.provider,
       room: providerState?.room,
-      customUserId: "하이루",
+      customUserId: userState?.nickname,
     });
 
   return (
