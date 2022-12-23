@@ -1,11 +1,12 @@
-import {
-  getChangeGameStateHandler,
-  yGameState,
-} from "@common/yjsStore/userStore";
+import { yGameState } from "@common/yjsStore/userStore";
 import { CPGameState } from "@types";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
-
+/**
+ * `deprecated` usePages split useSyncPageFromGameState, useUpdateGameState
+ * @param roomId
+ * @returns
+ */
 const usePages = (roomId: string) => {
   const router = useRouter();
   const [gameState, setGameState] = useState(null);
@@ -16,8 +17,11 @@ const usePages = (roomId: string) => {
       router.push("/");
       return;
     }
-    if (gameState.nowPage !== router.pathname) {
-      router.push(gameState.nowPage);
+    if (
+      gameState.gamePagesIndex > -1 &&
+      gameState.gamePages[gameState.gamePagesIndex].path !== router.pathname
+    ) {
+      router.push(gameState.gamePages[gameState.gamePagesIndex].path);
     }
     setGameState(gameState);
   }, [roomId, router]);
@@ -29,17 +33,7 @@ const usePages = (roomId: string) => {
     };
   }, [observeFunction]);
 
-  // const changeGameStateHandler = (
-  //   partialGameState = {} as Partial<CPGameState>
-  // ) => {
-  //   const gameState = yGameState.get(roomId);
-  //   const newGameState = { ...gameState, ...partialGameState };
-  //   yGameState.set(roomId, newGameState);
-  // };
-
-  const changeGameStateHandler = getChangeGameStateHandler(roomId);
-
-  return { gameState, changeGameStateHandler };
+  return { gameState };
 };
 
 export default usePages;

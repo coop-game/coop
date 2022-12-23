@@ -1,9 +1,8 @@
 import DraweeLogo from "@asset/images/DraweeLogo.png";
 import Image from "next/image";
-import { Button, Flex, Spinner, useDisclosure } from "@chakra-ui/react";
+import { Button, Flex, Spinner } from "@chakra-ui/react";
 import Users from "@components/Users";
 import { userProfilesSelector, userSelector } from "@common/recoil/recoil.atom";
-import Link from "next/link";
 import { useTranslation } from "@hooks/useTransitions";
 import { useToast } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
@@ -11,10 +10,13 @@ import Chatting from "./Chatting";
 import useProfileUpdate from "@hooks/useProfileUpdate";
 import useCheckCreatedProvider from "@hooks/useCheckCreatedProvider";
 import { css } from "@emotion/react";
-import usePages from "@hooks/usePages";
-import { providerState } from "@common/yjsStore/userStore";
-import { GAME_TYPE } from "src/constant/games";
-import { CPGameState } from "@types";
+import useSyncPageFromGameState from "@hooks/useSyncPageFromGameState";
+import {
+  getChangeGameStateHandler,
+  providerState,
+} from "@common/yjsStore/userStore";
+import { DEFAULT_GAME_STATE } from "src/constant/games";
+import useUpdateGameState from "@hooks/useUpdateGameState";
 
 export const LobbyMain = () => {
   const translation = useTranslation("ko-kr").messages;
@@ -24,8 +26,10 @@ export const LobbyMain = () => {
   );
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
-  const { provider, room } = providerState;
-  const { changeGameStateHandler } = usePages(roomId);
+  const { provider } = providerState;
+  useUpdateGameState(roomId);
+  useSyncPageFromGameState();
+  const changeGameStateHandler = getChangeGameStateHandler(roomId);
   useProfileUpdate();
 
   if (provider === null) {
@@ -47,9 +51,9 @@ export const LobbyMain = () => {
 
   const onClickGameStartHandler = () => {
     changeGameStateHandler({
-      nowPage: GAME_TYPE.DRAWEE.firstPath,
       isGameStart: true,
-      gamePages: GAME_TYPE.DRAWEE.defaultPages,
+      gamePages: DEFAULT_GAME_STATE.DRAWEE.gamePages,
+      gamePagesIndex: DEFAULT_GAME_STATE.DRAWEE.gamePagesIndex,
     });
   };
 

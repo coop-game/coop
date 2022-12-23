@@ -1,5 +1,10 @@
 import { atom, selector } from "recoil";
-import { CPChatType, CPUserProfilesState, CPUserType } from "@types";
+import {
+  CPChatType,
+  CPGameState,
+  CPUserProfilesState,
+  CPUserType,
+} from "@types";
 
 /**
  * userState
@@ -36,6 +41,14 @@ export const userProfilesSelector = selector({
   },
   set: ({ set }, newValue) =>
     set(userProfilesState, (prev) => ({ ...prev, ...newValue })),
+});
+
+/**
+ * yjsGameState
+ */
+export const yjsGameState = atom<CPGameState | null>({
+  key: "YJS_GAME_STATE",
+  default: null,
 });
 
 /**

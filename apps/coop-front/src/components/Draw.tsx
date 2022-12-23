@@ -10,6 +10,7 @@ import * as Y from "yjs";
 
 import { Tldraw } from "@coop/draw";
 import { providerState } from "@common/yjsStore/userStore";
+import useProfileUpdate from "@hooks/useProfileUpdate";
 
 function Editor({}) {
   const { onMount, onChangePage, onUndo, onRedo, onChangePresence } =
@@ -44,6 +45,7 @@ function Editor({}) {
 }
 
 function Draw() {
+  useProfileUpdate();
   return (
     <>
       <div>{providerState?.provider.roomName}</div>

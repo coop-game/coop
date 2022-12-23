@@ -15,7 +15,7 @@ export type CPChatType = {
 };
 
 export type CPUserProfile = {
-  id?: string;
+  id?: number;
 } & Omit<CPUserType, "roomId">;
 
 export type CPUserProfilesState = {
@@ -23,21 +23,22 @@ export type CPUserProfilesState = {
   userProfiles?: CPUserProfile[];
 };
 
+export type CPPageType = "/lobby" | "/start" | "/draw" | "/result";
+
 export type CPGamePage = {
-  answer: string;
-  question: string;
-  questioner: string;
+  path: CPPageType;
+  answer?: string;
+  question?: string;
+  questioner?: number;
 };
 
 export type CPGamePages = CPGamePage[];
 
-export type CPNowPageType = "/lobby" | "/start" | "/draw" | "/result";
-
 type CPGameTypes = "DRAWEE";
 
 type CPGameTypeProperty = {
-  firstPath: CPNowPageType;
-  defaultPages: CPGamePages;
+  gamePages: CPGamePages;
+  gamePagesIndex: number;
 };
 
 export type CPGames = Record<CPGameTypes, CPGameTypeProperty>;
@@ -47,5 +48,5 @@ export type CPGameState = {
   gamePages: CPGamePages;
   gamePagesIndex: number;
   agreeSet: Set<number>;
-  nowPage: CPNowPageType;
+  // nowPage: CPNowPageType;
 };

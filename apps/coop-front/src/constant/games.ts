@@ -1,8 +1,8 @@
 import { CPGames } from "@types";
 
-export const GAME_TYPE: CPGames = {
+export const DEFAULT_GAME_STATE: CPGames = {
   DRAWEE: {
-    firstPath: "/start",
-    defaultPages: [],
+    gamePages: [{ path: "/start" }],
+    gamePagesIndex: 0,
   },
 };

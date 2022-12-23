@@ -2,7 +2,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { userProfilesSelector, userSelector } from "@common/recoil/recoil.atom";
 import { CPUserProfile } from "@types";
 import { useCallback, useEffect } from "react";
-import { doc, providerState } from "@common/yjsStore/userStore";
+import { doc, providerState, yUserProfiles } from "@common/yjsStore/userStore";
 
 const useProfileUpdate = () => {
   const { nickname, avatarIndex, color, utcTimeStamp } =
@@ -12,22 +12,20 @@ const useProfileUpdate = () => {
   const { provider, room } = providerState;
 
   const filterMap = useCallback(() => {
-    const userProfiles: Array<CPUserProfile> = [];
-    provider?.awareness.getStates().forEach((v) => {
-      if (v?.userProfile) {
-        const userProfile: CPUserProfile = {};
-        userProfile.id = v.id;
-        userProfile.nickname = v.userProfile.name;
-        userProfile.avatarIndex = v.userProfile.avatarIndex;
-        userProfile.color = v.userProfile.color;
-        userProfile.utcTimeStamp = v.userProfile.utcTimeStamp;
-        userProfiles.push(userProfile);
-      }
-    });
+    const state = provider?.awareness.getStates();
+    const userProfiles: CPUserProfile[] = [];
+    const stateKeysIter = state.keys();
+    while (true) {
+      const res = stateKeysIter.next().value;
+      if (res) {
+        const userProfile = yUserProfiles.get(String(res));
+        if (userProfile) userProfiles.push(userProfile);
+      } else break;
+    }
+
     userProfiles.sort((a, b) => {
       return a.utcTimeStamp - b.utcTimeStamp;
     });
-
     return userProfiles.map((v, idx) => {
       const isOwner = idx === 0;
       if (isOwner === true && Number(v.id) === doc.clientID) {
@@ -38,6 +36,10 @@ const useProfileUpdate = () => {
   }, [provider?.awareness, setUserProfiles]);
 
   useEffect(() => {
+    yUserProfiles.observe(() => {
+      setUserProfiles({ userProfiles: filterMap() });
+    });
+
     provider?.awareness.on(
       "change",
       ({
@@ -53,8 +55,9 @@ const useProfileUpdate = () => {
       }
     );
 
-    provider?.awareness.setLocalStateField("userProfile", {
-      name: nickname,
+    yUserProfiles.set(String(provider.awareness.clientID), {
+      id: provider.awareness.clientID,
+      nickname,
       avatarIndex,
       color,
       utcTimeStamp,
