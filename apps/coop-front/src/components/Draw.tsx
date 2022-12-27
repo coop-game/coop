@@ -12,7 +12,7 @@ import { Tldraw } from "@coop/draw";
 import { providerState } from "@common/yjsStore/userStore";
 import useProfileUpdate from "@hooks/useProfileUpdate";
 import { useRecoilValue } from "recoil";
-import { userSelector } from "@common/recoil/recoil.atom";
+import { userSelector, yjsGameState } from "@common/recoil/recoil.atom";
 
 function Editor({}) {
   const userState = useRecoilValue(userSelector);
@@ -49,9 +49,12 @@ function Editor({}) {
 
 function Draw() {
   useProfileUpdate();
+  const gameState = useRecoilValue(yjsGameState);
   return (
     <>
       <div>{providerState?.provider.roomName}</div>
+      <div>gamePages.length : {gameState.gamePages.length}</div>
+      <div>gamePagesIndex : {gameState.gamePagesIndex}</div>
       {providerState.provider !== null && (
         <div className="tldraw">
           <Editor />

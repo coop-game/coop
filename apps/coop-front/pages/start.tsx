@@ -1,10 +1,10 @@
 import CreateQuestion from "@components/CreateQuestion";
 
-const start = () => {
+const Start = () => {
   return (
     <div>
       <CreateQuestion></CreateQuestion>
     </div>
   );
 };
-export default start;
+export default Start;

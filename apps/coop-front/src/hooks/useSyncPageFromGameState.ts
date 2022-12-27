@@ -1,5 +1,5 @@
 import { yjsGameState } from "../common/recoil/recoil.atom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { yGameState } from "@common/yjsStore/userStore";
 import { CPGameState } from "@types";
 import { useRouter } from "next/router";
@@ -20,7 +20,7 @@ import { useCallback, useEffect, useState } from "react";
 const useSyncPageFromGameState = () => {
   const router = useRouter();
   // const [gameState, setGameState] = useState<CPGameState | null>(null);
-  const [gameState, setGameState] = useRecoilState(yjsGameState);
+  const gameState = useRecoilValue(yjsGameState);
 
   useEffect(() => {
     if (!gameState) {

@@ -16,10 +16,12 @@ const useAgreeToPageMove = (roomId: string) => {
 
   const gameState = useRecoilValue(yjsGameState);
 
+  // useEffect(() => {
+  //   console.log("gameState", gameState);
+  // }, [gameState]);
+
   const onClickAgreeHandler = () => {
     setIsAgree(true);
-    // const agreeSet = new Set(Array.from(gameState.agreeSet));
-    // agreeSet.add(provider.awareness.clientID);
     const agreeList = Array.from(
       new Set([...gameState.agreeList, provider.awareness.clientID])
     );
@@ -32,33 +34,19 @@ const useAgreeToPageMove = (roomId: string) => {
   useEffect(() => {
     if (provider?.awareness && isAgree === true) {
       const users = provider?.awareness.getStates();
-      console.log(
-        users.size === gameState.agreeList.length,
-        users.size,
-        gameState.agreeList.length
-      );
       if (users.size === gameState.agreeList.length) {
-        console.log("useAgreeToPageMove gameState update");
-        const newPage: CPGamePage = {
-          path: "/draw",
-          answer: "asdf",
-          question: "?????를 그려라",
-          questioner: provider.awareness.clientID,
-        };
         changeGameStateHandler({
           agreeList: [],
-          gamePages: [...gameState.gamePages, newPage],
           gamePagesIndex: gameState.gamePagesIndex + 1,
         });
       }
     }
   }, [
     changeGameStateHandler,
-    gameState.agreeList,
-    gameState.gamePages,
+    gameState.agreeList.length,
     gameState.gamePagesIndex,
     isAgree,
-    provider.awareness,
+    provider?.awareness,
     roomId,
   ]);
   return { isAgree, onClickAgreeHandler };

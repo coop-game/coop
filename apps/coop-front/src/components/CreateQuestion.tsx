@@ -10,31 +10,62 @@ import useSyncPageFromGameState from "@hooks/useSyncPageFromGameState";
 import useProfileUpdate from "@hooks/useProfileUpdate";
 import useUpdateGameState from "@hooks/useUpdateGameState";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import usePages from "@hooks/usePages";
+import Timer from "./Timer";
+import {
+  doc,
+  getChangeGameStateHandler,
+  providerState,
+} from "@common/yjsStore/userStore";
+import { CPGamePage } from "@types";
 
 const CreateQuestion = () => {
-  const { input, onChangeHandler } = useInput("");
+  const { provider } = providerState;
+  const { input, setInput, onChangeHandler } = useInput("");
+  const gameState = useRecoilValue(yjsGameState);
   const { roomId } = useRecoilValue(userSelector) ?? {};
+
   useSyncPageFromGameState();
   useUpdateGameState(roomId);
+
   const { isAgree, onClickAgreeHandler } = useAgreeToPageMove(roomId);
-  const router = useRouter();
+
+  // recoil 프로필 업데이트
   useProfileUpdate();
   // const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
-  const gameState = useRecoilValue(yjsGameState);
-  useEffect(() => {
-    console.log("isAgree", isAgree);
-  }, [isAgree]);
+
+  const changeGameStateHandler = getChangeGameStateHandler(roomId);
+
+  const onClickButtonHandler = () => {
+    console.log("??? 이게 두번 돌아가?");
+    onClickAgreeHandler();
+    if (!!provider && input !== "") {
+      const newPage: CPGamePage = {
+        path: "/draw",
+        answer: input,
+        question: "?????를 그려라",
+        questioner: provider.awareness.clientID,
+      };
+      changeGameStateHandler({
+        gamePages: [...gameState.gamePages, newPage],
+      });
+    }
+    setInput("");
+  };
 
   return (
     <div>
+      <Timer
+        time={5000}
+        gaugeColor={["red", "orange", "green"]}
+        callback={onClickButtonHandler}
+      />
       <div>문장을 입력하세요.</div>
       <Input value={input} onChange={onChangeHandler} />
       <Button
         onClick={() => {
-          onClickAgreeHandler();
+          onClickButtonHandler();
         }}
       >
         <Checkbox size="md" colorScheme="green" isChecked={isAgree}>

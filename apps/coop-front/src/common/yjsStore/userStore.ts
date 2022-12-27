@@ -16,7 +16,7 @@ export const getChangeGameStateHandler = (roomId: string) => {
   return (partialGameState = {} as Partial<CPGameState>) => {
     const gameState = yGameState.get(roomId);
     const newGameState = { ...gameState, ...partialGameState };
-    console.log("newGameState", newGameState);
+    console.log("getChangeGameStateHandler", newGameState);
     yGameState.set(roomId, newGameState);
   };
 };
