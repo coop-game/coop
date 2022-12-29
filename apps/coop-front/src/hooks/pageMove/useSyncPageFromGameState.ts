@@ -1,4 +1,4 @@
-import { yjsGameState } from "../common/recoil/recoil.atom";
+import { yjsGameState } from "../../common/recoil/recoil.atom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { yGameState } from "@common/yjsStore/userStore";
 import { CPGameState } from "@types";
@@ -24,13 +24,9 @@ const useSyncPageFromGameState = () => {
 
   useEffect(() => {
     if (!gameState) {
-      console.log("useSyncPageFromGameState 2", gameState);
       if (router.pathname !== "/lobby") router.push("/");
-    } else if (
-      gameState.gamePagesIndex > -1 &&
-      gameState.gamePages[gameState.gamePagesIndex].path !== router.pathname
-    ) {
-      router.push(gameState.gamePages[gameState.gamePagesIndex].path);
+    } else if (gameState.path !== router.pathname) {
+      router.push(gameState.path);
     }
   }, [gameState, router]);
 

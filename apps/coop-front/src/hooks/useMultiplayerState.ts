@@ -44,7 +44,6 @@ export function useMultiplayerState({
       bindings: Record<string, TDBinding | undefined>
     ) => {
       undoManager.stopCapturing();
-      console.log("shapes bindings", shapes, bindings);
       doc.transact(() => {
         Object.entries(shapes).forEach(([id, shape]) => {
           if (!shape) {
@@ -78,12 +77,10 @@ export function useMultiplayerState({
   const onChangePresence = useCallback(
     (app: TldrawApp, user: TDUser) => {
       if (!app.room) return;
-      console.log("user", user);
-      console.log("provider", provider);
       user.id += `|${customUserId}`;
       room.setPresence({ id: app.room.userId, tdUser: user });
     },
-    [customUserId, provider, room]
+    [customUserId, room]
   );
 
   /**

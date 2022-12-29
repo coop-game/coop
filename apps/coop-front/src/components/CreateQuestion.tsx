@@ -2,57 +2,75 @@ import { Input, Button, Checkbox } from "@chakra-ui/react";
 import {
   userProfilesSelector,
   userSelector,
-  yjsGameState,
+  yjsAgreeState,
 } from "@common/recoil/recoil.atom";
-import useAgreeToPageMove from "@hooks/useAgreeToPageMove";
 import useInput from "@hooks/useInput";
-import useSyncPageFromGameState from "@hooks/useSyncPageFromGameState";
-import useProfileUpdate from "@hooks/useProfileUpdate";
-import useUpdateGameState from "@hooks/useUpdateGameState";
-import { useRouter } from "next/router";
-import { useCallback, useEffect } from "react";
+import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
+import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
+import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
+import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import Timer from "./Timer";
 import {
   doc,
   getChangeGameStateHandler,
   providerState,
+  yAgreeState,
 } from "@common/yjsStore/userStore";
-import { CPGamePage } from "@types";
+import { CPGameQuestion } from "@types";
+import useAgreeUpdate from "@hooks/gameHooks/updateState/useAgreeUpdate";
+import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
 
 const CreateQuestion = () => {
   const { provider } = providerState;
   const { input, setInput, onChangeHandler } = useInput("");
-  const gameState = useRecoilValue(yjsGameState);
+  const agreeList = useRecoilValue(yjsAgreeState);
   const { roomId } = useRecoilValue(userSelector) ?? {};
 
+  // gameState.path 에 따라 페이지 동기화
   useSyncPageFromGameState();
-  useUpdateGameState(roomId);
+  // gameState가 바뀌면 recoil을 업데이트 해줌
+  useGameStateUpdate(roomId);
 
-  const { isAgree, onClickAgreeHandler } = useAgreeToPageMove(roomId);
-
-  // recoil 프로필 업데이트
+  // yjs profile이  바뀌면 recoil을 업데이트해줌
   useProfileUpdate();
-  // const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
+  const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
+
+  // agree 버튼을 누를 때 마다 recoil의 agreeList를 업데이트 해줌
+  useAgreeUpdate();
 
   const changeGameStateHandler = getChangeGameStateHandler(roomId);
+  const { pushQuestionHandler } = useQuestionUpdate();
+
+  const [isAgree, setIsAgree] = useState(false);
 
   const onClickButtonHandler = () => {
-    console.log("??? 이게 두번 돌아가?");
-    onClickAgreeHandler();
-    if (!!provider && input !== "") {
-      const newPage: CPGamePage = {
-        path: "/draw",
-        answer: input,
-        question: "?????를 그려라",
-        questioner: provider.awareness.clientID,
-      };
-      changeGameStateHandler({
-        gamePages: [...gameState.gamePages, newPage],
-      });
-    }
+    setIsAgree(true);
+    doc.transact(() => {
+      yAgreeState.set(String(doc.clientID), true);
+      if (!!provider && input !== "") {
+        const newQuestion: CPGameQuestion = {
+          answer: input,
+          question: "?????를 그려라",
+          questioner: provider.awareness.clientID,
+        };
+        pushQuestionHandler(newQuestion);
+      }
+    });
     setInput("");
   };
+
+  useEffect(() => {
+    if (
+      agreeList.length === userProfiles.length &&
+      userProfiles[0].id === doc.clientID
+    ) {
+      doc.transact(() => {
+        yAgreeState.clear();
+        changeGameStateHandler({ path: "/draw", gamePagesIndex: 0 });
+      });
+    }
+  }, [agreeList, changeGameStateHandler, userProfiles]);
 
   return (
     <div>
@@ -72,22 +90,10 @@ const CreateQuestion = () => {
           Checkbox
         </Checkbox>
       </Button>
-      {/* <div>
-        {userProfiles.map((v) => {
-          return <div key={v.id}>{`${v.id}`}</div>;
-        })}
-      </div> */}
-      {/* <div>
-          {gameState &&
-            Array.from(gameState.agreeSet).map((v) => {
-              return <div key={v}>{`${v}`}</div>;
-            })}
-        </div> */}
       <div>
-        {gameState &&
-          gameState.agreeList.map((v) => {
-            return <div key={v}>{`${v}`}</div>;
-          })}
+        {agreeList.map((v) => {
+          return <div key={v}>{`${v}`}</div>;
+        })}
       </div>
     </div>
   );

@@ -7,16 +7,16 @@ import { useTranslation } from "@hooks/useTransitions";
 import { useToast } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import Chatting from "./Chatting";
-import useProfileUpdate from "@hooks/useProfileUpdate";
-import useCheckCreatedProvider from "@hooks/useCheckCreatedProvider";
+import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
+import useCheckCreatedProvider from "@hooks/pageMove/useCheckCreatedProvider";
 import { css } from "@emotion/react";
-import useSyncPageFromGameState from "@hooks/useSyncPageFromGameState";
+import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import {
   getChangeGameStateHandler,
   providerState,
 } from "@common/yjsStore/userStore";
 import { DEFAULT_GAME_STATE } from "src/constant/games";
-import useUpdateGameState from "@hooks/useUpdateGameState";
+import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 
 export const LobbyMain = () => {
   const translation = useTranslation("ko-kr").messages;
@@ -27,7 +27,7 @@ export const LobbyMain = () => {
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
   const { provider } = providerState;
-  useUpdateGameState(roomId);
+  useGameStateUpdate(roomId);
   useSyncPageFromGameState();
   const changeGameStateHandler = getChangeGameStateHandler(roomId);
   useProfileUpdate();
@@ -52,8 +52,9 @@ export const LobbyMain = () => {
   const onClickGameStartHandler = () => {
     changeGameStateHandler({
       isGameStart: true,
-      gamePages: DEFAULT_GAME_STATE.DRAWEE.gamePages,
-      gamePagesIndex: DEFAULT_GAME_STATE.DRAWEE.gamePagesIndex,
+      path: "/start",
+      // gamePages: DEFAULT_GAME_STATE.DRAWEE.gamePages,
+      // gamePagesIndex: DEFAULT_GAME_STATE.DRAWEE.gamePagesIndex,
     });
   };
 

@@ -2,7 +2,7 @@ import { Button, Flex, Input } from "@chakra-ui/react";
 import { ChattingSelector, userSelector } from "@common/recoil/recoil.atom";
 import { doc, providerState } from "@common/yjsStore/userStore";
 import { css } from "@emotion/react";
-import useChattingUpdate from "@hooks/useChattingUpdate";
+import useChattingUpdate from "@hooks/gameHooks/gameChatting/useChattingUpdate";
 import { useTranslation } from "@hooks/useTransitions";
 import React from "react";
 import { useRecoilValue } from "recoil";
@@ -16,11 +16,9 @@ const Chatting = () => {
 
   const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      console.log(providerState);
       onClickHandler();
     }
   };
-  console.log(translation["chatting.input.placeholder"]);
 
   return (
     <Flex

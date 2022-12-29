@@ -2,7 +2,11 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { userProfilesSelector, userSelector } from "@common/recoil/recoil.atom";
 import { CPUserProfile } from "@types";
 import { useCallback, useEffect } from "react";
-import { doc, providerState, yUserProfiles } from "@common/yjsStore/userStore";
+import {
+  doc,
+  providerState,
+  yUserProfilesState,
+} from "@common/yjsStore/userStore";
 
 const useProfileUpdate = () => {
   const { nickname, avatarIndex, color, utcTimeStamp } =
@@ -13,12 +17,12 @@ const useProfileUpdate = () => {
 
   const filterMap = useCallback(() => {
     const state = provider?.awareness.getStates();
-    const userProfiles: CPUserProfile[] = [];
+    let userProfiles: CPUserProfile[] = [];
     const stateKeysIter = state.keys();
     while (true) {
       const res = stateKeysIter.next().value;
       if (res) {
-        const userProfile = yUserProfiles.get(String(res));
+        const userProfile = yUserProfilesState.get(String(res));
         if (userProfile) userProfiles.push(userProfile);
       } else break;
     }
@@ -26,42 +30,35 @@ const useProfileUpdate = () => {
     userProfiles.sort((a, b) => {
       return a.utcTimeStamp - b.utcTimeStamp;
     });
-    return userProfiles.map((v, idx) => {
+
+    userProfiles = userProfiles.map((v, idx) => {
       const isOwner = idx === 0;
-      if (isOwner === true && Number(v.id) === doc.clientID) {
-        setUserProfiles({ isOwner: true });
-      }
-      return { ...v, isOwner };
+      return { isOwner, ...v };
     });
-  }, [provider?.awareness, setUserProfiles]);
+
+    const isOwner = Number(userProfiles[0].id) === doc.clientID;
+    return { isOwner, userProfiles };
+  }, [provider?.awareness]);
 
   useEffect(() => {
-    yUserProfiles.observe(() => {
-      setUserProfiles({ userProfiles: filterMap() });
-    });
+    const observeFunction = () => {
+      setUserProfiles({ ...filterMap() });
+    };
+    yUserProfilesState.observe(observeFunction);
 
-    provider?.awareness.on(
-      "change",
-      ({
-        added,
-        updated,
-        removed,
-      }: {
-        added: any;
-        updated: any;
-        removed: any;
-      }) => {
-        setUserProfiles({ userProfiles: filterMap() });
-      }
-    );
+    provider?.awareness.on("change", observeFunction);
 
-    yUserProfiles.set(String(provider.awareness.clientID), {
+    yUserProfilesState.set(String(provider.awareness.clientID), {
       id: provider.awareness.clientID,
       nickname,
       avatarIndex,
       color,
       utcTimeStamp,
     });
+    return () => {
+      yUserProfilesState.unobserve(observeFunction);
+      provider?.awareness.off("change", observeFunction);
+    };
   }, [
     filterMap,
     provider,

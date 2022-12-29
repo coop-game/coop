@@ -4,6 +4,7 @@ import {
   CPGameState,
   CPUserProfilesState,
   CPUserType,
+  CPGameQuestions,
 } from "@types";
 
 /**
@@ -49,6 +50,22 @@ export const userProfilesSelector = selector({
 export const yjsGameState = atom<CPGameState | null>({
   key: "YJS_GAME_STATE",
   default: null,
+});
+
+/**
+ * yjsAgreeState
+ */
+export const yjsAgreeState = atom<number[]>({
+  key: "YJS_AGREE_STATE",
+  default: [],
+});
+
+/**
+ * yjsQuestionsState
+ */
+export const yjsQuestionsState = atom<CPGameQuestions>({
+  key: "YJS_QUESTIONS_STATE",
+  default: [],
 });
 
 /**

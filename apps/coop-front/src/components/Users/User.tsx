@@ -8,7 +8,6 @@ import { useState } from "react";
 const User = ({ userProfile }: { userProfile: CPUserProfile }) => {
   const [isLabelOpen, setIsLabelOpen] = useState(false);
   const { nickname, color, id, avatarIndex, isOwner } = userProfile;
-  console.log("userProfile", color);
   return (
     <Flex
       w={"100%"}

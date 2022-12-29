@@ -9,10 +9,18 @@ import NewCursor, { CursorComponent } from "@components/NewCursor";
 import * as Y from "yjs";
 
 import { Tldraw } from "@coop/draw";
-import { providerState } from "@common/yjsStore/userStore";
-import useProfileUpdate from "@hooks/useProfileUpdate";
+import {
+  getChangeGameStateHandler,
+  providerState,
+} from "@common/yjsStore/userStore";
+import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import { useRecoilValue } from "recoil";
-import { userSelector, yjsGameState } from "@common/recoil/recoil.atom";
+import {
+  userProfilesSelector,
+  userSelector,
+  yjsGameState,
+} from "@common/recoil/recoil.atom";
+import Timer from "./Timer";
 
 function Editor({}) {
   const userState = useRecoilValue(userSelector);
@@ -50,10 +58,24 @@ function Editor({}) {
 function Draw() {
   useProfileUpdate();
   const gameState = useRecoilValue(yjsGameState);
+  const { roomId } = useRecoilValue(userSelector) ?? {};
+  const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
+  const changeGameStateHandler = getChangeGameStateHandler(roomId);
+
+  const callbackHandler = () => {
+    if (isOwner === true) {
+      changeGameStateHandler({ gamePagesIndex: gameState.gamePagesIndex + 1 });
+    }
+  };
+
   return (
     <>
+      <Timer
+        time={50000}
+        gaugeColor={["red", "orange", "green"]}
+        callback={callbackHandler}
+      />
       <div>{providerState?.provider.roomName}</div>
-      <div>gamePages.length : {gameState.gamePages.length}</div>
       <div>gamePagesIndex : {gameState.gamePagesIndex}</div>
       {providerState.provider !== null && (
         <div className="tldraw">

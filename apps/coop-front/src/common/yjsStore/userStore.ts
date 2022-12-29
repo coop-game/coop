@@ -1,3 +1,4 @@
+import { CPGameQuestion } from "./../../../types/index.d";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
 import * as awarenessProtocol from "y-protocols/awareness";
@@ -10,13 +11,16 @@ export const doc = new Y.Doc();
 
 export const yGameState = doc.getMap<CPGameState>("gameState");
 
-export const yUserProfiles = doc.getMap<CPUserProfile>("userProfiles");
+export const yUserProfilesState = doc.getMap<CPUserProfile>("userProfiles");
+
+export const yAgreeState = doc.getMap<boolean>("agreeMap");
+
+export const yQuestionsState = doc.getArray<CPGameQuestion>("questions");
 
 export const getChangeGameStateHandler = (roomId: string) => {
   return (partialGameState = {} as Partial<CPGameState>) => {
     const gameState = yGameState.get(roomId);
     const newGameState = { ...gameState, ...partialGameState };
-    console.log("getChangeGameStateHandler", newGameState);
     yGameState.set(roomId, newGameState);
   };
 };
@@ -39,8 +43,8 @@ export class providerClass {
   };
 
   createProvider = (roomId: string, isCreater: boolean) => {
-    console.log("creactProvider");
     if (this.provider === null) {
+      console.log("creactProvider");
       this.provider = new WebrtcProvider(roomId, doc, {
         signaling: ["ws://krkorea.iptime.org:3012"],
         password: null,
@@ -63,16 +67,11 @@ export class providerClass {
     }
     if (this.room === null) {
       this.room = new Room(this.provider.awareness);
-      console.log(
-        "this.provider.awareness.getStates()",
-        this.provider.awareness.getStates().size
-      );
       if (isCreater) {
         const gameState: CPGameState = {
+          path: "/lobby",
           isGameStart: false,
-          gamePages: [],
           gamePagesIndex: -1,
-          agreeList: [],
         };
         yGameState.set(roomId, gameState);
       }

@@ -25,14 +25,13 @@ export type CPUserProfilesState = {
 
 export type CPPageType = "/lobby" | "/start" | "/draw" | "/result";
 
-export type CPGamePage = {
-  path: CPPageType;
+export type CPGameQuestion = {
   answer?: string;
   question?: string;
   questioner?: number;
 };
 
-export type CPGamePages = CPGamePage[];
+export type CPGameQuestions = CPGameQuestion[];
 
 type CPGameTypes = "DRAWEE";
 
@@ -44,10 +43,11 @@ type CPGameTypeProperty = {
 export type CPGames = Record<CPGameTypes, CPGameTypeProperty>;
 
 export type CPGameState = {
+  path: CPPageType;
   isGameStart: boolean;
-  gamePages: CPGamePages;
+  // gamePages: CPGamePages;
   gamePagesIndex: number;
   // agreeSet: Set<number>;
-  agreeList: number[];
+  // agreeList: number[];
   // nowPage: CPNowPageType;
 };
