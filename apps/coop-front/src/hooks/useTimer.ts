@@ -23,11 +23,14 @@ const useTimer = ({
 }: TimerPropsType) => {
   const addTime = 100;
   const [timeState, setTimeState] = useState(time);
+  const [check, setCheck] = useState(false);
   useEffect(() => {
     const interval = setTimeout(() => {
       if (timeState < 0) {
-        callback();
         clearInterval(interval);
+      } else if (timeState === 0) {
+        callback();
+        setTimeState(time);
       } else {
         setTimeState((prev) => prev - addTime);
       }
@@ -37,7 +40,7 @@ const useTimer = ({
     };
   }, [callback, time, timeState]);
   const percent = (timeState / time) * 100;
-  const getColorScheme = Math.trunc(percent * color.length);
+  const getColorScheme = Math.trunc((percent * color.length) / 100);
   return { colorScheme: gaugeColor[getColorScheme], percent };
 };
 export default useTimer;

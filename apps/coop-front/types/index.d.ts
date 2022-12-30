@@ -33,6 +33,13 @@ export type CPGameQuestion = {
 
 export type CPGameQuestions = CPGameQuestion[];
 
+export type CPGameState = {
+  path: CPPageType;
+  isGameStart: boolean;
+  gamePagesIndex: number;
+};
+
+// -------------  deprecated -------------------
 type CPGameTypes = "DRAWEE";
 
 type CPGameTypeProperty = {
@@ -41,13 +48,3 @@ type CPGameTypeProperty = {
 };
 
 export type CPGames = Record<CPGameTypes, CPGameTypeProperty>;
-
-export type CPGameState = {
-  path: CPPageType;
-  isGameStart: boolean;
-  // gamePages: CPGamePages;
-  gamePagesIndex: number;
-  // agreeSet: Set<number>;
-  // agreeList: number[];
-  // nowPage: CPNowPageType;
-};

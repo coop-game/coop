@@ -10,7 +10,7 @@ import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import Timer from "./Timer";
+import Timer from "./Timer/Timer";
 import {
   doc,
   getChangeGameStateHandler,

@@ -14,6 +14,7 @@ import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import {
   getChangeGameStateHandler,
   providerState,
+  yQuestionsState,
 } from "@common/yjsStore/userStore";
 import { DEFAULT_GAME_STATE } from "src/constant/games";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
@@ -50,11 +51,12 @@ export const LobbyMain = () => {
   };
 
   const onClickGameStartHandler = () => {
+    yQuestionsState.delete;
     changeGameStateHandler({
       isGameStart: true,
       path: "/start",
       // gamePages: DEFAULT_GAME_STATE.DRAWEE.gamePages,
-      // gamePagesIndex: DEFAULT_GAME_STATE.DRAWEE.gamePagesIndex,
+      // gamePagesIndex: -1,
     });
   };
 

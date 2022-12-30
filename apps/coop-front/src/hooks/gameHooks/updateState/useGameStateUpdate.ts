@@ -1,9 +1,7 @@
 import { yjsGameState } from "../../../common/recoil/recoil.atom";
 import { useRecoilState } from "recoil";
 import { yGameState } from "@common/yjsStore/userStore";
-import { CPGameState } from "@types";
-import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 
 const useGameStateUpdate = (roomId: string) => {
   const [_, setGameState] = useRecoilState(yjsGameState);
@@ -18,5 +16,9 @@ const useGameStateUpdate = (roomId: string) => {
       yGameState.unobserve(observeFunction);
     };
   }, [observeFunction, roomId, setGameState]);
+  // useEffect(() => {
+  //   const gameState = yGameState.get(roomId);
+  //   setGameState({ ...gameState });
+  // }, []);
 };
 export default useGameStateUpdate;

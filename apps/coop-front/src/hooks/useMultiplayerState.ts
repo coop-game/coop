@@ -148,10 +148,6 @@ export function useMultiplayerState({
     };
   }, [app, provider, room, yBindings, yShapes]);
 
-  // useEffect(() => {
-  //   console.log("provider.roomName : ", provider.roomName, app, room);
-  // }, [provider, app, room]);
-
   return {
     onMount,
     onChangePage,

@@ -71,7 +71,7 @@ export class providerClass {
         const gameState: CPGameState = {
           path: "/lobby",
           isGameStart: false,
-          gamePagesIndex: -1,
+          gamePagesIndex: 0,
         };
         yGameState.set(roomId, gameState);
       }

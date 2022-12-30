@@ -42,7 +42,7 @@ const Chatting = () => {
               css={css`
                 display: flex;
                 flex-direction: column;
-                align-items: ${doc.clientID === id ? "flex-start" : "flex-end"};
+                align-items: ${doc.clientID === id ? "flex-end" : "flex-start"};
                 padding: 10px;
               `}
             >

@@ -1,3 +1,5 @@
+import { getChangeGameStateHandler } from "./../../common/yjsStore/userStore";
+import { yjsQuestionsState } from "./../../common/recoil/recoil.atom";
 import { yjsGameState } from "../../common/recoil/recoil.atom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { yGameState } from "@common/yjsStore/userStore";
@@ -21,6 +23,7 @@ const useSyncPageFromGameState = () => {
   const router = useRouter();
   // const [gameState, setGameState] = useState<CPGameState | null>(null);
   const gameState = useRecoilValue(yjsGameState);
+  const questionState = useRecoilValue(yjsQuestionsState);
 
   useEffect(() => {
     if (!gameState) {
@@ -28,7 +31,7 @@ const useSyncPageFromGameState = () => {
     } else if (gameState.path !== router.pathname) {
       router.push(gameState.path);
     }
-  }, [gameState, router]);
+  }, [gameState, questionState, router]);
 
   return { gameState };
 };
