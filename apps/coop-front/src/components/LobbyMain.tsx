@@ -20,7 +20,7 @@ import { DEFAULT_GAME_STATE } from "src/constant/games";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 
 export const LobbyMain = () => {
-  const translation = useTranslation("ko-kr").messages;
+  const translation = useTranslation().messages;
   const toast = useToast();
   useCheckCreatedProvider(
     "/ErrorPage/?errorMessage=잘못된 접근입니다.&statusCode=403"
@@ -42,8 +42,8 @@ export const LobbyMain = () => {
       `${process.env.NEXT_PUBLIC_HOSTNAME}/?roomId=${roomId}`
     );
     toast({
-      title: "초대하기",
-      description: "초대주소가 복사되었습니다.",
+      title: translation["lobby.toast.invite.title"],
+      description: translation["lobby.toast.invite.description"],
       status: "success",
       duration: 1000,
       isClosable: true,
@@ -67,12 +67,13 @@ export const LobbyMain = () => {
         alignItems={"center"}
         w={"100%"}
         h={"100%"}
+        minHeight={"500px"}
         border="3px solid gray"
         boxShadow="dark-lg"
         rounded="md"
       >
         <Flex
-          position={"absolute"}
+          // position={"absolute"}
           m={5}
           height={"150px"}
           width={"100%"}
@@ -83,16 +84,24 @@ export const LobbyMain = () => {
         <Flex
           w={"100%"}
           h={"100%"}
-          p="3em"
-          pt={"198px"}
+          minHeight={"500px"}
+          p="1em"
           justifyContent={"center"}
           flexDirection={{ base: "column", md: "row" }}
           gap={{ base: "10px", md: "20px" }}
         >
-          <Users userProfiles={userProfiles} />
+          <div
+            css={css`
+              minheight: 200px;
+            `}
+          >
+            <Users userProfiles={userProfiles} />
+          </div>
           <Flex
             w={{ base: "100%", md: "350px", xl: "600px" }}
-            height="100%"
+            // h={{ base: "80%", md: "100%" }}
+            h={"100%"}
+            css={css``}
             borderRadius={"15px"}
             border="3px solid gray"
             boxShadow="dark-lg"
@@ -101,45 +110,53 @@ export const LobbyMain = () => {
           >
             <Flex
               css={css`
-                flex-grow: 3;
+                /* display: flex; */
+                flex-grow: 1;
                 overflow: hidden;
               `}
             >
               <Chatting></Chatting>
             </Flex>
-            {!isOwner && (
-              <div>
-                <Spinner color="red.500" />
-                방장이 선택하는 중입니다.
-              </div>
-            )}
-            {isOwner && (
-              <Flex
-                css={css`
-                  flex-grow: 1;
-                  max-height: 45px;
-                  width: 100%;
-                  justify-content: space-between;
-                `}
-              >
-                <Button
+            <Flex
+              css={css`
+                /* display: flex; */
+                /* flex-basis: 10px; */
+              `}
+            >
+              {!isOwner && (
+                <div>
+                  <Spinner color="red.500" />
+                  {translation["lobby.selectByOwner"]}
+                </div>
+              )}
+              {isOwner && (
+                <Flex
                   css={css`
-                    width: 50%;
+                    flex-grow: 1;
+                    max-height: 45px;
+                    width: 100%;
+                    justify-content: space-between;
                   `}
-                  onClick={onClickInviteHandler}
                 >
-                  {translation["lobby.invite.button"]}
-                </Button>
-                <Button
-                  css={css`
-                    width: 50%;
-                  `}
-                  onClick={onClickGameStartHandler}
-                >
-                  {translation["lobby.next.button"]}
-                </Button>
-              </Flex>
-            )}
+                  <Button
+                    css={css`
+                      width: 50%;
+                    `}
+                    onClick={onClickInviteHandler}
+                  >
+                    {translation["lobby.invite.button"]}
+                  </Button>
+                  <Button
+                    css={css`
+                      width: 50%;
+                    `}
+                    onClick={onClickGameStartHandler}
+                  >
+                    {translation["lobby.next.button"]}
+                  </Button>
+                </Flex>
+              )}
+            </Flex>
           </Flex>
         </Flex>
       </Flex>

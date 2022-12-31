@@ -19,6 +19,7 @@ const useChattingUpdate = () => {
     setChattingState([...arr]);
   }, [setChattingState]);
 
+  // observe를 통한 상태값 동기화
   useEffect(() => {
     yarray.observe(observeFunction);
     return () => {
@@ -27,9 +28,15 @@ const useChattingUpdate = () => {
     };
   }, [observeFunction, setChattingState]);
 
+  // 스크롤 하단 고정 유지
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView();
   }, [chattingState]);
+
+  // 처음 렌더링 될때 chatting state recoil 초기값 갱신
+  useEffect(() => {
+    observeFunction();
+  }, [observeFunction]);
 
   const onClickHandler = () => {
     if (inputString === "") return;

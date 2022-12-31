@@ -46,10 +46,17 @@ const Chatting = () => {
                 padding: 10px;
               `}
             >
-              <div>{nickname} </div>
+              <div
+                css={css`
+                  font-size: 1.3rem;
+                `}
+              >
+                {nickname}{" "}
+              </div>
               <div
                 css={css`
                   background: #00eaff;
+                  font-size: 1.1rem;
                   padding: 5px;
                   border-radius: 8px;
                 `}
@@ -63,10 +70,15 @@ const Chatting = () => {
       </div>
       <div
         css={css`
+          display: flex;
+          gap: 3px;
           padding: 3px;
         `}
       >
         <Input
+          css={css`
+            flex-grow: 1;
+          `}
           placeholder={translation["chatting.input.placeholder"]}
           value={inputString}
           onChange={(e) => {
@@ -74,12 +86,7 @@ const Chatting = () => {
           }}
           onKeyPress={onKeyPressHandler}
         />
-        <Button
-          css={css`
-            width: 100%;
-          `}
-          onClick={onClickHandler}
-        >
+        <Button onClick={onClickHandler}>
           {translation["chatting.input"]}
         </Button>
       </div>
