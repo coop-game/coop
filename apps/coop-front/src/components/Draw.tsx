@@ -102,12 +102,7 @@ function Draw() {
 
   return (
     <>
-      {/* <Timer
-        time={5000}
-        gaugeColor={["red", "orange", "green"]}
-        callback={callbackHandler}
-      /> */}
-      <CircleTimer
+      <Timer
         time={5000}
         gaugeColor={["red", "orange", "green"]}
         callback={callbackHandler}

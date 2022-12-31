@@ -18,7 +18,7 @@ const CircleTimer = (props: TimerPropsType) => {
       css={css`
         width: 50px;
         height: 50px;
-        /* aspect-ratio: 1; */
+        aspect-ratio: 1;
         display: inline-grid;
         place-content: center;
         margin: 5px;
@@ -31,10 +31,7 @@ const CircleTimer = (props: TimerPropsType) => {
           position: absolute;
           border-radius: 50%;
           inset: 0;
-          background: conic-gradient(
-            ${colorScheme} calc(${percent} * 1%),
-            #0000 0
-          );
+          background: conic-gradient(${colorScheme} ${percent}%, #000000);
         }
       `}
     ></div>
