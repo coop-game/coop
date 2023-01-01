@@ -46,13 +46,15 @@ const Chatting = () => {
                 padding: 10px;
               `}
             >
-              <div
-                css={css`
-                  font-size: 1.3rem;
-                `}
-              >
-                {nickname}{" "}
-              </div>
+              {doc.clientID !== id && (
+                <div
+                  css={css`
+                    font-size: 1.3rem;
+                  `}
+                >
+                  {nickname}
+                </div>
+              )}
               <div
                 css={css`
                   background: #00eaff;

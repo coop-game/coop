@@ -1,4 +1,4 @@
-import { Progress } from "@chakra-ui/react";
+import { Progress, css } from "@chakra-ui/react";
 import useTimer, { TimerPropsType } from "@hooks/useTimer";
 
 /**
@@ -10,6 +10,17 @@ import useTimer, { TimerPropsType } from "@hooks/useTimer";
  */
 const Timer = (props: TimerPropsType) => {
   const { colorScheme, percent } = useTimer(props);
-  return <Progress colorScheme={colorScheme} height="32px" value={percent} />;
+  return (
+    <Progress
+      sx={{
+        "& > div:first-child": {
+          transitionProperty: "width",
+        },
+      }}
+      colorScheme={colorScheme}
+      height="32px"
+      value={percent}
+    />
+  );
 };
 export default Timer;

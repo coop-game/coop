@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const color = ["green", "yello", "orange", "red"];
 
 export type TimerPropsType = {
+  isStop?: boolean;
   time: number;
   gaugeColor: string[];
   callback: () => void;
@@ -17,6 +18,7 @@ export type TimerPropsType = {
  */
 
 const useTimer = ({
+  isStop = false,
   time,
   gaugeColor = color,
   callback = () => {},
@@ -25,20 +27,25 @@ const useTimer = ({
   const [timeState, setTimeState] = useState(time);
   const [check, setCheck] = useState(false);
   useEffect(() => {
-    const interval = setTimeout(() => {
-      if (timeState < 0) {
-        clearInterval(interval);
-      } else if (timeState === 0) {
-        callback();
-        setTimeState(time);
-      } else {
-        setTimeState((prev) => prev - addTime);
-      }
-    }, addTime);
+    let interval = null;
+    if (isStop === false) {
+      interval = setTimeout(() => {
+        if (timeState < 0) {
+          clearInterval(interval);
+        } else if (timeState === 0) {
+          callback();
+          setTimeState(time);
+        } else {
+          setTimeState((prev) => prev - addTime);
+        }
+      }, addTime);
+    }
     return () => {
-      clearInterval(interval);
+      if (interval) {
+        clearInterval(interval);
+      }
     };
-  }, [callback, time, timeState]);
+  }, [callback, time, timeState, isStop]);
   const percent = (timeState / time) * 100;
   const getColorScheme = Math.trunc((percent * color.length) / 100);
   return { colorScheme: gaugeColor[getColorScheme], percent };

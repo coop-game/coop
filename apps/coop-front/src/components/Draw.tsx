@@ -27,9 +27,10 @@ import Timer from "./Timer/Timer";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import { useCallback, useEffect, useState } from "react";
-import { Button, Progress } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import useTimer from "@hooks/useTimer";
 import CircleTimer from "./Timer/CircleTimer";
+import Progress from "./Progress";
 
 function Editor({}) {
   const userState = useRecoilValue(userSelector);
@@ -58,7 +59,7 @@ function Editor({}) {
         onUndo={onUndo}
         onRedo={onRedo}
         onChangePresence={onChangePresence}
-        components={{ Cursor: NewCursor as any }}
+        components={{ Cursor: NewCursor as CursorComponent }}
       />
     </div>
   );
@@ -83,9 +84,9 @@ function Draw() {
       const newGameState = {
         gamePagesIndex: gamePagesIndex + 1,
       };
-      if (gamePagesIndex + 1 >= questionState.length) {
-        newGameState["path"] = "/lobby";
-      }
+      // if (gamePagesIndex + 1 >= questionState.length) {
+      //   newGameState["path"] = "/lobby";
+      // }
       changeGameStateHandler(newGameState);
     }
   }, [changeGameStateHandler, isOwner, questionState.length, roomId]);
@@ -97,15 +98,21 @@ function Draw() {
     }
   }, []);
 
-  const [isStop, setisStop] = useState(false);
+  const [isStop, setIsStop] = useState(false);
+  const [isPlay, setIsPlay] = useState("running");
 
   return (
     <>
-      <Timer
+      <div>
+        <div>asdf</div>
+      </div>
+      <Progress play={isPlay} time={5000} callback={callbackHandler}></Progress>
+      {/* <Timer
+        isStop={isStop}
         time={5000}
         gaugeColor={["red", "orange", "green"]}
         callback={callbackHandler}
-      />
+      /> */}
       {questionState.map((v, idx) => {
         return (
           <div key={idx}>
@@ -116,6 +123,14 @@ function Draw() {
         );
       })}
       <Button onClick={callbackHandler}></Button>
+      <Button onClick={() => setIsStop((prev) => !prev)}>isStop</Button>
+      <Button
+        onClick={() =>
+          setIsPlay((prev) => (prev === "running" ? "paused" : "running"))
+        }
+      >
+        setIsPlay
+      </Button>
       <div>-------------------------------</div>
       <div>{providerState?.provider.roomName}</div>
       <div>gamePagesIndex : {gameState.gamePagesIndex}</div>
