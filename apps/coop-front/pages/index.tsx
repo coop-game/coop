@@ -27,6 +27,8 @@ import { useRecoilState } from "recoil";
 import AvatarImage from "@components/AvatarImage";
 import { providerState } from "@common/yjsStore/userStore";
 import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
+import Layout from "@components/layout";
+import LogoImage from "@components/layout/LogoImage";
 
 export default function Home({
   roomId,
@@ -67,85 +69,72 @@ export default function Home({
 
   return (
     <div>
-      <Flex w={"100%"} h={"100vh"} alignItems={"center"} p={"3em"}>
+      <Layout>
+        <LogoImage
+          src={DraweeLogo}
+          height={150}
+          width={150}
+          heightPadding={25}
+        />
         <Flex
-          direction={{ base: "column" }}
-          alignItems={"center"}
           w={"100%"}
           h={"100%"}
-          border="3px solid gray"
-          boxShadow="dark-lg"
-          rounded="md"
+          minHeight={"500px"}
+          p="1em"
+          justifyContent={"center"}
+          flexDirection={{ base: "column", md: "row" }}
+          gap={{ base: "10px", md: "20px" }}
         >
           <Flex
-            position={"absolute"}
-            m={5}
-            height={"150px"}
-            width={"100%"}
-            justifyContent={"center"}
+            w={{ base: "100%", md: "350px", xl: "600px" }}
+            height="100%"
+            borderRadius={"15px"}
+            border="3px solid gray"
+            boxShadow="dark-lg"
+            rounded="md"
+            p={10}
+            flexDirection={"column"}
+            minHeight={"500px"}
           >
-            <Image src={DraweeLogo} width={150} height={150} alt="로고이미지" />
+            <AvatarImage
+              avatarIndex={avatarIndex}
+              borderColor={color}
+              randomAvatarHandler={randomAvatarHandler}
+            ></AvatarImage>
+            <FormControl isInvalid={isError}>
+              <FormLabel>{translation["user.nickname"]}</FormLabel>
+              <Input
+                type="email"
+                value={nickname}
+                onChange={(e) => {
+                  setNickname(e.target.value);
+                  setIsError(e.target.value === "");
+                }}
+              />
+              <Flex ml={5}>
+                {!isError ? (
+                  <FormHelperText>로비로 GOGO</FormHelperText>
+                ) : (
+                  <FormErrorMessage>{`${translation["user.required.nickname"]}`}</FormErrorMessage>
+                )}
+              </Flex>
+              <Flex width={"100%"} justifyContent={"flex-end"}>
+                <Button onClick={pushLobbyHander}>GO LOBBY</Button>
+              </Flex>
+            </FormControl>
           </Flex>
           <Flex
-            w={"100%"}
-            h={"100%"}
-            p="3em"
-            pt={"198px"}
-            justifyContent={"center"}
-            flexDirection={{ base: "column", md: "row" }}
-            gap={{ base: "10px", md: "20px" }}
+            w={{ base: "100%", md: "350px", xl: "600px" }}
+            height="100%"
+            borderRadius={"15px"}
+            border="3px solid gray"
+            boxShadow="dark-lg"
+            rounded="md"
           >
-            <Flex
-              w={{ base: "100%", md: "350px", xl: "600px" }}
-              height="100%"
-              borderRadius={"15px"}
-              border="3px solid gray"
-              boxShadow="dark-lg"
-              rounded="md"
-              p={10}
-              flexDirection={"column"}
-              minHeight={"500px"}
-            >
-              <AvatarImage
-                avatarIndex={avatarIndex}
-                borderColor={color}
-                randomAvatarHandler={randomAvatarHandler}
-              ></AvatarImage>
-              <FormControl isInvalid={isError}>
-                <FormLabel>{translation["user.nickname"]}</FormLabel>
-                <Input
-                  type="email"
-                  value={nickname}
-                  onChange={(e) => {
-                    setNickname(e.target.value);
-                    setIsError(e.target.value === "");
-                  }}
-                />
-                <Flex ml={5}>
-                  {!isError ? (
-                    <FormHelperText>로비로 GOGO</FormHelperText>
-                  ) : (
-                    <FormErrorMessage>{`${translation["user.required.nickname"]}`}</FormErrorMessage>
-                  )}
-                </Flex>
-                <Flex width={"100%"} justifyContent={"flex-end"}>
-                  <Button onClick={pushLobbyHander}>GO LOBBY</Button>
-                </Flex>
-              </FormControl>
-            </Flex>
-            <Flex
-              w={{ base: "100%", md: "350px", xl: "600px" }}
-              height="100%"
-              borderRadius={"15px"}
-              border="3px solid gray"
-              boxShadow="dark-lg"
-              rounded="md"
-            >
-              asdf
-            </Flex>
+            asdf
           </Flex>
         </Flex>
-      </Flex>
+      </Layout>
     </div>
   );
 }

@@ -18,6 +18,8 @@ import {
 } from "@common/yjsStore/userStore";
 import { DEFAULT_GAME_STATE } from "src/constant/games";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
+import Layout from "./layout";
+import LogoImage from "./layout/LogoImage";
 
 export const LobbyMain = () => {
   const translation = useTranslation().messages;
@@ -61,106 +63,79 @@ export const LobbyMain = () => {
   };
 
   return (
-    <Flex w={"100%"} h={"100vh"} alignItems={"center"} p={"3em"}>
+    <>
+      <LogoImage src={DraweeLogo} height={150} width={150} heightPadding={25} />
       <Flex
-        direction={{ base: "column" }}
-        alignItems={"center"}
         w={"100%"}
         h={"100%"}
         minHeight={"500px"}
-        border="3px solid gray"
-        boxShadow="dark-lg"
-        rounded="md"
+        p="1em"
+        justifyContent={"center"}
+        flexDirection={{ base: "column", md: "row" }}
+        gap={{ base: "10px", md: "20px" }}
       >
-        <Flex
-          // position={"absolute"}
-          m={5}
-          height={"150px"}
-          width={"100%"}
-          justifyContent={"center"}
+        <div
+          css={css`
+            minheight: 200px;
+          `}
         >
-          <Image src={DraweeLogo} width={150} height={150} alt="로고이미지" />
-        </Flex>
+          <Users userProfiles={userProfiles} />
+        </div>
         <Flex
-          w={"100%"}
+          w={{ base: "100%", md: "350px", xl: "600px" }}
           h={"100%"}
-          minHeight={"500px"}
-          p="1em"
-          justifyContent={"center"}
-          flexDirection={{ base: "column", md: "row" }}
-          gap={{ base: "10px", md: "20px" }}
+          css={css``}
+          borderRadius={"15px"}
+          border="3px solid gray"
+          boxShadow="dark-lg"
+          rounded="md"
+          flexDirection={"column"}
         >
-          <div
+          <Flex
             css={css`
-              minheight: 200px;
+              flex-grow: 1;
+              overflow: hidden;
             `}
           >
-            <Users userProfiles={userProfiles} />
-          </div>
-          <Flex
-            w={{ base: "100%", md: "350px", xl: "600px" }}
-            // h={{ base: "80%", md: "100%" }}
-            h={"100%"}
-            css={css``}
-            borderRadius={"15px"}
-            border="3px solid gray"
-            boxShadow="dark-lg"
-            rounded="md"
-            flexDirection={"column"}
-          >
-            <Flex
-              css={css`
-                /* display: flex; */
-                flex-grow: 1;
-                overflow: hidden;
-              `}
-            >
-              <Chatting></Chatting>
-            </Flex>
-            <Flex
-              css={css`
-                /* display: flex; */
-                /* flex-basis: 10px; */
-              `}
-            >
-              {!isOwner && (
-                <div>
-                  <Spinner color="red.500" />
-                  {translation["lobby.selectByOwner"]}
-                </div>
-              )}
-              {isOwner && (
-                <Flex
-                  css={css`
-                    flex-grow: 1;
-                    max-height: 45px;
-                    width: 100%;
-                    justify-content: space-between;
-                  `}
-                >
-                  <Button
-                    css={css`
-                      width: 50%;
-                    `}
-                    onClick={onClickInviteHandler}
-                  >
-                    {translation["lobby.invite.button"]}
-                  </Button>
-                  <Button
-                    css={css`
-                      width: 50%;
-                    `}
-                    onClick={onClickGameStartHandler}
-                  >
-                    {translation["lobby.next.button"]}
-                  </Button>
-                </Flex>
-              )}
-            </Flex>
+            <Chatting></Chatting>
           </Flex>
+
+          {!isOwner && (
+            <div>
+              <Spinner color="red.500" />
+              {translation["lobby.selectByOwner"]}
+            </div>
+          )}
+          {isOwner && (
+            <Flex
+              css={css`
+                flex-grow: 1;
+                max-height: 45px;
+                width: 100%;
+                justify-content: space-between;
+              `}
+            >
+              <Button
+                css={css`
+                  width: 50%;
+                `}
+                onClick={onClickInviteHandler}
+              >
+                {translation["lobby.invite.button"]}
+              </Button>
+              <Button
+                css={css`
+                  width: 50%;
+                `}
+                onClick={onClickGameStartHandler}
+              >
+                {translation["lobby.next.button"]}
+              </Button>
+            </Flex>
+          )}
         </Flex>
       </Flex>
-    </Flex>
+    </>
   );
 };
 export default LobbyMain;

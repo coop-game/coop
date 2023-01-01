@@ -78,16 +78,15 @@ function Draw() {
   const callbackHandler = useCallback(() => {
     if (isOwner === true) {
       console.log("isOwner true");
-      // console.log("gameState.gamePagesIndex", gameState.gamePagesIndex + 1);
       const gamePagesIndex = yGameState.get(roomId).gamePagesIndex;
       console.log(gamePagesIndex);
-      const temp = {
+      const newGameState = {
         gamePagesIndex: gamePagesIndex + 1,
       };
       if (gamePagesIndex + 1 >= questionState.length) {
-        temp["path"] = "/lobby";
+        newGameState["path"] = "/lobby";
       }
-      changeGameStateHandler(temp);
+      changeGameStateHandler(newGameState);
     }
   }, [changeGameStateHandler, isOwner, questionState.length, roomId]);
 
