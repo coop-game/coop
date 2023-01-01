@@ -31,6 +31,7 @@ import { Button } from "@chakra-ui/react";
 import useTimer from "@hooks/useTimer";
 import CircleTimer from "./Timer/CircleTimer";
 import Progress from "./Progress";
+import SideBarOfDraw from "./layout/sideBar/SideBarOfDraw";
 
 function Editor({}) {
   const userState = useRecoilValue(userSelector);
@@ -61,6 +62,7 @@ function Editor({}) {
         onChangePresence={onChangePresence}
         components={{ Cursor: NewCursor as CursorComponent }}
       />
+      <SideBarOfDraw></SideBarOfDraw>
     </div>
   );
 }
@@ -107,12 +109,6 @@ function Draw() {
         <div>asdf</div>
       </div>
       <Progress play={isPlay} time={5000} callback={callbackHandler}></Progress>
-      {/* <Timer
-        isStop={isStop}
-        time={5000}
-        gaugeColor={["red", "orange", "green"]}
-        callback={callbackHandler}
-      /> */}
       {questionState.map((v, idx) => {
         return (
           <div key={idx}>

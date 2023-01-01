@@ -7,6 +7,8 @@ import {
   providerState,
   yUserProfilesState,
 } from "@common/yjsStore/userStore";
+import { Transaction, YMapEvent } from "yjs";
+import { Room } from "y-webrtc";
 
 const useProfileUpdate = () => {
   const { nickname, avatarIndex, color, utcTimeStamp } =
@@ -41,12 +43,20 @@ const useProfileUpdate = () => {
   }, [provider?.awareness]);
 
   useEffect(() => {
-    const observeFunction = () => {
+    const observeFunction = (eventType: any, transaction: any) => {
+      // local에서 수정했고, updated로 데이터가 들어왔다면
+      if (transaction === "local" && eventType.updated.length > 0) {
+        return;
+      }
+      // transaction으로 Room이 전송됬고 updated로 데이터가 들어왔다면
+      if (transaction instanceof Room && eventType.updated.length > 0) {
+        return;
+      }
       setUserProfiles({ ...filterMap() });
     };
     yUserProfilesState.observe(observeFunction);
 
-    provider?.awareness.on("change", observeFunction);
+    provider?.awareness.on("update", observeFunction);
 
     yUserProfilesState.set(String(provider.awareness.clientID), {
       id: provider.awareness.clientID,
@@ -56,8 +66,9 @@ const useProfileUpdate = () => {
       utcTimeStamp,
     });
     return () => {
+      console.log("삭제한다");
       yUserProfilesState.unobserve(observeFunction);
-      provider?.awareness.off("change", observeFunction);
+      provider?.awareness.off("update", observeFunction);
     };
   }, [
     filterMap,
