@@ -7,7 +7,7 @@ const Example = () => {
     <>
       <RollingSelect></RollingSelect>
       <Rollinghexagone></Rollinghexagone>
-      <ChakraModal onCloseHandler={}>
+      <ChakraModal onCloseHandler={() => {}}>
         <div>정답!</div>
         <div>???? 이 정답을 맞췄습니다</div>
       </ChakraModal>
