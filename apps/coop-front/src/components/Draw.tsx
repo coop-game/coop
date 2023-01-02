@@ -31,7 +31,7 @@ import { Button } from "@chakra-ui/react";
 import useTimer from "@hooks/useTimer";
 import CircleTimer from "./Timer/CircleTimer";
 import Progress from "./Progress";
-import SideBarOfDraw from "./layout/sideBar/SideBarOfDraw";
+import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
 
 function Editor({}) {
   const userState = useRecoilValue(userSelector);

@@ -48,6 +48,7 @@ const useProfileUpdate = () => {
       if (transaction === "local" && eventType.updated.length > 0) {
         return;
       }
+      // 마우스 커서
       // transaction으로 Room이 전송됬고 updated로 데이터가 들어왔다면
       if (transaction instanceof Room && eventType.updated.length > 0) {
         return;
@@ -66,7 +67,6 @@ const useProfileUpdate = () => {
       utcTimeStamp,
     });
     return () => {
-      console.log("삭제한다");
       yUserProfilesState.unobserve(observeFunction);
       provider?.awareness.off("update", observeFunction);
     };

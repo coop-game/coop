@@ -51,8 +51,10 @@ const CreateQuestion = () => {
       if (!!provider && input !== "") {
         const newQuestion: CPGameQuestion = {
           answer: input,
+          inputAnswer: null,
           question: "?????를 그려라",
           questioner: provider.awareness.clientID,
+          solver: null,
         };
         pushQuestionHandler(newQuestion);
       }

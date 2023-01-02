@@ -26,9 +26,11 @@ export type CPUserProfilesState = {
 export type CPPageType = "/lobby" | "/start" | "/draw" | "/result";
 
 export type CPGameQuestion = {
-  answer?: string;
-  question?: string;
-  questioner?: number;
+  answer: string;
+  inputAnswer: string | null;
+  question: string;
+  questioner: number;
+  solver: number | null;
 };
 
 export type CPGameQuestions = CPGameQuestion[];
