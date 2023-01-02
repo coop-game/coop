@@ -25,6 +25,7 @@ const Chatting = () => {
       css={css`
         width: 100%;
         height: 100%;
+
         flex-direction: column;
         justify-content: space-between;
       `}
@@ -33,6 +34,7 @@ const Chatting = () => {
         css={css`
           word-break: break-all;
           overflow-y: scroll;
+          height: 100%;
         `}
       >
         {chattingState.map(({ nickname, message, id }, idx) => {
