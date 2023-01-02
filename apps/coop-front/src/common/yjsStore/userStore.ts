@@ -70,6 +70,7 @@ export class providerClass {
       if (isCreater) {
         const gameState: CPGameState = {
           path: "/lobby",
+          gametype: "DRAWEE",
           isGameStart: false,
           gamePagesIndex: 0,
         };

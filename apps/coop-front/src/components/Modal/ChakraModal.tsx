@@ -12,6 +12,7 @@ import {
   Input,
   FormLabel,
 } from "@chakra-ui/react";
+import { css } from "@emotion/react";
 import React from "react";
 
 type ChakraModalPropsType = {
@@ -23,35 +24,63 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
+
+  const onCloseAllHandler = () => {
+    onClose();
+    onCloseHandler();
+  };
 
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
-      <Button ml={4} ref={finalRef}>
-        {`I'll receive focus on close`}
-      </Button>
 
       <Modal
         initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
         isOpen={isOpen}
-        onClose={() => {
-          onCloseHandler();
-          onClose();
-        }}
+        onClose={onCloseAllHandler}
       >
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader></ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>{children}</ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Save
+        <ModalContent minH={"80vh"} minW={"80vw"}>
+          <ModalHeader
+            css={css`
+              background: #e2e0a5;
+            `}
+          ></ModalHeader>
+          <ModalBody
+            pb={6}
+            css={css`
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background: #e2e0a5;
+            `}
+          >
+            {children}
+          </ModalBody>
+          <ModalFooter
+            css={css`
+              display: flex;
+              justify-content: center;
+              background: #e2e0a5;
+            `}
+          >
+            <Button
+              css={css`
+                width: 150px;
+                height: 50px;
+                padding: 20px;
+                color: white;
+                font-size: 1.5rem;
+                font-weight: 500;
+                background: #d3504a;
+                &:hover {
+                  background: #dd726d;
+                }
+              `}
+              onClick={onCloseAllHandler}
+            >
+              다음
             </Button>
-            <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

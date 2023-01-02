@@ -20,12 +20,14 @@ import {
 import { CPGameQuestion } from "@types";
 import useAgreeUpdate from "@hooks/gameHooks/updateState/useAgreeUpdate";
 import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
+import { useTranslation } from "@hooks/useTransitions";
 
 const CreateQuestion = () => {
   const { provider } = providerState;
   const { input, setInput, onChangeHandler } = useInput("");
   const agreeList = useRecoilValue(yjsAgreeState);
   const { roomId } = useRecoilValue(userSelector) ?? {};
+  const translation = useTranslation().messages;
 
   // gameState.path 에 따라 페이지 동기화
   useSyncPageFromGameState();
@@ -51,10 +53,11 @@ const CreateQuestion = () => {
       if (!!provider && input !== "") {
         const newQuestion: CPGameQuestion = {
           answer: input,
-          inputAnswer: null,
-          question: "?????를 그려라",
+          inputAnswer: [],
+          question: translation["start.push.question"],
           questioner: provider.awareness.clientID,
           solver: null,
+          path: "/draw",
         };
         pushQuestionHandler(newQuestion);
       }
@@ -81,7 +84,7 @@ const CreateQuestion = () => {
         gaugeColor={["red", "orange", "green"]}
         callback={onClickButtonHandler}
       />
-      <div>문장을 입력하세요.</div>
+      <div>{`${translation["start.input.answer"]}`}</div>
       <Input value={input} onChange={onChangeHandler} />
       <Button
         onClick={() => {

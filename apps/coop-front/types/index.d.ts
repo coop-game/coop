@@ -26,8 +26,9 @@ export type CPUserProfilesState = {
 export type CPPageType = "/lobby" | "/start" | "/draw" | "/result";
 
 export type CPGameQuestion = {
+  path: CPPageType;
   answer: string;
-  inputAnswer: string | null;
+  inputAnswer: string[] | null;
   question: string;
   questioner: number;
   solver: number | null;
@@ -37,16 +38,17 @@ export type CPGameQuestions = CPGameQuestion[];
 
 export type CPGameState = {
   path: CPPageType;
+  gametype: CPGameTypes;
   isGameStart: boolean;
   gamePagesIndex: number;
 };
 
 // -------------  deprecated -------------------
-type CPGameTypes = "DRAWEE";
+type CPGameTypes = "DRAWEE" | "RELAY_RACE";
 
 type CPGameTypeProperty = {
-  gamePages: CPGamePages;
-  gamePagesIndex: number;
+  isGameStart: boolean;
+  path: CPPageType;
 };
 
 export type CPGames = Record<CPGameTypes, CPGameTypeProperty>;

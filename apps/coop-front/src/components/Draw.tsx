@@ -32,6 +32,7 @@ import useTimer from "@hooks/useTimer";
 import CircleTimer from "./Timer/CircleTimer";
 import Progress from "./Progress";
 import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
+import Solver from "./Solver";
 
 function Editor({}) {
   const userState = useRecoilValue(userSelector);
@@ -135,6 +136,7 @@ function Draw() {
           <Editor />
         </div>
       )}
+      <Solver></Solver>
     </>
   );
 }

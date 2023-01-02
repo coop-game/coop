@@ -12,7 +12,7 @@ const Chatting = () => {
   const { inputString, setInputString, messagesEndRef, onClickHandler } =
     useChattingUpdate();
 
-  const translation = useTranslation("ko-kr").messages;
+  const translation = useTranslation().messages;
 
   const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -25,7 +25,6 @@ const Chatting = () => {
       css={css`
         width: 100%;
         height: 100%;
-
         flex-direction: column;
         justify-content: space-between;
       `}

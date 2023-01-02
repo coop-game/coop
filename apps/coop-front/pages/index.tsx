@@ -37,7 +37,7 @@ export default function Home({
   roomId: string;
   isCreater: boolean;
 }) {
-  const translation = useTranslation("ko-kr").messages;
+  const translation = useTranslation().messages;
   const [userState, setUserState] = useRecoilState(userSelector);
   const router = useRouter();
 
@@ -113,7 +113,9 @@ export default function Home({
               />
               <Flex ml={5}>
                 {!isError ? (
-                  <FormHelperText>로비로 GOGO</FormHelperText>
+                  <FormHelperText>
+                    {`${translation["user.success.nickname"]}`}
+                  </FormHelperText>
                 ) : (
                   <FormErrorMessage>{`${translation["user.required.nickname"]}`}</FormErrorMessage>
                 )}

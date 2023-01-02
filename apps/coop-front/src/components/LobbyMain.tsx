@@ -57,8 +57,6 @@ export const LobbyMain = () => {
     changeGameStateHandler({
       isGameStart: true,
       path: "/start",
-      // gamePages: DEFAULT_GAME_STATE.DRAWEE.gamePages,
-      // gamePagesIndex: -1,
     });
   };
 
