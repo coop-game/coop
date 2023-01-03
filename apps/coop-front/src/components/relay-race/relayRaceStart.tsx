@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import _ from "lodash";
 import { CPGameRelayRace, CPGameState } from "@types";
+import Wating from "./wating";
 
 const RelayRaceStart = () => {
   const translation = useTranslation().messages;
@@ -60,18 +61,35 @@ const RelayRaceStart = () => {
     ) {
       const myId = doc.clientID;
       let result = 0;
-      gameState.gameOrderNumber.forEach((e, i) => {
-        if (e === myId) {
-          result = i;
-          return;
+      let index = 0;
+      for (let i of gameState.gameOrderNumber) {
+        if (i === myId) {
+          result = index;
+          break;
         }
-      });
+        index++;
+      }
+      setMyOrderNumber(result);
     }
   }, [gameState]);
   if (provider === null) {
     return <div></div>;
   }
-
+  if (
+    myOrderNumber !== undefined &&
+    gameState.gamePagesIndex !== myOrderNumber
+  ) {
+    return (
+      <div>
+        <Wating />
+      </div>
+    );
+  } else if (
+    myOrderNumber !== undefined &&
+    gameState.gamePagesIndex === myOrderNumber
+  ) {
+    return <div>문제를 냅시다.</div>;
+  }
   return <div>test</div>;
 };
 
