@@ -19,12 +19,18 @@ import {
   doc,
   getChangeGameStateHandler,
   providerState,
+  yAgreeState,
   yQuestionsState,
 } from "@common/yjsStore/userStore";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import LogoImage from "./layout/LogoImage";
 import { useRouter } from "next/router";
-import { CPGameDrawee, CPGameState } from "@types";
+import {
+  CPGameDrawee,
+  CPGameRelayRace,
+  CPGameState,
+  CPGameTypes,
+} from "@types";
 import { useEffect } from "react";
 
 export const LobbyMain = () => {
@@ -44,10 +50,14 @@ export const LobbyMain = () => {
   useProfileUpdate();
 
   useEffect(() => {
-    doc.transact(() => {
-      yQuestionsState.delete(0, yQuestionsState.length);
-    });
-  }, []);
+    // 로비로 진입시 questionsState, yAgreeState 를 초기화함.
+    if (isOwner) {
+      doc.transact(() => {
+        yQuestionsState.delete(0, yQuestionsState.length);
+        yAgreeState.clear();
+      });
+    }
+  }, [isOwner]);
 
   if (provider === null) {
     return <div></div>;
@@ -66,12 +76,22 @@ export const LobbyMain = () => {
     });
   };
 
-  const onClickGameStartHandler = () => {
-    // yQuestionsState.delete();
-    changeGameStateHandler({
-      isGameStart: true,
-      path: "/start",
-    });
+  const onClickGameStartHandler = (gameType: CPGameTypes) => {
+    if (gameType === "DRAWEE") {
+      const a: Partial<CPGameDrawee> = {
+        isGameStart: true,
+        path: "/start",
+      };
+      changeGameStateHandler(a);
+    }
+
+    if (gameType === "RELAY_RACE") {
+      const a: Partial<CPGameRelayRace> = {
+        isGameStart: true,
+        path: "/start",
+      };
+      changeGameStateHandler(a);
+    }
   };
 
   return (
@@ -139,7 +159,7 @@ export const LobbyMain = () => {
                 css={css`
                   width: 50%;
                 `}
-                onClick={onClickGameStartHandler}
+                onClick={() => onClickGameStartHandler("DRAWEE")}
               >
                 {translation["lobby.next.button"]}
               </Button>

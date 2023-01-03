@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 
 import NewCursor, { CursorComponent } from "@components/NewCursor";
 
-import { Tldraw } from "@coop/draw";
+import { Tldraw, TldrawApp } from "@coop/draw";
 import {
   getChangeGameStateHandler,
   providerState,
@@ -28,7 +28,6 @@ import Solver from "./Solver";
 import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
 import AnswerModal from "./Modal/AnswerModal";
 import { CPGameDrawee } from "@types";
-import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
 
 function Editor({}) {
   const userState = useRecoilValue(userSelector);
@@ -38,6 +37,9 @@ function Editor({}) {
       room: providerState?.room,
       customUserId: userState?.nickname,
     });
+  const onAssetDelete = (app: TldrawApp, file: File, id: string) => {
+    console.log(app, file, id);
+  };
 
   return (
     <div
@@ -47,6 +49,7 @@ function Editor({}) {
         height: 100%;
       `}
     >
+      <Button>삭제 버튼</Button>
       <Tldraw
         showMenu={false}
         // autofocus

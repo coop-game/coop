@@ -3,17 +3,14 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Layout from "@components/layout";
 
-const Draw = dynamic(() => import("@components/Draw"), { ssr: false });
-
 function DrawPage() {
-  const [state, setState] = useState(false);
-  useEffect(() => {
-    setState(true);
-  }, []);
+  const Draw = dynamic(() => import("@components/Draw"), { ssr: false });
 
   return (
     <Layout>
-      <div className={styles.container}>{state && <Draw></Draw>}</div>
+      <div className={styles.container}>
+        <Draw></Draw>
+      </div>
     </Layout>
   );
 }
