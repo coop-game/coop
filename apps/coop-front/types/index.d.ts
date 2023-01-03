@@ -23,7 +23,7 @@ export type CPUserProfilesState = {
   userProfiles?: CPUserProfile[];
 };
 
-export type CPPageType = "/lobby" | "/start" | "/draw" | "/result";
+export type CPPageType = "/lobby" | "/start" | "/draw" | "/result" | "/games/relay-race";
 
 export type CPGameQuestion = {
   path: CPPageType;
@@ -33,6 +33,8 @@ export type CPGameQuestion = {
   questioner: number;
   solver: number | null;
 };
+
+
 
 export type CPGameQuestions = CPGameQuestion[];
 

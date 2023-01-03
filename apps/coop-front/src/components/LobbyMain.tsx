@@ -54,9 +54,13 @@ export const LobbyMain = () => {
 
   const onClickGameStartHandler = () => {
     yQuestionsState.delete;
+    // changeGameStateHandler({
+    //   isGameStart: true,
+    //   path: "/start",
+    // });
     changeGameStateHandler({
       isGameStart: true,
-      path: "/start",
+      path: "/games/relay-race",
     });
   };
 

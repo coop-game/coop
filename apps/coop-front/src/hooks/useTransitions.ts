@@ -7,7 +7,7 @@ export function useTranslation(locale?: CPLanguage) {
     return getTranslation(
       locale ?? typeof window !== "undefined"
         ? navigator.language.split(/[-_]/)[0]
-        : "en"
+        : "ko-kr"
     );
   }, [locale]);
 }
