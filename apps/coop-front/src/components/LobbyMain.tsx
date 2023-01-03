@@ -2,7 +2,11 @@ import DraweeLogo from "@asset/images/DraweeLogo.png";
 import Image from "next/image";
 import { Button, Flex, Spinner } from "@chakra-ui/react";
 import Users from "@components/Users";
-import { userProfilesSelector, userSelector } from "@common/recoil/recoil.atom";
+import {
+  userProfilesSelector,
+  userSelector,
+  yjsGameState,
+} from "@common/recoil/recoil.atom";
 import { useTranslation } from "@hooks/useTransitions";
 import { useToast } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
@@ -16,18 +20,19 @@ import {
   providerState,
   yQuestionsState,
 } from "@common/yjsStore/userStore";
-import { DEFAULT_GAME_STATE } from "src/constant/games";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
-import Layout from "./layout";
 import LogoImage from "./layout/LogoImage";
+import { useRouter } from "next/router";
 
 export const LobbyMain = () => {
+  const router = useRouter();
   const translation = useTranslation().messages;
   const toast = useToast();
   useCheckCreatedProvider(
     "/ErrorPage/?errorMessage=잘못된 접근입니다.&statusCode=403"
   );
   const { roomId } = useRecoilValue(userSelector) ?? {};
+  const gameState = useRecoilValue(yjsGameState);
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
   const { provider } = providerState;
   useGameStateUpdate(roomId);
@@ -53,7 +58,8 @@ export const LobbyMain = () => {
   };
 
   const onClickGameStartHandler = () => {
-    yQuestionsState.delete;
+    // yQuestionsState.delete();
+    console.log("이게 작동함?????");
     changeGameStateHandler({
       isGameStart: true,
       path: "/start",

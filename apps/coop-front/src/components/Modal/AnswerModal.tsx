@@ -2,13 +2,13 @@ import { Flex } from "@chakra-ui/react";
 import ChakraModal from "@components/Modal/ChakraModal";
 import { css } from "@emotion/react";
 
-const AnswerModal = () => {
+type AnswerModalPropsType = {
+  onClose: () => void;
+};
+
+const AnswerModal = (props: AnswerModalPropsType) => {
   return (
-    <ChakraModal
-      onCloseHandler={() => {
-        console.log("asdfa????");
-      }}
-    >
+    <ChakraModal onCloseHandler={props.onClose}>
       <Flex
         fontSize={{ base: "2rem", md: "3rem", xl: "4rem" }}
         css={css`

@@ -8,7 +8,7 @@ import useInput from "@hooks/useInput";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import Timer from "./Timer/Timer";
 import {
@@ -46,7 +46,7 @@ const CreateQuestion = () => {
 
   const [isAgree, setIsAgree] = useState(false);
 
-  const onClickButtonHandler = () => {
+  const onClickButtonHandler = async () => {
     setIsAgree(true);
     doc.transact(() => {
       yAgreeState.set(String(doc.clientID), true);
@@ -65,26 +65,33 @@ const CreateQuestion = () => {
     setInput("");
   };
 
-  useEffect(() => {
-    if (
-      agreeList.length === userProfiles.length &&
-      userProfiles[0].id === doc.clientID
-    ) {
+  const nextPageHandlerByOwner = useCallback(() => {
+    if (isOwner) {
       doc.transact(() => {
         yAgreeState.clear();
+        console.log("경로 바꿈");
         changeGameStateHandler({ path: "/draw", gamePagesIndex: 0 });
       });
     }
-  }, [agreeList, changeGameStateHandler, userProfiles]);
+  }, [changeGameStateHandler, isOwner]);
+
+  useEffect(() => {
+    if (agreeList.length === userProfiles.length) {
+      nextPageHandlerByOwner();
+    }
+  }, [agreeList.length, nextPageHandlerByOwner, userProfiles.length]);
 
   return (
     <div>
       <Timer
         time={5000}
         gaugeColor={["red", "orange", "green"]}
-        callback={onClickButtonHandler}
+        callback={async () => {
+          onClickButtonHandler();
+          nextPageHandlerByOwner();
+        }}
       />
-      <div>{`${translation["start.input.answer"]}`}</div>
+      <div>{translation["start.input.answer"]}</div>
       <Input value={input} onChange={onChangeHandler} />
       <Button
         onClick={() => {

@@ -21,7 +21,7 @@ type ChakraModalPropsType = {
 };
 
 const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
 
   const initialRef = React.useRef(null);
 

@@ -25,7 +25,6 @@ const useTimer = ({
 }: TimerPropsType) => {
   const addTime = 100;
   const [timeState, setTimeState] = useState(time);
-  const [check, setCheck] = useState(false);
   useEffect(() => {
     let interval = null;
     if (isStop === false) {

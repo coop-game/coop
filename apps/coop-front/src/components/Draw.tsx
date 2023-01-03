@@ -4,13 +4,8 @@ import { css } from "@emotion/react";
 
 import NewCursor, { CursorComponent } from "@components/NewCursor";
 
-// import { yjsState } from "@common/recoil/recoil.atom";
-
-import * as Y from "yjs";
-
 import { Tldraw } from "@coop/draw";
 import {
-  doc,
   getChangeGameStateHandler,
   providerState,
   yGameState,
@@ -23,16 +18,15 @@ import {
   yjsGameState,
   yjsQuestionsState,
 } from "@common/recoil/recoil.atom";
-import Timer from "./Timer/Timer";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "@chakra-ui/react";
-import useTimer from "@hooks/useTimer";
-import CircleTimer from "./Timer/CircleTimer";
 import Progress from "./Progress";
 import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
 import Solver from "./Solver";
+import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
+import AnswerModal from "./Modal/AnswerModal";
 
 function Editor({}) {
   const userState = useRecoilValue(userSelector);
@@ -47,8 +41,8 @@ function Editor({}) {
     <div
       css={css`
         position: relative;
-        width: 80vw;
-        height: 80vh;
+        width: 100%;
+        height: 100%;
       `}
     >
       <Tldraw
@@ -63,7 +57,6 @@ function Editor({}) {
         onChangePresence={onChangePresence}
         components={{ Cursor: NewCursor as CursorComponent }}
       />
-      <SideBarOfDraw></SideBarOfDraw>
     </div>
   );
 }
@@ -76,10 +69,15 @@ function Draw() {
   const questionState = useRecoilValue(yjsQuestionsState);
 
   useProfileUpdate();
+  useQuestionUpdate();
   useGameStateUpdate(roomId);
   useSyncPageFromGameState();
+  useEffect(() => {
+    console.log(gameState.path, "가 바뀜");
+  }, [gameState.path]);
 
-  const callbackHandler = useCallback(() => {
+  const nextPageHandler = useCallback(() => {
+    console.log(userProfiles);
     if (isOwner === true) {
       console.log("isOwner true");
       const gamePagesIndex = yGameState.get(roomId).gamePagesIndex;
@@ -94,33 +92,34 @@ function Draw() {
     }
   }, [changeGameStateHandler, isOwner, questionState.length, roomId]);
 
-  useEffect(() => {
-    const gamePagesIndex = yGameState.get(roomId).gamePagesIndex;
-    if (gamePagesIndex >= questionState.length) {
-      changeGameStateHandler({ path: "/lobby" });
-    }
-  }, []);
+  // useEffect(() => {
+  //   const gamePagesIndex = yGameState.get(roomId).gamePagesIndex;
+  //   if (gamePagesIndex >= questionState.length) {
+  //     changeGameStateHandler({ path: "/lobby" });
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
-  const [isStop, setIsStop] = useState(false);
   const [isPlay, setIsPlay] = useState("running");
+
+  const isAnswerInArray = () => {
+    if (questionState.length > gameState.gamePagesIndex) {
+      const question = questionState[gameState.gamePagesIndex];
+      return question.inputAnswer.includes(question.answer);
+    }
+  };
 
   return (
     <>
-      <div>
-        <div>asdf</div>
-      </div>
-      <Progress play={isPlay} time={5000} callback={callbackHandler}></Progress>
-      {questionState.map((v, idx) => {
-        return (
-          <div key={idx}>
-            <div>{v.question}</div>
-            <div>{v.questioner}</div>
-            <div>{v.answer}</div>
-          </div>
-        );
-      })}
-      <Button onClick={callbackHandler}></Button>
-      <Button onClick={() => setIsStop((prev) => !prev)}>isStop</Button>
+      <Progress
+        play={isPlay}
+        time={50000}
+        callback={() => {
+          nextPageHandler();
+        }}
+      ></Progress>
+      {isAnswerInArray() && <AnswerModal onClose={() => {}}></AnswerModal>}
+      <Button onClick={nextPageHandler}></Button>
       <Button
         onClick={() =>
           setIsPlay((prev) => (prev === "running" ? "paused" : "running"))
@@ -131,11 +130,33 @@ function Draw() {
       <div>-------------------------------</div>
       <div>{providerState?.provider.roomName}</div>
       <div>gamePagesIndex : {gameState.gamePagesIndex}</div>
-      {providerState.provider !== null && (
-        <div className="tldraw">
-          <Editor />
+      <div
+        css={css`
+          display: flex;
+          width: 100%;
+          heigth: 100%;
+        `}
+      >
+        {providerState.provider !== null && (
+          <div
+            className="tldraw"
+            css={css`
+              flex-flow: 1;
+              width: 100%;
+              height: 100%;
+            `}
+          >
+            <Editor />
+          </div>
+        )}
+        <div
+          css={css`
+            flex-basis: 200px;
+          `}
+        >
+          <SideBarOfDraw></SideBarOfDraw>
         </div>
-      )}
+      </div>
       <Solver></Solver>
     </>
   );
