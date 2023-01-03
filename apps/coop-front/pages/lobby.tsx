@@ -3,11 +3,14 @@ import Layout from "@components/layout";
 
 const Lobby = () => {
   const LobbyMain = dynamic(() => import("@components/LobbyMain"), {
-    ssr: false,
+    loading: () => {
+      return <div>Loading...</div>;
+    },
   });
+
   return (
     <Layout>
-      <LobbyMain></LobbyMain>;
+      <LobbyMain></LobbyMain>
     </Layout>
   );
 };

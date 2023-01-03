@@ -1,14 +1,14 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { css } from "@emotion/react";
-import TopContent from "./components/TopContent";
-import MiddleContent from "./components/MiddleContent/index";
+import TopContent from "@components/Welcome/TopContent";
+import MiddleContent from "@components/Welcome/MiddleContent/index";
 import { useState } from "react";
-import MiddleLowContent from "./components/MiddleContent/src/lowContent";
+import MiddleLowContent from "@components/Welcome/MiddleContent/src/lowContent";
 import stock1 from "../../src/asset/stock1.jpg";
 import stock2 from "../../src/asset/stock2.jpg";
 import stock3 from "../../src/asset/stock3.jpg";
 import stock4 from "../../src/asset/stock4.jpg";
-import BottomContent from "./components/BottomContent";
+import BottomContent from "@components/Welcome/BottomContent";
 
 export type nextContentType = {
   ratio: number | undefined;

@@ -1,20 +1,15 @@
-import DraweeLogo from "@asset/images/DraweeLogo.png";
-import Image from "next/image";
-import { Button, Flex, Spinner } from "@chakra-ui/react";
-import Users from "@components/Users";
-import {
-  userProfilesSelector,
-  userSelector,
-  yjsGameState,
-} from "@common/recoil/recoil.atom";
+import { css } from "@emotion/react";
+import { Button, Flex, Spinner, useToast } from "@chakra-ui/react";
+
+import { userProfilesSelector, userSelector } from "@common/recoil/recoil.atom";
 import { useTranslation } from "@hooks/useTransitions";
-import { useToast } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
-import Chatting from "./Chatting";
+
 import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import useCheckCreatedProvider from "@hooks/pageMove/useCheckCreatedProvider";
-import { css } from "@emotion/react";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
+import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
+
 import {
   doc,
   getChangeGameStateHandler,
@@ -22,26 +17,27 @@ import {
   yAgreeState,
   yQuestionsState,
 } from "@common/yjsStore/userStore";
-import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
+
+import DraweeLogo from "@asset/images/DraweeLogo.png";
+import Users from "@components/Users";
+import Chatting from "./Chatting";
 import LogoImage from "./layout/LogoImage";
-import { useRouter } from "next/router";
+
+import { useEffect } from "react";
 import {
   CPGameDrawee,
   CPGameRelayRace,
   CPGameState,
   CPGameTypes,
 } from "@types";
-import { useEffect } from "react";
 
 export const LobbyMain = () => {
-  const router = useRouter();
   const translation = useTranslation().messages;
   const toast = useToast();
   useCheckCreatedProvider(
     "/ErrorPage/?errorMessage=잘못된 접근입니다.&statusCode=403"
   );
   const { roomId } = useRecoilValue(userSelector) ?? {};
-  const gameState = useRecoilValue(yjsGameState);
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
   const { provider } = providerState;
   useGameStateUpdate(roomId);
@@ -60,7 +56,7 @@ export const LobbyMain = () => {
   }, [isOwner]);
 
   if (provider === null) {
-    return <div></div>;
+    return <div>프로바이더가 없음</div>;
   }
 
   const onClickInviteHandler = () => {
@@ -78,24 +74,24 @@ export const LobbyMain = () => {
 
   const onClickGameStartHandler = (gameType: CPGameTypes) => {
     if (gameType === "DRAWEE") {
-      const a: Partial<CPGameDrawee> = {
+      const partialDrawee: Partial<CPGameDrawee> = {
         isGameStart: true,
         path: "/start",
       };
-      changeGameStateHandler(a);
+      changeGameStateHandler(partialDrawee);
     }
 
     if (gameType === "RELAY_RACE") {
-      const a: Partial<CPGameRelayRace> = {
+      changeGameStateHandler({
         isGameStart: true,
-        path: "/start",
-      };
-      changeGameStateHandler(a);
+        path: "/games/relay-race",
+      } as CPGameRelayRace);
     }
   };
 
   return (
     <>
+      <div>asdfffasdafsd</div>
       <LogoImage src={DraweeLogo} height={150} width={150} heightPadding={25} />
       <Flex
         w={"100%"}
@@ -161,7 +157,15 @@ export const LobbyMain = () => {
                 `}
                 onClick={() => onClickGameStartHandler("DRAWEE")}
               >
-                {translation["lobby.next.button"]}
+                {translation["lobby.next.button"]}1
+              </Button>
+              <Button
+                css={css`
+                  width: 50%;
+                `}
+                onClick={() => onClickGameStartHandler("RELAY_RACE")}
+              >
+                {translation["lobby.next.button"]}2
               </Button>
             </Flex>
           )}
@@ -170,4 +174,5 @@ export const LobbyMain = () => {
     </>
   );
 };
+
 export default LobbyMain;

@@ -1,4 +1,13 @@
+import dynamic from "next/dynamic";
+
 const Main = () => {
-  return <div></div>;
+  const RelayRaceStart = dynamic(
+    import("@components/relay-race/relayRaceStart")
+  );
+  return (
+    <div>
+      <RelayRaceStart />
+    </div>
+  );
 };
 export default Main;

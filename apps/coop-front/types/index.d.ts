@@ -23,7 +23,12 @@ export type CPUserProfilesState = {
   userProfiles?: CPUserProfile[];
 };
 
-export type CPPageType = "/lobby" | "/start" | "/draw" | "/result";
+export type CPPageType =
+  | "/lobby"
+  | "/start"
+  | "/draw"
+  | "/result"
+  | "/games/relay-race";
 
 export type CPGameQuestion = {
   path: CPPageType;
@@ -48,6 +53,7 @@ export type CPGameRelayRace = {
   gametype: "RELAYRACE";
   isGameStart: boolean;
   gamePagesIndex: number;
+  gameOrderNumber: number[];
 };
 
 export type CPGameState = CPGameDrawee | CPGameRelayRace;
