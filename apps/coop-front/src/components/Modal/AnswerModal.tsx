@@ -1,12 +1,28 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, transition } from "@chakra-ui/react";
 import ChakraModal from "@components/Modal/ChakraModal";
 import { css } from "@emotion/react";
+import useAnswer from "@hooks/gameHooks/DRAWEE/useAnswer";
+import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
+import { useTranslation } from "@hooks/useTransitions";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 type AnswerModalPropsType = {
+  setIsPlay: Dispatch<SetStateAction<"paused" | "running">>;
   onClose: () => void;
 };
 
 const AnswerModal = (props: AnswerModalPropsType) => {
+  const { getSolverId, getSovlerNicknameFromId } = useSolver();
+  const { getAnswer } = useAnswer();
+
+  const translation = useTranslation().messages;
+
+  useEffect(() => {
+    props.setIsPlay("paused");
+    return () => {
+      props.setIsPlay("running");
+    };
+  }, [props]);
   return (
     <ChakraModal onCloseHandler={props.onClose}>
       <Flex
@@ -19,15 +35,14 @@ const AnswerModal = (props: AnswerModalPropsType) => {
           align-items: center;
         `}
       >
-        <div>정답!</div>
-        <div
-          css={css`
-        정답자
-      `}
-        >
-          Solver
+        <div>
+          <>{`${translation["draw.modal.answer"]} : ${getAnswer()}`}</>
         </div>
-        <div>???? 이 정답을 맞췄습니다</div>
+        <div>
+          {`${getSovlerNicknameFromId(getSolverId())} ${
+            translation["draw.modal.correct.answer"]
+          }`}
+        </div>
       </Flex>
     </ChakraModal>
   );

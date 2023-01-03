@@ -21,5 +21,9 @@
   "draw.answer.history": "Answer history",
 
   "chatting.input.placeholder": "Input your chat",
-  "chatting.input": "Chat"
+  "chatting.input": "Chat",
+
+  "draw.modal.answer": "Answer!",
+  "draw.modal.correct.answer": "got the answer right!",
+  "draw.modal.next": "Next"
 }

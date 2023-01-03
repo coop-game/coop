@@ -16,6 +16,7 @@ import useCheckCreatedProvider from "@hooks/pageMove/useCheckCreatedProvider";
 import { css } from "@emotion/react";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import {
+  doc,
   getChangeGameStateHandler,
   providerState,
   yQuestionsState,
@@ -24,6 +25,7 @@ import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate"
 import LogoImage from "./layout/LogoImage";
 import { useRouter } from "next/router";
 import { CPGameDrawee, CPGameState } from "@types";
+import { useEffect } from "react";
 
 export const LobbyMain = () => {
   const router = useRouter();
@@ -40,6 +42,12 @@ export const LobbyMain = () => {
   useSyncPageFromGameState();
   const changeGameStateHandler = getChangeGameStateHandler<CPGameState>(roomId);
   useProfileUpdate();
+
+  useEffect(() => {
+    doc.transact(() => {
+      yQuestionsState.delete(0, yQuestionsState.length);
+    });
+  }, []);
 
   if (provider === null) {
     return <div></div>;
