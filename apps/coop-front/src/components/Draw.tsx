@@ -23,7 +23,7 @@ import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate"
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "@chakra-ui/react";
 import Progress from "./Progress";
-import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
+import SideBarOfDraw from "./layout/sideBar/SideBarOfDraw";
 import Solver from "./Solver";
 import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
 import AnswerModal from "./Modal/AnswerModal";

@@ -23,7 +23,7 @@ import {
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import LogoImage from "./layout/LogoImage";
 import { useRouter } from "next/router";
-import { CPGameDrawee, CPGameState } from "@types";
+import { CPGameDrawee, CPGameRelayRace, CPGameState } from "@types";
 
 export const LobbyMain = () => {
   const router = useRouter();
@@ -63,7 +63,7 @@ export const LobbyMain = () => {
     changeGameStateHandler({
       isGameStart: true,
       path: "/games/relay-race",
-    });
+    } as CPGameRelayRace);
   };
 
   return (

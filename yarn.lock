@@ -6390,7 +6390,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:*, @types/lodash@npm:^4.14.167":
+"@types/lodash@npm:*, @types/lodash@npm:^4.14.167, @types/lodash@npm:^4.14.191":
   version: 4.14.191
   resolution: "@types/lodash@npm:4.14.191"
   checksum: ba0d5434e10690869f32d5ea49095250157cae502f10d57de0a723fd72229ce6c6a4979576f0f13e0aa9fbe3ce2457bfb9fa7d4ec3d6daba56730a51906d1491
@@ -19230,9 +19230,11 @@ __metadata:
     "@commitlint/config-conventional": ^15.0.0
     "@fontsource/jua": ^4.5.11
     "@next/font": ^13.0.6
+    "@types/lodash": ^4.14.191
     cross-env: ^7.0.3
     eslint: ^8.4.1
     husky: ^8.0.0
+    lodash: ^4.17.21
     prettier: ^2.5.1
     turbo: latest
   languageName: unknown
