@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 
 import NewCursor, { CursorComponent } from "@components/NewCursor";
 
-import { Tldraw } from "@coop/draw";
+import { Tldraw, TldrawApp } from "@coop/draw";
 import {
   getChangeGameStateHandler,
   providerState,
@@ -23,7 +23,7 @@ import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate"
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "@chakra-ui/react";
 import Progress from "./Progress";
-import SideBarOfDraw from "./layout/sideBar/SideBarOfDraw";
+import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
 import Solver from "./Solver";
 import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
 import AnswerModal from "./Modal/AnswerModal";
@@ -37,6 +37,9 @@ function Editor({}) {
       room: providerState?.room,
       customUserId: userState?.nickname,
     });
+  const onAssetDelete = (app: TldrawApp, file: File, id: string) => {
+    console.log(app, file, id);
+  };
 
   return (
     <div
@@ -46,6 +49,7 @@ function Editor({}) {
         height: 100%;
       `}
     >
+      <Button>삭제 버튼</Button>
       <Tldraw
         showMenu={false}
         // autofocus
@@ -81,29 +85,21 @@ function Draw() {
       const newGameState = {
         gamePagesIndex: gamePagesIndex + 1,
       };
-      // if (gamePagesIndex + 1 >= questionState.length) {
-      //   newGameState["path"] = "/lobby";
-      // }
+      if (gamePagesIndex + 1 >= questionState.length) {
+        newGameState["path"] = "/lobby";
+      }
       changeGameStateHandler(newGameState);
     }
   }, [changeGameStateHandler, isOwner, questionState.length, roomId]);
 
-  // useEffect(() => {
-  //   const gamePagesIndex = yGameState.get(roomId).gamePagesIndex;
-  //   if (gamePagesIndex >= questionState.length) {
-  //     changeGameStateHandler({ path: "/lobby" });
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  const [isPlay, setIsPlay] = useState<"running" | "paused">("running");
 
-  const [isPlay, setIsPlay] = useState("running");
-
-  const isAnswerInArray = () => {
+  const isAnswerInArray = useCallback(() => {
     if (questionState.length > gameState.gamePagesIndex) {
       const question = questionState[gameState.gamePagesIndex];
       return question.inputAnswer.includes(question.answer);
     }
-  };
+  }, [gameState.gamePagesIndex, questionState]);
 
   return (
     <>
@@ -114,18 +110,16 @@ function Draw() {
           nextPageHandler();
         }}
       ></Progress>
-      {isAnswerInArray() && <AnswerModal onClose={() => {}}></AnswerModal>}
-      <Button onClick={nextPageHandler}></Button>
-      <Button
-        onClick={() =>
-          setIsPlay((prev) => (prev === "running" ? "paused" : "running"))
-        }
-      >
-        setIsPlay
-      </Button>
-      <div>-------------------------------</div>
-      <div>{providerState?.provider.roomName}</div>
-      <div>gamePagesIndex : {gameState.gamePagesIndex}</div>
+      {isAnswerInArray() && (
+        <AnswerModal
+          setIsPlay={setIsPlay}
+          onClose={() => {
+            nextPageHandler();
+          }}
+        ></AnswerModal>
+      )}
+
+      <div>{gameState.gamePagesIndex} 번째 문제</div>
       <div
         css={css`
           display: flex;

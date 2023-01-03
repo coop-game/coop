@@ -7,9 +7,14 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
-import { yjsGameState, yjsQuestionsState } from "@common/recoil/recoil.atom";
+import {
+  userProfilesSelector,
+  yjsGameState,
+  yjsQuestionsState,
+} from "@common/recoil/recoil.atom";
 import { doc, yQuestionsState } from "@common/yjsStore/userStore";
 import { css } from "@emotion/react";
+import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
 import { useTranslation } from "@hooks/useTransitions";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
@@ -38,41 +43,42 @@ const Solver = () => {
     });
   };
 
+  const { getSolverId, getSovlerNicknameFromId } = useSolver();
+
   return (
     <div>
       <div>
-        {translation["draw.solver"]} :
-        {questionsState.length > gameState.gamePagesIndex
-          ? questionsState[gameState.gamePagesIndex].solver
-          : ""}
+        {translation["draw.solver"]} : {getSovlerNicknameFromId(getSolverId())}
       </div>
-      <FormControl isInvalid={isError}>
-        <FormLabel>{translation["draw.answer"]}</FormLabel>
-        <Input
-          type="text"
-          value={answer}
-          onChange={(e) => {
-            setAnswer(e.target.value);
-            setIsError(e.target.value === "");
-          }}
-        />
-        <Flex ml={5}>
-          {!isError ? (
-            <FormHelperText>
-              {translation["draw.input.in.answer"]}
-            </FormHelperText>
-          ) : (
-            <FormErrorMessage>
-              {translation["draw.input.required.answer"]}
-            </FormErrorMessage>
-          )}
-        </Flex>
-        <Flex width={"100%"} justifyContent={"flex-end"}>
-          <Button onClick={answerChangeHandler}>
-            {translation["draw.answer.submit"]}
-          </Button>
-        </Flex>
-      </FormControl>
+      {getSolverId() === doc.clientID && (
+        <FormControl isInvalid={isError}>
+          <FormLabel>{translation["draw.answer"]}</FormLabel>
+          <Input
+            type="text"
+            value={answer}
+            onChange={(e) => {
+              setAnswer(e.target.value);
+              setIsError(e.target.value === "");
+            }}
+          />
+          <Flex ml={5}>
+            {!isError ? (
+              <FormHelperText>
+                {translation["draw.input.in.answer"]}
+              </FormHelperText>
+            ) : (
+              <FormErrorMessage>
+                {translation["draw.input.required.answer"]}
+              </FormErrorMessage>
+            )}
+          </Flex>
+          <Flex width={"100%"} justifyContent={"flex-end"}>
+            <Button onClick={answerChangeHandler}>
+              {translation["draw.answer.submit"]}
+            </Button>
+          </Flex>
+        </FormControl>
+      )}
       <div
         css={css`
           height: 200px;

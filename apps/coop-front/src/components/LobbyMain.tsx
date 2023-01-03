@@ -1,39 +1,43 @@
-import DraweeLogo from "@asset/images/DraweeLogo.png";
-import Image from "next/image";
-import { Button, Flex, Spinner } from "@chakra-ui/react";
-import Users from "@components/Users";
-import {
-  userProfilesSelector,
-  userSelector,
-  yjsGameState,
-} from "@common/recoil/recoil.atom";
+import { css } from "@emotion/react";
+import { Button, Flex, Spinner, useToast } from "@chakra-ui/react";
+
+import { userProfilesSelector, userSelector } from "@common/recoil/recoil.atom";
 import { useTranslation } from "@hooks/useTransitions";
-import { useToast } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
-import Chatting from "./Chatting";
+
 import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import useCheckCreatedProvider from "@hooks/pageMove/useCheckCreatedProvider";
-import { css } from "@emotion/react";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
+import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
+
 import {
+  doc,
   getChangeGameStateHandler,
   providerState,
+  yAgreeState,
   yQuestionsState,
 } from "@common/yjsStore/userStore";
-import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
+
+import DraweeLogo from "@asset/images/DraweeLogo.png";
+import Users from "@components/Users";
+import Chatting from "./Chatting";
 import LogoImage from "./layout/LogoImage";
-import { useRouter } from "next/router";
-import { CPGameDrawee, CPGameRelayRace, CPGameState } from "@types";
+
+import { useEffect } from "react";
+import {
+  CPGameDrawee,
+  CPGameRelayRace,
+  CPGameState,
+  CPGameTypes,
+} from "@types";
 
 export const LobbyMain = () => {
-  const router = useRouter();
   const translation = useTranslation().messages;
   const toast = useToast();
   useCheckCreatedProvider(
     "/ErrorPage/?errorMessage=잘못된 접근입니다.&statusCode=403"
   );
   const { roomId } = useRecoilValue(userSelector) ?? {};
-  const gameState = useRecoilValue(yjsGameState);
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
   const { provider } = providerState;
   useGameStateUpdate(roomId);
@@ -41,8 +45,18 @@ export const LobbyMain = () => {
   const changeGameStateHandler = getChangeGameStateHandler<CPGameState>(roomId);
   useProfileUpdate();
 
+  useEffect(() => {
+    // 로비로 진입시 questionsState, yAgreeState 를 초기화함.
+    if (isOwner) {
+      doc.transact(() => {
+        yQuestionsState.delete(0, yQuestionsState.length);
+        yAgreeState.clear();
+      });
+    }
+  }, [isOwner]);
+
   if (provider === null) {
-    return <div></div>;
+    return <div>프로바이더가 없음</div>;
   }
 
   const onClickInviteHandler = () => {
@@ -58,16 +72,26 @@ export const LobbyMain = () => {
     });
   };
 
-  const onClickGameStartHandler = () => {
-    // yQuestionsState.delete();
-    changeGameStateHandler({
-      isGameStart: true,
-      path: "/games/relay-race",
-    } as CPGameRelayRace);
+  const onClickGameStartHandler = (gameType: CPGameTypes) => {
+    if (gameType === "DRAWEE") {
+      const partialDrawee: Partial<CPGameDrawee> = {
+        isGameStart: true,
+        path: "/start",
+      };
+      changeGameStateHandler(partialDrawee);
+    }
+
+    if (gameType === "RELAY_RACE") {
+      changeGameStateHandler({
+        isGameStart: true,
+        path: "/games/relay-race",
+      } as CPGameRelayRace);
+    }
   };
 
   return (
     <>
+      <div>asdfffasdafsd</div>
       <LogoImage src={DraweeLogo} height={150} width={150} heightPadding={25} />
       <Flex
         w={"100%"}
@@ -131,9 +155,17 @@ export const LobbyMain = () => {
                 css={css`
                   width: 50%;
                 `}
-                onClick={onClickGameStartHandler}
+                onClick={() => onClickGameStartHandler("DRAWEE")}
               >
-                {translation["lobby.next.button"]}
+                {translation["lobby.next.button"]}1
+              </Button>
+              <Button
+                css={css`
+                  width: 50%;
+                `}
+                onClick={() => onClickGameStartHandler("RELAY_RACE")}
+              >
+                {translation["lobby.next.button"]}2
               </Button>
             </Flex>
           )}
@@ -142,4 +174,5 @@ export const LobbyMain = () => {
     </>
   );
 };
+
 export default LobbyMain;

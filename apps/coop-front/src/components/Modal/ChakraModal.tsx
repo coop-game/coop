@@ -12,8 +12,11 @@ import {
   Input,
   FormLabel,
 } from "@chakra-ui/react";
+import { userProfilesState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
+import { useTranslation } from "@hooks/useTransitions";
 import React from "react";
+import { useRecoilValue } from "recoil";
 
 type ChakraModalPropsType = {
   children?: React.ReactNode;
@@ -21,9 +24,11 @@ type ChakraModalPropsType = {
 };
 
 const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
-  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
+  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
 
   const initialRef = React.useRef(null);
+  const { isOwner } = useRecoilValue(userProfilesState);
+  const translation = useTranslation().messages;
 
   const onCloseAllHandler = () => {
     onClose();
@@ -32,13 +37,7 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
-
-      <Modal
-        initialFocusRef={initialRef}
-        isOpen={isOpen}
-        onClose={onCloseAllHandler}
-      >
+      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={() => {}}>
         <ModalOverlay />
         <ModalContent minH={"80vh"} minW={"80vw"}>
           <ModalHeader
@@ -64,23 +63,25 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
               background: #e2e0a5;
             `}
           >
-            <Button
-              css={css`
-                width: 150px;
-                height: 50px;
-                padding: 20px;
-                color: white;
-                font-size: 1.5rem;
-                font-weight: 500;
-                background: #d3504a;
-                &:hover {
-                  background: #dd726d;
-                }
-              `}
-              onClick={onCloseAllHandler}
-            >
-              다음
-            </Button>
+            {isOwner && (
+              <Button
+                css={css`
+                  width: 150px;
+                  height: 50px;
+                  padding: 20px;
+                  color: white;
+                  font-size: 1.5rem;
+                  font-weight: 500;
+                  background: #d3504a;
+                  &:hover {
+                    background: #dd726d;
+                  }
+                `}
+                onClick={onCloseAllHandler}
+              >
+                {translation["draw.modal.next"]}
+              </Button>
+            )}
           </ModalFooter>
         </ModalContent>
       </Modal>
