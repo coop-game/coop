@@ -13,6 +13,13 @@
   "start.input.answer": "정답을 입력하세요",
   "start.push.question": "정답을 그려라!",
 
+  "draw.answer": "정답!!",
+  "draw.solver": "맞추는 사람",
+  "draw.answer.submit": "정답 제출",
+  "draw.input.in.answer": "이게 ... 정답일까?",
+  "draw.input.required.answer": "정답을 입력하세요",
+  "draw.answer.history": "정답 히스토리",
+
   "chatting.input.placeholder": "채팅을 입력하세요",
   "chatting.input": "채팅"
 }

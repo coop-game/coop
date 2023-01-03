@@ -1,11 +1,8 @@
-import { getChangeGameStateHandler } from "./../../common/yjsStore/userStore";
 import { yjsQuestionsState } from "./../../common/recoil/recoil.atom";
 import { yjsGameState } from "../../common/recoil/recoil.atom";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { yGameState } from "@common/yjsStore/userStore";
-import { CPGameState } from "@types";
+import { useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 
 /**
  *
@@ -27,8 +24,12 @@ const useSyncPageFromGameState = () => {
 
   useEffect(() => {
     if (!gameState) {
-      if (router.pathname !== "/lobby") router.push("/");
+      if (router.pathname !== "/lobby") {
+        console.log("gameState 가 없어서 로비로 이동함");
+        router.push("/");
+      }
     } else if (gameState.path !== router.pathname) {
+      console.log("path 가 달라서 이동함", gameState.path, router.pathname);
       router.push(gameState.path);
     }
   }, [gameState, questionState, router]);

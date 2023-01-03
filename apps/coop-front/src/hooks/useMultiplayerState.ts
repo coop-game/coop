@@ -28,7 +28,6 @@ export function useMultiplayerState({
 
   const onMount = useCallback(
     (app: TldrawApp) => {
-      console.log("룸이 바뀜");
       app.loadRoom(provider.roomName);
       app.pause();
       setApp(app);

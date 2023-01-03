@@ -1,10 +1,11 @@
 import CreateQuestion from "@components/CreateQuestion";
+import Layout from "@components/layout";
 
 const Start = () => {
   return (
-    <div>
+    <Layout>
       <CreateQuestion></CreateQuestion>
-    </div>
+    </Layout>
   );
 };
 export default Start;

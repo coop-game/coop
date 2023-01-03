@@ -7,7 +7,6 @@ import {
   providerState,
   yUserProfilesState,
 } from "@common/yjsStore/userStore";
-import { Transaction, YMapEvent } from "yjs";
 import { Room } from "y-webrtc";
 
 const useProfileUpdate = () => {
@@ -57,15 +56,16 @@ const useProfileUpdate = () => {
     };
     yUserProfilesState.observe(observeFunction);
 
-    provider?.awareness.on("update", observeFunction);
+    provider && provider?.awareness.on("update", observeFunction);
 
-    yUserProfilesState.set(String(provider.awareness.clientID), {
-      id: provider.awareness.clientID,
-      nickname,
-      avatarIndex,
-      color,
-      utcTimeStamp,
-    });
+    provider &&
+      yUserProfilesState.set(String(provider.awareness.clientID), {
+        id: provider.awareness.clientID,
+        nickname,
+        avatarIndex,
+        color,
+        utcTimeStamp,
+      });
     return () => {
       yUserProfilesState.unobserve(observeFunction);
       provider?.awareness.off("update", observeFunction);

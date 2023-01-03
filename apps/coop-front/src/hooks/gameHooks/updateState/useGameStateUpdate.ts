@@ -16,9 +16,9 @@ const useGameStateUpdate = (roomId: string) => {
       yGameState.unobserve(observeFunction);
     };
   }, [observeFunction, roomId, setGameState]);
-  // useEffect(() => {
-  //   const gameState = yGameState.get(roomId);
-  //   setGameState({ ...gameState });
-  // }, []);
+  useEffect(() => {
+    const gameState = yGameState.get(roomId);
+    setGameState({ ...gameState });
+  }, [roomId, setGameState]);
 };
 export default useGameStateUpdate;

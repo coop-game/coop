@@ -114,10 +114,12 @@ export default function Home({
               <Flex ml={5}>
                 {!isError ? (
                   <FormHelperText>
-                    {`${translation["user.success.nickname"]}`}
+                    {translation["user.success.nickname"]}
                   </FormHelperText>
                 ) : (
-                  <FormErrorMessage>{`${translation["user.required.nickname"]}`}</FormErrorMessage>
+                  <FormErrorMessage>
+                    {translation["user.required.nickname"]}
+                  </FormErrorMessage>
                 )}
               </Flex>
               <Flex width={"100%"} justifyContent={"flex-end"}>

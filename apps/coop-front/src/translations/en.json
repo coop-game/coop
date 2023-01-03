@@ -13,6 +13,13 @@
   "start.input.answer": "Input answer",
   "start.push.question": "Drawing answer!",
 
+  "draw.answer": "Answer!!",
+  "draw.solver": "Solver",
+  "draw.answer.submit": "Answer submit",
+  "draw.input.in.answer": "Is this really correct?..",
+  "draw.input.required.answer": "input answer required",
+  "draw.answer.history": "Answer history",
+
   "chatting.input.placeholder": "Input your chat",
   "chatting.input": "Chat"
 }
