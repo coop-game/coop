@@ -1,4 +1,4 @@
-import { CPGameQuestion } from "./../../../types/index.d";
+import { CPGameDrawee, CPGameQuestion } from "./../../../types/index.d";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
 import * as awarenessProtocol from "y-protocols/awareness";
@@ -17,8 +17,8 @@ export const yAgreeState = doc.getMap<boolean>("agreeMap");
 
 export const yQuestionsState = doc.getArray<CPGameQuestion>("questions");
 
-export const getChangeGameStateHandler = (roomId: string) => {
-  return (partialGameState = {} as Partial<CPGameState>) => {
+export const getChangeGameStateHandler = <T>(roomId: string) => {
+  return (partialGameState = {} as Partial<T>) => {
     const gameState = yGameState.get(roomId);
     const newGameState = { ...gameState, ...partialGameState };
     yGameState.set(roomId, newGameState);
@@ -68,7 +68,7 @@ export class providerClass {
     if (this.room === null) {
       this.room = new Room(this.provider.awareness);
       if (isCreater) {
-        const gameState: CPGameState = {
+        const gameState: CPGameDrawee = {
           path: "/lobby",
           gametype: "DRAWEE",
           isGameStart: false,

@@ -12,9 +12,6 @@ const SideBarOfDraw = () => {
   const questions = useRecoilValue(yjsQuestionsState);
   const gameState = useRecoilValue(yjsGameState);
 
-  useEffect(() => {
-    console.log(questions);
-  }, [questions]);
   return (
     <div>
       {userProfiles &&

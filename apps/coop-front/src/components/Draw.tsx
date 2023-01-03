@@ -27,6 +27,7 @@ import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
 import Solver from "./Solver";
 import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
 import AnswerModal from "./Modal/AnswerModal";
+import { CPGameDrawee } from "@types";
 
 function Editor({}) {
   const userState = useRecoilValue(userSelector);
@@ -65,23 +66,18 @@ function Draw() {
   const gameState = useRecoilValue(yjsGameState);
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
-  const changeGameStateHandler = getChangeGameStateHandler(roomId);
+  const changeGameStateHandler =
+    getChangeGameStateHandler<CPGameDrawee>(roomId);
   const questionState = useRecoilValue(yjsQuestionsState);
 
   useProfileUpdate();
   useQuestionUpdate();
   useGameStateUpdate(roomId);
   useSyncPageFromGameState();
-  useEffect(() => {
-    console.log(gameState.path, "가 바뀜");
-  }, [gameState.path]);
 
   const nextPageHandler = useCallback(() => {
-    console.log(userProfiles);
     if (isOwner === true) {
-      console.log("isOwner true");
       const gamePagesIndex = yGameState.get(roomId).gamePagesIndex;
-      console.log(gamePagesIndex);
       const newGameState = {
         gamePagesIndex: gamePagesIndex + 1,
       };

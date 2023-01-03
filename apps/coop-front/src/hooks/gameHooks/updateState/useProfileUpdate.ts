@@ -7,7 +7,6 @@ import {
   providerState,
   yUserProfilesState,
 } from "@common/yjsStore/userStore";
-import { Transaction, YMapEvent } from "yjs";
 import { Room } from "y-webrtc";
 
 const useProfileUpdate = () => {

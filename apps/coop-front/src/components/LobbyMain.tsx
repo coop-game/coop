@@ -23,6 +23,7 @@ import {
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import LogoImage from "./layout/LogoImage";
 import { useRouter } from "next/router";
+import { CPGameDrawee, CPGameState } from "@types";
 
 export const LobbyMain = () => {
   const router = useRouter();
@@ -37,7 +38,7 @@ export const LobbyMain = () => {
   const { provider } = providerState;
   useGameStateUpdate(roomId);
   useSyncPageFromGameState();
-  const changeGameStateHandler = getChangeGameStateHandler(roomId);
+  const changeGameStateHandler = getChangeGameStateHandler<CPGameState>(roomId);
   useProfileUpdate();
 
   if (provider === null) {
@@ -59,7 +60,6 @@ export const LobbyMain = () => {
 
   const onClickGameStartHandler = () => {
     // yQuestionsState.delete();
-    console.log("이게 작동함?????");
     changeGameStateHandler({
       isGameStart: true,
       path: "/start",

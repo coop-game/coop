@@ -36,12 +36,21 @@ export type CPGameQuestion = {
 
 export type CPGameQuestions = CPGameQuestion[];
 
-export type CPGameState = {
+export type CPGameDrawee = {
   path: CPPageType;
-  gametype: CPGameTypes;
+  gametype: "DRAWEE";
   isGameStart: boolean;
   gamePagesIndex: number;
 };
+
+export type CPGameRelayRace = {
+  path: CPPageType;
+  gametype: "RELAYRACE";
+  isGameStart: boolean;
+  gamePagesIndex: number;
+};
+
+export type CPGameState = CPGameDrawee | CPGameRelayRace;
 
 // -------------  deprecated -------------------
 type CPGameTypes = "DRAWEE" | "RELAY_RACE";
