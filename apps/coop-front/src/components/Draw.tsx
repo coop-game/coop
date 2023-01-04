@@ -116,10 +116,9 @@ function Draw() {
     <>
       <Progress
         play={isPlay}
-        time={10000}
+        time={60000}
         callback={() => {
           setIsPlay("paused");
-          // nextPageHandler();
           questionTimeOut();
         }}
       ></Progress>

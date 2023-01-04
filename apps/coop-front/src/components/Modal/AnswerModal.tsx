@@ -69,23 +69,17 @@ const AnswerModal = (props: AnswerModalPropsType) => {
     };
   }, [props]);
 
-  if (isAnswerInArray()) {
-    return (
-      <ChakraModal onCloseHandler={props.onClose}>
-        <Answer solverNickname={solverNickname} answer={answer}></Answer>
-      </ChakraModal>
-    );
-  } else {
-    return (
-      <ChakraModal onCloseHandler={props.onClose}>
+  return (
+    <ChakraModal onCloseHandler={props.onClose}>
+      {isAnswerInArray() ? (
+        <Answer solverNickname={solverNickname} answer={answer} />
+      ) : (
         <WrongAnswer
           solverNickname={solverNickname}
           answer={answer}
         ></WrongAnswer>
-      </ChakraModal>
-    );
-  }
-
-  return <></>;
+      )}
+    </ChakraModal>
+  );
 };
 export default AnswerModal;
