@@ -1,11 +1,9 @@
 import { ChattingSelector, userSelector } from "@common/recoil/recoil.atom";
-import { doc } from "@common/yjsStore/userStore";
+import { doc, yChattingState } from "@common/yjsStore/userStore";
 import { CPChatType } from "@types";
 import { useCallback, useEffect, useRef } from "react";
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-
-const yarray = doc.getArray<CPChatType>("chatting");
 
 const useChattingUpdate = () => {
   const [chattingState, setChattingState] = useRecoilState(ChattingSelector);
@@ -15,15 +13,15 @@ const useChattingUpdate = () => {
   const messagesEndRef = useRef<null | HTMLDivElement>();
 
   const observeFunction = useCallback(() => {
-    const arr = yarray.toArray();
+    const arr = yChattingState.toArray();
     setChattingState([...arr]);
   }, [setChattingState]);
 
   // observe를 통한 상태값 동기화
   useEffect(() => {
-    yarray.observe(observeFunction);
+    yChattingState.observe(observeFunction);
     return () => {
-      yarray.unobserve(observeFunction);
+      yChattingState.unobserve(observeFunction);
       setChattingState([]);
     };
   }, [observeFunction, setChattingState]);
@@ -45,7 +43,7 @@ const useChattingUpdate = () => {
       nickname,
       message: inputString,
     };
-    yarray.push([newChat]);
+    yChattingState.push([newChat]);
     setInputString("");
   };
 

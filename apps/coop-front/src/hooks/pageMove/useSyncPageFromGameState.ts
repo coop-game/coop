@@ -18,21 +18,20 @@ import { useEffect } from "react";
  */
 const useSyncPageFromGameState = () => {
   const router = useRouter();
-  // const [gameState, setGameState] = useState<CPGameState | null>(null);
   const gameState = useRecoilValue(yjsGameState);
-  const questionState = useRecoilValue(yjsQuestionsState);
 
   useEffect(() => {
+    console.log(gameState);
     if (!gameState) {
       if (router.pathname !== "/lobby") {
         console.log("gameState 가 없어서 로비로 이동함");
         router.push("/");
       }
-    } else if (gameState.path !== router.pathname) {
+    } else if (gameState.path && gameState.path !== router.pathname) {
       console.log("path 가 달라서 이동함", gameState.path, router.pathname);
       router.push(gameState.path);
     }
-  }, [gameState, questionState, router]);
+  }, [gameState, router]);
 
   return { gameState };
 };

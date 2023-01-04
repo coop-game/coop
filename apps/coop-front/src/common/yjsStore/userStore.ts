@@ -1,4 +1,8 @@
-import { CPGameDrawee, CPGameQuestion } from "./../../../types/index.d";
+import {
+  CPChatType,
+  CPGameDrawee,
+  CPGameQuestion,
+} from "./../../../types/index.d";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
 import * as awarenessProtocol from "y-protocols/awareness";
@@ -16,6 +20,8 @@ export const yUserProfilesState = doc.getMap<CPUserProfile>("userProfiles");
 export const yAgreeState = doc.getMap<boolean>("agreeMap");
 
 export const yQuestionsState = doc.getArray<CPGameQuestion>("questions");
+
+export const yChattingState = doc.getArray<CPChatType>("chatting");
 
 export const getChangeGameStateHandler = <T>(roomId: string) => {
   return (partialGameState = {} as Partial<T>) => {

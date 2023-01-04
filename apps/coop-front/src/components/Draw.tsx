@@ -95,11 +95,11 @@ function Draw() {
   const [isPlay, setIsPlay] = useState<"running" | "paused">("running");
 
   const isAnswerInArray = useCallback(() => {
-    if (questionState.length > gameState.gamePagesIndex) {
+    if (gameState && questionState.length > gameState.gamePagesIndex) {
       const question = questionState[gameState.gamePagesIndex];
       return question.inputAnswer.includes(question.answer);
     }
-  }, [gameState.gamePagesIndex, questionState]);
+  }, [gameState, questionState]);
 
   return (
     <>
@@ -119,7 +119,7 @@ function Draw() {
         ></AnswerModal>
       )}
 
-      <div>{gameState.gamePagesIndex} 번째 문제</div>
+      <div>{gameState?.gamePagesIndex} 번째 문제</div>
       <div
         css={css`
           display: flex;
