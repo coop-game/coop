@@ -84,6 +84,8 @@ export const LobbyMain = () => {
     if (gameType === "RELAY_RACE") {
       changeGameStateHandler({
         isGameStart: true,
+        gamePagesIndex: 0,
+        gametype:"RELAYRACE",
         path: "/games/relay-race",
       } as CPGameRelayRace);
     }

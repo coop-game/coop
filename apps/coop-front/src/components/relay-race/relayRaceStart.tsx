@@ -14,9 +14,10 @@ import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import { useTranslation } from "@hooks/useTransitions";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import _ from "lodash";
+import shuffle from "lodash/shuffle";
 import { CPGameRelayRace, CPGameState } from "@types";
 import Wating from "./wating";
+import { Box } from "@chakra-ui/react";
 
 const RelayRaceStart = () => {
   const translation = useTranslation().messages;
@@ -48,7 +49,7 @@ const RelayRaceStart = () => {
       const copyUserClientId = userProfiles.map((e) => {
         return e.id;
       });
-      const shuffleUserId = _.shuffle(copyUserClientId);
+      const shuffleUserId = shuffle(copyUserClientId);
       changeGameStateHandler({ gameOrderNumber: shuffleUserId });
     }
   }, [isOwner]);
@@ -80,9 +81,9 @@ const RelayRaceStart = () => {
     gameState.gamePagesIndex !== myOrderNumber
   ) {
     return (
-      <div>
+      <Box w="100%" h="100%">
         <Wating />
-      </div>
+      </Box>
     );
   } else if (
     myOrderNumber !== undefined &&
