@@ -21,7 +21,7 @@ const useSolver = () => {
   const getSovlerNicknameFromId = useCallback(
     (id: number) => {
       if (userProfiles === null) return null;
-      let nickname = null;
+      let nickname: null | string = null;
       userProfiles.forEach((v) => {
         if (v.id === id) nickname = v.nickname;
       });

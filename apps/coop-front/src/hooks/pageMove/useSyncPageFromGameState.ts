@@ -18,7 +18,6 @@ import { useEffect } from "react";
  */
 const useSyncPageFromGameState = () => {
   const router = useRouter();
-  // const [gameState, setGameState] = useState<CPGameState | null>(null);
   const gameState = useRecoilValue(yjsGameState);
 
   useEffect(() => {

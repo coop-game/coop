@@ -66,6 +66,7 @@ const CreateQuestion = () => {
           inputAnswer: [],
           question: translation["start.push.question"],
           questioner: provider.awareness.clientID,
+          isQuestionEnd: false,
           solver: nextUserClientId,
           path: "/draw",
         };

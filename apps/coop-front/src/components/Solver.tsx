@@ -31,10 +31,12 @@ const Solver = () => {
     doc.transact(() => {
       const gamePagesIndex = gameState.gamePagesIndex;
       const question = yQuestionsState.get(gamePagesIndex);
+      question.isQuestionEnd === true;
       if (question === undefined) return;
       const newQuestion = {
         ...question,
         inputAnswer: [...question.inputAnswer, answer],
+        isQuestionEnd: question.answer === answer,
       };
       setAnswer("");
       yQuestionsState.delete(gamePagesIndex);

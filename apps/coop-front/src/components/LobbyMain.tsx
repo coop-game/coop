@@ -15,6 +15,7 @@ import {
   getChangeGameStateHandler,
   providerState,
   yAgreeState,
+  yChattingState,
   yQuestionsState,
 } from "@common/yjsStore/userStore";
 
@@ -49,6 +50,7 @@ export const LobbyMain = () => {
     // 로비로 진입시 questionsState, yAgreeState 를 초기화함.
     if (isOwner) {
       doc.transact(() => {
+        yChattingState.delete(0, yChattingState.length);
         yQuestionsState.delete(0, yQuestionsState.length);
         yAgreeState.clear();
       });
@@ -76,6 +78,7 @@ export const LobbyMain = () => {
     if (gameType === "DRAWEE") {
       const partialDrawee: Partial<CPGameDrawee> = {
         isGameStart: true,
+        gamePagesIndex: 0,
         path: "/start",
       };
       changeGameStateHandler(partialDrawee);
@@ -93,7 +96,6 @@ export const LobbyMain = () => {
 
   return (
     <>
-      <div>asdfffasdafsd</div>
       <LogoImage src={DraweeLogo} height={150} width={150} heightPadding={25} />
       <Flex
         w={"100%"}
