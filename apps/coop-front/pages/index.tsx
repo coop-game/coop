@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
-import styles from "../styles/Home.module.css";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import DraweeLogo from "@asset/images/DraweeLogo.png";
 import lodashRandom from "lodash/random";
 
@@ -12,13 +11,9 @@ import {
   FormHelperText,
   FormLabel,
   Input,
-  InputGroup,
-  InputLeftAddon,
-  Stack,
 } from "@chakra-ui/react";
 import { userSelector } from "@common/recoil/recoil.atom";
 import { nanoid } from "nanoid";
-import { getTranslation } from "src/translations";
 import { useTranslation } from "@hooks/useTransitions";
 import { useRecoilState } from "recoil";
 import AvatarImage from "@components/AvatarImage";
@@ -35,7 +30,7 @@ export default function Home({
   isCreater: boolean;
 }) {
   const translation = useTranslation().messages;
-  const [userState, setUserState] = useRecoilState(userSelector);
+  const [_, setUserState] = useRecoilState(userSelector);
   const router = useRouter();
 
   const [nickname, setNickname] = useState("");

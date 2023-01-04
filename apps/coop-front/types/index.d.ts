@@ -36,6 +36,7 @@ export type CPGameQuestion = {
   inputAnswer: string[] | null;
   question: string;
   questioner: number;
+  isQuestionEnd: boolean;
   solver: number | null;
 };
 

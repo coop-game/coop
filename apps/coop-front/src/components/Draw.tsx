@@ -6,9 +6,11 @@ import NewCursor, { CursorComponent } from "@components/NewCursor";
 
 import { Tldraw, TldrawApp } from "@coop/draw";
 import {
+  doc,
   getChangeGameStateHandler,
   providerState,
   yGameState,
+  yQuestionsState,
 } from "@common/yjsStore/userStore";
 import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import { useRecoilValue } from "recoil";
@@ -20,7 +22,7 @@ import {
 } from "@common/recoil/recoil.atom";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Button } from "@chakra-ui/react";
 import Progress from "./Progress";
 import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
@@ -28,6 +30,7 @@ import Solver from "./Solver";
 import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
 import AnswerModal from "./Modal/AnswerModal";
 import { CPGameDrawee } from "@types";
+import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
 
 function Editor({}) {
   const userState = useRecoilValue(userSelector);
@@ -37,9 +40,6 @@ function Editor({}) {
       room: providerState?.room,
       customUserId: userState?.nickname,
     });
-  const onAssetDelete = (app: TldrawApp, file: File, id: string) => {
-    console.log(app, file, id);
-  };
 
   return (
     <div
@@ -72,7 +72,7 @@ function Draw() {
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
   const changeGameStateHandler =
     getChangeGameStateHandler<CPGameDrawee>(roomId);
-  const questionState = useRecoilValue(yjsQuestionsState);
+  const questionsState = useRecoilValue(yjsQuestionsState);
 
   useProfileUpdate();
   useQuestionUpdate();
@@ -85,39 +85,56 @@ function Draw() {
       const newGameState = {
         gamePagesIndex: gamePagesIndex + 1,
       };
-      if (gamePagesIndex + 1 >= questionState.length) {
+      if (gamePagesIndex + 1 >= questionsState.length) {
         newGameState["path"] = "/lobby";
       }
       changeGameStateHandler(newGameState);
     }
-  }, [changeGameStateHandler, isOwner, questionState.length, roomId]);
+  }, [changeGameStateHandler, isOwner, questionsState.length, roomId]);
+  const { getSolverId } = useSolver();
+
+  const questionTimeOut = () => {
+    if (getSolverId() === doc.clientID) {
+      doc.transact(() => {
+        const gamePagesIndex = gameState.gamePagesIndex;
+        const question = yQuestionsState.get(gamePagesIndex);
+
+        if (question === undefined) return;
+        const newQuestion = {
+          ...question,
+          isQuestionEnd: true,
+        };
+        yQuestionsState.delete(gamePagesIndex);
+        yQuestionsState.insert(gamePagesIndex, [newQuestion]);
+      });
+    }
+  };
 
   const [isPlay, setIsPlay] = useState<"running" | "paused">("running");
-
-  const isAnswerInArray = useCallback(() => {
-    if (gameState && questionState.length > gameState.gamePagesIndex) {
-      const question = questionState[gameState.gamePagesIndex];
-      return question.inputAnswer.includes(question.answer);
-    }
-  }, [gameState, questionState]);
 
   return (
     <>
       <Progress
         play={isPlay}
-        time={50000}
+        time={10000}
         callback={() => {
-          nextPageHandler();
+          setIsPlay("paused");
+          // nextPageHandler();
+          questionTimeOut();
         }}
       ></Progress>
-      {isAnswerInArray() && (
-        <AnswerModal
-          setIsPlay={setIsPlay}
-          onClose={() => {
-            nextPageHandler();
-          }}
-        ></AnswerModal>
-      )}
+
+      {gameState &&
+        questionsState.length > gameState.gamePagesIndex &&
+        questionsState[gameState.gamePagesIndex].isQuestionEnd && (
+          <AnswerModal
+            setIsPlay={setIsPlay}
+            onClose={() => {
+              setIsPlay("running");
+              nextPageHandler();
+            }}
+          />
+        )}
 
       <div>{gameState?.gamePagesIndex} 번째 문제</div>
       <div
