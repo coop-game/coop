@@ -12,17 +12,19 @@ type useArrayUpdatePropsType<T> = {
   yjsState: Y.Array<T>;
   onMountSync?: boolean;
   unMountCallback?: () => void;
-  callback?: (x: T[]) => T[];
+  callback?: (T: T[]) => T[];
 };
 
 /**
  * `yjsState` is object from yjs doc.getArray("")
  *
  * `setState` is from useState of recoil
- * 
- * onMountSync is boolean used at componentDidMount
- * 
- * unMountCallback is boolean u
+ *
+ * `onMountSync` is `boolean`, used at componentDidMount
+ *
+ * `unMountCallback` is `()=>void` used at componentDidUnmount
+ *
+ * `callback` is `(T: T[]) => T[]` modified array from yjs `ex) sort by array property or modified array property`
  */
 const useArrayUpdate = <T>(props: useArrayUpdatePropsType<T>) => {
   const { setState, yjsState } = props;
