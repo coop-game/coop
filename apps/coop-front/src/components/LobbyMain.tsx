@@ -55,7 +55,7 @@ export const LobbyMain = () => {
         yAgreeState.clear();
       });
     }
-  }, [isOwner]);
+  }, []);
 
   if (provider === null) {
     return <div>프로바이더가 없음</div>;

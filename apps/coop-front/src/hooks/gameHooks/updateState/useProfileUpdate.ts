@@ -36,8 +36,8 @@ const useProfileUpdate = () => {
       const isOwner = idx === 0;
       return { isOwner, ...v };
     });
-
-    const isOwner = Number(userProfiles[0].id) === doc.clientID;
+    console.log("userProfiles", userProfiles);
+    const isOwner = Number(userProfiles[0]?.id) === doc.clientID;
     return { isOwner, userProfiles };
   }, [provider?.awareness]);
 
@@ -52,21 +52,50 @@ const useProfileUpdate = () => {
       if (transaction instanceof Room && eventType.updated.length > 0) {
         return;
       }
+      console.log("eventType, transaction", eventType, transaction);
       setUserProfiles({ ...filterMap() });
     };
     yUserProfilesState.observe(observeFunction);
 
     provider && provider?.awareness.on("update", observeFunction);
 
-    provider &&
-      yUserProfilesState.set(String(provider.awareness.clientID), {
-        id: provider.awareness.clientID,
-        nickname,
-        avatarIndex,
-        color,
-        utcTimeStamp,
-      });
+    if (provider) {
+      const getUser = yUserProfilesState.get(
+        String(provider.awareness.clientID)
+      );
+      if (!getUser || getUser.isConnected === false) {
+        yUserProfilesState.set(String(provider.awareness.clientID), {
+          id: provider.awareness.clientID,
+          nickname,
+          avatarIndex,
+          color,
+          isConnected: true,
+          utcTimeStamp,
+        });
+      } else {
+        alert("창을 2중으로 열었습니다.");
+        // window.history.pushState(null, "", "/");
+        window.location.href = "/";
+      }
+    }
+
+    // provider &&
+    //   yUserProfilesState.set(String(provider.awareness.clientID), {
+    //     id: provider.awareness.clientID,
+    //     nickname,
+    //     avatarIndex,
+    //     color,
+    //     utcTimeStamp,
+    //   });
+
     return () => {
+      const userProfile = yUserProfilesState.get(
+        String(provider.awareness.clientID)
+      );
+      yUserProfilesState.set(String(provider.awareness.clientID), {
+        ...userProfile,
+        isConnected: false,
+      });
       yUserProfilesState.unobserve(observeFunction);
       provider?.awareness.off("update", observeFunction);
     };

@@ -14,6 +14,33 @@ import { CPGameState, CPUserProfile } from "@types";
 
 export const doc = new Y.Doc();
 
+if (typeof window !== "undefined") {
+  // const channel = new BroadcastChannel("tab");
+  // let isOriginal = true;
+
+  // channel.postMessage("another-tab");
+
+  // channel.addEventListener("message", (msg) => {
+  //   if (msg.data === "another-tab" && isOriginal) {
+  //     channel.postMessage("already-open");
+  //   }
+  //   if (msg.data === "already-open") {
+  //     isOriginal = false;
+  //     window.close();
+  //     alert("Cannot open multiple instances");
+  //   }
+  // });
+
+  const CLIENT_ID = "clientID";
+  const localStorageClientID = localStorage.getItem(CLIENT_ID);
+  if (localStorageClientID) {
+    console.log("바꿈");
+    doc.clientID = Number(localStorageClientID);
+  } else {
+    localStorage.setItem(CLIENT_ID, String(doc.clientID));
+  }
+}
+
 export const yGameState = doc.getMap<CPGameState>("gameState");
 
 export const yUserProfilesState = doc.getMap<CPUserProfile>("userProfiles");
@@ -25,6 +52,9 @@ export const yQuestionsState = doc.getArray<CPGameQuestion>("questions");
 export const yRelayRaceAnswerState =
   doc.getArray<CPGameRelayRaceAnswer>("relayRaceAnswer");
 export const yChattingState = doc.getArray<CPChatType>("chatting");
+
+export const yGameUserProfileStates =
+  doc.getArray<CPUserProfile>("gameUserProfiles");
 
 export const getChangeGameStateHandler = <T>(roomId: string) => {
   return (partialGameState = {} as Partial<T>) => {

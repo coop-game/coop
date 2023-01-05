@@ -6,6 +6,8 @@ import { Room } from "@y-presence/client";
 import { WebrtcProvider } from "y-webrtc";
 import { doc } from "@common/yjsStore/userStore";
 
+import lodashThrottle from "lodash/throttle";
+
 export function useMultiplayerState({
   provider,
   room,
@@ -76,8 +78,8 @@ export function useMultiplayerState({
   const onChangePresence = useCallback(
     (app: TldrawApp, user: TDUser) => {
       if (!app.room) return;
-      user.id += `|${customUserId}`;
-      room.setPresence({ id: app.room.userId, tdUser: user });
+        user.id += `|${customUserId}`;
+        room.setPresence({ id: app.room.userId, tdUser: user });
     },
     [customUserId, room]
   );
