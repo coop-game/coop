@@ -1,18 +1,29 @@
 import { doc, yQuestionsState } from "./../../../common/yjsStore/userStore";
 import { yjsQuestionsState } from "./../../../common/recoil/recoil.atom";
 import { RecoilState, SetterOrUpdater, useRecoilState } from "recoil";
-import { useCallback, useEffect } from "react";
+import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 import { providerState } from "@common/yjsStore/userStore";
 import { CPGameQuestion } from "@types";
 import { Room } from "y-webrtc";
 import * as Y from "yjs";
 
 type useArrayUpdatePropsType<T> = {
-  setState: SetterOrUpdater<T[]>;
+  setState: SetterOrUpdater<T[]> | Dispatch<SetStateAction<T[]>>;
   yjsState: Y.Array<T>;
   onMountSync?: boolean;
+  unMountCallback?: () => void;
   callback?: (x: T[]) => T[];
 };
+
+/**
+ * `yjsState` is object from yjs doc.getArray("")
+ *
+ * `setState` is from useState of recoil
+ * 
+ * onMountSync is boolean used at componentDidMount
+ * 
+ * unMountCallback is boolean u
+ */
 const useArrayUpdate = <T>(props: useArrayUpdatePropsType<T>) => {
   const { setState, yjsState } = props;
   const { provider } = providerState;
@@ -52,6 +63,9 @@ const useArrayUpdate = <T>(props: useArrayUpdatePropsType<T>) => {
     if (props.onMountSync === true) {
       setState(getArray());
     }
+    return () => {
+      props.unMountCallback && props.unMountCallback();
+    };
   }, []);
 
   const pushArrayHandler = (element: T) => {
