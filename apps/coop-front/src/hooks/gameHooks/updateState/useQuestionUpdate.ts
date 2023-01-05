@@ -24,11 +24,11 @@ const useQuestionUpdate = () => {
       if (transaction === "local" && eventType.updated.length > 0) {
         return;
       }
-      // 마우스 커서
-      // transaction으로 Room이 전송됬고 updated로 데이터가 들어왔다면
-      if (transaction instanceof Room && eventType.updated.length > 0) {
-        return;
-      }
+      // // 마우스 커서
+      // // transaction으로 Room이 전송됬고 updated로 데이터가 들어왔다면
+      // if (transaction instanceof Room && eventType.updated.length > 0) {
+      //   return;
+      // }
       setQuestionsState(getQuestionList());
     },
     [getQuestionList, setQuestionsState]
