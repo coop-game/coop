@@ -50,6 +50,9 @@ export const yQuestionsState = doc.getArray<CPGameQuestion>("questions");
 
 export const yChattingState = doc.getArray<CPChatType>("chatting");
 
+export const yGameUserProfileStates =
+  doc.getArray<CPUserProfile>("gameUserProfiles");
+
 export const getChangeGameStateHandler = <T>(roomId: string) => {
   return (partialGameState = {} as Partial<T>) => {
     const gameState = yGameState.get(roomId);

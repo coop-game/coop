@@ -5,6 +5,7 @@ import {
   CPUserProfilesState,
   CPUserType,
   CPGameQuestions,
+  CPUserProfile,
 } from "@types";
 
 /**
@@ -42,6 +43,11 @@ export const userProfilesSelector = selector({
   },
   set: ({ set }, newValue) =>
     set(userProfilesState, (prev) => ({ ...prev, ...newValue })),
+});
+
+export const gameUserProfileStates = atom<CPUserProfile[]>({
+  key: "USER_PROFILES_STATE",
+  default: [],
 });
 
 /**
