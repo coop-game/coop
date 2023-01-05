@@ -37,7 +37,7 @@ const useProfileUpdate = () => {
       return { isOwner, ...v };
     });
     console.log("userProfiles", userProfiles);
-    const isOwner = Number(userProfiles[0].id) === doc.clientID;
+    const isOwner = Number(userProfiles[0]?.id) === doc.clientID;
     return { isOwner, userProfiles };
   }, [provider?.awareness]);
 

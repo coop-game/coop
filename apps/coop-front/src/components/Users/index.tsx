@@ -7,6 +7,7 @@ type UsersPropsType = {
   userProfiles: Array<CPUserProfile>;
 };
 const Users = ({ userProfiles }: UsersPropsType) => {
+  console.log(userProfiles);
   return (
     <Flex
       flexDirection={{ base: "row", md: "column" }}
@@ -20,9 +21,10 @@ const Users = ({ userProfiles }: UsersPropsType) => {
       boxShadow="dark-lg"
       rounded="md"
     >
-      {userProfiles.map((userProfile, idx) => {
-        return <User key={userProfile.id + idx} userProfile={userProfile} />;
-      })}
+      {userProfiles &&
+        userProfiles.map((userProfile, idx) => {
+          return <User key={userProfile.id + idx} userProfile={userProfile} />;
+        })}
     </Flex>
   );
 };
