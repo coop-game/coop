@@ -24,9 +24,12 @@ export type CPUserProfilesState = {
 };
 
 export type CPGameRelayRaceAnswer = {
-  path: CPPageType;
-  answer: string[];
+  answer: string;
+  id: number;
+  username: string;
 }
+
+export type CPGameRelayRaceAnswers = CPGameRelayRaceAnswer[];
 
 
 export type CPPageType =

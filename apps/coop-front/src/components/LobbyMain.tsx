@@ -91,6 +91,7 @@ export const LobbyMain = () => {
         gametype:"RELAYRACE",
         path: "/games/relay-race",
       } as CPGameRelayRace);
+
     }
   };
 

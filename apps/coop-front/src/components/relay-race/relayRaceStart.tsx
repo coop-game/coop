@@ -2,28 +2,33 @@ import {
   userProfilesSelector,
   userSelector,
   yjsGameState,
+  yjsRelayRaceAnswerState,
 } from "@common/recoil/recoil.atom";
 import {
   doc,
   getChangeGameStateHandler,
   providerState,
+  yRelayRaceAnswerState,
 } from "@common/yjsStore/userStore";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import { useTranslation } from "@hooks/useTransitions";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import shuffle from "lodash/shuffle";
-import { CPGameRelayRace, CPGameState } from "@types";
+import { CPGameRelayRace, CPGameRelayRaceAnswer, CPGameState } from "@types";
 import Wating from "./wating";
 import { Box } from "@chakra-ui/react";
+import useArrayUpdate from "@hooks/gameHooks/updateState/useArrayUpdate";
+import AnswerInput from "./answer";
 
 const RelayRaceStart = () => {
   const translation = useTranslation().messages;
   const { provider } = providerState;
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const [myOrderNumber, setMyOrderNumber] = useState<number>();
+
 
   // gameState.path에 따라 페이지 동기화
   useSyncPageFromGameState();
@@ -32,6 +37,9 @@ const RelayRaceStart = () => {
 
   //yjs profile이 바귀면 recoil을 업데이트 해줌
   useProfileUpdate();
+
+  console.log(yRelayRaceAnswerState);
+
 
   // userProfiles
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
@@ -89,7 +97,11 @@ const RelayRaceStart = () => {
     myOrderNumber !== undefined &&
     gameState.gamePagesIndex === myOrderNumber
   ) {
-    return <div>문제를 냅시다.</div>;
+    return (
+      <div>
+        <AnswerInput></AnswerInput>
+      </div>
+    );
   }
   return <div>test</div>;
 };

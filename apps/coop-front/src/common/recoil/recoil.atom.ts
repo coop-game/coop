@@ -5,7 +5,7 @@ import {
   CPUserProfilesState,
   CPUserType,
   CPGameQuestions,
-  CPGameRelayRaceAnswer,
+  CPGameRelayRaceAnswers,
 } from "@types";
 
 /**
@@ -56,19 +56,9 @@ export const yjsGameState = atom<CPGameState | null>({
 /**
  * yjsRelayRaceAnswerState
  */
-export const yjsRelayRaceAnswerState = atom<CPGameRelayRaceAnswer>({
+export const yjsRelayRaceAnswerState = atom<CPGameRelayRaceAnswers>({
   key: "YJS_RELAY_RACE_ANSWER",
-  default: {
-    answer: [],
-    path: "/games/relay-race",
-  },
-});
-
-export const yjsRelayRaceAnswerSelector = selector({
-  key: "YJS_RELAY_RACE_ANSWER_SELECTOR",
-  get: ({ get }) => {
-    return get(yjsRelayRaceAnswerState);
-  },
+  default: [],
 });
 
 /**
