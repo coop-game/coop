@@ -16,7 +16,7 @@ export type CPChatType = {
 
 export type CPUserProfile = {
   id?: number;
-  isConnected: boolean;
+  isBanned: boolean;
 } & Omit<CPUserType, "roomId">;
 
 export type CPUserProfilesState = {

@@ -1,4 +1,7 @@
-const Result = () =>{
-    return <div></div>
-}
+import useHistoryBack from "@hooks/usehistoryBack";
+
+const Result = () => {
+  useHistoryBack();
+  return <div></div>;
+};
 export default Result;

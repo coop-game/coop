@@ -52,14 +52,14 @@ const useArrayUpdate = <T>(props: useArrayUpdatePropsType<T>) => {
   );
 
   useEffect(() => {
-    yQuestionsState.observe(observeFunction);
+    yjsState.observe(observeFunction);
     provider?.awareness.on("change", observeFunction);
 
     return () => {
-      yQuestionsState.unobserve(observeFunction);
+      yjsState.unobserve(observeFunction);
       provider?.awareness.off("change", observeFunction);
     };
-  }, [observeFunction, provider?.awareness]);
+  }, [observeFunction, provider?.awareness, yjsState]);
 
   useEffect(() => {
     if (props.onMountSync === true) {

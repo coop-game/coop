@@ -25,11 +25,11 @@ const useSyncPageFromGameState = () => {
     if (!gameState) {
       if (router.pathname !== "/lobby") {
         console.log("gameState 가 없어서 로비로 이동함");
-        router.push("/");
+        router.replace("/");
       }
     } else if (gameState.path && gameState.path !== router.pathname) {
       console.log("path 가 달라서 이동함", gameState.path, router.pathname);
-      router.push(gameState.path);
+      router.replace(gameState.path);
     }
   }, [gameState, router]);
 

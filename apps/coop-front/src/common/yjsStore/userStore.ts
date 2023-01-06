@@ -78,7 +78,7 @@ export class providerClass {
     this.room = null;
   };
 
-  createProvider = (roomId: string, isCreater: boolean) => {
+  createProvider = (roomId: string) => {
     if (this.provider === null) {
       console.log("creactProvider");
       this.provider = new WebrtcProvider(roomId, doc, {
@@ -103,15 +103,6 @@ export class providerClass {
     }
     if (this.room === null) {
       this.room = new Room(this.provider.awareness);
-      if (isCreater) {
-        const gameState: CPGameDrawee = {
-          path: "/lobby",
-          gametype: "DRAWEE",
-          isGameStart: false,
-          gamePagesIndex: 0,
-        };
-        yGameState.set(roomId, gameState);
-      }
     }
   };
 }
