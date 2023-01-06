@@ -5,40 +5,36 @@ import {
   getChangeGameStateHandler,
   yRelayRaceAnswerState,
 } from "@common/yjsStore/userStore";
+import Progress from "@components/Progress";
 import useArrayUpdate from "@hooks/gameHooks/updateState/useArrayUpdate";
 import { CPGameRelayRace, CPGameRelayRaceAnswer } from "@types";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 
 const AnswerInput = ({
-  changeGameStateHandler,
+  pushArrayHandler,
 }: {
-  changeGameStateHandler: (partialGameState?: Partial<CPGameRelayRace>) => void;
+  pushArrayHandler: (element: CPGameRelayRaceAnswer) => void;
 }) => {
-  const [answer, setAnswer] = useState<string>();
+  const [answer, setAnswer] = useState<string>("");
   const [relayRaceAnswerState, setState] = useRecoilState<
     CPGameRelayRaceAnswer[]
   >(yjsRelayRaceAnswerState);
-  //   const changeGameStateHandler =
-  //     getChangeGameStateHandler<CPGameRelayRace>(roomId);
-  console.log("yjs입니다.", yRelayRaceAnswerState);
-  // useArrayUpdate<CPGameRelayRaceAnswer>({
-  //   yjsState: yRelayRaceAnswerState,
-  //   setState: setState,
-  // });
   const onClick = async () => {
     doc.transact(() => {
       const temp: CPGameRelayRaceAnswer = {
         answer: answer,
         id: doc.clientID,
         username: "Test",
+        isDraw: false,
       };
-      yRelayRaceAnswerState.push([temp]);
+      pushArrayHandler(temp);
     });
     setAnswer("");
   };
   return (
     <div>
+      <Progress time={50000} callback={onClick} play={"running"} />
       <div>정답 입력</div>
       <div>입력한 정답 {answer}</div>
       <Input
@@ -46,6 +42,7 @@ const AnswerInput = ({
         onChange={(e) => {
           setAnswer(e.target.value);
         }}
+        value={answer}
       ></Input>
       <Button onClick={onClick}>안녕하세요</Button>
     </div>

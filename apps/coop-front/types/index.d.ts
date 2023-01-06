@@ -25,13 +25,13 @@ export type CPUserProfilesState = {
 };
 
 export type CPGameRelayRaceAnswer = {
-  answer: string;
+  answer?: string;
   id: number;
   username: string;
-}
+  isDraw: boolean;
+};
 
 export type CPGameRelayRaceAnswers = CPGameRelayRaceAnswer[];
-
 
 export type CPPageType =
   | "/lobby"

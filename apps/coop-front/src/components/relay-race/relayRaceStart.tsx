@@ -22,17 +22,17 @@ import Wating from "./Wating";
 import { Box } from "@chakra-ui/react";
 import useArrayUpdate from "@hooks/gameHooks/updateState/useArrayUpdate";
 import AnswerInput from "./AnswerInput";
+import AnswerDraw from "./AsnwerDraw";
+import { useRouter } from "next/router";
 
 const RelayRaceStart = () => {
   const translation = useTranslation().messages;
   const { provider } = providerState;
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const [myOrderNumber, setMyOrderNumber] = useState<number>();
-  const [answerLengthState, setAnswerLengthState] = useState<number>(0);
-
   const [relayRaceAnswerState, setState] = useRecoilState<
-  CPGameRelayRaceAnswer[]
->(yjsRelayRaceAnswerState);
+    CPGameRelayRaceAnswer[]
+  >(yjsRelayRaceAnswerState);
 
   // gameState.path에 따라 페이지 동기화
   useSyncPageFromGameState();
@@ -45,6 +45,7 @@ const RelayRaceStart = () => {
   // userProfiles
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
   const gameState = useRecoilValue(yjsGameState) as CPGameRelayRace;
+  const [isPlay, setIsPlay] = useState<"running" | "paused">("running");
 
   // gameStateHandler 게임 상태값 변하게 하는 핸들러
   const changeGameStateHandler =
@@ -54,12 +55,21 @@ const RelayRaceStart = () => {
   console.log(gameState);
   useEffect(() => {
     console.log("relayRace", relayRaceAnswerState);
-  }, [relayRaceAnswerState, relayRaceAnswerState.length]);
+    if (isOwner && relayRaceAnswerState.length !== 0) {
+      if (relayRaceAnswerState.length >= gameState.gameOrderNumber.length) {
+        changeGameStateHandler({
+          path: "/lobby",
+        });
+      } else {
+        changeGameStateHandler({
+          gamePagesIndex: gameState.gamePagesIndex + 1,
+        });
+      }
+    }
+    setIsPlay("paused");
+  }, [relayRaceAnswerState.length]);
 
-
-
-
-  useArrayUpdate<CPGameRelayRaceAnswer>({
+  const { pushArrayHandler } = useArrayUpdate<CPGameRelayRaceAnswer>({
     yjsState: yRelayRaceAnswerState,
     setState: setState,
   });
@@ -93,29 +103,39 @@ const RelayRaceStart = () => {
       setMyOrderNumber(result);
     }
   }, [gameState]);
+  // 프로바이더가 없는 경우 아무것도 렌더링 하지 않음
   if (provider === null) {
     return <div></div>;
   }
+  // 내 순서가 아닌 경우 대기실에 들어가서 대기
   if (
     myOrderNumber !== undefined &&
     gameState.gamePagesIndex !== myOrderNumber
   ) {
     return (
       <Box w="100%" h="100%">
-        <Wating />
+        <Wating isPlay={isPlay} setIsPlay={setIsPlay} />
       </Box>
     );
-  } else if (
+  }
+  // 내 순서인 경우 정답을 입력하거나 그림을 그리러 간다.
+  else if (
     myOrderNumber !== undefined &&
     gameState.gamePagesIndex === myOrderNumber
   ) {
-    return (
-      <div>
-        <AnswerInput
-          changeGameStateHandler={changeGameStateHandler}
-        ></AnswerInput>
-      </div>
-    );
+    if (gameState.gamePagesIndex % 2 === 0) {
+      return (
+        <div>
+          <AnswerInput pushArrayHandler={pushArrayHandler}></AnswerInput>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <AnswerDraw pushArrayHandler={pushArrayHandler} />
+        </div>
+      );
+    }
   }
   return <div>test</div>;
 };

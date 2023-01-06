@@ -41,7 +41,6 @@ const useArrayUpdate = <T>(props: useArrayUpdatePropsType<T>) => {
       // if (transaction === "local" && eventType.updated.length > 0) {
       //   return;
       // }
-      console.log("업데이트 중이에요");
       //   // 마우스 커서
       //   // transaction으로 Room이 전송됐고 updated로 데이터가 들어왔다면
       //   if (transaction instanceof Room && eventType.updated.length > 0) {
@@ -55,7 +54,6 @@ const useArrayUpdate = <T>(props: useArrayUpdatePropsType<T>) => {
   useEffect(() => {
     yjsState.observe(observeFunction);
     provider?.awareness.on("change", observeFunction);
-    console.log("프로바이더가 있나요?",provider)
 
     return () => {
       yjsState.unobserve(observeFunction);
