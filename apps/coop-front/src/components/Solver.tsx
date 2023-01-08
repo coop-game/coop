@@ -12,7 +12,11 @@ import {
   yjsGameState,
   yjsQuestionsState,
 } from "@common/recoil/recoil.atom";
-import { doc, yQuestionsState } from "@common/yjsStore/userStore";
+import {
+  doc,
+  providerState,
+  yQuestionsState,
+} from "@common/yjsStore/userStore";
 import { css } from "@emotion/react";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
 import { useTranslation } from "@hooks/useTransitions";
@@ -31,8 +35,7 @@ const Solver = () => {
     doc.transact(() => {
       const gamePagesIndex = gameState.gamePagesIndex;
       const question = yQuestionsState.get(gamePagesIndex);
-      question.isQuestionEnd === true;
-      if (question === undefined) return;
+      if (question === undefined || question.isQuestionEnd === true) return;
       const newQuestion = {
         ...question,
         inputAnswer: [...question.inputAnswer, answer],
@@ -52,7 +55,7 @@ const Solver = () => {
       <div>
         {translation["draw.solver"]} : {getSovlerNicknameFromId(getSolverId())}
       </div>
-      {getSolverId() === doc.clientID && (
+      {getSolverId() === providerState.provider.awareness.clientID && (
         <FormControl isInvalid={isError}>
           <FormLabel>{translation["draw.answer"]}</FormLabel>
           <Input
@@ -89,7 +92,7 @@ const Solver = () => {
         `}
       >
         <div>{translation["draw.answer.history"]}</div>
-        {questionsState.length > gameState.gamePagesIndex && (
+        {questionsState.length > gameState?.gamePagesIndex && (
           <div>
             {questionsState[gameState.gamePagesIndex].inputAnswer.map(
               (v, idx) => {

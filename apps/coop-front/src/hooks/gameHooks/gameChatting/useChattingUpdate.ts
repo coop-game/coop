@@ -1,5 +1,5 @@
 import { ChattingSelector, userSelector } from "@common/recoil/recoil.atom";
-import { doc, yChattingState } from "@common/yjsStore/userStore";
+import { doc, providerState, yChattingState } from "@common/yjsStore/userStore";
 import { CPChatType } from "@types";
 import { useCallback, useEffect, useRef } from "react";
 import { useState } from "react";
@@ -39,7 +39,7 @@ const useChattingUpdate = () => {
   const onClickHandler = () => {
     if (inputString === "") return;
     const newChat = {
-      id: doc.clientID,
+      id: providerState.provider.awareness.clientID,
       nickname,
       message: inputString,
     };

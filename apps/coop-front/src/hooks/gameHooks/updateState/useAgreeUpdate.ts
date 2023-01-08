@@ -42,7 +42,7 @@ const useAgreeUpdate = () => {
     provider && provider.awareness.on("change", observeFunction);
 
     return () => {
-      yAgreeState.set(String(doc.clientID), false);
+      yAgreeState.set(String(providerState.provider.awareness.clientID), false);
       yAgreeState.unobserve(observeFunction);
       provider && provider.awareness.off("change", observeFunction);
     };
@@ -53,7 +53,7 @@ const useAgreeUpdate = () => {
   //   setAgreeState(filterMap());
   // }, []);
   const agreeHandler = () => {
-    yAgreeState.set(String(doc.clientID), true);
+    yAgreeState.set(String(providerState.provider.awareness.clientID), true);
   };
   return { agreeHandler };
 };

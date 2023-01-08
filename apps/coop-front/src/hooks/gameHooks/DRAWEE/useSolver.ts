@@ -1,4 +1,6 @@
-import { useCallback } from "react";
+import { yGameState } from "@common/yjsStore/userStore";
+import { yQuestionsState } from "./../../../common/yjsStore/userStore";
+import { useCallback, useEffect } from "react";
 import {
   userProfilesSelector,
   yjsGameState,
@@ -8,27 +10,32 @@ import { useRecoilValue } from "recoil";
 
 const useSolver = () => {
   const gameState = useRecoilValue(yjsGameState);
-  const questionsState = useRecoilValue(yjsQuestionsState);
+  // const questionsState = useRecoilValue(yjsQuestionsState);
   const { userProfiles } = useRecoilValue(userProfilesSelector);
 
   const getSolverId = useCallback(() => {
+    const questionsState = yQuestionsState.toArray();
     if (!questionsState || !gameState) return null;
     return questionsState.length > gameState.gamePagesIndex
       ? questionsState[gameState.gamePagesIndex].solver
       : null;
-  }, [gameState, questionsState]);
+  }, [gameState]);
 
   const getSovlerNicknameFromId = useCallback(
     (id: number) => {
-      if (userProfiles === null) return null;
-      let nickname: null | string = null;
-      userProfiles.forEach((v) => {
-        if (v.id === id) nickname = v.nickname;
-      });
-      return nickname;
+      if (userProfiles)
+        for (let e of userProfiles) {
+          if (e.id === id) return e.nickname;
+        }
+      return null;
     },
     [userProfiles]
   );
+
+  useEffect(() => {
+    console.log("useSolver1", getSolverId());
+    console.log("useSolver2", getSovlerNicknameFromId(getSolverId()));
+  }, [getSolverId, getSovlerNicknameFromId]);
 
   return { getSolverId, getSovlerNicknameFromId };
 };

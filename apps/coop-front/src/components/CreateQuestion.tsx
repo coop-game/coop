@@ -50,7 +50,7 @@ const CreateQuestion = () => {
   const onClickButtonHandler = async () => {
     setIsAgree(true);
     doc.transact(() => {
-      yAgreeState.set(String(doc.clientID), true);
+      yAgreeState.set(String(providerState.provider.awareness.clientID), true);
       if (!!provider && input !== "") {
         // userProfiles 기준으로 다음 user의 id를 문제 맞추는 사람으로 설정함.
         const nextUserClientId =
@@ -78,8 +78,8 @@ const CreateQuestion = () => {
 
   const nextPageHandlerByOwner = useCallback(() => {
     if (isOwner) {
+      yAgreeState.clear();
       doc.transact(() => {
-        yAgreeState.clear();
         changeGameStateHandler({ path: "/draw", gamePagesIndex: 0 });
       });
     }
