@@ -22,8 +22,7 @@ import Wating from "./Wating";
 import { Box } from "@chakra-ui/react";
 import useArrayUpdate from "@hooks/gameHooks/updateState/useArrayUpdate";
 import AnswerInput from "./AnswerInput";
-import AnswerDraw from "./AsnwerDraw";
-import { useRouter } from "next/router";
+import AnswerDraw from "./AnswerDraw";
 
 const RelayRaceStart = () => {
   const translation = useTranslation().messages;
@@ -51,14 +50,16 @@ const RelayRaceStart = () => {
   const changeGameStateHandler =
     getChangeGameStateHandler<CPGameRelayRace>(roomId);
 
-  console.log(userProfiles);
   console.log(gameState);
+  console.log("relayRace", relayRaceAnswerState);
   useEffect(() => {
-    console.log("relayRace", relayRaceAnswerState);
     if (isOwner && relayRaceAnswerState.length !== 0) {
       if (relayRaceAnswerState.length >= gameState.gameOrderNumber.length) {
+        // const answerLength = yRelayRaceAnswerState.length;
+        // yRelayRaceAnswerState.delete(0, answerLength);
+        // setState([]);
         changeGameStateHandler({
-          path: "/lobby",
+          path: "/result",
         });
       } else {
         changeGameStateHandler({
@@ -125,15 +126,21 @@ const RelayRaceStart = () => {
   ) {
     if (gameState.gamePagesIndex % 2 === 0) {
       return (
-        <div>
-          <AnswerInput pushArrayHandler={pushArrayHandler}></AnswerInput>
-        </div>
+        <Box w="100%" h="100%">
+          <AnswerInput
+            gamepageIndex={gameState.gamePagesIndex}
+            pushArrayHandler={pushArrayHandler}
+          ></AnswerInput>
+        </Box>
       );
     } else {
       return (
-        <div>
-          <AnswerDraw pushArrayHandler={pushArrayHandler} />
-        </div>
+        <Box w="100%" h="100%">
+          <AnswerDraw
+            gamepageIndex={gameState.gamePagesIndex}
+            pushArrayHandler={pushArrayHandler}
+          />
+        </Box>
       );
     }
   }

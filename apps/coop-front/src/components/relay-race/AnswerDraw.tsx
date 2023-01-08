@@ -12,7 +12,7 @@ import { useMultiplayerState } from "@hooks/useMultiplayerState";
 import { CPGameRelayRaceAnswer } from "@types";
 import { useRecoilValue } from "recoil";
 
-function Editor({}) {
+function Editor({ pageIndex }: { pageIndex: number }) {
   const userState = useRecoilValue(userSelector);
   const { onMount, onChangePage, onUndo, onRedo, onChangePresence } =
     useMultiplayerState({
@@ -20,6 +20,7 @@ function Editor({}) {
       room: providerState?.room,
       customUserId: userState?.nickname,
       color: userState?.color,
+      pageIndex: pageIndex,
     });
 
   return (
@@ -33,8 +34,6 @@ function Editor({}) {
       <Button>삭제 버튼</Button>
       <Tldraw
         showMenu={false}
-        // autofocus
-        // disableAssets
         showPages={false}
         onMount={onMount}
         onChangePage={onChangePage}
@@ -49,8 +48,10 @@ function Editor({}) {
 
 const AnswerDraw = ({
   pushArrayHandler,
+  gamepageIndex,
 }: {
   pushArrayHandler: (element: CPGameRelayRaceAnswer) => void;
+  gamepageIndex: number;
 }) => {
   const RelayRaceAnswerState = useRecoilValue(yjsRelayRaceAnswerState);
   const drawEnd = () => {
@@ -72,7 +73,7 @@ const AnswerDraw = ({
           </div>
         </div>
       )}
-      <Editor />
+      <Editor pageIndex={gamepageIndex} />
       <Button onClick={drawEnd}>다음으로 넘기기</Button>
     </div>
   );
