@@ -31,6 +31,7 @@ import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
 import AnswerModal from "./Modal/AnswerModal";
 import { CPGameDrawee } from "@types";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
+import CanvasViewer from "./CanvasViewer";
 
 function Editor({}) {
   const userState = useRecoilValue(userSelector);
@@ -50,13 +51,12 @@ function Editor({}) {
         height: 100%;
       `}
     >
-      <Button>삭제 버튼</Button>
-
       <Tldraw
         showMenu={false}
         // autofocus
         // disableAssets
         showPages={false}
+        // showUI={false}
         onMount={onMount}
         onChangePage={onChangePage}
         onUndo={onUndo}
@@ -64,6 +64,7 @@ function Editor({}) {
         onChangePresence={onChangePresence}
         components={{ Cursor: NewCursor as CursorComponent }}
       />
+      <CanvasViewer></CanvasViewer>
     </div>
   );
 }
@@ -141,7 +142,7 @@ function Draw() {
     <>
       <Progress
         play={isPlay}
-        time={20000}
+        time={2000000}
         callback={() => {
           setIsPlay("paused");
           questionTimeOut();
@@ -172,9 +173,11 @@ function Draw() {
           <div
             className="tldraw"
             css={css`
-              flex-flow: 1;
+              flex-grow: 1;
+              flex-basis: 500px;
+
               width: 100%;
-              height: 100%;
+              /* height: 100%; */
             `}
           >
             <Editor />
