@@ -3,10 +3,10 @@ import { TldrawApp, TDShape, TDBinding, Tldraw } from "@coop/draw";
 import { css } from "@emotion/react";
 import { useCallback, useEffect, useState } from "react";
 
-const CanvasViewer = () => {
+const CanvasViewer = ({ pageIndex }: { pageIndex: number }) => {
   const [app, setApp] = useState<TldrawApp>();
-  const yShapes = doc.getMap<TDShape>(`shapes`);
-  const yBindings = doc.getMap<TDBinding>("bindings");
+  const yShapes = doc.getMap<TDShape>(`shapes ${pageIndex}`);
+  const yBindings = doc.getMap<TDBinding>(`bindings ${pageIndex}`);
 
   const onMount = useCallback((app: TldrawApp) => {
     app.loadRoom(providerState.provider.roomName);

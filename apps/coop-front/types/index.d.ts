@@ -57,7 +57,6 @@ export type CPGameDrawee = {
   gametype: "DRAWEE";
   isGameStart: boolean;
   gamePagesIndex: number;
-  // QuestionsEnd: boolean[];
 };
 
 export type CPGameRelayRace = {

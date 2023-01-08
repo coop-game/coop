@@ -13,14 +13,16 @@ export function useMultiplayerState({
   room,
   customUserId,
   color,
+  pageIndex,
 }: {
   provider: WebrtcProvider;
   room: Room;
   customUserId: string;
   color: string;
+  pageIndex: number;
 }) {
-  const yShapes: Y.Map<TDShape> = doc.getMap("shapes");
-  const yBindings: Y.Map<TDBinding> = doc.getMap("bindings");
+  const yShapes: Y.Map<TDShape> = doc.getMap(`shapes ${pageIndex}`);
+  const yBindings: Y.Map<TDBinding> = doc.getMap(`bindings ${pageIndex}`);
 
   const undoManager = useMemo(
     () => new Y.UndoManager([yShapes, yBindings]),
@@ -159,6 +161,4 @@ export function useMultiplayerState({
     loading,
     onChangePresence,
   };
-
-  useEffect(() => {}, []);
 }
