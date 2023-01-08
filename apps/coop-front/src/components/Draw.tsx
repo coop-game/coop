@@ -31,11 +31,13 @@ import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
 import AnswerModal from "./Modal/AnswerModal";
 import { CPGameDrawee } from "@types";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
+import CanvasViewer from "./CanvasViewer";
 
 function Editor({}) {
   const userState = useRecoilValue(userSelector);
   const { onMount, onChangePage, onUndo, onRedo, onChangePresence } =
     useMultiplayerState({
+      color: userState?.color,
       provider: providerState?.provider,
       room: providerState?.room,
       customUserId: userState?.nickname,
@@ -49,12 +51,12 @@ function Editor({}) {
         height: 100%;
       `}
     >
-      <Button>삭제 버튼</Button>
       <Tldraw
         showMenu={false}
         // autofocus
         // disableAssets
         showPages={false}
+        // showUI={false}
         onMount={onMount}
         onChangePage={onChangePage}
         onUndo={onUndo}
@@ -93,22 +95,45 @@ function Draw() {
   }, [changeGameStateHandler, isOwner, questionsState.length, roomId]);
   const { getSolverId } = useSolver();
 
-  const questionTimeOut = () => {
-    if (getSolverId() === doc.clientID) {
-      doc.transact(() => {
-        const gamePagesIndex = gameState.gamePagesIndex;
-        const question = yQuestionsState.get(gamePagesIndex);
+  const setQuestionEnd = useCallback(() => {
+    doc.transact(() => {
+      const gamePagesIndex = gameState.gamePagesIndex;
+      const question = yQuestionsState.get(gamePagesIndex);
 
-        if (question === undefined) return;
-        const newQuestion = {
-          ...question,
-          isQuestionEnd: true,
-        };
-        yQuestionsState.delete(gamePagesIndex);
-        yQuestionsState.insert(gamePagesIndex, [newQuestion]);
-      });
+      if (question === undefined) return;
+      const newQuestion = {
+        ...question,
+        isQuestionEnd: true,
+      };
+      yQuestionsState.delete(gamePagesIndex);
+      yQuestionsState.insert(gamePagesIndex, [newQuestion]);
+    });
+  }, [gameState?.gamePagesIndex]);
+
+  const questionTimeOut = useCallback(() => {
+    // const isSolverInUserProfiles = () => {
+    //   return userProfiles.filter((v) => v.id === getSolverId()).length > 0;
+    // };
+    // console.log(
+    //   "questionTimeOut",
+    //   getSolverId(),
+    //   providerState.provider.awareness.clientID,
+    //   isOwner,
+    //   !isSolverInUserProfiles
+    // );
+    if (getSolverId() === providerState.provider.awareness.clientID) {
+      setQuestionEnd();
     }
-  };
+  }, [getSolverId, setQuestionEnd]);
+
+  useEffect(() => {
+    const isSolverInUserProfiles = () => {
+      return userProfiles.filter((v) => v.id === getSolverId()).length > 0;
+    };
+    if (isOwner && !isSolverInUserProfiles()) {
+      setQuestionEnd();
+    }
+  }, [getSolverId, isOwner, setQuestionEnd, userProfiles]);
 
   const [isPlay, setIsPlay] = useState<"running" | "paused">("running");
 
@@ -116,7 +141,7 @@ function Draw() {
     <>
       <Progress
         play={isPlay}
-        time={60000}
+        time={2000000}
         callback={() => {
           setIsPlay("paused");
           questionTimeOut();
@@ -147,9 +172,11 @@ function Draw() {
           <div
             className="tldraw"
             css={css`
-              flex-flow: 1;
+              flex-grow: 1;
+              flex-basis: 500px;
+
               width: 100%;
-              height: 100%;
+              /* height: 100%; */
             `}
           >
             <Editor />

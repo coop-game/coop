@@ -43,11 +43,13 @@ const Chatting = () => {
               css={css`
                 display: flex;
                 flex-direction: column;
-                align-items: ${doc.clientID === id ? "flex-end" : "flex-start"};
+                align-items: ${providerState.provider.awareness.clientID === id
+                  ? "flex-end"
+                  : "flex-start"};
                 padding: 10px;
               `}
             >
-              {doc.clientID !== id && (
+              {providerState.provider.awareness.clientID !== id && (
                 <div
                   css={css`
                     font-size: 1.3rem;

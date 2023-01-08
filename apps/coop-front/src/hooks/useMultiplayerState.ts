@@ -12,10 +12,12 @@ export function useMultiplayerState({
   provider,
   room,
   customUserId,
+  color,
 }: {
   provider: WebrtcProvider;
   room: Room;
   customUserId: string;
+  color: string;
 }) {
   const yShapes: Y.Map<TDShape> = doc.getMap("shapes");
   const yBindings: Y.Map<TDBinding> = doc.getMap("bindings");
@@ -30,11 +32,11 @@ export function useMultiplayerState({
 
   const onMount = useCallback(
     (app: TldrawApp) => {
-      app.loadRoom(provider.roomName);
+      app.loadRoom(provider.roomName, color);
       app.pause();
       setApp(app);
     },
-    [provider.roomName]
+    [color, provider.roomName]
   );
 
   // draw 좌표 전송 부분
@@ -78,8 +80,8 @@ export function useMultiplayerState({
   const onChangePresence = useCallback(
     (app: TldrawApp, user: TDUser) => {
       if (!app.room) return;
-        user.id += `|${customUserId}`;
-        room.setPresence({ id: app.room.userId, tdUser: user });
+      user.id += `|${customUserId}`;
+      room.setPresence({ id: app.room.userId, tdUser: user });
     },
     [customUserId, room]
   );
@@ -157,4 +159,6 @@ export function useMultiplayerState({
     loading,
     onChangePresence,
   };
+
+  useEffect(() => {}, []);
 }

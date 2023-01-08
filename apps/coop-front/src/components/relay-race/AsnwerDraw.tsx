@@ -19,6 +19,7 @@ function Editor({}) {
       provider: providerState?.provider,
       room: providerState?.room,
       customUserId: userState?.nickname,
+      color: userState?.color,
     });
 
   return (

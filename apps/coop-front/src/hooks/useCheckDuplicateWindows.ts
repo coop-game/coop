@@ -9,7 +9,8 @@ const useCheckDuplicateWindows = () => {
   const { roomId } = ({} = useRecoilValue(userSelector));
   const router = useRouter();
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && !!roomId) {
+      console.log("main", roomId);
       const channel = new BroadcastChannel(`tab ${roomId}`);
       let isOriginal = true;
       channel.postMessage(`another-tab`);

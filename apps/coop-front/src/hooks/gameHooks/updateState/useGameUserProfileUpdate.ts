@@ -10,6 +10,5 @@ const useGameUserProfileUpdate = () => {
     setState,
     yjsState,
   });
-  return {};
 };
 export default useGameUserProfileUpdate;

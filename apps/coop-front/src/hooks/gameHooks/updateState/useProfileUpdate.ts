@@ -23,12 +23,10 @@ const useProfileUpdate = () => {
     const stateKeysIter = state.keys();
     while (true) {
       const res = stateKeysIter.next().value;
-      console.log(res, provider);
       if (res) {
         const userProfile = yUserProfilesState.get(String(res));
         if (userProfile) userProfiles.push(userProfile);
       } else if (null) {
-        console.log("널 들어옴");
       } else break;
     }
 
@@ -41,7 +39,8 @@ const useProfileUpdate = () => {
       return { isOwner, ...v };
     });
     console.log("userProfiles", userProfiles);
-    const isOwner = Number(userProfiles[0]?.id) === doc.clientID;
+    const isOwner =
+      Number(userProfiles[0]?.id) === providerState.provider.awareness.clientID;
     return { isOwner, userProfiles };
   }, [provider]);
 
@@ -62,7 +61,7 @@ const useProfileUpdate = () => {
     };
     yUserProfilesState.observe(observeFunction);
 
-    provider && provider?.awareness.on("update", observeFunction);
+    provider && provider.awareness.on("update", observeFunction);
 
     if (provider) {
       yUserProfilesState.set(String(provider.awareness.clientID), {
@@ -82,7 +81,6 @@ const useProfileUpdate = () => {
     return () => {
       yUserProfilesState.unobserve(observeFunction);
       provider?.awareness.off("update", observeFunction);
-      // }
     };
   }, [
     filterMap,
@@ -96,14 +94,16 @@ const useProfileUpdate = () => {
   ]);
 
   useEffect(() => {
-    yUserProfilesState.set(String(provider.awareness.clientID), {
-      id: provider.awareness.clientID,
-      nickname,
-      avatarIndex,
-      color,
-      isBanned: false,
-      utcTimeStamp,
-    });
+    provider.awareness.setLocalState({});
+    provider &&
+      yUserProfilesState.set(String(provider.awareness.clientID), {
+        id: provider.awareness.clientID,
+        nickname,
+        avatarIndex,
+        color,
+        isBanned: false,
+        utcTimeStamp,
+      });
   }, []);
 };
 export default useProfileUpdate;
