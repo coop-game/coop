@@ -35,12 +35,14 @@ import CanvasViewer from "./CanvasViewer";
 
 function Editor({}) {
   const userState = useRecoilValue(userSelector);
+  const gameState = useRecoilValue(yjsGameState);
   const { onMount, onChangePage, onUndo, onRedo, onChangePresence } =
     useMultiplayerState({
       color: userState?.color,
       provider: providerState?.provider,
       room: providerState?.room,
       customUserId: userState?.nickname,
+      pageIndex: gameState?.gamePagesIndex,
     });
 
   return (
@@ -111,16 +113,6 @@ function Draw() {
   }, [gameState?.gamePagesIndex]);
 
   const questionTimeOut = useCallback(() => {
-    // const isSolverInUserProfiles = () => {
-    //   return userProfiles.filter((v) => v.id === getSolverId()).length > 0;
-    // };
-    // console.log(
-    //   "questionTimeOut",
-    //   getSolverId(),
-    //   providerState.provider.awareness.clientID,
-    //   isOwner,
-    //   !isSolverInUserProfiles
-    // );
     if (getSolverId() === providerState.provider.awareness.clientID) {
       setQuestionEnd();
     }
