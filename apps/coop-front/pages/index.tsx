@@ -21,6 +21,7 @@ import { providerState } from "@common/yjsStore/userStore";
 import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
 import Layout from "@components/layout";
 import LogoImage from "@components/layout/LogoImage";
+import useHistoryBack from "@hooks/usehistoryBack";
 
 export default function Home({
   roomId,
@@ -45,15 +46,17 @@ export default function Home({
     setColor(getRandomColor());
   }, []);
 
+  useHistoryBack();
+
   const pushLobbyHander = () => {
     if (nickname !== "") {
       if (!!providerState.provider) {
         providerState.clearProvider();
       }
-      providerState.createProvider(roomId, isCreater);
+      providerState.createProvider(roomId);
       const utcTimeStamp = getUtcTimeStamp();
       setUserState({ roomId, nickname, avatarIndex, color, utcTimeStamp });
-      router.push("/lobby");
+      router.replace("/lobby");
     } else {
       setIsError(true);
     }

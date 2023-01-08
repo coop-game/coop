@@ -17,14 +17,18 @@ const useProfileUpdate = () => {
   const { provider, room } = providerState;
 
   const filterMap = useCallback(() => {
+    // const state = provider?.awareness.meta;
     const state = provider?.awareness.getStates();
     let userProfiles: CPUserProfile[] = [];
     const stateKeysIter = state.keys();
     while (true) {
       const res = stateKeysIter.next().value;
+      console.log(res, provider);
       if (res) {
         const userProfile = yUserProfilesState.get(String(res));
         if (userProfile) userProfiles.push(userProfile);
+      } else if (null) {
+        console.log("널 들어옴");
       } else break;
     }
 
@@ -39,20 +43,21 @@ const useProfileUpdate = () => {
     console.log("userProfiles", userProfiles);
     const isOwner = Number(userProfiles[0]?.id) === doc.clientID;
     return { isOwner, userProfiles };
-  }, [provider?.awareness]);
+  }, [provider]);
 
   useEffect(() => {
     const observeFunction = (eventType: any, transaction: any) => {
+      console.log(eventType, transaction);
       // local에서 수정했고, updated로 데이터가 들어왔다면
-      if (transaction === "local" && eventType.updated.length > 0) {
-        return;
-      }
+      // if (transaction === "local" && eventType.updated.length > 0) {
+      //   return;
+      // }
       // 마우스 커서
       // transaction으로 Room이 전송됬고 updated로 데이터가 들어왔다면
-      if (transaction instanceof Room && eventType.updated.length > 0) {
-        return;
-      }
-      console.log("eventType, transaction", eventType, transaction);
+      // if (transaction instanceof Room && eventType.updated.length > 0) {
+      //   return;
+      // }
+      // console.log("eventType, transaction", eventType, transaction);
       setUserProfiles({ ...filterMap() });
     };
     yUserProfilesState.observe(observeFunction);
@@ -60,44 +65,24 @@ const useProfileUpdate = () => {
     provider && provider?.awareness.on("update", observeFunction);
 
     if (provider) {
-      const getUser = yUserProfilesState.get(
-        String(provider.awareness.clientID)
-      );
-      if (!getUser || getUser.isConnected === false) {
-        yUserProfilesState.set(String(provider.awareness.clientID), {
-          id: provider.awareness.clientID,
-          nickname,
-          avatarIndex,
-          color,
-          isConnected: true,
-          utcTimeStamp,
-        });
-      } else {
-        alert("창을 2중으로 열었습니다.");
-        // window.history.pushState(null, "", "/");
-        window.location.href = "/";
-      }
+      yUserProfilesState.set(String(provider.awareness.clientID), {
+        id: provider.awareness.clientID,
+        nickname,
+        avatarIndex,
+        color,
+        isBanned: false,
+        utcTimeStamp,
+      });
+      // console.log(getUser);
+      // alert(`창을 2중으로 열었습니다.${getUser?.isBanned}`);
+      // window.history.pushState(null, "", "/welcome");
+      // window.location.href = "/welcome";
     }
 
-    // provider &&
-    //   yUserProfilesState.set(String(provider.awareness.clientID), {
-    //     id: provider.awareness.clientID,
-    //     nickname,
-    //     avatarIndex,
-    //     color,
-    //     utcTimeStamp,
-    //   });
-
     return () => {
-      const userProfile = yUserProfilesState.get(
-        String(provider.awareness.clientID)
-      );
-      yUserProfilesState.set(String(provider.awareness.clientID), {
-        ...userProfile,
-        isConnected: false,
-      });
       yUserProfilesState.unobserve(observeFunction);
       provider?.awareness.off("update", observeFunction);
+      // }
     };
   }, [
     filterMap,
@@ -109,5 +94,16 @@ const useProfileUpdate = () => {
     setUserProfiles,
     utcTimeStamp,
   ]);
+
+  useEffect(() => {
+    yUserProfilesState.set(String(provider.awareness.clientID), {
+      id: provider.awareness.clientID,
+      nickname,
+      avatarIndex,
+      color,
+      isBanned: false,
+      utcTimeStamp,
+    });
+  }, []);
 };
 export default useProfileUpdate;

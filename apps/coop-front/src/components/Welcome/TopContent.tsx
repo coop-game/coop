@@ -2,6 +2,7 @@ import { Box, Button, Center, Flex, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import DraweeLogo from "@asset/images/DraweeLogo.png";
 import { css, keyframes } from "@emotion/react";
+import { useRouter } from "next/router";
 
 const scroll = keyframes`
   0%{
@@ -13,6 +14,7 @@ const scroll = keyframes`
   }
 `;
 function TopContent() {
+  const router = useRouter();
   return (
     <Center w="100%" h="max-content">
       <Flex direction="column">
@@ -52,7 +54,13 @@ function TopContent() {
         <Center
           marginTop={{ base: "70px", sm: "30px", md: "100px", lg: "60px" }}
         >
-          <Button width="150px" bg="colors.third">
+          <Button
+            width="150px"
+            bg="colors.third"
+            onClick={() => {
+              router.replace("/");
+            }}
+          >
             시작하기
           </Button>
         </Center>

@@ -59,7 +59,7 @@ const useArrayUpdate = <T>(props: useArrayUpdatePropsType<T>) => {
       yjsState.unobserve(observeFunction);
       provider?.awareness.off("change", observeFunction);
     };
-  }, [observeFunction, provider?.awareness]);
+  }, [observeFunction, provider?.awareness, yjsState]);
 
   useEffect(() => {
     if (props.onMountSync === true) {
