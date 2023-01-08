@@ -10,7 +10,6 @@ const Wating = ({
   isPlay: "running" | "paused";
   setIsPlay: Dispatch<SetStateAction<"running" | "paused">>;
 }) => {
-  console.log("isPlay? ,", isPlay);
   useEffect(() => {
     if (isPlay === "paused") {
       setIsPlay("running");

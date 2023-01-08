@@ -1,15 +1,53 @@
 import { Button, Input } from "@chakra-ui/react";
-import { yjsRelayRaceAnswerState } from "@common/recoil/recoil.atom";
 import {
-  doc,
-  getChangeGameStateHandler,
-  yRelayRaceAnswerState,
-} from "@common/yjsStore/userStore";
+  userSelector,
+  yjsRelayRaceAnswerState,
+} from "@common/recoil/recoil.atom";
+import { doc, providerState } from "@common/yjsStore/userStore";
 import Progress from "@components/Progress";
-import useArrayUpdate from "@hooks/gameHooks/updateState/useArrayUpdate";
-import { CPGameRelayRace, CPGameRelayRaceAnswer } from "@types";
+import { CPGameRelayRaceAnswer } from "@types";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { css } from "@emotion/react";
+import { Tldraw } from "@coop/draw";
+import { useMultiplayerState } from "@hooks/useMultiplayerState";
+import NewCursor, { CursorComponent } from "@components/NewCursor";
+
+function Editor({}) {
+  const userState = useRecoilValue(userSelector);
+  const { onMount, onChangePage, onUndo, onRedo, onChangePresence } =
+    useMultiplayerState({
+      provider: providerState?.provider,
+      room: providerState?.room,
+      customUserId: userState?.nickname,
+    });
+
+  return (
+    <div
+      css={css`
+        position: relative;
+        width: 100%;
+        height: 100%;
+      `}
+    >
+      <Button>삭제 버튼</Button>
+      <Tldraw
+        showMenu={false}
+        // autofocus
+        // disableAssets
+        readOnly={true}
+        showPages={false}
+        onMount={onMount}
+        onChangePage={onChangePage}
+        showUI={false}
+        // onUndo={onUndo}
+        // onRedo={onRedo}
+        onChangePresence={onChangePresence}
+        // components={{ Cursor: NewCursor as CursorComponent }}
+      />
+    </div>
+  );
+}
 
 const AnswerInput = ({
   pushArrayHandler,
@@ -35,6 +73,7 @@ const AnswerInput = ({
   return (
     <div>
       <Progress time={50000} callback={onClick} play={"running"} />
+      {relayRaceAnswerState.length > 0 && <Editor />}
       <div>정답 입력</div>
       <div>입력한 정답 {answer}</div>
       <Input

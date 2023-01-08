@@ -1,5 +1,8 @@
 import { Button } from "@chakra-ui/react";
-import { userSelector } from "@common/recoil/recoil.atom";
+import {
+  userSelector,
+  yjsRelayRaceAnswerState,
+} from "@common/recoil/recoil.atom";
 import { doc, providerState } from "@common/yjsStore/userStore";
 import NewCursor, { CursorComponent } from "@components/NewCursor";
 import Progress from "@components/Progress";
@@ -48,6 +51,7 @@ const AnswerDraw = ({
 }: {
   pushArrayHandler: (element: CPGameRelayRaceAnswer) => void;
 }) => {
+  const RelayRaceAnswerState = useRecoilValue(yjsRelayRaceAnswerState);
   const drawEnd = () => {
     const temp: CPGameRelayRaceAnswer = {
       id: doc.clientID,
@@ -59,8 +63,16 @@ const AnswerDraw = ({
   return (
     <div>
       <Progress time={50000} callback={drawEnd} play={"running"} />
+      {RelayRaceAnswerState.length > 0 && (
+        <div>
+          <div>아래에 주어진정답을 그려주세요!</div>
+          <div>
+            {RelayRaceAnswerState[RelayRaceAnswerState.length - 1].answer}
+          </div>
+        </div>
+      )}
       <Editor />
-      <Button onClick={drawEnd}></Button>
+      <Button onClick={drawEnd}>다음으로 넘기기</Button>
     </div>
   );
 };
