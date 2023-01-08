@@ -55,7 +55,7 @@ const Solver = () => {
       <div>
         {translation["draw.solver"]} : {getSovlerNicknameFromId(getSolverId())}
       </div>
-      {getSolverId() === providerState.provider.awareness.clientID && (
+      {getSolverId() === providerState?.provider?.awareness?.clientID && (
         <FormControl isInvalid={isError}>
           <FormLabel>{translation["draw.answer"]}</FormLabel>
           <Input

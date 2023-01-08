@@ -58,12 +58,12 @@ function Editor({}) {
         // autofocus
         // disableAssets
         showPages={false}
-        // showUI={false}
         onMount={onMount}
         onChangePage={onChangePage}
         onUndo={onUndo}
         onRedo={onRedo}
         onChangePresence={onChangePresence}
+        disableAssets={true}
         components={{ Cursor: NewCursor as CursorComponent }}
       />
     </div>
@@ -113,7 +113,7 @@ function Draw() {
   }, [roomId]);
 
   const questionTimeOut = useCallback(() => {
-    if (getSolverId() === providerState.provider.awareness.clientID) {
+    if (getSolverId() === providerState?.provider?.awareness.clientID) {
       setQuestionEnd();
     }
   }, [getSolverId, setQuestionEnd]);

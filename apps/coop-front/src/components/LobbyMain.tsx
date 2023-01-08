@@ -50,7 +50,9 @@ export const LobbyMain = () => {
   useEffect(() => {
     // 로비로 진입시 questionsState, yAgreeState 를 초기화함.
     if (isOwner) {
-      const pageIndex = yGameState.get(roomId).gamePagesIndex;
+      const gameState = yGameState.get(roomId);
+      if (!gameState) return;
+      const pageIndex = gameState.gamePagesIndex;
       doc.transact(() => {
         for (let index = 0; index < pageIndex; index++) {
           doc.getMap<any>(`shapes ${index}`).clear();
@@ -137,10 +139,17 @@ export const LobbyMain = () => {
           </Flex>
 
           {!isOwner && (
-            <div>
-              <Spinner color="red.500" />
-              {translation["lobby.selectByOwner"]}
-            </div>
+            <Flex
+              justifyContent={"center"}
+              alignItems={"center"}
+              m={3}
+              gap={"10px"}
+              fontWeight={500}
+              fontSize={"1.1rem"}
+            >
+              <Spinner color="red.500" size="md" />
+              {translation["lobby.select.by.owner"]}
+            </Flex>
           )}
           {isOwner && (
             <Flex

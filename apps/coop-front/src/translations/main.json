@@ -6,7 +6,7 @@
 
   "lobby.invite.button": "초대하기",
   "lobby.next.button": "다음으로 넘어가기",
-  "lobby.selectByOwner": "방장이 선택하는 중입니다.",
+  "lobby.select.by.owner": "방장이 선택하는 중입니다.",
   "lobby.toast.invite.title": "초대하기",
   "lobby.toast.invite.description": "초대주소가 복사되었습니다.",
 
@@ -25,5 +25,6 @@
 
   "draw.modal.answer": "정답!",
   "draw.modal.correct.answer": "이 정답을 맞췄습니다",
-  "draw.modal.next": "다음"
+  "draw.modal.next": "다음",
+  "draw.modal.next.wait.owner": "방장을 기다리는 중입니다."
 }

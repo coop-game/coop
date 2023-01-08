@@ -6,7 +6,7 @@
 
   "lobby.invite.button": "Invite",
   "lobby.next.button": "Next",
-  "lobby.selectByOwner": "Selecting from Onwer",
+  "lobby.select.by.owner": "Selecting from Onwer",
   "lobby.toast.invite.title": "Invite",
   "lobby.toast.invite.description": "Copy invite url",
 
@@ -25,5 +25,6 @@
 
   "draw.modal.answer": "Answer!",
   "draw.modal.correct.answer": "got the answer right!",
-  "draw.modal.next": "Next"
+  "draw.modal.next": "Next",
+  "draw.modal.next.wait.owner": "Waiting Owner"
 }
