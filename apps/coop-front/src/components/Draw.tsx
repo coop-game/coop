@@ -64,7 +64,6 @@ function Editor({}) {
         onChangePresence={onChangePresence}
         components={{ Cursor: NewCursor as CursorComponent }}
       />
-      <CanvasViewer></CanvasViewer>
     </div>
   );
 }
