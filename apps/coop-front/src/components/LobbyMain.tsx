@@ -16,6 +16,7 @@ import {
   providerState,
   yAgreeState,
   yChattingState,
+  yGameState,
   yQuestionsState,
 } from "@common/yjsStore/userStore";
 
@@ -49,13 +50,18 @@ export const LobbyMain = () => {
   useEffect(() => {
     // 로비로 진입시 questionsState, yAgreeState 를 초기화함.
     if (isOwner) {
+      const pageIndex = yGameState.get(roomId).gamePagesIndex;
       doc.transact(() => {
+        for (let index = 0; index < pageIndex; index++) {
+          doc.getMap<any>(`shapes ${index}`).clear();
+          doc.getMap<any>(`bindings ${index}`).clear();
+        }
         yChattingState.delete(0, yChattingState.length);
         yQuestionsState.delete(0, yQuestionsState.length);
         yAgreeState.clear();
       });
     }
-  }, [isOwner]);
+  }, [isOwner, roomId]);
 
   if (provider === null) {
     return <div>프로바이더가 없음</div>;
