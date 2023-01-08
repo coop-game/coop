@@ -98,8 +98,8 @@ function Draw() {
   const { getSolverId } = useSolver();
 
   const setQuestionEnd = useCallback(() => {
+    const gamePagesIndex = yGameState.get(roomId).gamePagesIndex;
     doc.transact(() => {
-      const gamePagesIndex = gameState.gamePagesIndex;
       const question = yQuestionsState.get(gamePagesIndex);
 
       if (question === undefined) return;
@@ -110,7 +110,7 @@ function Draw() {
       yQuestionsState.delete(gamePagesIndex);
       yQuestionsState.insert(gamePagesIndex, [newQuestion]);
     });
-  }, [gameState?.gamePagesIndex]);
+  }, [roomId]);
 
   const questionTimeOut = useCallback(() => {
     if (getSolverId() === providerState.provider.awareness.clientID) {
@@ -133,7 +133,8 @@ function Draw() {
     <>
       <Progress
         play={isPlay}
-        time={2000000}
+        startTime={gameState?.pageStartTime}
+        time={20000}
         callback={() => {
           setIsPlay("paused");
           questionTimeOut();

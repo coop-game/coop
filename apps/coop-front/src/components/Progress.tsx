@@ -1,18 +1,30 @@
+import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
 import { css } from "@emotion/react";
+import React from "react";
 import { useEffect, useState } from "react";
 
 type ProgressPropsType = {
+  startTime: number;
   time: number;
   play: string;
   callback: () => void;
 };
 
-const Progress = ({ time, play = "running", callback }: ProgressPropsType) => {
+const Progress = ({
+  startTime,
+  time,
+  play = "running",
+  callback,
+}: ProgressPropsType) => {
   const [isView, setIsView] = useState(play === "running");
 
   useEffect(() => {
     setIsView(play === "running");
   }, [play]);
+
+  const endTime = startTime + time;
+  const utcTimeStamp = getUtcTimeStamp();
+
   return (
     <>
       {isView && (
@@ -56,7 +68,9 @@ const Progress = ({ time, play = "running", callback }: ProgressPropsType) => {
                 }
               }
               animation-name: progress;
-              animation-duration: ${time}ms;
+              animation-duration: ${endTime - utcTimeStamp > 0
+                ? endTime - utcTimeStamp
+                : 0}ms;
               animation-timing-function: linear;
               animation-play-state: ${play};
             `}
@@ -66,4 +80,4 @@ const Progress = ({ time, play = "running", callback }: ProgressPropsType) => {
     </>
   );
 };
-export default Progress;
+export default React.memo(Progress);

@@ -1,4 +1,3 @@
-import { CPGamePage } from "./index.d";
 export type CPUserType = {
   roomId?: string;
   nickname?: string;
@@ -43,26 +42,38 @@ export type CPGameQuestion = {
 
 export type CPGameQuestions = CPGameQuestion[];
 
-export type CPGameDrawee = {
+export type CPGameCommonType = {
   path: CPPageType;
-  gametype: "DRAWEE";
+  gameType: CPGameTypes;
   isGameStart: boolean;
   gamePagesIndex: number;
+  pageStartTime: number;
 };
 
-export type CPGameRelayRace = {
-  path: CPPageType;
-  gametype: "RELAYRACE";
-  isGameStart: boolean;
-  gamePagesIndex: number;
-  gameOrderNumber: number[];
-};
+export type Modify<T, R> = Omit<T, keyof R> & R;
 
+export type CPGameTypeRelayRace = "RELAY_RACE";
+export type CPGameTypeDrawee = "DRAWEE";
+
+export type CPGameDrawee = Modify<
+  CPGameCommonType,
+  {
+    gameType: CPGameTypeDrawee;
+  }
+>;
+
+export type CPGameRelayRace = Modify<
+  CPGameCommonType,
+  {
+    gameType: CPGameTypeRelayRace;
+    gameOrderNumber: number[];
+  }
+>;
+
+type CPGameTypes = CPGameTypeDrawee | CPGameTypeRelayRace;
 export type CPGameState = CPGameDrawee | CPGameRelayRace;
 
 // -------------  deprecated -------------------
-type CPGameTypes = "DRAWEE" | "RELAY_RACE";
-
 type CPGameTypeProperty = {
   isGameStart: boolean;
   path: CPPageType;

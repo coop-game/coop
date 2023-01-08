@@ -1,3 +1,4 @@
+import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
 import { CPChatType, CPGameQuestion } from "./../../../types/index.d";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
@@ -39,6 +40,9 @@ export const getChangeGameStateHandler = <T>(roomId: string) => {
   return (partialGameState = {} as Partial<T>) => {
     const gameState = yGameState.get(roomId);
     const newGameState = { ...gameState, ...partialGameState };
+    if (partialGameState.hasOwnProperty("gamePagesIndex")) {
+      newGameState["pageStartTime"] = getUtcTimeStamp();
+    }
     yGameState.set(roomId, newGameState);
   };
 };
