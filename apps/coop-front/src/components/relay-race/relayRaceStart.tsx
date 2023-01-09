@@ -55,9 +55,6 @@ const RelayRaceStart = () => {
   useEffect(() => {
     if (isOwner && relayRaceAnswerState.length !== 0) {
       if (relayRaceAnswerState.length >= gameState.gameOrderNumber.length) {
-        // const answerLength = yRelayRaceAnswerState.length;
-        // yRelayRaceAnswerState.delete(0, answerLength);
-        // setState([]);
         changeGameStateHandler({
           path: "/result",
         });
