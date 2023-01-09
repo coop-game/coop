@@ -71,6 +71,7 @@ export const LobbyMain = () => {
         yAgreeState.clear();
       });
     }
+    // 나중에 결과 페이지에서 처리
     setRelayraceAnswerState([]);
   }, [isOwner, roomId]);
 

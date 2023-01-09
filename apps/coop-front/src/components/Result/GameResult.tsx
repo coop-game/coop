@@ -5,12 +5,10 @@ import {
   userProfilesSelector,
   userSelector,
   yjsGameState,
-  yjsQuestionsState,
   yjsRelayRaceAnswerState,
 } from "@common/recoil/recoil.atom";
 import {
   getChangeGameStateHandler,
-  yRelayRaceAnswerState,
 } from "@common/yjsStore/userStore";
 import CanvasViewer from "@components/CanvasViewer";
 import Progress from "@components/Progress";
@@ -38,8 +36,7 @@ const Result = () => {
   useProfileUpdate();
   useGameStateUpdate(roomId);
   useSyncPageFromGameState();
-  console.log("게임이다?", relayRaceState);
-  console.log("게임 타입이 이어달리기다?", relayRaceTypeCheck(gameState));
+
   const [nowPageIndex, setNowPageIndex] = useState<number>(0);
   const timerReset = () => {
     if (nowPageIndex + 1 <= gameState.gamePagesIndex) {
@@ -53,7 +50,6 @@ const Result = () => {
       }
     }
   };
-  console.log("정답목록", relayRaceState);
 
   useEffect(() => {
     if (!isPlay) {

@@ -56,6 +56,7 @@ const RelayRaceStart = () => {
   const { pushArrayHandler } = useArrayUpdate<CPGameRelayRaceAnswer>({
     yjsState: yRelayRaceAnswerState,
     setState: setState,
+    onMountSync: true,
   });
 
   useEffect(() => {
