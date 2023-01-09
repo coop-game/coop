@@ -7,7 +7,6 @@ import {
   providerState,
   yUserProfilesState,
 } from "@common/yjsStore/userStore";
-import { Room } from "y-webrtc";
 
 const useProfileUpdate = () => {
   const { nickname, avatarIndex, color, utcTimeStamp } =

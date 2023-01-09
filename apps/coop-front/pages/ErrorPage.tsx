@@ -11,7 +11,7 @@ const ErrorPage = ({ statusCode, errorMessage }: ErrorPagePropsType) => {
   const router = useRouter();
   useEffect(() => {
     const interval = setInterval(() => {
-      router.replace("/");
+      router.push("/");
     }, 3000);
     return () => {
       clearInterval(interval);

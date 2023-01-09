@@ -86,10 +86,10 @@ const CreateQuestion = () => {
   }, [changeGameStateHandler, isOwner]);
 
   useEffect(() => {
-    if (agreeList.length === userProfiles.length) {
+    if (agreeList && userProfiles && agreeList.length === userProfiles.length) {
       nextPageHandlerByOwner();
     }
-  }, [agreeList.length, nextPageHandlerByOwner, userProfiles.length]);
+  }, [agreeList, nextPageHandlerByOwner, userProfiles]);
 
   return (
     <div>

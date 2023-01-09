@@ -18,7 +18,7 @@ const useCheckDuplicateWindows = () => {
         isOriginal = false;
         alert("Cannot open multiple instances");
         providerState.provider.disconnect();
-        router.replace("/welcome");
+        router.push("/welcome");
       }
     }
     if (typeof window !== "undefined" && !!roomId) {

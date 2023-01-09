@@ -17,7 +17,7 @@ import { nanoid } from "nanoid";
 import { useTranslation } from "@hooks/useTransitions";
 import { useRecoilState } from "recoil";
 import AvatarImage from "@components/AvatarImage";
-import { providerState } from "@common/yjsStore/userStore";
+import { doc, providerState } from "@common/yjsStore/userStore";
 import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
 import Layout from "@components/layout";
 import LogoImage from "@components/layout/LogoImage";
@@ -36,7 +36,7 @@ export default function Home({
 
   const [nickname, setNickname] = useState("");
   const [isError, setIsError] = useState(true);
-  const [avatarIndex, setAvatarIndex] = useState(0);
+  const [avatarIndex, setAvatarIndex] = useState(lodashRandom(9));
   const getRandomColor = () =>
     "#" + Math.floor(Math.random() * 16777215).toString(16);
   const [color, setColor] = useState(getRandomColor());
@@ -50,13 +50,13 @@ export default function Home({
 
   const pushLobbyHander = () => {
     if (nickname !== "") {
-      if (!!providerState.provider) {
-        providerState.clearProvider();
-      }
       providerState.createProvider(roomId);
+      // if (!providerState.provider) {
+      //   providerState.clearProvider();
+      // }
       const utcTimeStamp = getUtcTimeStamp();
       setUserState({ roomId, nickname, avatarIndex, color, utcTimeStamp });
-      router.replace("/lobby");
+      router.push("/lobby");
     } else {
       setIsError(true);
     }

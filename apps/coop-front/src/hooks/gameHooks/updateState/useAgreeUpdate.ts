@@ -42,11 +42,11 @@ const useAgreeUpdate = () => {
     provider && provider.awareness.on("change", observeFunction);
 
     return () => {
-      yAgreeState.set(String(providerState.provider.awareness.clientID), false);
+      provider && yAgreeState.set(String(provider.awareness.clientID), false);
       yAgreeState.unobserve(observeFunction);
       provider && provider.awareness.off("change", observeFunction);
     };
-  }, [provider.awareness, observeFunction, provider]);
+  }, [provider?.awareness, observeFunction, provider]);
 
   // 처음 mount 될 때
   // useEffect(() => {

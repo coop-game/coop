@@ -1,14 +1,19 @@
 import { providerState, yUserProfilesState } from "@common/yjsStore/userStore";
+import router from "next/router";
+import { useEffect, useState } from "react";
+import { useTranslation } from "./useTransitions";
 
 const useHistoryBack = () => {
-  if (typeof window !== "undefined") {
-    const { provider } = providerState;
-    window.onpopstate = function () {
-      providerState.clearProvider();
-      provider.awareness.destroy();
-      window.location.href = "/welcome";
-      console.log("작동했냐???");
-    };
-  }
+  const translation = useTranslation().messages;
+  useEffect(() => {
+    router.beforePopState(({ url, as, options }) => {
+      window.history.pushState(null, "", router.asPath);
+      const isConfirmed = confirm(`${translation["backspace"]}`);
+      if (isConfirmed) {
+        window.location.href = "/";
+      }
+      return isConfirmed;
+    });
+  }, []);
 };
 export default useHistoryBack;
