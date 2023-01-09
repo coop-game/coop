@@ -90,7 +90,7 @@ function Draw() {
         gamePagesIndex: gamePagesIndex + 1,
       };
       if (gamePagesIndex + 1 >= questionsState.length) {
-        newGameState["path"] = "/lobby";
+        newGameState["path"] = "/result";
       }
       changeGameStateHandler(newGameState);
     }

@@ -7,9 +7,7 @@ import {
   yjsGameState,
   yjsRelayRaceAnswerState,
 } from "@common/recoil/recoil.atom";
-import {
-  getChangeGameStateHandler,
-} from "@common/yjsStore/userStore";
+import { getChangeGameStateHandler } from "@common/yjsStore/userStore";
 import CanvasViewer from "@components/CanvasViewer";
 import Progress from "@components/Progress";
 import { css } from "@emotion/react";
@@ -19,6 +17,9 @@ import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import { CPGameDrawee, CPGameRelayRace, CPGameRelayRaceAnswer } from "@types";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
+import { motion } from "framer-motion";
+import RelayRaceResult from "./RelayRaceResult";
+import DraweeResult from "./DraweeResult";
 
 const Result = () => {
   const gameState = useRecoilValue(yjsGameState);
@@ -27,11 +28,10 @@ const Result = () => {
     CPGameDrawee | CPGameRelayRace
   >(roomId);
   const [isPlay, setIsPlay] = useState<boolean>(false);
-  const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
+  const { isOwner } = useRecoilValue(userProfilesSelector);
   const [startTime, setStartTime] = useState<number>();
-  const relayRaceState = useRecoilValue<CPGameRelayRaceAnswer[]>(
-    yjsRelayRaceAnswerState
-  );
+
+  const gameType = gameState.gameType;
 
   useProfileUpdate();
   useGameStateUpdate(roomId);
@@ -57,12 +57,13 @@ const Result = () => {
       setStartTime(getUtcTimeStamp());
     }
   }, [isPlay]);
+
   return (
     <Box w="100%" h="100%">
       <div>결과</div>
       {isPlay && (
         <Progress
-          time={1000}
+          time={10000}
           callback={timerReset}
           play={"running"}
           startTime={startTime}
@@ -84,13 +85,9 @@ const Result = () => {
           `}
         >
           {relayRaceTypeCheck(gameState) ? (
-            nowPageIndex % 2 === 0 ? (
-              <div>{relayRaceState[nowPageIndex].answer}</div>
-            ) : (
-              <CanvasViewer pageIndex={nowPageIndex} />
-            )
+            <RelayRaceResult nowPageIndex={nowPageIndex} />
           ) : (
-            <CanvasViewer pageIndex={nowPageIndex} />
+            <DraweeResult nowPageIndex={nowPageIndex} />
           )}
         </div>
       </div>
