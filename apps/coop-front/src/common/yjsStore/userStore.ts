@@ -14,7 +14,6 @@ export const doc = (() => {
     const CLIENT_ID = "clientID";
     const localStorageClientID = localStorage.getItem(CLIENT_ID);
     if (localStorageClientID) {
-      console.log("바꿈");
       doc.clientID = Number(localStorageClientID);
     } else {
       localStorage.setItem(CLIENT_ID, String(doc.clientID));
@@ -57,7 +56,6 @@ export class providerClass {
   }
 
   clearProvider = () => {
-    console.log("clearProvider");
     this.provider.destroy();
     this.provider = null;
     this.room.destroy();
@@ -74,7 +72,6 @@ export class providerClass {
 
   createProvider = (roomId: string) => {
     if (this.provider === null) {
-      console.log("creactProvider");
       this.provider = new WebrtcProvider(roomId, doc, {
         signaling: ["ws://krkorea.iptime.org:3012"],
         password: null,
@@ -93,7 +90,6 @@ export class providerClass {
           },
         },
       });
-      console.log(this.provider);
     }
     if (this.room === null) {
       this.room = new Room(this.provider.awareness);

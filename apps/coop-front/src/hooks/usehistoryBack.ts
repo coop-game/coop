@@ -5,6 +5,7 @@ import { useTranslation } from "./useTransitions";
 
 const useHistoryBack = () => {
   const translation = useTranslation().messages;
+
   useEffect(() => {
     router.beforePopState(({ url, as, options }) => {
       window.history.pushState(null, "", router.asPath);
@@ -14,6 +15,6 @@ const useHistoryBack = () => {
       }
       return isConfirmed;
     });
-  }, []);
+  }, [translation]);
 };
 export default useHistoryBack;

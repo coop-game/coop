@@ -32,11 +32,6 @@ const useSolver = () => {
     [userProfiles]
   );
 
-  useEffect(() => {
-    console.log("useSolver1", getSolverId());
-    console.log("useSolver2", getSovlerNicknameFromId(getSolverId()));
-  }, [getSolverId, getSovlerNicknameFromId]);
-
   return { getSolverId, getSovlerNicknameFromId };
 };
 export default useSolver;

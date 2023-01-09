@@ -44,7 +44,6 @@ const Solver = () => {
       setAnswer("");
       yQuestionsState.delete(gamePagesIndex);
       yQuestionsState.insert(gamePagesIndex, [newQuestion]);
-      console.log(yQuestionsState.toArray());
     });
   };
 

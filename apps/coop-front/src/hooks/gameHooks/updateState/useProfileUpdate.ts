@@ -37,7 +37,6 @@ const useProfileUpdate = () => {
       const isOwner = idx === 0;
       return { isOwner, ...v };
     });
-    console.log("userProfiles", userProfiles);
     const isOwner =
       Number(userProfiles[0]?.id) === providerState.provider.awareness.clientID;
     return { isOwner, userProfiles };
@@ -45,17 +44,6 @@ const useProfileUpdate = () => {
 
   useEffect(() => {
     const observeFunction = (eventType: any, transaction: any) => {
-      console.log(eventType, transaction);
-      // local에서 수정했고, updated로 데이터가 들어왔다면
-      // if (transaction === "local" && eventType.updated.length > 0) {
-      //   return;
-      // }
-      // 마우스 커서
-      // transaction으로 Room이 전송됬고 updated로 데이터가 들어왔다면
-      // if (transaction instanceof Room && eventType.updated.length > 0) {
-      //   return;
-      // }
-      // console.log("eventType, transaction", eventType, transaction);
       setUserProfiles({ ...filterMap() });
     };
     yUserProfilesState.observe(observeFunction);
@@ -71,10 +59,6 @@ const useProfileUpdate = () => {
         isBanned: false,
         utcTimeStamp,
       });
-      // console.log(getUser);
-      // alert(`창을 2중으로 열었습니다.${getUser?.isBanned}`);
-      // window.history.pushState(null, "", "/welcome");
-      // window.location.href = "/welcome";
     }
 
     return () => {

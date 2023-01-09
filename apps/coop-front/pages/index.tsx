@@ -17,7 +17,7 @@ import { nanoid } from "nanoid";
 import { useTranslation } from "@hooks/useTransitions";
 import { useRecoilState } from "recoil";
 import AvatarImage from "@components/AvatarImage";
-import { doc, providerState } from "@common/yjsStore/userStore";
+import { providerState } from "@common/yjsStore/userStore";
 import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
 import Layout from "@components/layout";
 import LogoImage from "@components/layout/LogoImage";
@@ -140,7 +140,6 @@ export default function Home({
 
 export async function getServerSideProps(context) {
   const roomId = context.query?.roomId;
-  console.log(roomId);
   return {
     props: {
       roomId: roomId === undefined ? nanoid() : roomId,

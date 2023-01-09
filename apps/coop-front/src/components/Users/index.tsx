@@ -7,7 +7,6 @@ type UsersPropsType = {
   userProfiles: Array<CPUserProfile>;
 };
 const Users = ({ userProfiles }: UsersPropsType) => {
-  console.log(userProfiles);
   return (
     <Flex
       flexDirection={{ base: "row", md: "column" }}
