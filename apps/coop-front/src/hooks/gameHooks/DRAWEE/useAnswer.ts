@@ -7,13 +7,13 @@ const useAnswer = () => {
   const questionsState = useRecoilValue(yjsQuestionsState);
 
   const getAnswer = useCallback(() => {
-    return questionsState.length > gameState.gamePagesIndex
+    return questionsState.length >= gameState.gamePagesIndex
       ? questionsState[gameState.gamePagesIndex].answer
       : null;
   }, [gameState.gamePagesIndex, questionsState]);
 
   const isAnswerInArray = useCallback(() => {
-    if (gameState && questionsState.length > gameState.gamePagesIndex) {
+    if (gameState && questionsState.length >= gameState.gamePagesIndex) {
       const question = questionsState[gameState.gamePagesIndex];
       return question.inputAnswer.includes(question.answer);
     }

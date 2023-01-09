@@ -44,7 +44,6 @@ const Solver = () => {
       setAnswer("");
       yQuestionsState.delete(gamePagesIndex);
       yQuestionsState.insert(gamePagesIndex, [newQuestion]);
-      console.log(yQuestionsState.toArray());
     });
   };
 
@@ -92,7 +91,7 @@ const Solver = () => {
         `}
       >
         <div>{translation["draw.answer.history"]}</div>
-        {questionsState.length > gameState?.gamePagesIndex && (
+        {questionsState.length >= gameState?.gamePagesIndex && (
           <div>
             {questionsState[gameState.gamePagesIndex].inputAnswer.map(
               (v, idx) => {

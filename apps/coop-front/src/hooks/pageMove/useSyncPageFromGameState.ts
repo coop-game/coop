@@ -21,7 +21,6 @@ const useSyncPageFromGameState = () => {
   const gameState = useRecoilValue(yjsGameState);
 
   useEffect(() => {
-    console.log(gameState);
     if (!gameState) {
       if (router.pathname !== "/lobby") {
         console.log("gameState 가 없어서 로비로 이동함");

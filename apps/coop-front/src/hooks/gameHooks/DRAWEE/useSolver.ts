@@ -16,7 +16,7 @@ const useSolver = () => {
   const getSolverId = useCallback(() => {
     const questionsState = yQuestionsState.toArray();
     if (!questionsState || !gameState) return null;
-    return questionsState.length > gameState.gamePagesIndex
+    return questionsState.length >= gameState.gamePagesIndex
       ? questionsState[gameState.gamePagesIndex].solver
       : null;
   }, [gameState]);
@@ -31,11 +31,6 @@ const useSolver = () => {
     },
     [userProfiles]
   );
-
-  useEffect(() => {
-    console.log("useSolver1", getSolverId());
-    console.log("useSolver2", getSovlerNicknameFromId(getSolverId()));
-  }, [getSolverId, getSovlerNicknameFromId]);
 
   return { getSolverId, getSovlerNicknameFromId };
 };
