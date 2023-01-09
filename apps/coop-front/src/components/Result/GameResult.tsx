@@ -1,17 +1,24 @@
 import { Box } from "@chakra-ui/react";
+import { relayRaceTypeCheck } from "@common/lib/getGameType";
+import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
 import {
   userProfilesSelector,
   userSelector,
   yjsGameState,
+  yjsQuestionsState,
+  yjsRelayRaceAnswerState,
 } from "@common/recoil/recoil.atom";
-import { getChangeGameStateHandler } from "@common/yjsStore/userStore";
+import {
+  getChangeGameStateHandler,
+  yRelayRaceAnswerState,
+} from "@common/yjsStore/userStore";
 import CanvasViewer from "@components/CanvasViewer";
 import Progress from "@components/Progress";
 import { css } from "@emotion/react";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
-import { CPGameDrawee, CPGameRelayRace } from "@types";
+import { CPGameDrawee, CPGameRelayRace, CPGameRelayRaceAnswer } from "@types";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 
@@ -23,11 +30,16 @@ const Result = () => {
   >(roomId);
   const [isPlay, setIsPlay] = useState<boolean>(false);
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
+  const [startTime, setStartTime] = useState<number>();
+  const relayRaceState = useRecoilValue<CPGameRelayRaceAnswer[]>(
+    yjsRelayRaceAnswerState
+  );
+
   useProfileUpdate();
   useGameStateUpdate(roomId);
   useSyncPageFromGameState();
-
-  console.log(gameState);
+  console.log("게임이다?", relayRaceState);
+  console.log("게임 타입이 이어달리기다?", relayRaceTypeCheck(gameState));
   const [nowPageIndex, setNowPageIndex] = useState<number>(0);
   const timerReset = () => {
     if (nowPageIndex + 1 <= gameState.gamePagesIndex) {
@@ -41,17 +53,24 @@ const Result = () => {
       }
     }
   };
+  console.log("정답목록", relayRaceState);
 
   useEffect(() => {
     if (!isPlay) {
       setIsPlay(true);
+      setStartTime(getUtcTimeStamp());
     }
   }, [isPlay]);
   return (
     <Box w="100%" h="100%">
       <div>결과</div>
       {isPlay && (
-        <Progress time={5000} callback={timerReset} play={"running"} />
+        <Progress
+          time={1000}
+          callback={timerReset}
+          play={"running"}
+          startTime={startTime}
+        />
       )}
       <div
         css={css`
@@ -68,7 +87,15 @@ const Result = () => {
             width: 100%;
           `}
         >
-          <CanvasViewer pageIndex={nowPageIndex} />
+          {relayRaceTypeCheck(gameState) ? (
+            nowPageIndex % 2 === 0 ? (
+              <div>{relayRaceState[nowPageIndex].answer}</div>
+            ) : (
+              <CanvasViewer pageIndex={nowPageIndex} />
+            )
+          ) : (
+            <CanvasViewer pageIndex={nowPageIndex} />
+          )}
         </div>
       </div>
     </Box>

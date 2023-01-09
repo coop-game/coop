@@ -52,13 +52,19 @@ const RelayRaceStart = () => {
 
   console.log(gameState);
   console.log("relayRace", relayRaceAnswerState);
+
+  const { pushArrayHandler } = useArrayUpdate<CPGameRelayRaceAnswer>({
+    yjsState: yRelayRaceAnswerState,
+    setState: setState,
+  });
+
   useEffect(() => {
-    if (isOwner && relayRaceAnswerState.length !== 0) {
+    if (isOwner && relayRaceAnswerState && relayRaceAnswerState.length !== 0) {
       if (relayRaceAnswerState.length >= gameState.gameOrderNumber.length) {
         changeGameStateHandler({
           path: "/result",
         });
-      } else {
+      } else if (isOwner) {
         changeGameStateHandler({
           gamePagesIndex: gameState.gamePagesIndex + 1,
         });
@@ -66,11 +72,6 @@ const RelayRaceStart = () => {
     }
     setIsPlay("paused");
   }, [relayRaceAnswerState.length]);
-
-  const { pushArrayHandler } = useArrayUpdate<CPGameRelayRaceAnswer>({
-    yjsState: yRelayRaceAnswerState,
-    setState: setState,
-  });
 
   useEffect(() => {
     if (isOwner) {
@@ -127,7 +128,7 @@ const RelayRaceStart = () => {
           <AnswerInput
             gamepageIndex={gameState.gamePagesIndex}
             pushArrayHandler={pushArrayHandler}
-            startTime = {gameState.pageStartTime}
+            startTime={gameState.pageStartTime}
           ></AnswerInput>
         </Box>
       );
