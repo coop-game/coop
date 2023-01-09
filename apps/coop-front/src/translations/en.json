@@ -26,5 +26,7 @@
   "draw.modal.answer": "Answer!",
   "draw.modal.correct.answer": "got the answer right!",
   "draw.modal.next": "Next",
-  "draw.modal.next.wait.owner": "Waiting Owner"
+  "draw.modal.next.wait.owner": "Waiting Owner",
+
+  "backspace": "Are you sure you want to get out? Data may be lost?"
 }

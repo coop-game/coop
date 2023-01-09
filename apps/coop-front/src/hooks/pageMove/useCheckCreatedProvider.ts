@@ -5,7 +5,7 @@ const useCheckCreatedProvider = (path = "/") => {
   const { provider } = providerState;
   const router = useRouter();
   if (provider === null) {
-    router.replace(`${path}`);
+    router.push(`${path}`);
   }
 };
 

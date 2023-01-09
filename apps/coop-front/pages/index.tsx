@@ -56,7 +56,7 @@ export default function Home({
       // }
       const utcTimeStamp = getUtcTimeStamp();
       setUserState({ roomId, nickname, avatarIndex, color, utcTimeStamp });
-      router.replace("/lobby");
+      router.push("/lobby");
     } else {
       setIsError(true);
     }
