@@ -1,9 +1,14 @@
 import { css } from "@emotion/react";
 import { Button, Flex, Spinner, useToast } from "@chakra-ui/react";
 
-import { userProfilesSelector, userSelector } from "@common/recoil/recoil.atom";
+import {
+  userProfilesSelector,
+  userSelector,
+  yjsQuestionsState,
+  yjsRelayRaceAnswerState,
+} from "@common/recoil/recoil.atom";
 import { useTranslation } from "@hooks/useTransitions";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import useCheckCreatedProvider from "@hooks/pageMove/useCheckCreatedProvider";
@@ -18,6 +23,7 @@ import {
   yChattingState,
   yGameState,
   yQuestionsState,
+  yRelayRaceAnswerState,
 } from "@common/yjsStore/userStore";
 
 import DraweeLogo from "@asset/images/DraweeLogo.png";
@@ -45,6 +51,7 @@ export const LobbyMain = () => {
   useGameStateUpdate(roomId);
   useSyncPageFromGameState();
   const changeGameStateHandler = getChangeGameStateHandler<CPGameState>(roomId);
+  const [_, setRelayraceAnswerState] = useRecoilState(yjsRelayRaceAnswerState);
   useProfileUpdate();
 
   useEffect(() => {
@@ -60,9 +67,12 @@ export const LobbyMain = () => {
         }
         yChattingState.delete(0, yChattingState.length);
         yQuestionsState.delete(0, yQuestionsState.length);
+        yRelayRaceAnswerState.delete(0, yRelayRaceAnswerState.length);
         yAgreeState.clear();
       });
     }
+    // 나중에 결과 페이지에서 처리
+    setRelayraceAnswerState([]);
   }, [isOwner, roomId]);
 
   if (provider === null) {
@@ -93,10 +103,13 @@ export const LobbyMain = () => {
     }
 
     if (gameType === "RELAY_RACE") {
-      changeGameStateHandler({
+      const partialRelayRace: Partial<CPGameRelayRace> = {
         isGameStart: true,
+        gamePagesIndex: 0,
+        gameType: "RELAY_RACE",
         path: "/games/relay-race",
-      } as CPGameRelayRace);
+      };
+      changeGameStateHandler(partialRelayRace);
     }
   };
 

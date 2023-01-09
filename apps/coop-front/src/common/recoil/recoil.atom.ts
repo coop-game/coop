@@ -5,6 +5,7 @@ import {
   CPUserProfilesState,
   CPUserType,
   CPGameQuestions,
+  CPGameRelayRaceAnswers,
   CPUserProfile,
 } from "@types";
 
@@ -56,6 +57,14 @@ export const gameUserProfileStates = atom<CPUserProfile[]>({
 export const yjsGameState = atom<CPGameState | null>({
   key: "YJS_GAME_STATE",
   default: null,
+});
+
+/**
+ * yjsRelayRaceAnswerState
+ */
+export const yjsRelayRaceAnswerState = atom<CPGameRelayRaceAnswers>({
+  key: "YJS_RELAY_RACE_ANSWER",
+  default: [],
 });
 
 /**

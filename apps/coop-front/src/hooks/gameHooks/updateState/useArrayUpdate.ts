@@ -38,11 +38,11 @@ const useArrayUpdate = <T>(props: useArrayUpdatePropsType<T>) => {
 
   const observeFunction = useCallback(
     (eventType: any, transaction: any) => {
-      if (transaction === "local" && eventType.updated.length > 0) {
-        return;
-      }
+      // if (transaction === "local" && eventType.updated.length > 0) {
+      //   return;
+      // }
       //   // 마우스 커서
-      //   // transaction으로 Room이 전송됬고 updated로 데이터가 들어왔다면
+      //   // transaction으로 Room이 전송됐고 updated로 데이터가 들어왔다면
       //   if (transaction instanceof Room && eventType.updated.length > 0) {
       //     return;
       //   }

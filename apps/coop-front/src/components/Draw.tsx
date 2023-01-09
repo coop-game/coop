@@ -88,7 +88,7 @@ function Draw() {
       const gamePagesIndex = yGameState.get(roomId).gamePagesIndex;
       const newGameState = {};
       if (gamePagesIndex + 1 >= questionsState.length) {
-        newGameState["path"] = "/lobby";
+        newGameState["path"] = "/result";
       } else {
         newGameState["gamePagesIndex"] = gamePagesIndex + 1;
       }

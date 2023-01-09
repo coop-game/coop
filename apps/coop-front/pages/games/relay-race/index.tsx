@@ -1,13 +1,14 @@
+import { Box } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 
 const Main = () => {
   const RelayRaceStart = dynamic(
-    import("@components/relay-race/relayRaceStart")
+    import("@components/relay-race/RelayRaceStart")
   );
   return (
-    <div>
+    <Box w="100%" h="100%" minHeight="95vh">
       <RelayRaceStart />
-    </div>
+    </Box>
   );
 };
 export default Main;

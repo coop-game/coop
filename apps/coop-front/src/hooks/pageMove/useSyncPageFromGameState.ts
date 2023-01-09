@@ -7,13 +7,13 @@ import { useEffect } from "react";
 /**
  *
  * @param roomId roomName from doc
- * @returns `{gameState, changeGameStateHandler}`
+ * @returns {gameState, changeGameStateHandler}
  *
- * `gameState` from CRDT data
+ * gameState from CRDT data
  *
- * `changeGameStateHandler` is update yjs CRDT Data
+ * changeGameStateHandler is update yjs CRDT Data
  *
- * flow `gameState` update from `changeGameStateHandler`
+ * flow gameState update from changeGameStateHandler
  *
  */
 const useSyncPageFromGameState = () => {

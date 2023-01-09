@@ -23,6 +23,15 @@ export type CPUserProfilesState = {
   userProfiles?: CPUserProfile[];
 };
 
+export type CPGameRelayRaceAnswer = {
+  answer?: string;
+  id: number;
+  username: string;
+  isDraw: boolean;
+};
+
+export type CPGameRelayRaceAnswers = CPGameRelayRaceAnswer[];
+
 export type CPPageType =
   | "/lobby"
   | "/start"
