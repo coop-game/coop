@@ -127,6 +127,7 @@ const RelayRaceStart = () => {
           <AnswerInput
             gamepageIndex={gameState.gamePagesIndex}
             pushArrayHandler={pushArrayHandler}
+            startTime = {gameState.pageStartTime}
           ></AnswerInput>
         </Box>
       );
@@ -136,6 +137,7 @@ const RelayRaceStart = () => {
           <AnswerDraw
             gamepageIndex={gameState.gamePagesIndex}
             pushArrayHandler={pushArrayHandler}
+            startTime={gameState.pageStartTime}
           />
         </Box>
       );

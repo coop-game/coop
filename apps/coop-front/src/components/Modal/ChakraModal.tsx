@@ -11,6 +11,7 @@ import {
   ModalFooter,
   Input,
   FormLabel,
+  Spinner,
 } from "@chakra-ui/react";
 import { userProfilesState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
@@ -81,6 +82,22 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
               >
                 {translation["draw.modal.next"]}
               </Button>
+            )}
+            {!isOwner && (
+              <div
+                css={css`
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 10px;
+                  font-size: 2em;
+                `}
+              >
+                <Spinner color="red.700" size="lg" />
+                <div css={css``}>
+                  {translation["draw.modal.next.wait.owner"]}
+                </div>
+              </div>
             )}
           </ModalFooter>
         </ModalContent>

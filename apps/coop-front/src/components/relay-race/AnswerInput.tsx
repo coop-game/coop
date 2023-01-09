@@ -11,9 +11,11 @@ import { css } from "@emotion/react";
 const AnswerInput = ({
   pushArrayHandler,
   gamepageIndex,
+  startTime,
 }: {
   pushArrayHandler: (element: CPGameRelayRaceAnswer) => void;
   gamepageIndex: number;
+  startTime: number;
 }) => {
   const [answer, setAnswer] = useState<string>("");
   const [relayRaceAnswerState, setState] = useRecoilState<
@@ -38,7 +40,12 @@ const AnswerInput = ({
         height: 100%;
       `}
     >
-      <Progress time={50000} callback={onClick} play={"running"} />
+      <Progress
+        time={50000}
+        callback={onClick}
+        play={"running"}
+        startTime={startTime}
+      />
       <div
         css={css`
           display: flex;
@@ -55,7 +62,7 @@ const AnswerInput = ({
               width: 100%;
             `}
           >
-            <CanvasViewer pageIndex={gamepageIndex-1} />
+            <CanvasViewer pageIndex={gamepageIndex - 1} />
           </div>
         )}
       </div>

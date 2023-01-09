@@ -1,9 +1,5 @@
-import {
-  CPChatType,
-  CPGameDrawee,
-  CPGameQuestion,
-  CPGameRelayRaceAnswer,
-} from "./../../../types/index.d";
+import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
+import { CPChatType, CPGameQuestion,CPGameRelayRaceAnswer, } from "./../../../types/index.d";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
 import * as awarenessProtocol from "y-protocols/awareness";
@@ -46,6 +42,9 @@ export const getChangeGameStateHandler = <T>(roomId: string) => {
   return (partialGameState = {} as Partial<T>) => {
     const gameState = yGameState.get(roomId);
     const newGameState = { ...gameState, ...partialGameState };
+    if (partialGameState.hasOwnProperty("gamePagesIndex")) {
+      newGameState["pageStartTime"] = getUtcTimeStamp();
+    }
     yGameState.set(roomId, newGameState);
   };
 };

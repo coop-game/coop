@@ -49,9 +49,11 @@ function Editor({ pageIndex }: { pageIndex: number }) {
 const AnswerDraw = ({
   pushArrayHandler,
   gamepageIndex,
+  startTime,
 }: {
   pushArrayHandler: (element: CPGameRelayRaceAnswer) => void;
   gamepageIndex: number;
+  startTime: number;
 }) => {
   const RelayRaceAnswerState = useRecoilValue(yjsRelayRaceAnswerState);
   const drawEnd = () => {
@@ -64,7 +66,7 @@ const AnswerDraw = ({
   };
   return (
     <div>
-      <Progress time={50000} callback={drawEnd} play={"running"} />
+      <Progress time={50000} callback={drawEnd} play={"running"} startTime={startTime} />
       {RelayRaceAnswerState.length > 0 && (
         <div>
           <div>아래에 주어진정답을 그려주세요!</div>

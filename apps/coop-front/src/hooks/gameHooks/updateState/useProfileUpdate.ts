@@ -94,7 +94,7 @@ const useProfileUpdate = () => {
   ]);
 
   useEffect(() => {
-    provider.awareness.setLocalState({});
+    provider && provider.awareness.setLocalState({});
     provider &&
       yUserProfilesState.set(String(provider.awareness.clientID), {
         id: provider.awareness.clientID,
