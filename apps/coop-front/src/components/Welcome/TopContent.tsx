@@ -58,7 +58,7 @@ function TopContent() {
             width="150px"
             bg="colors.third"
             onClick={() => {
-              router.replace("/");
+              router.push("/");
             }}
           >
             시작하기

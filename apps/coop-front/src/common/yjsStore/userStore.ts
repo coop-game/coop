@@ -64,6 +64,14 @@ export class providerClass {
     this.room = null;
   };
 
+  disconnectProvider = () => {
+    this.provider.disconnect();
+  };
+
+  connectProvider = () => {
+    this.provider.connect();
+  };
+
   createProvider = (roomId: string) => {
     if (this.provider === null) {
       console.log("creactProvider");
