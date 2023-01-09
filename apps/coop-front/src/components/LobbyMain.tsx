@@ -112,22 +112,20 @@ export const LobbyMain = () => {
         flexDirection={{ base: "column", md: "row" }}
         gap={{ base: "10px", md: "20px" }}
       >
-        <div
-          css={css`
-            minheight: 200px;
-          `}
-        >
+        <div>
           <Users userProfiles={userProfiles} />
         </div>
         <Flex
           w={{ base: "100%", md: "350px", xl: "600px" }}
           h={"100%"}
-          css={css``}
           borderRadius={"15px"}
           border="3px solid gray"
           boxShadow="dark-lg"
           rounded="md"
           flexDirection={"column"}
+          css={css`
+            flex-grow: 1;
+          `}
         >
           <Flex
             css={css`

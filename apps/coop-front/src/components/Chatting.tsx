@@ -22,6 +22,7 @@ const Chatting = () => {
 
   return (
     <Flex
+      // maxHeight={{ base: 500, md: 900 }}
       css={css`
         width: 100%;
         height: 100%;
@@ -29,8 +30,9 @@ const Chatting = () => {
         justify-content: space-between;
       `}
     >
-      <div
+      <Flex
         css={css`
+          flex-direction: column;
           word-break: break-all;
           overflow-y: scroll;
           height: 100%;
@@ -72,7 +74,7 @@ const Chatting = () => {
           );
         })}
         <div ref={messagesEndRef}></div>
-      </div>
+      </Flex>
       <div
         css={css`
           display: flex;

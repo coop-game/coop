@@ -17,10 +17,11 @@ const LogoImage = ({
 }: LogoImagePropsType) => {
   return (
     <Flex
-      p={`${heightPadding}px`}
-      height={`${heightPadding * 2 + height}px`}
-      width={"100%"}
+      p={{ base: "10px", md: `${heightPadding}px` }}
+      height={{ base: height - 50, md: `${heightPadding * 2 + height}px` }}
+      width={{ base: height - 50, md: `${heightPadding * 2 + height}px` }}
       justifyContent={"center"}
+      alignSelf="center"
     >
       <Image src={src} width={width} height={height} alt="로고이미지" />
     </Flex>

@@ -19,6 +19,8 @@ const Users = ({ userProfiles }: UsersPropsType) => {
       border="3px solid gray"
       boxShadow="dark-lg"
       rounded="md"
+      css={css`
+      `}
     >
       {userProfiles &&
         userProfiles.map((userProfile, idx) => {
