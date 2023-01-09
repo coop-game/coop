@@ -86,11 +86,11 @@ function Draw() {
   const nextPageHandler = useCallback(() => {
     if (isOwner === true) {
       const gamePagesIndex = yGameState.get(roomId).gamePagesIndex;
-      const newGameState = {
-        gamePagesIndex: gamePagesIndex + 1,
-      };
+      const newGameState = {};
       if (gamePagesIndex + 1 >= questionsState.length) {
         newGameState["path"] = "/lobby";
+      } else {
+        newGameState["gamePagesIndex"] = gamePagesIndex + 1;
       }
       changeGameStateHandler(newGameState);
     }
@@ -142,7 +142,7 @@ function Draw() {
       ></Progress>
 
       {gameState &&
-        questionsState.length > gameState.gamePagesIndex &&
+        questionsState.length >= gameState.gamePagesIndex &&
         questionsState[gameState.gamePagesIndex].isQuestionEnd && (
           <AnswerModal
             setIsPlay={setIsPlay}

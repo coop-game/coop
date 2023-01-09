@@ -16,7 +16,7 @@ const useSolver = () => {
   const getSolverId = useCallback(() => {
     const questionsState = yQuestionsState.toArray();
     if (!questionsState || !gameState) return null;
-    return questionsState.length > gameState.gamePagesIndex
+    return questionsState.length >= gameState.gamePagesIndex
       ? questionsState[gameState.gamePagesIndex].solver
       : null;
   }, [gameState]);

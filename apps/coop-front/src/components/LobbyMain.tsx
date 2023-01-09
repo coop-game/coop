@@ -54,7 +54,7 @@ export const LobbyMain = () => {
       if (!gameState) return;
       const pageIndex = gameState.gamePagesIndex;
       doc.transact(() => {
-        for (let index = 0; index < pageIndex; index++) {
+        for (let index = 0; index <= pageIndex; index++) {
           doc.getMap<any>(`shapes ${index}`).clear();
           doc.getMap<any>(`bindings ${index}`).clear();
         }
