@@ -15,7 +15,7 @@ const RelayRaceResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
     <Box w="100%" height="100%" overflow="hidden">
       <motion.div
         animate={{
-          x: `${+nowPageIndex * -100 - 50}%`,
+          x: `${+nowPageIndex * 100}%`,
           scale: 1,
           rotate: 0,
         }}

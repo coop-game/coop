@@ -36,10 +36,11 @@ export default function Home({
 
   const [nickname, setNickname] = useState("");
   const [isError, setIsError] = useState(true);
-  const [avatarIndex, setAvatarIndex] = useState(lodashRandom(9));
+  const [avatarIndex, setAvatarIndex] = useState(0);
+  const [color, setColor] = useState("#000000");
+
   const getRandomColor = () =>
     "#" + Math.floor(Math.random() * 16777215).toString(16);
-  const [color, setColor] = useState(getRandomColor());
 
   const randomAvatarHandler = useCallback(() => {
     setAvatarIndex(lodashRandom(9));
