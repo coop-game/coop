@@ -5,10 +5,8 @@ import {
   userProfilesSelector,
   userSelector,
   yjsGameState,
-  yjsRelayRaceAnswerState,
 } from "@common/recoil/recoil.atom";
 import { getChangeGameStateHandler } from "@common/yjsStore/userStore";
-import CanvasViewer from "@components/CanvasViewer";
 import Progress from "@components/Progress";
 import { css } from "@emotion/react";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
@@ -17,7 +15,6 @@ import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import { CPGameDrawee, CPGameRelayRace, CPGameRelayRaceAnswer } from "@types";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { motion } from "framer-motion";
 import RelayRaceResult from "./RelayRaceResult";
 import DraweeResult from "./DraweeResult";
 
@@ -30,8 +27,6 @@ const Result = () => {
   const [isPlay, setIsPlay] = useState<boolean>(false);
   const { isOwner } = useRecoilValue(userProfilesSelector);
   const [startTime, setStartTime] = useState<number>();
-
-  const gameType = gameState.gameType;
 
   useProfileUpdate();
   useGameStateUpdate(roomId);
@@ -59,11 +54,11 @@ const Result = () => {
   }, [isPlay]);
 
   return (
-    <Box w="100%" h="100%">
+    <Box w="100%" h="100%" position={"relative"}>
       <div>결과</div>
       {isPlay && (
         <Progress
-          time={10000}
+          time={5000}
           callback={timerReset}
           play={"running"}
           startTime={startTime}

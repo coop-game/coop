@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import {
+  userProfilesSelector,
   yjsQuestionsState,
   yjsRelayRaceAnswerState,
 } from "@common/recoil/recoil.atom";
@@ -11,10 +12,14 @@ import { css } from "@emotion/react";
 
 const DraweeResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
   const questionState = useRecoilValue<CPGameQuestions>(yjsQuestionsState);
-
+  const { userProfiles } = useRecoilValue(userProfilesSelector);
+  
+  console.log(questionState);
   return (
     <Box w="100%" height="100%">
-      <CanvasViewer pageIndex={nowPageIndex} />
+      <Box w="80%" height="80%">
+        <CanvasViewer pageIndex={nowPageIndex} />
+      </Box>
     </Box>
   );
 };

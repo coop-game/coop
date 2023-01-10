@@ -25,10 +25,9 @@ export type CPUserProfilesState = {
 
 export type CPGameRelayRaceAnswer = {
   answer?: string;
-  id: number;
-  username: string;
   isDraw: boolean;
-};
+  id: number;
+} & Omit<CPUserType,"utcTimeStamp"|"isBanned"|"isOwner"|"roomId">;
 
 export type CPGameRelayRaceAnswers = CPGameRelayRaceAnswer[];
 
