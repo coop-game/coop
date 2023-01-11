@@ -12,7 +12,7 @@ import { css } from "@emotion/react";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
-import { CPGameDrawee, CPGameRelayRace, CPGameRelayRaceAnswer } from "@types";
+import { CPGameState } from "@types";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import RelayRaceResult from "./RelayRaceResult";
@@ -21,9 +21,7 @@ import DraweeResult from "./DraweeResult";
 const Result = () => {
   const gameState = useRecoilValue(yjsGameState);
   const { roomId } = useRecoilValue(userSelector) ?? {};
-  const gameChangeHandler = getChangeGameStateHandler<
-    CPGameDrawee | CPGameRelayRace
-  >(roomId);
+  const gameChangeHandler = getChangeGameStateHandler<CPGameState>(roomId);
   const [isPlay, setIsPlay] = useState<boolean>(false);
   const { isOwner } = useRecoilValue(userProfilesSelector);
   const [startTime, setStartTime] = useState<number>();
@@ -31,7 +29,10 @@ const Result = () => {
   useProfileUpdate();
   useGameStateUpdate(roomId);
   useSyncPageFromGameState();
-
+  console.log(
+    "너는 무슨 타입이니? 이어달리기니?",
+    relayRaceTypeCheck(gameState)
+  );
   const [nowPageIndex, setNowPageIndex] = useState<number>(0);
   const timerReset = () => {
     if (nowPageIndex + 1 <= gameState.gamePagesIndex) {

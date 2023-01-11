@@ -16,10 +16,10 @@ const RelayRaceResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
   );
   const { userProfiles } = useRecoilValue(userProfilesSelector);
   return (
-    <Box w="100%" height="100%" overflow="hidden" position={"absolute"}>
+    <Box w="100%" height="100%" overflow={"hidden"} position={"absolute"}>
       <Flex
         w={"100%"}
-        h={"80%"}
+        h={"70%"}
         border="2px"
         justifyContent="center"
         alignItems="center"
