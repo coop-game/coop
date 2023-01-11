@@ -143,7 +143,7 @@ function Draw() {
 
       {gameState &&
         questionsState.length >= gameState.gamePagesIndex &&
-        questionsState[gameState.gamePagesIndex].isQuestionEnd && (
+        questionsState[gameState.gamePagesIndex]?.isQuestionEnd && (
           <AnswerModal
             setIsPlay={setIsPlay}
             onClose={() => {

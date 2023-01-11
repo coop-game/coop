@@ -17,7 +17,7 @@ const useSolver = () => {
     const questionsState = yQuestionsState.toArray();
     if (!questionsState || !gameState) return null;
     return questionsState.length >= gameState.gamePagesIndex
-      ? questionsState[gameState.gamePagesIndex].solver
+      ? questionsState[gameState.gamePagesIndex]?.solver
       : null;
   }, [gameState]);
 
