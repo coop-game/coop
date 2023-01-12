@@ -36,7 +36,8 @@ const PageTurningAnimation = ({
         left: 0;
         width: 100vw;
         height: 100vh;
-        overflow: hidden;
+        /* overflow: hidden; */
+        overflow-x: hidden;
       `}
     >
       <div className={styles.root}>
