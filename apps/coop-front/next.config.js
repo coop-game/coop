@@ -4,14 +4,6 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
     prependData: `
-    $--body-bg: #fafafa;
-    $--page-bg: #f5f5f5;
-    $--dark-text: #2a2935;
-  
-    $--baseline: 26px;
-  
-    $--body: "Cormorant Garamond", serif;
-    $--page-turnning-duration: 0.9s;
     `,
   },
   experimental: {

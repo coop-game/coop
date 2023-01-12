@@ -17,16 +17,15 @@ type PageTurningAnimation<RC> = {
   transitionState: string;
 };
 
-const duration = 2000;
+const duration = 1000;
 
 const PageTurningAnimation = ({
   children,
   transitionState,
 }: PageTurningAnimation<React.ReactNode>) => {
-  const [isTurn, setIsTurn] = useState<string>("");
+  const [isTurn, setIsTurn] = useState<boolean>(false);
   useEffect(() => {
-    console.log("transitionState", transitionState);
-    setIsTurn(transitionState === "exiting" ? "turnning" : "");
+    setIsTurn(transitionState === "exiting");
   }, [transitionState]);
 
   return (
@@ -43,8 +42,20 @@ const PageTurningAnimation = ({
       <div className={styles.root}>
         <div className="cover">
           <div className="book">
-            <div className={`book__page book__page--2 ${isTurn}`}>
-              <div className="book__page-front">{children}</div>
+            <div
+              className={`${isTurn ? styles.flipOut : styles.flipIn}`}
+              css={css`
+                width: 100%;
+                height: 100%;
+              `}
+            >
+              <div
+                className={`book__page book__page--1 ${
+                  isTurn ? styles.scaleOut : ""
+                }`}
+              >
+                <div className={`book__page-front`}>{children}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -57,18 +68,10 @@ const Transition = ({
   children,
   location,
 }: TransitionKind<React.ReactNode>) => {
-  console.log("location", location);
   return (
     <>
       <TransitionGroup style={{ position: "relative" }}>
-        <ReactTransition
-          key={location}
-          timeout={{
-            appear: 0,
-            enter: 0,
-            exit: duration,
-          }}
-        >
+        <ReactTransition key={location} timeout={duration}>
           {(status: string) => (
             <PageTurningAnimation transitionState={status}>
               {children}

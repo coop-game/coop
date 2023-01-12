@@ -13,9 +13,13 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <RecoilRoot>
-        <Transition location={router.pathname}>
+        {router.pathname === "/welcome" ? (
           <Component {...pageProps} />
-        </Transition>
+        ) : (
+          <Transition location={router.pathname}>
+            <Component {...pageProps} />
+          </Transition>
+        )}
       </RecoilRoot>
     </ChakraProvider>
   );
