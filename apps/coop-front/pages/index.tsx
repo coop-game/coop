@@ -22,6 +22,7 @@ import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
 import Layout from "@components/layout";
 import LogoImage from "@components/layout/LogoImage";
 import useHistoryBack from "@hooks/usehistoryBack";
+import { css } from "@emotion/react";
 
 export default function Home({
   roomId,
@@ -91,6 +92,7 @@ export default function Home({
             p={10}
             flexDirection={"column"}
             minHeight={"500px"}
+            position="relative"
           >
             <AvatarImage
               avatarIndex={avatarIndex}
@@ -122,6 +124,19 @@ export default function Home({
                 <Button onClick={pushLobbyHander}>GO LOBBY</Button>
               </Flex>
             </FormControl>
+          <div css={css`
+              & {
+                position: absolute;
+                content: '';
+                top: -5px;
+                left: 0;
+                height: 10px;
+                width: 11px;
+                background-size: 9px 12px;
+                background-image: radial-gradient(circle at 5% 40%, transparent 70%, #555 20%);
+                transform: rotateX(90deg);
+              }
+            `}></div>
           </Flex>
           <Flex
             w={{ base: "100%", md: "350px", xl: "600px" }}

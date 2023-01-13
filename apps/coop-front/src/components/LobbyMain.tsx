@@ -125,9 +125,9 @@ export const LobbyMain = () => {
         flexDirection={{ base: "column", md: "row" }}
         gap={{ base: "10px", md: "20px" }}
       >
-        <div>
+        <Flex  w={{ base: "100%", md: "350px", xl: "350px" }}>
           <Users userProfiles={userProfiles} />
-        </div>
+        </Flex>
         <Flex
           w={{ base: "100%", md: "350px", xl: "600px" }}
           h={"100%"}
@@ -136,9 +136,6 @@ export const LobbyMain = () => {
           boxShadow="dark-lg"
           rounded="md"
           flexDirection={"column"}
-          css={css`
-            flex-grow: 1;
-          `}
         >
           <Flex
             css={css`

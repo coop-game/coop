@@ -93,6 +93,8 @@ const sizes = {
 };
 
 const theme = extendTheme({
+  initialColorMode: "light",
+  useSystemColorMode: false,
   breakpoints,
   space,
   sizes,

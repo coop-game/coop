@@ -7,6 +7,8 @@ import {
 } from "react-transition-group";
 
 import styles from "./Transition.module.scss";
+import BackgroundNote from "@components/layout/backgroundNote";
+import { Flex, useColorMode, useColorModeValue } from "@chakra-ui/react";
 
 type TransitionKind<RC> = {
   children: RC;
@@ -24,6 +26,9 @@ const PageTurningAnimation = ({
   transitionState,
 }: PageTurningAnimation<React.ReactNode>) => {
   const [isTurn, setIsTurn] = useState<boolean>(false);
+
+  const color = useColorModeValue("white", "#1b0c5f");
+
   useEffect(() => {
     setIsTurn(transitionState === "exiting");
   }, [transitionState]);
@@ -32,33 +37,39 @@ const PageTurningAnimation = ({
     <div
       css={css`
         position: absolute;
-        top: 0;
-        left: 0;
+        z-index: 10;
         width: 100vw;
         height: 100vh;
-        /* overflow: hidden; */
         overflow-x: hidden;
       `}
     >
-      <div className={styles.root}>
-        <div className="cover">
-          <div className="book">
-            <div
-              className={`${isTurn ? styles.flipOut : styles.flipIn}`}
+      <div
+        className={styles.root}
+        css={css`
+          width: 100%;
+          height: 100%;
+        `}
+      >
+        <div className="book">
+          <Flex
+            className={`${isTurn ? styles.flipOut : styles.flipIn}`}
+            css={css`
+              width: 100%;
+              height: 100%;
+            `}
+          >
+            <Flex
+              className={`${isTurn ? styles.scaleOut : ""}`}
+              bg={color}
               css={css`
                 width: 100%;
                 height: 100%;
               `}
             >
-              <div
-                className={`book__page book__page--1 ${
-                  isTurn ? styles.scaleOut : ""
-                }`}
-              >
-                <div className={`book__page-front`}>{children}</div>
-              </div>
-            </div>
-          </div>
+              <BackgroundNote></BackgroundNote>
+              <Flex className={`book__page`}>{children}</Flex>
+            </Flex>
+          </Flex>
         </div>
       </div>
     </div>
