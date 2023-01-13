@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import shuffle from "lodash/shuffle";
 import { CPGameRelayRace, CPGameRelayRaceAnswer, CPGameState } from "@types";
-import Wating from "./Wating";
+import Wating from "./Waiting";
 import { Box } from "@chakra-ui/react";
 import useArrayUpdate from "@hooks/gameHooks/updateState/useArrayUpdate";
 import AnswerInput from "./AnswerInput";
