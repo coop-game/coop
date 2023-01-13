@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { atom, selector } from "recoil";
 import {
   CPChatType,
@@ -30,7 +31,7 @@ export const userSelector = selector({
  * userProfilesState
  */
 export const userProfilesState = atom<CPUserProfilesState>({
-  key: "USER_PROFILES_STATE",
+  key: `USER_PROFILES_STATE ${nanoid()}`,
   default: {
     isOwner: false,
     userProfiles: [],

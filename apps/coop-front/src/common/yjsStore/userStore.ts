@@ -1,5 +1,9 @@
 import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
-import { CPChatType, CPGameQuestion,CPGameRelayRaceAnswer, } from "./../../../types/index.d";
+import {
+  CPChatType,
+  CPGameQuestion,
+  CPGameRelayRaceAnswer,
+} from "./../../../types/index.d";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
 import * as awarenessProtocol from "y-protocols/awareness";
@@ -75,7 +79,7 @@ export class providerClass {
   createProvider = (roomId: string) => {
     if (this.provider === null) {
       this.provider = new WebrtcProvider(roomId, doc, {
-        signaling: ["ws://krkorea.iptime.org:3012"],
+        signaling: [`ws://${process.env.NEXT_PUBLIC_BACKEND_URL}`],
         password: null,
         awareness: new awarenessProtocol.Awareness(doc),
         maxConns: 20 + math.floor(random.rand() * 15),
