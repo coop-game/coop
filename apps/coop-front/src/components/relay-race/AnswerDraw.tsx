@@ -1,6 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import {
   userSelector,
+  userState,
   yjsRelayRaceAnswerState,
 } from "@common/recoil/recoil.atom";
 import { doc, providerState } from "@common/yjsStore/userStore";
@@ -56,17 +57,25 @@ const AnswerDraw = ({
   startTime: number;
 }) => {
   const RelayRaceAnswerState = useRecoilValue(yjsRelayRaceAnswerState);
+  const user = useRecoilValue(userState);
   const drawEnd = () => {
     const temp: CPGameRelayRaceAnswer = {
       id: doc.clientID,
-      username: "Test",
+      nickname: user.nickname,
       isDraw: true,
+      avatarIndex: user.avatarIndex,
+      color: user.color,
     };
     pushArrayHandler(temp);
   };
   return (
     <div>
-      <Progress time={50000} callback={drawEnd} play={"running"} startTime={startTime} />
+      <Progress
+        time={50000}
+        callback={drawEnd}
+        play={"running"}
+        startTime={startTime}
+      />
       {RelayRaceAnswerState.length > 0 && (
         <div>
           <div>아래에 주어진정답을 그려주세요!</div>

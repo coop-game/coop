@@ -114,7 +114,11 @@ const RelayRaceStart = () => {
   ) {
     return (
       <Box w="100%" h="100%">
-        <Wating isPlay={isPlay} setIsPlay={setIsPlay} />
+        <Wating
+          isPlay={isPlay}
+          setIsPlay={setIsPlay}
+          startTime={gameState.pageStartTime}
+        />
       </Box>
     );
   }

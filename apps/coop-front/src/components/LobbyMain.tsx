@@ -97,6 +97,7 @@ export const LobbyMain = () => {
       const partialDrawee: Partial<CPGameDrawee> = {
         isGameStart: true,
         gamePagesIndex: 0,
+        gameType: "DRAWEE",
         path: "/start",
       };
       changeGameStateHandler(partialDrawee);

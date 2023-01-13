@@ -4,9 +4,10 @@ import { doc } from "@common/yjsStore/userStore";
 import Progress from "@components/Progress";
 import { CPGameRelayRaceAnswer } from "@types";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import CanvasViewer from "@components/CanvasViewer";
 import { css } from "@emotion/react";
+import { userState } from "@common/recoil/recoil.atom";
 
 const AnswerInput = ({
   pushArrayHandler,
@@ -21,13 +22,17 @@ const AnswerInput = ({
   const [relayRaceAnswerState, setState] = useRecoilState<
     CPGameRelayRaceAnswer[]
   >(yjsRelayRaceAnswerState);
+  const user = useRecoilValue(userState);
+
   const onClick = async () => {
     doc.transact(() => {
       const temp: CPGameRelayRaceAnswer = {
         answer: answer,
         id: doc.clientID,
-        username: "Test",
+        nickname: user.nickname,
         isDraw: false,
+        avatarIndex: user.avatarIndex,
+        color: user.color,
       };
       pushArrayHandler(temp);
     });
