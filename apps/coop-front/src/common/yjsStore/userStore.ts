@@ -79,7 +79,7 @@ export class providerClass {
   createProvider = (roomId: string) => {
     if (this.provider === null) {
       this.provider = new WebrtcProvider(roomId, doc, {
-        signaling: [`ws://${process.env.NEXT_PUBLIC_BACKEND_URL}`],
+        signaling: [`wss://${process.env.NEXT_PUBLIC_BACKEND_URL}`],
         password: null,
         awareness: new awarenessProtocol.Awareness(doc),
         maxConns: 20 + math.floor(random.rand() * 15),
