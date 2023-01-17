@@ -6,7 +6,7 @@ const Main = () => {
     import("@components/relay-race/RelayRaceStart")
   );
   return (
-    <Box w="100%" h="100%" minHeight="95vh">
+    <Box w="100%" h="100%" minHeight="95vh" position={"relative"}>
       <RelayRaceStart />
     </Box>
   );

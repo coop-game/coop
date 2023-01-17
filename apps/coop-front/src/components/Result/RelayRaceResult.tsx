@@ -24,43 +24,53 @@ const RelayRaceResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
         justifyContent="center"
         alignItems="center"
       >
-        {relayRaceState[nowPageIndex].isDraw ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            // animate={{}}
-            transition={{
-              duration: 1,
-              repeat: 1,
-              repeatType: "reverse",
-              repeatDelay: 3,
-            }}
-            whileInView={{ opacity: 1 }}
+        {relayRaceState[nowPageIndex] ? (
+          <div
             css={css`
               width: 100%;
               height: 100%;
             `}
           >
-            <Box w={"95%"} h={"95%"} position={"relative"}>
-              <CanvasViewer pageIndex={nowPageIndex}></CanvasViewer>
-            </Box>
-          </motion.div>
+            {relayRaceState[nowPageIndex].isDraw ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                transition={{
+                  duration: 1,
+                  repeat: 1,
+                  repeatType: "reverse",
+                  repeatDelay: 3,
+                }}
+                whileInView={{ opacity: 1 }}
+                css={css`
+                  width: 100%;
+                  height: 100%;
+                `}
+              >
+                <Box w={"95%"} h={"95%"} position={"relative"}>
+                  <CanvasViewer pageIndex={nowPageIndex}></CanvasViewer>
+                </Box>
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                  duration: 1,
+                  repeat: 1,
+                  repeatType: "reverse",
+                  repeatDelay: 3,
+                }}
+                css={css`
+                  width: 100%;
+                  height: 100%;
+                `}
+              >
+                <Text>{relayRaceState[nowPageIndex].answer}</Text>
+              </motion.div>
+            )}
+          </div>
         ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{
-              duration: 1,
-              repeat: 1,
-              repeatType: "reverse",
-              repeatDelay: 3,
-            }}
-            css={css`
-              width: 100%;
-              height: 100%;
-            `}
-          >
-            <Text>{relayRaceState[nowPageIndex].answer}</Text>
-          </motion.div>
+          <div></div>
         )}
       </Flex>
 
