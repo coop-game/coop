@@ -26,7 +26,19 @@ const DraweeResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
   const questionState = useRecoilValue<CPGameQuestions>(yjsQuestionsState);
   const { userProfiles } = useRecoilValue(userProfilesSelector);
   const [answerState, setAnswerState] = useState<CPGameDraweeResult[]>();
-  console.log(questionState);
+  const [animation, setAnimation] = useState<boolean>(false);
+  const animationFlag = document.querySelector(".book");
+
+  useEffect(() => {
+    animationFlag.addEventListener("animationend", () => {
+      setAnimation(true);
+    });
+    return () => {
+      animationFlag.removeEventListener("animationend", () => {
+        setAnimation(false);
+      });
+    };
+  }, []);
 
   useEffect(() => {
     const tempAnswerList = questionState.map((e) => {
@@ -57,10 +69,13 @@ const DraweeResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
   }, [questionState, userProfiles]);
 
   return (
-    <Box w="100%" height="100%">
-      <Box w="80%" height="80%">
-        <CanvasViewer pageIndex={nowPageIndex} />
-      </Box>
+    <Box w="100%" height="100%" position={"relative"}>
+      {animation && (
+        <Box w="80%" height="80%">
+          <CanvasViewer pageIndex={nowPageIndex} />
+        </Box>
+      )}
+
       <Box w="100%" h="20%">
         {answerState && answerState.length > 0 && (
           <Flex w={"100%"} h={"100%"}>

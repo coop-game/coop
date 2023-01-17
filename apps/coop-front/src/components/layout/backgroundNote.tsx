@@ -17,6 +17,8 @@ const BackgroundNote = () => {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    left: 0px;
+    top: 0px;
     .list {
       list-style: none;
       color: #555;

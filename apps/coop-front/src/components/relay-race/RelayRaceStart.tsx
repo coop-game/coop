@@ -19,7 +19,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import shuffle from "lodash/shuffle";
 import { CPGameRelayRace, CPGameRelayRaceAnswer, CPGameState } from "@types";
 import Wating from "./Waiting";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import useArrayUpdate from "@hooks/gameHooks/updateState/useArrayUpdate";
 import AnswerInput from "./AnswerInput";
 import AnswerDraw from "./AnswerDraw";
@@ -129,7 +129,7 @@ const RelayRaceStart = () => {
   ) {
     if (gameState.gamePagesIndex % 2 === 0) {
       return (
-        <Box w="100%" h="100%">
+        <Box w="100%" h="100%" position={"absolute"} left={"0px"} top={"0px"}>
           <AnswerInput
             gamepageIndex={gameState.gamePagesIndex}
             pushArrayHandler={pushArrayHandler}

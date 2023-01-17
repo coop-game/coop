@@ -76,8 +76,9 @@ const Result = () => {
         <div
           css={css`
             flex-grow: 1;
-            flex-basis: 500px;
+            /* flex-basis: 500px; */
             width: 100%;
+            height: 100%;
           `}
         >
           {relayRaceTypeCheck(gameState) ? (
