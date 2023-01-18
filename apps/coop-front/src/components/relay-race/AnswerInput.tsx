@@ -1,4 +1,4 @@
-import { Button, Input } from "@chakra-ui/react";
+import { Button, Input, Text } from "@chakra-ui/react";
 import { yjsRelayRaceAnswerState } from "@common/recoil/recoil.atom";
 import { doc } from "@common/yjsStore/userStore";
 import Progress from "@components/Progress";
@@ -8,6 +8,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import CanvasViewer from "@components/CanvasViewer";
 import { css } from "@emotion/react";
 import { userState } from "@common/recoil/recoil.atom";
+import { useTranslation } from "@hooks/useTransitions";
 
 const AnswerInput = ({
   pushArrayHandler,
@@ -18,6 +19,7 @@ const AnswerInput = ({
   gamepageIndex: number;
   startTime: number;
 }) => {
+  const translation = useTranslation().messages;
   const [answer, setAnswer] = useState<string>("");
   const [relayRaceAnswerState, setState] = useRecoilState<
     CPGameRelayRaceAnswer[]
@@ -70,16 +72,19 @@ const AnswerInput = ({
           </div>
         )}
       </div>
-      <div>정답 입력</div>
-      <div>입력한 정답 {answer}</div>
+      <Text fontSize={"5xl"} fontWeight="bold">
+        {translation["relay.race.answer.suggest"]}
+      </Text>
       <Input
-        placeholder="답을 입력해주세요!"
+        placeholder={translation["relay.race.answer.input.placeholder"]}
         onChange={(e) => {
           setAnswer(e.target.value);
         }}
         value={answer}
       ></Input>
-      <Button onClick={onClick}>안녕하세요</Button>
+      <Button onClick={onClick}>
+        {translation["relay.race.answer.submit"]}
+      </Button>
     </div>
   );
 };

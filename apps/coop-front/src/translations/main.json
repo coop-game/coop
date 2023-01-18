@@ -28,5 +28,16 @@
   "draw.modal.next": "다음",
   "draw.modal.next.wait.owner": "방장을 기다리는 중입니다.",
 
-  "backspace": "정말 나가시겠습니까? 데이터가 날라갈지도 모릅니다?"
+  "backspace": "정말 나가시겠습니까? 데이터가 날라갈지도 모릅니다?",
+
+  "relay.race.wating.other.player":"다른 플레이어를 기다리는 중입니다.",
+  "relay.race.answer.input.placeholder":"정답 입력하기",
+  "relay.race.answer.suggest":"당신이 생각한 것을 입력해주세요",
+  "relay.race.answer.submit":"정답 제출하기",
+
+  "relay.race.draw.answer":"정답을 그려주세요",
+  "relay.race.draw.submit":"그림 제출하기",
+
+  "result":"결과"
+
 }

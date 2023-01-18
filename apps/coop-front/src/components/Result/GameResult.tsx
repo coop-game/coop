@@ -17,8 +17,10 @@ import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import RelayRaceResult from "./RelayRaceResult";
 import DraweeResult from "./DraweeResult";
+import { useTranslation } from "@hooks/useTransitions";
 
 const Result = () => {
+  const translation = useTranslation().messages;
   const gameState = useRecoilValue(yjsGameState);
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const gameChangeHandler = getChangeGameStateHandler<CPGameState>(roomId);
@@ -29,10 +31,6 @@ const Result = () => {
   useProfileUpdate();
   useGameStateUpdate(roomId);
   useSyncPageFromGameState();
-  console.log(
-    "너는 무슨 타입이니? 이어달리기니?",
-    relayRaceTypeCheck(gameState)
-  );
   const [nowPageIndex, setNowPageIndex] = useState<number>(0);
   const timerReset = () => {
     if (nowPageIndex + 1 <= gameState.gamePagesIndex) {
@@ -56,7 +54,7 @@ const Result = () => {
 
   return (
     <Box w="100%" h="100%" position={"relative"}>
-      <div>결과</div>
+      <div>{translation["result"]}</div>
       {isPlay && (
         <Progress
           time={5000}

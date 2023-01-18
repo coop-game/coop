@@ -113,13 +113,22 @@ const RelayRaceStart = () => {
     gameState.gamePagesIndex !== myOrderNumber
   ) {
     return (
-      <Box w="100%" h="100%">
-        <Wating
-          isPlay={isPlay}
-          setIsPlay={setIsPlay}
-          startTime={gameState.pageStartTime}
-        />
-      </Box>
+      <Flex
+        w="100%"
+        justifyContent={"center"}
+        alignItems={"center"}
+        position="absolute"
+        top={"3%"}
+        // transform={`translateY(-50%)`}
+      >
+        <Box w="100%" h="100%" maxW={"1204px"}>
+          <Wating
+            isPlay={isPlay}
+            setIsPlay={setIsPlay}
+            startTime={gameState.pageStartTime}
+          />
+        </Box>
+      </Flex>
     );
   }
   // 내 순서인 경우 정답을 입력하거나 그림을 그리러 간다.
@@ -129,27 +138,43 @@ const RelayRaceStart = () => {
   ) {
     if (gameState.gamePagesIndex % 2 === 0) {
       return (
-        <Box w="100%" h="100%" position={"absolute"} left={"0px"} top={"0px"}>
-          <AnswerInput
-            gamepageIndex={gameState.gamePagesIndex}
-            pushArrayHandler={pushArrayHandler}
-            startTime={gameState.pageStartTime}
-          ></AnswerInput>
-        </Box>
+        <Flex
+          w="100%"
+          h="100%"
+          position={"absolute"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <Box w={"100%"} h="100%" maxW={"1204px"} maxH={"1000px"}>
+            <AnswerInput
+              gamepageIndex={gameState.gamePagesIndex}
+              pushArrayHandler={pushArrayHandler}
+              startTime={gameState.pageStartTime}
+            ></AnswerInput>
+          </Box>
+        </Flex>
       );
     } else {
       return (
-        <Box w="100%" h="100%">
-          <AnswerDraw
-            gamepageIndex={gameState.gamePagesIndex}
-            pushArrayHandler={pushArrayHandler}
-            startTime={gameState.pageStartTime}
-          />
-        </Box>
+        <Flex
+          w="100%"
+          h="100%"
+          position={"absolute"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <Box w="100%" h="100%" maxW={"1204px"} maxH={"720px"}>
+            <AnswerDraw
+              gamepageIndex={gameState.gamePagesIndex}
+              pushArrayHandler={pushArrayHandler}
+              startTime={gameState.pageStartTime}
+            />
+          </Box>
+        </Flex>
       );
     }
   }
-  return <div>test</div>;
+  return <div></div>;
 };
 
 export default RelayRaceStart;

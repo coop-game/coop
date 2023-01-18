@@ -88,9 +88,9 @@ export class providerClass {
           config: {
             iceServers: [
               {
-                urls: ["turn:turn.my-first-programming.kr"],
-                username: "test",
-                credential: "test1234",
+                urls: ["turn:turn.drawee.art"],
+                username: "coop",
+                credential: "coop1234",
               },
             ],
           },

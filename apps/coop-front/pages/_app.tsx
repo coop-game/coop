@@ -10,6 +10,7 @@ import Transition from "@components/Animation/PageTransition/Transition";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  console.log(router);
   return (
     <ChakraProvider theme={theme}>
       <RecoilRoot>

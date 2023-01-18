@@ -16,7 +16,7 @@ const port = process.env.PORT || 3012;
 // @ts-ignore
 
 // const wss = new WebSocketServer({ noServer: true });
-const wss = new ws.Server({ noServer: true });
+const wss = new wss.Server({ noServer: true });
 
 const server = http.createServer((request, response) => {
   response.writeHead(200, { "Content-Type": "text/plain" });

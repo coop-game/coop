@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import {
   userSelector,
   userState,
@@ -10,6 +10,7 @@ import Progress from "@components/Progress";
 import { Tldraw } from "@coop/draw";
 import { css } from "@emotion/react";
 import { useMultiplayerState } from "@hooks/useMultiplayerState";
+import { useTranslation } from "@hooks/useTransitions";
 import { CPGameRelayRaceAnswer } from "@types";
 import { useRecoilValue } from "recoil";
 
@@ -32,7 +33,6 @@ function Editor({ pageIndex }: { pageIndex: number }) {
         height: 100%;
       `}
     >
-      <Button>삭제 버튼</Button>
       <Tldraw
         showMenu={false}
         showPages={false}
@@ -40,7 +40,7 @@ function Editor({ pageIndex }: { pageIndex: number }) {
         onChangePage={onChangePage}
         onUndo={onUndo}
         onRedo={onRedo}
-        onChangePresence={onChangePresence}
+        // onChangePresence={onChangePresence}
         components={{ Cursor: NewCursor as CursorComponent }}
       />
     </div>
@@ -57,6 +57,7 @@ const AnswerDraw = ({
   startTime: number;
 }) => {
   const RelayRaceAnswerState = useRecoilValue(yjsRelayRaceAnswerState);
+  const translation = useTranslation().messages;
   const user = useRecoilValue(userState);
   const drawEnd = () => {
     const temp: CPGameRelayRaceAnswer = {
@@ -69,7 +70,7 @@ const AnswerDraw = ({
     pushArrayHandler(temp);
   };
   return (
-    <div>
+    <Box w="100%" h="100%">
       <Progress
         time={50000}
         callback={drawEnd}
@@ -78,15 +79,15 @@ const AnswerDraw = ({
       />
       {RelayRaceAnswerState.length > 0 && (
         <div>
-          <div>아래에 주어진정답을 그려주세요!</div>
+          <div>{translation["relay.race.draw.answer"]}</div>
           <div>
             {RelayRaceAnswerState[RelayRaceAnswerState.length - 1].answer}
           </div>
         </div>
       )}
       <Editor pageIndex={gamepageIndex} />
-      <Button onClick={drawEnd}>다음으로 넘기기</Button>
-    </div>
+      <Button onClick={drawEnd}>{translation["relay.race.draw.submit"]}</Button>
+    </Box>
   );
 };
 
