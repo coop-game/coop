@@ -35,10 +35,13 @@ $--page-turnning-duration: 1s;
 .flipIn {
   @keyframes flipIn {
     0% {
-      transform: scale(0.5);
+      opacity: 0;
+    }
+    30% {
+      opacity: 0;
     }
     100% {
-      transform: scale(1);
+      opacity: 1;
     }
   }
   animation: flipIn #{$--page-turnning-duration} cubic-bezier(0.645, 0.045, 0.355, 1);

@@ -23,7 +23,7 @@ import {
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Button } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import Progress from "./Progress";
 import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
 import Solver from "./Solver";
@@ -63,7 +63,7 @@ function Editor({}) {
         onUndo={onUndo}
         onRedo={onRedo}
         onChangePresence={onChangePresence}
-        disableAssets={true}
+        // disableAssets={true}
         components={{ Cursor: NewCursor as CursorComponent }}
       />
     </div>
@@ -162,18 +162,29 @@ function Draw() {
         `}
       >
         {providerState.provider !== null && (
-          <div
-            className="tldraw"
-            css={css`
-              flex-grow: 1;
-              flex-basis: 500px;
-
-              width: 100%;
-              /* height: 100%; */
-            `}
+          <Box
+            w="100%"
+            h="100%"
+            // css={css`
+            //   position: relative;
+            //   top: 0;
+            //   left: 0;
+            // `}
           >
             <Editor />
-          </div>
+          </Box>
+          // <div
+          //   className="tldraw"
+          //   css={css`
+          //     /* flex-grow: 1;
+          //     flex-basis: 500px;
+
+          //     width: 100%; */
+          //     /* height: 100%; */
+          //   `}
+          // >
+          //   <Editor />
+          // </div>
         )}
         <div
           css={css`
