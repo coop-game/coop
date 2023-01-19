@@ -1074,23 +1074,6 @@ export class TldrawApp extends StateManager<TDSnapshot> {
   /**
    * Toggle pen mode.
    */
-  toggleFocusMode = (): this => {
-    if (this.session) return this;
-    const patch = {
-      settings: {
-        isFocusMode: !this.settings.isFocusMode,
-      },
-    };
-
-    this.patchState(patch, `settings:toggled_focus_mode`);
-
-    this.persist(patch);
-    return this;
-  };
-
-  /**
-   * Toggle pen mode.
-   */
   togglePenMode = (): this => {
     if (this.session) return this;
     const patch = {
@@ -2707,10 +2690,16 @@ export class TldrawApp extends StateManager<TDSnapshot> {
     const commonBounds = Utils.getCommonBounds(shapes.map(TLDR.getBounds));
     let zoom = TLDR.getCameraZoom(
       Math.min(
-        (rendererBounds.width - FIT_TO_SCREEN_PADDING) / commonBounds.width,
-        (rendererBounds.height - FIT_TO_SCREEN_PADDING) / commonBounds.height
-      )
+        rendererBounds.width / commonBounds.width,
+        rendererBounds.height / commonBounds.height
+      )!
     );
+    // let zoom = TLDR.getCameraZoom(
+    //   Math.min(
+    //     (rendererBounds.width - FIT_TO_SCREEN_PADDING) / commonBounds.width,
+    //     (rendererBounds.height - FIT_TO_SCREEN_PADDING) / commonBounds.height
+    //   )
+    // );
     zoom = camera.zoom === zoom || camera.zoom < 1 ? Math.min(1, zoom) : zoom;
     const mx = (rendererBounds.width - commonBounds.width * zoom) / 2 / zoom;
     const my = (rendererBounds.height - commonBounds.height * zoom) / 2 / zoom;
@@ -4422,7 +4411,6 @@ export class TldrawApp extends StateManager<TDSnapshot> {
       isPenMode: false,
       isDarkMode: false,
       isZoomSnap: false,
-      isFocusMode: false,
       isSnapping: false,
       isDebugMode: false,
       isReadonlyMode: false,

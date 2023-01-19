@@ -1,687 +1,684 @@
-import * as React from 'react'
-import { useHotkeys } from 'react-hotkeys-hook'
-import { useFileSystemHandlers, useTldrawApp } from '~hooks'
-import { AlignStyle, TDShapeType } from '~types'
+import * as React from "react";
+import { useHotkeys } from "react-hotkeys-hook";
+import { useFileSystemHandlers, useTldrawApp } from "~hooks";
+import { AlignStyle, TDShapeType } from "~types";
 
 export function useKeyboardShortcuts(ref: React.RefObject<HTMLDivElement>) {
-  const app = useTldrawApp()
+  const app = useTldrawApp();
 
   const canHandleEvent = React.useCallback(
     (ignoreMenus = false) => {
-      const elm = ref.current
-      if (ignoreMenus && (app.isMenuOpen || app.settings.keepStyleMenuOpen)) return true
-      elm?.focus()
-      return elm && (document.activeElement === elm || elm.contains(document.activeElement))
+      const elm = ref.current;
+      if (ignoreMenus && (app.isMenuOpen || app.settings.keepStyleMenuOpen))
+        return true;
+      elm?.focus();
+      return (
+        elm &&
+        (document.activeElement === elm || elm.contains(document.activeElement))
+      );
     },
     [ref]
-  )
+  );
 
   React.useEffect(() => {
-    if (!app) return
+    if (!app) return;
 
     const handleCut = (e: ClipboardEvent) => {
-      if (!canHandleEvent(true)) return
+      if (!canHandleEvent(true)) return;
 
       if (app.readOnly) {
-        app.copy(undefined, e)
-        return
+        app.copy(undefined, e);
+        return;
       }
 
-      app.cut(undefined, e)
-    }
+      app.cut(undefined, e);
+    };
 
     const handleCopy = (e: ClipboardEvent) => {
-      if (!canHandleEvent(true)) return
+      if (!canHandleEvent(true)) return;
 
-      app.copy(undefined, e)
-    }
+      app.copy(undefined, e);
+    };
 
     const handlePaste = (e: ClipboardEvent) => {
-      if (!canHandleEvent(true)) return
-      if (app.readOnly) return
+      if (!canHandleEvent(true)) return;
+      if (app.readOnly) return;
 
-      app.paste(undefined, e)
-    }
+      app.paste(undefined, e);
+    };
 
-    document.addEventListener('cut', handleCut)
-    document.addEventListener('copy', handleCopy)
-    document.addEventListener('paste', handlePaste)
+    document.addEventListener("cut", handleCut);
+    document.addEventListener("copy", handleCopy);
+    document.addEventListener("paste", handlePaste);
     return () => {
-      document.removeEventListener('cut', handleCut)
-      document.removeEventListener('copy', handleCopy)
-      document.removeEventListener('paste', handlePaste)
-    }
-  }, [app])
+      document.removeEventListener("cut", handleCut);
+      document.removeEventListener("copy", handleCopy);
+      document.removeEventListener("paste", handlePaste);
+    };
+  }, [app]);
 
   /* ---------------------- Tools --------------------- */
 
   useHotkeys(
-    'v,1',
+    "v,1",
     () => {
-      if (!canHandleEvent(true)) return
-      app.selectTool('select')
+      if (!canHandleEvent(true)) return;
+      app.selectTool("select");
     },
     [app, ref.current]
-  )
+  );
 
   useHotkeys(
-    'd,p,2',
+    "d,p,2",
     () => {
-      if (!canHandleEvent(true)) return
-      app.selectTool(TDShapeType.Draw)
+      if (!canHandleEvent(true)) return;
+      app.selectTool(TDShapeType.Draw);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'e,3',
+    "e,3",
     () => {
-      if (!canHandleEvent(true)) return
-      app.selectTool('erase')
+      if (!canHandleEvent(true)) return;
+      app.selectTool("erase");
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'r,4',
+    "r,4",
     () => {
-      if (!canHandleEvent(true)) return
-      app.selectTool(TDShapeType.Rectangle)
+      if (!canHandleEvent(true)) return;
+      app.selectTool(TDShapeType.Rectangle);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'o,5',
+    "o,5",
     () => {
-      if (!canHandleEvent(true)) return
-      app.selectTool(TDShapeType.Ellipse)
+      if (!canHandleEvent(true)) return;
+      app.selectTool(TDShapeType.Ellipse);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'g,6',
+    "g,6",
     () => {
-      if (!canHandleEvent()) return
-      app.selectTool(TDShapeType.Triangle)
+      if (!canHandleEvent()) return;
+      app.selectTool(TDShapeType.Triangle);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'l,7',
+    "l,7",
     () => {
-      if (!canHandleEvent(true)) return
-      app.selectTool(TDShapeType.Line)
+      if (!canHandleEvent(true)) return;
+      app.selectTool(TDShapeType.Line);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'a,8',
+    "a,8",
     () => {
-      if (!canHandleEvent(true)) return
-      app.selectTool(TDShapeType.Arrow)
+      if (!canHandleEvent(true)) return;
+      app.selectTool(TDShapeType.Arrow);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    't,9',
+    "t,9",
     () => {
-      if (!canHandleEvent(true)) return
-      app.selectTool(TDShapeType.Text)
+      if (!canHandleEvent(true)) return;
+      app.selectTool(TDShapeType.Text);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    's,0',
+    "s,0",
     () => {
-      if (!canHandleEvent(true)) return
-      app.selectTool(TDShapeType.Sticky)
+      if (!canHandleEvent(true)) return;
+      app.selectTool(TDShapeType.Sticky);
     },
     undefined,
     [app]
-  )
+  );
 
   /* ---------------------- Misc ---------------------- */
 
   // Dark Mode
 
   useHotkeys(
-    'ctrl+shift+d,⌘+shift+d',
+    "ctrl+shift+d,⌘+shift+d",
     (e) => {
-      if (!canHandleEvent(true)) return
-      app.toggleDarkMode()
-      e.preventDefault()
+      if (!canHandleEvent(true)) return;
+      app.toggleDarkMode();
+      e.preventDefault();
     },
     undefined,
     [app]
-  )
-
-  // Focus Mode
+  );
 
   useHotkeys(
-    'ctrl+.,⌘+.',
+    "ctrl+shift+g,⌘+shift+g",
     () => {
-      if (!canHandleEvent(true)) return
-      app.toggleFocusMode()
+      if (!canHandleEvent(true)) return;
+      app.toggleGrid();
     },
     undefined,
     [app]
-  )
-
-  useHotkeys(
-    'ctrl+shift+g,⌘+shift+g',
-    () => {
-      if (!canHandleEvent(true)) return
-      app.toggleGrid()
-    },
-    undefined,
-    [app]
-  )
+  );
 
   // File System
 
-  const { onNewProject, onOpenProject, onSaveProject, onSaveProjectAs, onOpenMedia } =
-    useFileSystemHandlers()
+  const {
+    onNewProject,
+    onOpenProject,
+    onSaveProject,
+    onSaveProjectAs,
+    onOpenMedia,
+  } = useFileSystemHandlers();
 
   useHotkeys(
-    'ctrl+n,⌘+n',
+    "ctrl+n,⌘+n",
     (e) => {
-      e.preventDefault()
-      if (!canHandleEvent()) return
-      onNewProject(e)
+      e.preventDefault();
+      if (!canHandleEvent()) return;
+      onNewProject(e);
     },
     undefined,
     [app]
-  )
+  );
   useHotkeys(
-    'ctrl+s,⌘+s',
+    "ctrl+s,⌘+s",
     (e) => {
-      if (!canHandleEvent()) return
+      if (!canHandleEvent()) return;
 
-      onSaveProject(e)
+      onSaveProject(e);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'ctrl+shift+s,⌘+shift+s',
+    "ctrl+shift+s,⌘+shift+s",
     (e) => {
-      if (!canHandleEvent()) return
+      if (!canHandleEvent()) return;
 
-      onSaveProjectAs(e)
+      onSaveProjectAs(e);
     },
     undefined,
     [app]
-  )
+  );
   useHotkeys(
-    'ctrl+o,⌘+o',
+    "ctrl+o,⌘+o",
     (e) => {
-      if (!canHandleEvent()) return
+      if (!canHandleEvent()) return;
 
-      onOpenProject(e)
+      onOpenProject(e);
     },
     undefined,
     [app]
-  )
+  );
   useHotkeys(
-    'ctrl+u,⌘+u',
+    "ctrl+u,⌘+u",
     (e) => {
-      if (!canHandleEvent()) return
-      onOpenMedia(e)
+      if (!canHandleEvent()) return;
+      onOpenMedia(e);
     },
     undefined,
     [app]
-  )
+  );
 
   // Undo Redo
 
   useHotkeys(
-    '⌘+z,ctrl+z',
+    "⌘+z,ctrl+z",
     (e) => {
-      e.preventDefault()
-      if (!canHandleEvent(true)) return
+      e.preventDefault();
+      if (!canHandleEvent(true)) return;
 
       if (app.session) {
-        app.cancelSession()
+        app.cancelSession();
       } else {
-        app.undo()
+        app.undo();
       }
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'ctrl+shift+z,⌘+shift+z',
+    "ctrl+shift+z,⌘+shift+z",
     () => {
-      if (!canHandleEvent(true)) return
+      if (!canHandleEvent(true)) return;
 
       if (app.session) {
-        app.cancelSession()
+        app.cancelSession();
       } else {
-        app.redo()
+        app.redo();
       }
     },
     undefined,
     [app]
-  )
+  );
 
   // Undo Redo
 
   useHotkeys(
-    '⌘+u,ctrl+u',
+    "⌘+u,ctrl+u",
     () => {
-      if (!canHandleEvent()) return
-      app.undoSelect()
+      if (!canHandleEvent()) return;
+      app.undoSelect();
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'ctrl+shift-u,⌘+shift+u',
+    "ctrl+shift-u,⌘+shift+u",
     () => {
-      if (!canHandleEvent()) return
-      app.redoSelect()
+      if (!canHandleEvent()) return;
+      app.redoSelect();
     },
     undefined,
     [app]
-  )
+  );
 
   /* -------------------- Commands -------------------- */
 
   // Camera
 
   useHotkeys(
-    'ctrl+=,⌘+=,ctrl+num_add,⌘+num_add',
+    "ctrl+=,⌘+=,ctrl+num_add,⌘+num_add",
     (e) => {
-      if (!canHandleEvent(true)) return
-      app.zoomIn()
-      e.preventDefault()
+      if (!canHandleEvent(true)) return;
+      app.zoomIn();
+      e.preventDefault();
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'ctrl+-,⌘+-,ctrl+num_subtract,⌘+num_subtract',
+    "ctrl+-,⌘+-,ctrl+num_subtract,⌘+num_subtract",
     (e) => {
-      if (!canHandleEvent(true)) return
+      if (!canHandleEvent(true)) return;
 
-      app.zoomOut()
-      e.preventDefault()
+      app.zoomOut();
+      e.preventDefault();
     },
     undefined,
     [app]
-  )
-
-  useHotkeys(
-    'shift+0,ctrl+numpad_0,⌘+numpad_0',
-    () => {
-      if (!canHandleEvent(true)) return
-      app.resetZoom()
-    },
-    undefined,
-    [app]
-  )
+  );
 
   useHotkeys(
-    'shift+1',
+    "shift+0,ctrl+numpad_0,⌘+numpad_0",
     () => {
-      if (!canHandleEvent(true)) return
-      app.zoomToFit()
+      if (!canHandleEvent(true)) return;
+      app.resetZoom();
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'shift+2',
+    "shift+1",
     () => {
-      if (!canHandleEvent(true)) return
-      app.zoomToSelection()
+      if (!canHandleEvent(true)) return;
+      app.zoomToFit();
     },
     undefined,
     [app]
-  )
+  );
+
+  useHotkeys(
+    "shift+2",
+    () => {
+      if (!canHandleEvent(true)) return;
+      app.zoomToSelection();
+    },
+    undefined,
+    [app]
+  );
 
   // Duplicate
 
   useHotkeys(
-    'ctrl+d,⌘+d',
+    "ctrl+d,⌘+d",
     (e) => {
-      if (!canHandleEvent()) return
+      if (!canHandleEvent()) return;
 
-      app.duplicate()
-      e.preventDefault()
+      app.duplicate();
+      e.preventDefault();
     },
     undefined,
     [app]
-  )
+  );
 
   // Flip
 
   useHotkeys(
-    'shift+h',
+    "shift+h",
     () => {
-      if (!canHandleEvent(true)) return
-      app.flipHorizontal()
+      if (!canHandleEvent(true)) return;
+      app.flipHorizontal();
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'shift+v',
+    "shift+v",
     () => {
-      if (!canHandleEvent(true)) return
-      app.flipVertical()
+      if (!canHandleEvent(true)) return;
+      app.flipVertical();
     },
     undefined,
     [app]
-  )
+  );
 
   // Cancel
 
   useHotkeys(
-    'escape',
+    "escape",
     () => {
-      if (!canHandleEvent(true)) return
+      if (!canHandleEvent(true)) return;
 
-      app.cancel()
+      app.cancel();
     },
     undefined,
     [app]
-  )
+  );
 
   // Delete
 
   useHotkeys(
-    'backspace,del',
+    "backspace,del",
     () => {
-      if (!canHandleEvent()) return
-      app.delete()
+      if (!canHandleEvent()) return;
+      app.delete();
     },
     undefined,
     [app]
-  )
+  );
 
   // Select All
 
   useHotkeys(
-    '⌘+a,ctrl+a',
+    "⌘+a,ctrl+a",
     () => {
-      if (!canHandleEvent(true)) return
-      app.selectAll()
+      if (!canHandleEvent(true)) return;
+      app.selectAll();
     },
     undefined,
     [app]
-  )
+  );
 
   // Nudge
 
   useHotkeys(
-    'up',
+    "up",
     () => {
-      if (!canHandleEvent()) return
-      app.nudge([0, -1], false)
+      if (!canHandleEvent()) return;
+      app.nudge([0, -1], false);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'right',
+    "right",
     () => {
-      if (!canHandleEvent()) return
-      app.nudge([1, 0], false)
+      if (!canHandleEvent()) return;
+      app.nudge([1, 0], false);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'down',
+    "down",
     () => {
-      if (!canHandleEvent()) return
-      app.nudge([0, 1], false)
+      if (!canHandleEvent()) return;
+      app.nudge([0, 1], false);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'left',
+    "left",
     () => {
-      if (!canHandleEvent()) return
-      app.nudge([-1, 0], false)
+      if (!canHandleEvent()) return;
+      app.nudge([-1, 0], false);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'shift+up',
+    "shift+up",
     () => {
-      if (!canHandleEvent()) return
-      app.nudge([0, -1], true)
+      if (!canHandleEvent()) return;
+      app.nudge([0, -1], true);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'shift+right',
+    "shift+right",
     () => {
-      if (!canHandleEvent()) return
-      app.nudge([1, 0], true)
+      if (!canHandleEvent()) return;
+      app.nudge([1, 0], true);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'shift+down',
+    "shift+down",
     () => {
-      if (!canHandleEvent()) return
-      app.nudge([0, 1], true)
+      if (!canHandleEvent()) return;
+      app.nudge([0, 1], true);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'shift+left',
+    "shift+left",
     () => {
-      if (!canHandleEvent()) return
-      app.nudge([-1, 0], true)
+      if (!canHandleEvent()) return;
+      app.nudge([-1, 0], true);
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    '⌘+shift+l,ctrl+shift+l',
+    "⌘+shift+l,ctrl+shift+l",
     () => {
-      if (!canHandleEvent()) return
-      app.toggleLocked()
+      if (!canHandleEvent()) return;
+      app.toggleLocked();
     },
     undefined,
     [app]
-  )
+  );
 
   // Copy, Cut & Paste
 
-  // useHotkeys(
-  //   '⌘+c,ctrl+c',
-  //   () => {
-  //     if (!canHandleEvent()) return
-  //     app.copy()
-  //   },
-  //   undefined,
-  //   [app]
-  // )
-
   useHotkeys(
-    '⌘+shift+c,ctrl+shift+c',
-    (e) => {
-      if (!canHandleEvent()) return
-
-      app.copySvg()
-      e.preventDefault()
+    "⌘+c,ctrl+c",
+    () => {
+      if (!canHandleEvent()) return;
+      app.copy();
     },
     undefined,
     [app]
-  )
+  );
 
-  // useHotkeys(
-  //   '⌘+x,ctrl+x',
-  //   () => {
-  //     if (!canHandleEvent()) return
-  //     app.cut()
-  //   },
-  //   undefined,
-  //   [app]
-  // )
+  useHotkeys(
+    "⌘+shift+c,ctrl+shift+c",
+    (e) => {
+      if (!canHandleEvent()) return;
 
-  // useHotkeys(
-  //   '⌘+v,ctrl+v',
-  //   () => {
-  //     if (!canHandleEvent()) return
+      app.copySvg();
+      e.preventDefault();
+    },
+    undefined,
+    [app]
+  );
 
-  //     app.paste()
-  //   },
-  //   undefined,
-  //   [app]
-  // )
+  useHotkeys(
+    "⌘+x,ctrl+x",
+    () => {
+      if (!canHandleEvent()) return;
+      app.cut();
+    },
+    undefined,
+    [app]
+  );
+
+  useHotkeys(
+    "⌘+v,ctrl+v",
+    () => {
+      if (!canHandleEvent()) return;
+
+      app.paste();
+    },
+    undefined,
+    [app]
+  );
 
   // Group & Ungroup
 
   useHotkeys(
-    '⌘+g,ctrl+g',
+    "⌘+g,ctrl+g",
     (e) => {
-      if (!canHandleEvent()) return
+      if (!canHandleEvent()) return;
 
-      app.group()
-      e.preventDefault()
+      app.group();
+      e.preventDefault();
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    '⌘+shift+g,ctrl+shift+g',
+    "⌘+shift+g,ctrl+shift+g",
     (e) => {
-      if (!canHandleEvent()) return
+      if (!canHandleEvent()) return;
 
-      app.ungroup()
-      e.preventDefault()
+      app.ungroup();
+      e.preventDefault();
     },
     undefined,
     [app]
-  )
+  );
 
   // Move
 
   useHotkeys(
-    '[',
+    "[",
     () => {
-      if (!canHandleEvent(true)) return
-      app.moveBackward()
+      if (!canHandleEvent(true)) return;
+      app.moveBackward();
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    ']',
+    "]",
     () => {
-      if (!canHandleEvent(true)) return
-      app.moveForward()
+      if (!canHandleEvent(true)) return;
+      app.moveForward();
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'shift+[',
+    "shift+[",
     () => {
-      if (!canHandleEvent(true)) return
-      app.moveToBack()
+      if (!canHandleEvent(true)) return;
+      app.moveToBack();
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'shift+]',
+    "shift+]",
     () => {
-      if (!canHandleEvent(true)) return
-      app.moveToFront()
+      if (!canHandleEvent(true)) return;
+      app.moveToFront();
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'ctrl+shift+backspace,⌘+shift+backspace',
+    "ctrl+shift+backspace,⌘+shift+backspace",
     (e) => {
-      if (!canHandleEvent()) return
+      if (!canHandleEvent()) return;
       if (app.settings.isDebugMode) {
-        app.resetDocument()
+        app.resetDocument();
       }
-      e.preventDefault()
+      e.preventDefault();
     },
     undefined,
     [app]
-  )
+  );
 
   // Text Align
 
   useHotkeys(
-    'alt+command+l,alt+ctrl+l',
+    "alt+command+l,alt+ctrl+l",
     (e) => {
-      if (!canHandleEvent(true)) return
-      app.style({ textAlign: AlignStyle.Start })
-      e.preventDefault()
+      if (!canHandleEvent(true)) return;
+      app.style({ textAlign: AlignStyle.Start });
+      e.preventDefault();
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'alt+command+t,alt+ctrl+t',
+    "alt+command+t,alt+ctrl+t",
     (e) => {
-      if (!canHandleEvent(true)) return
-      app.style({ textAlign: AlignStyle.Middle })
-      e.preventDefault()
+      if (!canHandleEvent(true)) return;
+      app.style({ textAlign: AlignStyle.Middle });
+      e.preventDefault();
     },
     undefined,
     [app]
-  )
+  );
 
   useHotkeys(
-    'alt+command+r,alt+ctrl+r',
+    "alt+command+r,alt+ctrl+r",
     (e) => {
-      if (!canHandleEvent(true)) return
-      app.style({ textAlign: AlignStyle.End })
-      e.preventDefault()
+      if (!canHandleEvent(true)) return;
+      app.style({ textAlign: AlignStyle.End });
+      e.preventDefault();
     },
     undefined,
     [app]
-  )
+  );
 }

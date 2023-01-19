@@ -8,7 +8,9 @@ import { FocusButton } from "~components/FocusButton";
 import { Loading } from "~components/Loading";
 import { AlertDialog } from "~components/Primitives/AlertDialog";
 import { ToolsPanel } from "~components/ToolsPanel";
+import { BackToContent } from "~components/ToolsPanel/BackToContent";
 import { TopPanel } from "~components/TopPanel";
+import { ZoomMenu } from "~components/TopPanel/ZoomMenu";
 import { GRID_SIZE } from "~constants";
 import {
   AlertDialogContext,
@@ -113,6 +115,7 @@ export interface TldrawProps2 {
      * The component to render for multiplayer cursors.
      */
     Cursor?: CursorComponent;
+    CurrentQuestionNumber?: React.ReactNode;
   };
 
   /**
@@ -393,6 +396,7 @@ interface InnerTldrawProps {
   showTools: boolean;
   components?: {
     Cursor?: CursorComponent;
+    CurrentQuestionNumber?: React.ReactNode;
   };
   hideCursors?: boolean;
 }
@@ -525,104 +529,107 @@ const InnerTldraw = React.memo(function InnerTldraw({
           <OneOff focusableRef={rWrapper} autofocus={autofocus} />
           {showUI && (
             <StyledUI ref={setDialogContainer}>
-              {settings.isFocusMode ? (
-                <FocusButton onSelect={app.toggleFocusMode} />
-              ) : (
-                <>
-                  <TopPanel
-                    readOnly={readOnly}
-                    showPages={showPages}
-                    showMenu={showMenu}
-                    showMultiplayerMenu={showMultiplayerMenu}
-                    showStyles={showStyles}
-                    showZoom={showZoom}
-                  />
-                </>
-              )}
+              <TopPanel
+                readOnly={readOnly}
+                showPages={showPages}
+                showMenu={showMenu}
+                showMultiplayerMenu={showMultiplayerMenu}
+                showStyles={showStyles}
+                showZoom={showZoom}
+              />
             </StyledUI>
           )}
-          <ContextMenu>
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <Renderer
-                id={id}
-                containerRef={rWrapper}
-                shapeUtils={shapeUtils}
-                page={page}
-                pageState={pageState}
-                assets={assets}
-                snapLines={appState.snapLines}
-                eraseLine={appState.eraseLine}
-                grid={GRID_SIZE}
-                users={room?.users}
-                userId={room?.userId}
-                theme={theme}
-                meta={meta}
-                components={components}
-                hideCursors={hideCursors}
-                hideBounds={hideBounds}
-                hideHandles={hideHandles}
-                hideResizeHandles={isHideResizeHandlesShape}
-                hideIndicators={hideIndicators}
-                hideBindingHandles={!settings.showBindingHandles}
-                hideCloneHandles={hideCloneHandles}
-                hideRotateHandles={!settings.showRotateHandles}
-                hideGrid={!settings.showGrid}
-                showDashedBrush={showDashedBrush}
-                performanceMode={app.session?.performanceMode}
-                onPinchStart={app.onPinchStart}
-                onPinchEnd={app.onPinchEnd}
-                onPinch={app.onPinch}
-                onPan={app.onPan}
-                onZoom={app.onZoom}
-                onPointerDown={app.onPointerDown}
-                onPointerMove={app.onPointerMove}
-                onPointerUp={app.onPointerUp}
-                onPointCanvas={app.onPointCanvas}
-                onDoubleClickCanvas={app.onDoubleClickCanvas}
-                onRightPointCanvas={app.onRightPointCanvas}
-                onDragCanvas={app.onDragCanvas}
-                onReleaseCanvas={app.onReleaseCanvas}
-                onPointShape={app.onPointShape}
-                onDoubleClickShape={app.onDoubleClickShape}
-                onRightPointShape={app.onRightPointShape}
-                onDragShape={app.onDragShape}
-                onHoverShape={app.onHoverShape}
-                onUnhoverShape={app.onUnhoverShape}
-                onReleaseShape={app.onReleaseShape}
-                onPointBounds={app.onPointBounds}
-                onDoubleClickBounds={app.onDoubleClickBounds}
-                onRightPointBounds={app.onRightPointBounds}
-                onDragBounds={app.onDragBounds}
-                onHoverBounds={app.onHoverBounds}
-                onUnhoverBounds={app.onUnhoverBounds}
-                onReleaseBounds={app.onReleaseBounds}
-                onPointBoundsHandle={app.onPointBoundsHandle}
-                onDoubleClickBoundsHandle={app.onDoubleClickBoundsHandle}
-                onRightPointBoundsHandle={app.onRightPointBoundsHandle}
-                onDragBoundsHandle={app.onDragBoundsHandle}
-                onHoverBoundsHandle={app.onHoverBoundsHandle}
-                onUnhoverBoundsHandle={app.onUnhoverBoundsHandle}
-                onReleaseBoundsHandle={app.onReleaseBoundsHandle}
-                onPointHandle={app.onPointHandle}
-                onDoubleClickHandle={app.onDoubleClickHandle}
-                onRightPointHandle={app.onRightPointHandle}
-                onDragHandle={app.onDragHandle}
-                onHoverHandle={app.onHoverHandle}
-                onUnhoverHandle={app.onUnhoverHandle}
-                onReleaseHandle={app.onReleaseHandle}
-                onError={app.onError}
-                onRenderCountChange={app.onRenderCountChange}
-                onShapeChange={app.onShapeChange}
-                onShapeBlur={app.onShapeBlur}
-                onShapeClone={app.onShapeClone}
-                onBoundsChange={app.updateBounds}
-                onKeyDown={app.onKeyDown}
-                onKeyUp={app.onKeyUp}
-                onDragOver={app.onDragOver}
-                onDrop={app.onDrop}
-              />
-            </ErrorBoundary>
-          </ContextMenu>
+          <DrawLayout>
+            <ContextMenu>
+              <ErrorBoundary FallbackComponent={ErrorFallback}>
+                <BackToContent></BackToContent>
+                <Renderer
+                  id={id}
+                  containerRef={rWrapper}
+                  shapeUtils={shapeUtils}
+                  page={page}
+                  pageState={pageState}
+                  assets={assets}
+                  snapLines={appState.snapLines}
+                  eraseLine={appState.eraseLine}
+                  grid={GRID_SIZE}
+                  users={room?.users}
+                  userId={room?.userId}
+                  theme={theme}
+                  meta={meta}
+                  components={components}
+                  hideCursors={hideCursors}
+                  hideBounds={hideBounds}
+                  hideHandles={hideHandles}
+                  hideResizeHandles={isHideResizeHandlesShape}
+                  hideIndicators={hideIndicators}
+                  hideBindingHandles={!settings.showBindingHandles}
+                  hideCloneHandles={hideCloneHandles}
+                  hideRotateHandles={!settings.showRotateHandles}
+                  hideGrid={!settings.showGrid}
+                  showDashedBrush={showDashedBrush}
+                  performanceMode={app.session?.performanceMode}
+                  onPinchStart={app.onPinchStart}
+                  onPinchEnd={app.onPinchEnd}
+                  onPinch={app.onPinch}
+                  onPan={app.onPan}
+                  onZoom={app.onZoom}
+                  onPointerDown={app.onPointerDown}
+                  onPointerMove={app.onPointerMove}
+                  onPointerUp={app.onPointerUp}
+                  onPointCanvas={app.onPointCanvas}
+                  onDoubleClickCanvas={app.onDoubleClickCanvas}
+                  onRightPointCanvas={app.onRightPointCanvas}
+                  onDragCanvas={app.onDragCanvas}
+                  onReleaseCanvas={app.onReleaseCanvas}
+                  onPointShape={app.onPointShape}
+                  onDoubleClickShape={app.onDoubleClickShape}
+                  onRightPointShape={app.onRightPointShape}
+                  onDragShape={app.onDragShape}
+                  onHoverShape={app.onHoverShape}
+                  onUnhoverShape={app.onUnhoverShape}
+                  onReleaseShape={app.onReleaseShape}
+                  onPointBounds={app.onPointBounds}
+                  onDoubleClickBounds={app.onDoubleClickBounds}
+                  onRightPointBounds={app.onRightPointBounds}
+                  onDragBounds={app.onDragBounds}
+                  onHoverBounds={app.onHoverBounds}
+                  onUnhoverBounds={app.onUnhoverBounds}
+                  onReleaseBounds={app.onReleaseBounds}
+                  onPointBoundsHandle={app.onPointBoundsHandle}
+                  onDoubleClickBoundsHandle={app.onDoubleClickBoundsHandle}
+                  onRightPointBoundsHandle={app.onRightPointBoundsHandle}
+                  onDragBoundsHandle={app.onDragBoundsHandle}
+                  onHoverBoundsHandle={app.onHoverBoundsHandle}
+                  onUnhoverBoundsHandle={app.onUnhoverBoundsHandle}
+                  onReleaseBoundsHandle={app.onReleaseBoundsHandle}
+                  onPointHandle={app.onPointHandle}
+                  onDoubleClickHandle={app.onDoubleClickHandle}
+                  onRightPointHandle={app.onRightPointHandle}
+                  onDragHandle={app.onDragHandle}
+                  onHoverHandle={app.onHoverHandle}
+                  onUnhoverHandle={app.onUnhoverHandle}
+                  onReleaseHandle={app.onReleaseHandle}
+                  onError={app.onError}
+                  onRenderCountChange={app.onRenderCountChange}
+                  onShapeChange={app.onShapeChange}
+                  onShapeBlur={app.onShapeBlur}
+                  onShapeClone={app.onShapeClone}
+                  onBoundsChange={app.updateBounds}
+                  onKeyDown={app.onKeyDown}
+                  onKeyUp={app.onKeyUp}
+                  onDragOver={app.onDragOver}
+                  onDrop={app.onDrop}
+                />
+              </ErrorBoundary>
+            </ContextMenu>
+            <ZoomLayout className="ZoomLayout">
+              <ZoomMenu />
+            </ZoomLayout>
+            <QuestionsLayout>
+              {components && components?.CurrentQuestionNumber}
+            </QuestionsLayout>
+          </DrawLayout>
         </StyledLayout>
       </IntlProvider>
     </ContainerContext.Provider>
@@ -649,8 +656,7 @@ const OneOff = React.memo(function OneOff({
 });
 
 const StyledLayout = styled("div", {
-  // position: "absolute",
-  // position: "relative",
+  position: "relative",
   display: "flex",
   flexDirection: "row",
   height: "100%",
@@ -668,14 +674,28 @@ const StyledLayout = styled("div", {
     "tap-highlight-color": "transparent",
   },
 });
+const ZoomLayout = styled("div", {
+  position: "absolute",
+  right: 0,
+  top: 0,
+});
+const QuestionsLayout = styled("div", {
+  position: "absolute",
+  left: 0,
+  top: 0,
+});
+
+const DrawLayout = styled("div", {
+  position: "relative",
+  display: "flex",
+  flexGrow: 1,
+  width: "100%",
+  height: "100%",
+});
 
 const StyledUI = styled("div", {
-  // position: "absolute",
   position: "relative",
-  // top: 0,
-  // left: 0,
   height: "100%",
-  width: "150px",
   padding: "8px 8px 0 8px",
   display: "flex",
   alignItems: "flex-start",
