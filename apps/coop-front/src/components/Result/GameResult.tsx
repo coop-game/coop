@@ -17,16 +17,17 @@ import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import RelayRaceResult from "./RelayRaceResult";
 import DraweeResult from "./DraweeResult";
-import { useTranslation } from "@hooks/useTransitions";
+import { useRouter } from "next/router";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const Result = () => {
-  const translation = useTranslation().messages;
   const gameState = useRecoilValue(yjsGameState);
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const gameChangeHandler = getChangeGameStateHandler<CPGameState>(roomId);
   const [isPlay, setIsPlay] = useState<boolean>(false);
   const { isOwner } = useRecoilValue(userProfilesSelector);
   const [startTime, setStartTime] = useState<number>();
+  const router = useRouter();
 
   useProfileUpdate();
   useGameStateUpdate(roomId);
@@ -54,7 +55,9 @@ const Result = () => {
 
   return (
     <Box w="100%" h="100%" position={"relative"}>
-      <div>{translation["result"]}</div>
+      <div>
+        <FormattedMessage id={"result"} values={{ locale: router.locale }} />
+      </div>
       {isPlay && (
         <Progress
           time={5000}

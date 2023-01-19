@@ -8,7 +8,8 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import CanvasViewer from "@components/CanvasViewer";
 import { css } from "@emotion/react";
 import { userState } from "@common/recoil/recoil.atom";
-import { useTranslation } from "@hooks/useTransitions";
+import { useRouter } from "next/router";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const AnswerInput = ({
   pushArrayHandler,
@@ -19,12 +20,13 @@ const AnswerInput = ({
   gamepageIndex: number;
   startTime: number;
 }) => {
-  const translation = useTranslation().messages;
   const [answer, setAnswer] = useState<string>("");
   const [relayRaceAnswerState, setState] = useRecoilState<
     CPGameRelayRaceAnswer[]
   >(yjsRelayRaceAnswerState);
   const user = useRecoilValue(userState);
+  const router = useRouter();
+  const { formatMessage } = useIntl();
 
   const onClick = async () => {
     doc.transact(() => {
@@ -73,17 +75,25 @@ const AnswerInput = ({
         )}
       </div>
       <Text fontSize={"5xl"} fontWeight="bold">
-        {translation["relay.race.answer.suggest"]}
+        <FormattedMessage
+          id="relay.race.answer.suggest"
+          values={{ locale: router.locale }}
+        />
       </Text>
       <Input
-        placeholder={translation["relay.race.answer.input.placeholder"]}
+        placeholder={formatMessage({
+          id: "relay.race.answer.input.placeholder",
+        })}
         onChange={(e) => {
           setAnswer(e.target.value);
         }}
         value={answer}
       ></Input>
       <Button onClick={onClick}>
-        {translation["relay.race.answer.submit"]}
+        <FormattedMessage
+          id="relay.race.answer.submit"
+          values={{ locale: router.locale }}
+        />
       </Button>
     </div>
   );

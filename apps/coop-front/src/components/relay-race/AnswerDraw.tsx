@@ -10,9 +10,10 @@ import Progress from "@components/Progress";
 import { Tldraw } from "@coop/draw";
 import { css } from "@emotion/react";
 import { useMultiplayerState } from "@hooks/useMultiplayerState";
-import { useTranslation } from "@hooks/useTransitions";
 import { CPGameRelayRaceAnswer } from "@types";
 import { useRecoilValue } from "recoil";
+import { useRouter } from "next/router";
+import { FormattedMessage, useIntl } from "react-intl";
 
 function Editor({ pageIndex }: { pageIndex: number }) {
   const userState = useRecoilValue(userSelector);
@@ -57,8 +58,9 @@ const AnswerDraw = ({
   startTime: number;
 }) => {
   const RelayRaceAnswerState = useRecoilValue(yjsRelayRaceAnswerState);
-  const translation = useTranslation().messages;
   const user = useRecoilValue(userState);
+  const router = useRouter();
+
   const drawEnd = () => {
     const temp: CPGameRelayRaceAnswer = {
       id: doc.clientID,
@@ -79,14 +81,24 @@ const AnswerDraw = ({
       />
       {RelayRaceAnswerState.length > 0 && (
         <div>
-          <div>{translation["relay.race.draw.answer"]}</div>
+          <div>
+            <FormattedMessage
+              id="relay.race.draw.answer"
+              values={{ locale: router.locale }}
+            />
+          </div>
           <div>
             {RelayRaceAnswerState[RelayRaceAnswerState.length - 1].answer}
           </div>
         </div>
       )}
       <Editor pageIndex={gamepageIndex} />
-      <Button onClick={drawEnd}>{translation["relay.race.draw.submit"]}</Button>
+      <Button onClick={drawEnd}>
+        <FormattedMessage
+          id="relay.race.draw.submit"
+          values={{ locale: router.locale }}
+        />
+      </Button>
     </Box>
   );
 };

@@ -1,8 +1,9 @@
 import { Box, Text } from "@chakra-ui/react";
 import Chatting from "@components/Chatting";
 import Progress from "@components/Progress";
-import { useTranslation } from "@hooks/useTransitions";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { FormattedMessage } from "react-intl";
 
 const Wating = ({
   isPlay,
@@ -13,8 +14,7 @@ const Wating = ({
   setIsPlay: Dispatch<SetStateAction<"running" | "paused">>;
   startTime: number;
 }) => {
-  const translation = useTranslation().messages;
-
+  const router = useRouter();
   useEffect(() => {
     if (isPlay === "paused") {
       setIsPlay("running");
@@ -35,7 +35,10 @@ const Wating = ({
         startTime={startTime}
       />
       <Text fontWeight={"extrabold"} fontSize={"4xl"} paddingTop={"5%"}>
-        {translation["relay.race.wating.other.player"]}
+        <FormattedMessage
+          id={"relay.race.wating.other.player"}
+          values={{ locale: router.locale }}
+        />
       </Text>
       <Box w="100%" height="500px" display="flex" justifyContent="center">
         <Box w="100%" maxW="800px" height="500px">

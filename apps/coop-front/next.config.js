@@ -18,10 +18,9 @@ const nextConfig = {
     //지원하고 싶은 로케일을 적으면 된다.
     locales: ["ko", "en"],
     defaultLocale: "ko",
-    localeDetection: false,
-
-    trailingSlash: true,
+    localeDetection: true,
   },
+  trailingSlash: true,
   reactStrictMode: false,
   swcMinify: true,
 };

@@ -15,7 +15,8 @@ import {
 } from "@chakra-ui/react";
 import { userProfilesState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
-import { useTranslation } from "@hooks/useTransitions";
+import { useRouter } from "next/router";
+import { FormattedMessage } from "react-intl";
 import React from "react";
 import { useRecoilValue } from "recoil";
 
@@ -29,7 +30,8 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
 
   const initialRef = React.useRef(null);
   const { isOwner } = useRecoilValue(userProfilesState);
-  const translation = useTranslation().messages;
+
+  const router = useRouter();
 
   const onCloseAllHandler = () => {
     onClose();
@@ -80,7 +82,10 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
                 `}
                 onClick={onCloseAllHandler}
               >
-                {translation["draw.modal.next"]}
+                <FormattedMessage
+                  id="draw.modal.next"
+                  values={{ locale: router.locale }}
+                />
               </Button>
             )}
             {!isOwner && (
@@ -95,7 +100,10 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
               >
                 <Spinner color="red.700" size="lg" />
                 <div css={css``}>
-                  {translation["draw.modal.next.wait.owner"]}
+                  <FormattedMessage
+                    id="draw.modal.next.wait.owner"
+                    values={{ locale: router.locale }}
+                  />
                 </div>
               </div>
             )}

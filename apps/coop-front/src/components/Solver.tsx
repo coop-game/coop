@@ -19,17 +19,22 @@ import {
 } from "@common/yjsStore/userStore";
 import { css } from "@emotion/react";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
-import { useTranslation } from "@hooks/useTransitions";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
+import { useRouter } from "next/router";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const Solver = () => {
   const [answer, setAnswer] = useState("");
   const [isError, setIsError] = useState(true);
-  const translation = useTranslation().messages;
 
   const gameState = useRecoilValue(yjsGameState);
   const questionsState = useRecoilValue(yjsQuestionsState);
+
+  const router = useRouter();
+
+  const { formatMessage } = useIntl();
+  const drawSolver = formatMessage({ id: "draw.solver" });
 
   const answerChangeHandler = () => {
     doc.transact(() => {
@@ -52,11 +57,11 @@ const Solver = () => {
   return (
     <div>
       <div>
-        {translation["draw.solver"]} : {getSovlerNicknameFromId(getSolverId())}
+        {drawSolver} : {getSovlerNicknameFromId(getSolverId())}
       </div>
       {getSolverId() === providerState?.provider?.awareness?.clientID && (
         <FormControl isInvalid={isError}>
-          <FormLabel>{translation["draw.answer"]}</FormLabel>
+          <FormLabel>{formatMessage({ id: "draw.answer" })}</FormLabel>
           <Input
             type="text"
             value={answer}
@@ -68,17 +73,26 @@ const Solver = () => {
           <Flex ml={5}>
             {!isError ? (
               <FormHelperText>
-                {translation["draw.input.in.answer"]}
+                <FormattedMessage
+                  id="draw.input.in.answer"
+                  values={{ locale: router.locale }}
+                />
               </FormHelperText>
             ) : (
               <FormErrorMessage>
-                {translation["draw.input.required.answer"]}
+                <FormattedMessage
+                  id="draw.input.required.answer"
+                  values={{ locale: router.locale }}
+                />
               </FormErrorMessage>
             )}
           </Flex>
           <Flex width={"100%"} justifyContent={"flex-end"}>
             <Button onClick={answerChangeHandler}>
-              {translation["draw.answer.submit"]}
+              <FormattedMessage
+                id="draw.answer.submit"
+                values={{ locale: router.locale }}
+              />
             </Button>
           </Flex>
         </FormControl>
@@ -90,7 +104,12 @@ const Solver = () => {
           overflow-y: scroll;
         `}
       >
-        <div>{translation["draw.answer.history"]}</div>
+        <div>
+          <FormattedMessage
+            id="draw.answer.history"
+            values={{ locale: router.locale }}
+          />
+        </div>
         {questionsState.length >= gameState?.gamePagesIndex && (
           <div>
             {questionsState[gameState.gamePagesIndex].inputAnswer.map(

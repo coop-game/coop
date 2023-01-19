@@ -13,7 +13,6 @@ import {
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
-import { useTranslation } from "@hooks/useTransitions";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import shuffle from "lodash/shuffle";
@@ -25,7 +24,6 @@ import AnswerInput from "./AnswerInput";
 import AnswerDraw from "./AnswerDraw";
 
 const RelayRaceStart = () => {
-  const translation = useTranslation().messages;
   const { provider } = providerState;
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const [myOrderNumber, setMyOrderNumber] = useState<number>();

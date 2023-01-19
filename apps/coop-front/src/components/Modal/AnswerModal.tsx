@@ -3,8 +3,8 @@ import ChakraModal from "@components/Modal/ChakraModal";
 import { css } from "@emotion/react";
 import useAnswer from "@hooks/gameHooks/DRAWEE/useAnswer";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
-import { useTranslation } from "@hooks/useTransitions";
 import { Dispatch, SetStateAction, useEffect } from "react";
+import { useIntl } from "react-intl";
 
 type AnswerModalPropsType = {
   setIsPlay: Dispatch<SetStateAction<"paused" | "running">>;
@@ -13,7 +13,7 @@ type AnswerModalPropsType = {
 
 type AnswerPropsType = { solverNickname: string; answer: string };
 const Answer = ({ solverNickname, answer }: AnswerPropsType) => {
-  const translation = useTranslation().messages;
+  const { formatMessage } = useIntl();
   return (
     <Flex
       fontSize={{ base: "2rem", md: "3rem", xl: "4rem" }}
@@ -26,16 +26,18 @@ const Answer = ({ solverNickname, answer }: AnswerPropsType) => {
       `}
     >
       <div>
-        <>{`${translation["draw.modal.answer"]} : ${answer}`}</>
+        <>{`${formatMessage({ id: "draw.modal.answer" })} : ${answer}`}</>
       </div>
       <div>
-        {`${solverNickname} ${translation["draw.modal.correct.answer"]}`}
+        {`${solverNickname} ${formatMessage({
+          id: "draw.modal.correct.answer",
+        })}`}
       </div>
     </Flex>
   );
 };
 const WrongAnswer = ({ solverNickname, answer }: AnswerPropsType) => {
-  const translation = useTranslation().messages;
+  const { formatMessage } = useIntl();
   return (
     <Flex
       fontSize={{ base: "2rem", md: "3rem", xl: "4rem" }}
@@ -48,7 +50,7 @@ const WrongAnswer = ({ solverNickname, answer }: AnswerPropsType) => {
       `}
     >
       <div>
-        <>{`${translation["draw.modal.answer"]} : ${answer}`}</>
+        <>{`${formatMessage({ id: "draw.modal.answer" })} : ${answer}`}</>
       </div>
       <div>{`${solverNickname} 정답을 맞추지 못함`}</div>
     </Flex>

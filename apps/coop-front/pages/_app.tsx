@@ -7,21 +7,27 @@ import theme from "@theme/theme";
 import { RecoilRoot } from "recoil";
 import { useRouter } from "next/router";
 import Transition from "@components/Animation/PageTransition/Transition";
+import koMsg from "./../src/translations/main.json";
+import enMsg from "./../src/translations/en.json";
+import { IntlProvider } from "react-intl";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  console.log(router);
+
+  const messages = { en: enMsg, "en-US": enMsg, ko: koMsg }[router.locale];
   return (
     <ChakraProvider theme={theme}>
-      <RecoilRoot>
-        {router.pathname === "/welcome" ? (
-          <Component {...pageProps} />
-        ) : (
-          <Transition location={router.pathname}>
+      <IntlProvider locale={router.locale} messages={messages}>
+        <RecoilRoot>
+          {router.pathname === "/welcome" ? (
             <Component {...pageProps} />
-          </Transition>
-        )}
-      </RecoilRoot>
+          ) : (
+            <Transition location={router.pathname}>
+              <Component {...pageProps} />
+            </Transition>
+          )}
+        </RecoilRoot>
+      </IntlProvider>
     </ChakraProvider>
   );
 }
