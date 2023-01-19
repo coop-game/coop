@@ -87,10 +87,11 @@ export class providerClass {
         peerOpts: {
           config: {
             iceServers: [
+              { urls: process.env.NEXT_PUBLIC_STUN_URL },
               {
-                urls: ["turn:turn.drawee.art"],
-                username: "coop",
-                credential: "coop1234",
+                urls: [process.env.NEXT_PUBLIC_TURN_URL],
+                username: process.env.NEXT_PUBLIC_TURN_USERNAME,
+                credential: process.env.NEXT_PUBLIC_TURN_CREDENTIAL,
               },
             ],
           },
