@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   TransitionGroup,
@@ -9,6 +9,9 @@ import {
 import styles from "./Transition.module.scss";
 import BackgroundNote from "@components/layout/backgroundNote";
 import { Flex, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { useRecoilState } from "recoil";
+import { transitionPageAnimationState } from "@common/recoil/recoil.atom";
+import React, { AnimationEvent } from "react";
 
 type TransitionKind<RC> = {
   children: RC;
@@ -33,6 +36,25 @@ const PageTurningAnimation = ({
     setIsTurn(transitionState === "exiting");
   }, [transitionState]);
 
+  const [_, setIsAnimationEnd] = useRecoilState(transitionPageAnimationState);
+
+  const ref = useRef(null);
+  useEffect(() => {
+    console.log("123animation End", _);
+  }, [_]);
+  useEffect(() => {
+    const handler = (event: React.AnimationEvent<HTMLDivElement>) => {
+      if ((event.target as HTMLDivElement).id === "flipInOut") {
+        setIsAnimationEnd(true);
+      }
+    };
+    ref.current && ref.current.addEventListener("animationend", handler);
+    return () => {
+      setIsAnimationEnd(false);
+      ref.current && ref.current.removeEventListener("animationend", handler);
+    };
+  }, [setIsAnimationEnd]);
+
   return (
     <div
       css={css`
@@ -45,13 +67,17 @@ const PageTurningAnimation = ({
     >
       <div
         className={styles.root}
+        onAnimationEnd={(event) => {}}
         css={css`
           width: 100%;
           height: 100%;
+          background-color: #0c5900;
+          background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
         `}
       >
-        <div className="book">
+        <div ref={ref} className="book">
           <Flex
+            id={"flipInOut"}
             className={`${isTurn ? styles.flipOut : styles.flipIn}`}
             css={css`
               width: 100%;
@@ -59,6 +85,7 @@ const PageTurningAnimation = ({
             `}
           >
             <Flex
+              id={"scaleOut"}
               className={`${isTurn ? styles.scaleOut : ""}`}
               bg={color}
               css={css`
