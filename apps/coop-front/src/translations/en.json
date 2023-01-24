@@ -1,4 +1,13 @@
 {
+  "welcome.site.title": "Drawee!",
+  "welcome.site.tutorial1": "Draw a picture with other people and guess the answer!",
+  "welcome.site.tutorial2": "Drawee is a game where you team up and draw together.",
+  "welcome.site.tutorial3": "When the team members look at the word and draw, the other person looks at the picture and guesses the word.",
+  "welcome.site.start.button": "Start",
+  "welcome.site.correct":"Correct",
+  "welcome.site.drawing":"Drawing",
+  "welcome.site.play.now": "Just Play Now!",
+
   "room.id": "Room Title",
 
   "user.success.nickname": "GOGO Lobby",

@@ -1,4 +1,14 @@
 {
+  "welcome.site.title": "협동 조합 게임!",
+  "welcome.site.tutorial1": "다른 사람들과 함께 그림을 그리고 정답을 맞춰보세요!",
+  "welcome.site.tutorial2": "협동 조합 게임은 팀을 짜고 함께 그림을 그리는 게임 입니다.",
+  "welcome.site.tutorial3": "팀원이 제시어를 보고 그리면 나머지 한명이 그림을 보고 제시어를 맞추는 방식입니다.",
+  "welcome.site.start.button": "시작하기",
+  "welcome.site.correct":"맞춘다",
+  "welcome.site.drawing":"그린다",
+  "welcome.site.play.now": "지금 당장 시작해보세요!",
+
+
   "room.id": "방 제목",
 
   "user.success.nickname": "로비로 GOGO",
