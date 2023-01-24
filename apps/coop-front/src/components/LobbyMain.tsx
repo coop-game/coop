@@ -7,13 +7,14 @@ import {
   yjsQuestionsState,
   yjsRelayRaceAnswerState,
 } from "@common/recoil/recoil.atom";
-import { useTranslation } from "@hooks/useTransitions";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import useCheckCreatedProvider from "@hooks/pageMove/useCheckCreatedProvider";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
+
+import { FormattedMessage, useIntl } from "react-intl";
 
 import {
   doc,
@@ -38,9 +39,19 @@ import {
   CPGameState,
   CPGameTypes,
 } from "@types";
+import { useRouter } from "next/router";
 
 export const LobbyMain = () => {
-  const translation = useTranslation().messages;
+  const { formatMessage } = useIntl();
+
+  const lobbyToastInviteTitle = formatMessage({
+    id: "lobby.toast.invite.title",
+  });
+  const lobbyToastInviteDescription = formatMessage({
+    id: "lobby.toast.invite.description",
+  });
+
+  const router = useRouter();
   const toast = useToast();
   useCheckCreatedProvider(
     "/ErrorPage/?errorMessage=잘못된 접근입니다.&statusCode=403"
@@ -84,8 +95,8 @@ export const LobbyMain = () => {
       `${process.env.NEXT_PUBLIC_HOSTNAME}/?roomId=${roomId}`
     );
     toast({
-      title: translation["lobby.toast.invite.title"],
-      description: translation["lobby.toast.invite.description"],
+      title: lobbyToastInviteTitle,
+      description: lobbyToastInviteDescription,
       status: "success",
       duration: 1000,
       isClosable: true,
@@ -126,7 +137,7 @@ export const LobbyMain = () => {
         flexDirection={{ base: "column", md: "row" }}
         gap={{ base: "10px", md: "20px" }}
       >
-        <Flex  w={{ base: "100%", md: "350px", xl: "350px" }}>
+        <Flex w={{ base: "100%", md: "350px", xl: "350px" }}>
           <Users userProfiles={userProfiles} />
         </Flex>
         <Flex
@@ -157,7 +168,6 @@ export const LobbyMain = () => {
               fontSize={"1.1rem"}
             >
               <Spinner color="red.500" size="md" />
-              {translation["lobby.select.by.owner"]}
             </Flex>
           )}
           {isOwner && (
@@ -175,7 +185,10 @@ export const LobbyMain = () => {
                 `}
                 onClick={onClickInviteHandler}
               >
-                {translation["lobby.invite.button"]}
+                <FormattedMessage
+                  id="lobby.invite.button"
+                  values={{ locale: router.locale }}
+                ></FormattedMessage>
               </Button>
               <Button
                 css={css`
@@ -183,7 +196,11 @@ export const LobbyMain = () => {
                 `}
                 onClick={() => onClickGameStartHandler("DRAWEE")}
               >
-                {translation["lobby.next.button"]}1
+                <FormattedMessage
+                  id="lobby.next.button"
+                  values={{ locale: router.locale }}
+                ></FormattedMessage>
+                1
               </Button>
               <Button
                 css={css`
@@ -191,7 +208,11 @@ export const LobbyMain = () => {
                 `}
                 onClick={() => onClickGameStartHandler("RELAY_RACE")}
               >
-                {translation["lobby.next.button"]}2
+                <FormattedMessage
+                  id="lobby.next.button"
+                  values={{ locale: router.locale }}
+                ></FormattedMessage>
+                2
               </Button>
             </Flex>
           )}

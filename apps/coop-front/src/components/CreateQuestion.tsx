@@ -20,14 +20,21 @@ import {
 import { CPGameDrawee, CPGameQuestion } from "@types";
 import useAgreeUpdate from "@hooks/gameHooks/updateState/useAgreeUpdate";
 import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
-import { useTranslation } from "@hooks/useTransitions";
+import { FormattedMessage, useIntl } from "react-intl";
+import { useRouter } from "next/dist/client/router";
 
 const CreateQuestion = () => {
   const { provider } = providerState;
   const { input, setInput, onChangeHandler } = useInput("");
   const agreeList = useRecoilValue(yjsAgreeState);
   const { roomId } = useRecoilValue(userSelector) ?? {};
-  const translation = useTranslation().messages;
+
+  const router = useRouter();
+  const { formatMessage } = useIntl();
+  const startPushQuestion = formatMessage({
+    id: "start.push.question",
+  });
+
 
   // gameState.path 에 따라 페이지 동기화
   useSyncPageFromGameState();
@@ -64,7 +71,7 @@ const CreateQuestion = () => {
         const newQuestion: CPGameQuestion = {
           answer: input,
           inputAnswer: [],
-          question: translation["start.push.question"],
+          question: startPushQuestion,
           questioner: provider.awareness.clientID,
           isQuestionEnd: false,
           solver: nextUserClientId,
@@ -101,7 +108,12 @@ const CreateQuestion = () => {
           nextPageHandlerByOwner();
         }}
       />
-      <div>{translation["start.input.answer"]}</div>
+      <div>
+        <FormattedMessage
+          id={"start.input.answer"}
+          values={{ locale: router.locale }}
+        />
+      </div>
       <Input value={input} onChange={onChangeHandler} />
       <Button
         onClick={() => {

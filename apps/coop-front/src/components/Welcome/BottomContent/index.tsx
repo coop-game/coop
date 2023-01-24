@@ -4,13 +4,16 @@ import Image from "next/image";
 import DraweeLogo from "@asset/images/DraweeLogo.png";
 import { css } from "@emotion/react";
 import MotionDrawTools from "./MotionDrawTools";
+import { useRouter } from "next/dist/client/router";
+import { FormattedMessage } from "react-intl";
 
 function BottomContent() {
+  const { locale } = useRouter();
   return (
-    <Center w="100%" h="max-content">
+    <Center w="100%" h="100vh" overflow={"hidden"}>
       <Flex direction="column">
         <Center
-          marginTop={{ base: "50px", sm: "250px", md: "250px" }}
+          marginTop={{ base: "50px", sm: "150px", md: "250px" }}
           position="relative"
         >
           <MotionDrawTools></MotionDrawTools>
@@ -25,25 +28,34 @@ function BottomContent() {
           />
         </Center>
 
-        <Center marginTop={{ base: "40px", sm: "20px", md: "40px" }} zIndex={2}>
+        <Center marginTop={{ base: "40px", sm: "10px", md: "40px" }} zIndex={2}>
           <Text fontSize={{ base: "6xl", sm: "3xl", md: "6xl" }}>
-            협동 조합 게임!
+            <FormattedMessage
+              id={"welcome.site.title"}
+              values={{ locale: locale }}
+            />
           </Text>
         </Center>
-        <Center marginTop={{ base: "40px", sm: "20px", md: "40px" }} zIndex={2}>
+        <Center marginTop={{ base: "40px", sm: "10px", md: "40px" }} zIndex={2}>
           <Text
             fontSize={{ base: "4xl", sm: "2xl", md: "4xl" }}
             textAlign="center"
           >
-            지금 당장 시작해보세요!
+            <FormattedMessage
+              id={"welcome.site.play.now"}
+              values={{ locale }}
+            />
           </Text>
         </Center>
         <Center
-          marginTop={{ base: "70px", sm: "30px", md: "100px", lg: "60px" }}
+          marginTop={{ base: "70px", sm: "10px", md: "100px", lg: "60px" }}
           zIndex={2}
         >
           <Button width="150px" bg="colors.third">
-            시작하기
+            <FormattedMessage
+              id={"welcome.site.start.button"}
+              values={{ locale }}
+            />
           </Button>
         </Center>
       </Flex>

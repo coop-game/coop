@@ -15,8 +15,10 @@ import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import { CPGameState } from "@types";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import RelayRaceResult from "./RelayRaceResult";
+import RelayRaceResult from "./RelayRace/RelayRaceResult";
 import DraweeResult from "./DraweeResult";
+import { useRouter } from "next/router";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const Result = () => {
   const gameState = useRecoilValue(yjsGameState);
@@ -25,14 +27,11 @@ const Result = () => {
   const [isPlay, setIsPlay] = useState<boolean>(false);
   const { isOwner } = useRecoilValue(userProfilesSelector);
   const [startTime, setStartTime] = useState<number>();
+  const router = useRouter();
 
   useProfileUpdate();
   useGameStateUpdate(roomId);
   useSyncPageFromGameState();
-  console.log(
-    "너는 무슨 타입이니? 이어달리기니?",
-    relayRaceTypeCheck(gameState)
-  );
   const [nowPageIndex, setNowPageIndex] = useState<number>(0);
   const timerReset = () => {
     if (nowPageIndex + 1 <= gameState.gamePagesIndex) {
@@ -56,7 +55,9 @@ const Result = () => {
 
   return (
     <Box w="100%" h="100%" position={"relative"}>
-      <div>결과</div>
+      <div>
+        <FormattedMessage id={"result"} values={{ locale: router.locale }} />
+      </div>
       {isPlay && (
         <Progress
           time={5000}

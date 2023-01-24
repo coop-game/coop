@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import DraweeLogo from "@asset/images/DraweeLogo.png";
 import lodashRandom from "lodash/random";
+import { FormattedMessage } from "react-intl";
 
 import {
   Button,
@@ -14,7 +15,6 @@ import {
 } from "@chakra-ui/react";
 import { userSelector } from "@common/recoil/recoil.atom";
 import { nanoid } from "nanoid";
-import { useTranslation } from "@hooks/useTransitions";
 import { useRecoilState } from "recoil";
 import AvatarImage from "@components/AvatarImage";
 import { providerState } from "@common/yjsStore/userStore";
@@ -32,7 +32,6 @@ export default function Home({
   roomId: string;
   isCreater: boolean;
 }) {
-  const translation = useTranslation().messages;
   const [_, setUserState] = useRecoilState(userSelector);
   const router = useRouter();
 
@@ -108,7 +107,12 @@ export default function Home({
                   randomAvatarHandler={randomAvatarHandler}
                 ></AvatarImage>
                 <FormControl isInvalid={isError}>
-                  <FormLabel>{translation["user.nickname"]}</FormLabel>
+                  <FormLabel>
+                    <FormattedMessage
+                      id="user.nickname"
+                      values={{ locale: router.locale }}
+                    ></FormattedMessage>
+                  </FormLabel>
                   <Input
                     type="email"
                     value={nickname}
@@ -120,11 +124,17 @@ export default function Home({
                   <Flex ml={5}>
                     {!isError ? (
                       <FormHelperText>
-                        {translation["user.success.nickname"]}
+                        <FormattedMessage
+                          id="user.success.nickname"
+                          values={{ locale: router.locale }}
+                        ></FormattedMessage>
                       </FormHelperText>
                     ) : (
                       <FormErrorMessage>
-                        {translation["user.required.nickname"]}
+                        <FormattedMessage
+                          id="user.required.nickname"
+                          values={{ locale: router.locale }}
+                        ></FormattedMessage>
                       </FormErrorMessage>
                     )}
                   </Flex>

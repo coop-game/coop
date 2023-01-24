@@ -14,7 +14,6 @@ const RelayRaceResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
   const relayRaceState = useRecoilValue<CPGameRelayRaceAnswer[]>(
     yjsRelayRaceAnswerState
   );
-  const { userProfiles } = useRecoilValue(userProfilesSelector);
   return (
     <Box w="100%" height="100%" overflow={"hidden"} position={"absolute"}>
       <Flex
@@ -32,15 +31,7 @@ const RelayRaceResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
             `}
           >
             {relayRaceState[nowPageIndex].isDraw ? (
-              <motion.div
-                initial={{ opacity: 0 }}
-                transition={{
-                  duration: 1,
-                  repeat: 1,
-                  repeatType: "reverse",
-                  repeatDelay: 3,
-                }}
-                whileInView={{ opacity: 1 }}
+              <div
                 css={css`
                   width: 100%;
                   height: 100%;
@@ -49,60 +40,56 @@ const RelayRaceResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
                 <Box w={"95%"} h={"95%"} position={"relative"}>
                   <CanvasViewer pageIndex={nowPageIndex}></CanvasViewer>
                 </Box>
-              </motion.div>
+              </div>
             ) : (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{
-                  duration: 1,
-                  repeat: 1,
-                  repeatType: "reverse",
-                  repeatDelay: 3,
-                }}
+              <div
                 css={css`
                   width: 100%;
                   height: 100%;
                 `}
               >
                 <Text>{relayRaceState[nowPageIndex].answer}</Text>
-              </motion.div>
+              </div>
             )}
           </div>
         ) : (
           <div></div>
         )}
       </Flex>
+      {relayRaceState[nowPageIndex] && (
+        <AvatarImage userProfile={relayRaceState[nowPageIndex]} />
+      )}
 
+      {/* 
       <motion.div
-        animate={{
-          x: `${+nowPageIndex * -100}%`,
-          scale: 1,
-          rotate: 0,
-        }}
-        transition={{ ease: "easeOut", duration: 1 }}
-        css={css`
-          width: 100%;
-          height: 100%;
-        `}
+      animate={{
+        x: `${+nowPageIndex * -100}%`,
+        scale: 1,
+        rotate: 0,
+      }}
+      transition={{ ease: "easeOut", duration: 1 }}
+      css={css`
+      width: 100%;
+      height: 100%;
+      `}
       >
-        <div
-          css={css`
-            position: relative;
-            display: flex;
-            height: 100%;
-            width: ${100 * userProfiles.length}%;
-            /* left: 50%;
-            transform: translateX("-50%"); */
-          `}
-        >
-          {Object.keys(relayRaceState).map((e, i) => (
-            <Flex key={i} w={"100%"} h={"100%"} direction={"column"}>
-              <AvatarImage userProfile={relayRaceState[e]} />
-            </Flex>
-          ))}
+      <div
+      css={css`
+      position: relative;
+      display: flex;
+      height: 100%;
+      width: ${100 * userProfiles.length}%;
+      
+      `}
+      >
+      {Object.keys(relayRaceState).map((e, i) => (
+        <Flex key={i} w={"100%"} h={"100%"} direction={"column"}>
+        <AvatarImage userProfile={relayRaceState[e]} />
+        </Flex>
+        ))}
         </div>
-      </motion.div>
+        </motion.div>
+      */}
     </Box>
   );
 };

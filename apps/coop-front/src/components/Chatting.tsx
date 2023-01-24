@@ -3,16 +3,20 @@ import { ChattingSelector, userSelector } from "@common/recoil/recoil.atom";
 import { doc, providerState } from "@common/yjsStore/userStore";
 import { css } from "@emotion/react";
 import useChattingUpdate from "@hooks/gameHooks/gameChatting/useChattingUpdate";
-import { useTranslation } from "@hooks/useTransitions";
 import React from "react";
 import { useRecoilValue } from "recoil";
+import { useRouter } from "next/router";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const Chatting = () => {
+  const router = useRouter();
   const chattingState = useRecoilValue(ChattingSelector);
   const { inputString, setInputString, messagesEndRef, onClickHandler } =
     useChattingUpdate();
-
-  const translation = useTranslation().messages;
+  const { formatMessage } = useIntl();
+  const chattingInputPlaceholder = formatMessage({
+    id: "chatting.input.placeholder",
+  });
 
   const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -86,7 +90,7 @@ const Chatting = () => {
           css={css`
             flex-grow: 1;
           `}
-          placeholder={translation["chatting.input.placeholder"]}
+          placeholder={chattingInputPlaceholder}
           value={inputString}
           onChange={(e) => {
             setInputString(e.target.value.substring(0, 50));
@@ -94,7 +98,10 @@ const Chatting = () => {
           onKeyPress={onKeyPressHandler}
         />
         <Button onClick={onClickHandler}>
-          {translation["chatting.input"]}
+          <FormattedMessage
+            id="chatting.input"
+            values={{ locale: router.locale }}
+          ></FormattedMessage>
         </Button>
       </div>
     </Flex>

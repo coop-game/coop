@@ -3,6 +3,7 @@ import Image from "next/image";
 import DraweeLogo from "@asset/images/DraweeLogo.png";
 import { css, keyframes } from "@emotion/react";
 import { useRouter } from "next/router";
+import { FormattedMessage } from "react-intl";
 
 const scroll = keyframes`
   0%{
@@ -23,7 +24,10 @@ function TopContent() {
         </Center>
         <Center marginTop={{ base: "40px", sm: "20px", md: "40px" }}>
           <Text fontSize={{ base: "6xl", sm: "3xl", md: "6xl" }}>
-            협동 조합 게임!
+            <FormattedMessage
+              id={"welcome.site.title"}
+              values={{ locale: router.locale }}
+            />
           </Text>
         </Center>
         <Center marginTop={{ base: "40px", sm: "20px", md: "40px" }}>
@@ -31,7 +35,10 @@ function TopContent() {
             fontSize={{ base: "4xl", sm: "2xl", md: "4xl" }}
             textAlign="center"
           >
-            다른 사람들과 함께 그림을 그리고 정답을 맞춰보세요!
+            <FormattedMessage
+              id={"welcome.site.tutorial1"}
+              values={{ locale: router.locale }}
+            />
           </Text>
         </Center>
         <Center marginTop={{ base: "20px", sm: "10px", md: "20px" }}>
@@ -39,7 +46,10 @@ function TopContent() {
             fontSize={{ base: "2xl", sm: "lg", md: "2xl" }}
             textAlign="center"
           >
-            협동 조합 게임은 팀을 짜고 함께 그림을 그리는 게임 입니다.
+            <FormattedMessage
+              id={"welcome.site.tutorial2"}
+              values={{ locale: router.locale }}
+            />
           </Text>
         </Center>
         <Center marginTop={{ base: "10px", sm: "5px", md: "10px" }}>
@@ -47,8 +57,10 @@ function TopContent() {
             fontSize={{ base: "2xl", sm: "lg", md: "2xl" }}
             textAlign="center"
           >
-            최대 5명의 사람이 제시어를 보고 그리면 나머지 한명이 그림을 보고
-            제시어를 맞추는 방식입니다.
+            <FormattedMessage
+              id={"welcome.site.tutorial3"}
+              values={{ locale: router.locale }}
+            />
           </Text>
         </Center>
         <Center
@@ -61,7 +73,10 @@ function TopContent() {
               router.push("/");
             }}
           >
-            시작하기
+            <FormattedMessage
+              id={"welcome.site.start.button"}
+              values={{ locale: router.locale }}
+            />
           </Button>
         </Center>
         <Center>

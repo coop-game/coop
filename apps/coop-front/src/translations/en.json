@@ -1,6 +1,16 @@
 {
+  "welcome.site.title": "Drawee!",
+  "welcome.site.tutorial1": "Draw a picture with other people and guess the answer!",
+  "welcome.site.tutorial2": "Drawee is a game where you team up and draw together.",
+  "welcome.site.tutorial3": "When the team members look at the word and draw, the other person looks at the picture and guesses the word.",
+  "welcome.site.start.button": "Start",
+  "welcome.site.correct": "Correct",
+  "welcome.site.drawing": "Drawing",
+  "welcome.site.play.now": "Just Play Now!",
+
   "room.id": "Room Title",
 
+  "user.nickname": "Nickname",
   "user.success.nickname": "GOGO Lobby",
   "user.required.nickname": "Nickname is required",
 
@@ -28,5 +38,15 @@
   "draw.modal.next": "Next",
   "draw.modal.next.wait.owner": "Waiting Owner",
 
-  "backspace": "Are you sure you want to get out? Data may be lost?"
+  "backspace": "Are you sure you want to get out? Data may be lost?",
+
+  "relay.race.wating.other.player": "Waiting for other player",
+  "relay.race.answer.input.placeholder": "Enter the answer",
+  "relay.race.answer.suggest": "What do you think? plase enter the answer",
+  "relay.race.answer.submit": "Submit answer",
+
+  "relay.race.draw.answer": "Draw the answer",
+  "relay.race.draw.submit": "Submit picture",
+
+  "result": "result"
 }
