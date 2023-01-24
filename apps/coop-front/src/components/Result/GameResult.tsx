@@ -15,7 +15,7 @@ import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import { CPGameState } from "@types";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import RelayRaceResult from "./RelayRaceResult";
+import RelayRaceResult from "./RelayRace/RelayRaceResult";
 import DraweeResult from "./DraweeResult";
 import { useRouter } from "next/router";
 import { FormattedMessage, useIntl } from "react-intl";

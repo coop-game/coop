@@ -1,7 +1,8 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import {
   userSelector,
   userState,
+  yjsGameState,
   yjsRelayRaceAnswerState,
 } from "@common/recoil/recoil.atom";
 import { doc, providerState } from "@common/yjsStore/userStore";
@@ -73,32 +74,48 @@ const AnswerDraw = ({
   };
   return (
     <Box w="100%" h="100%">
-      <Progress
-        time={50000}
-        callback={drawEnd}
-        play={"running"}
-        startTime={startTime}
-      />
-      {RelayRaceAnswerState.length > 0 && (
-        <div>
-          <div>
-            <FormattedMessage
-              id="relay.race.draw.answer"
-              values={{ locale: router.locale }}
-            />
-          </div>
-          <div>
-            {RelayRaceAnswerState[RelayRaceAnswerState.length - 1].answer}
-          </div>
-        </div>
-      )}
-      <Editor pageIndex={gamepageIndex} />
-      <Button onClick={drawEnd}>
-        <FormattedMessage
-          id="relay.race.draw.submit"
-          values={{ locale: router.locale }}
+      <Box w="100%" h="10%">
+        <Progress
+          time={5000000}
+          callback={drawEnd}
+          play={"running"}
+          startTime={startTime}
         />
-      </Button>
+      </Box>
+      <Flex w="100%" h="12%" justifyContent="center" alignItems={"center"}>
+        {RelayRaceAnswerState.length > 0 && (
+          <Flex
+            w="100%"
+            h={"100%"}
+            justifyContent="center"
+            alignItems={"center"}
+            flexDirection={"column"}
+          >
+            <Text fontSize={"xl"}>
+              <FormattedMessage
+                id="relay.race.draw.answer"
+                values={{ locale: router.locale }}
+              />
+            </Text>
+            <Box>
+              <Text fontSize={"3xl"} fontWeight="bold">
+                {RelayRaceAnswerState[RelayRaceAnswerState.length - 1].answer}
+              </Text>
+            </Box>
+          </Flex>
+        )}
+      </Flex>
+      <Box w="100%" h="65%" position={"relative"}>
+        <Editor pageIndex={gamepageIndex} />
+      </Box>
+      <Flex w={"100%"} justifyContent="center" alignItems={"center"}>
+        <Button onClick={drawEnd}>
+          <FormattedMessage
+            id="relay.race.draw.submit"
+            values={{ locale: router.locale }}
+          />
+        </Button>
+      </Flex>
     </Box>
   );
 };
