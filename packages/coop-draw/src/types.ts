@@ -89,7 +89,6 @@ export interface TDSnapshot {
     keepStyleMenuOpen: boolean;
     nudgeDistanceSmall: number;
     nudgeDistanceLarge: number;
-    isFocusMode: boolean;
     isSnapping: boolean;
     showRotateHandles: boolean;
     showBindingHandles: boolean;

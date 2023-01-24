@@ -7,7 +7,7 @@ import { styled } from "~styles";
 import { Menu } from "./Menu/Menu";
 import { MultiplayerMenu } from "./MultiplayerMenu";
 import { PageMenu } from "./PageMenu";
-import { StyleMenu } from "./StyleMenu";
+import { MenuGrid, StyleMenu } from "./StyleMenu";
 import { ZoomMenu } from "./ZoomMenu";
 import { ToolsPanel } from "~components/ToolsPanel";
 import { PrimaryTools } from "~components/ToolsPanel/PrimaryTools";
@@ -32,30 +32,33 @@ export function _TopPanel({
   const app = useTldrawApp();
 
   return (
-    <StyledTopPanel>
-      <PanelGrid>
-        <ToolButton>
-          <UndoIcon onClick={app.undo} />
-        </ToolButton>
-        <ToolButton>
-          <UndoIcon onClick={app.redo} flipHorizontal />
-        </ToolButton>
-        <ZoomMenu />
-      </PanelGrid>
-      <StyleMenu />
-      <PrimaryTools />
-    </StyledTopPanel>
+    <>
+      <StyledTopPanel className="asdfqwer">
+        <MenuGrid>
+          <ToolButton>
+            <UndoIcon onClick={app.undo} />
+          </ToolButton>
+          <ToolButton>
+            <UndoIcon onClick={app.redo} flipHorizontal />
+          </ToolButton>
+        </MenuGrid>
+        <StyleMenu />
+        <PrimaryTools />
+      </StyledTopPanel>
+    </>
   );
 }
 
 const StyledTopPanel = styled("div", {
-  width: "150px",
+  // width: "150px",
   // position: "absolute",
-  top: 0,
-  left: 0,
+  // top: 0,
+  // left: 0,
 
   display: "flex",
   flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
   pointerEvents: "none",
   "& > *": {
     pointerEvents: "all",

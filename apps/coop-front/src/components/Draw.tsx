@@ -32,6 +32,7 @@ import AnswerModal from "./Modal/AnswerModal";
 import { CPGameDrawee } from "@types";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
 import CanvasViewer from "./CanvasViewer";
+import CurrentQuestionNumber from "./CurrentQuestionNumber";
 
 function Editor({}) {
   const userState = useRecoilValue(userSelector);
@@ -64,7 +65,12 @@ function Editor({}) {
         onRedo={onRedo}
         onChangePresence={onChangePresence}
         // disableAssets={true}
-        components={{ Cursor: NewCursor as CursorComponent }}
+        components={{
+          Cursor: NewCursor as CursorComponent,
+          CurrentQuestionNumber: (
+            <CurrentQuestionNumber></CurrentQuestionNumber>
+          ),
+        }}
       />
     </div>
   );
@@ -134,7 +140,7 @@ function Draw() {
       <Progress
         play={isPlay}
         startTime={gameState?.pageStartTime}
-        time={20000}
+        time={20000000}
         callback={() => {
           setIsPlay("paused");
           questionTimeOut();

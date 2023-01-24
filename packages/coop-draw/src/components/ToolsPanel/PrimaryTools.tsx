@@ -39,21 +39,7 @@ export const PrimaryTools = React.memo(function PrimaryTools() {
   }, [app]);
 
   return (
-    <MenuGrid
-      // side="center"
-      id="TD-PrimaryTools"
-      // style={{ flexDirection: panelStyle }}
-      // bp={breakpoints}
-    >
-      {/* <ToolButtonWithTooltip
-        kbd={"1"}
-        label={intl.formatMessage({ id: "select" })}
-        onClick={selectSelectTool}
-        isActive={activeTool === "select"}
-        id="TD-PrimaryTools-CursorArrow"
-      >
-        <CursorArrowIcon />
-      </ToolButtonWithTooltip> */}
+    <MenuGrid id="TD-PrimaryTools">
       <ToolButton
         onClick={selectDrawTool}
         isActive={activeTool === TDShapeType.Draw}

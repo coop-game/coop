@@ -87,7 +87,6 @@ export const StyleMenu = React.memo(function ColorMenu() {
     <>
       <ScrollArea.Root className="ScrollAreaRoot">
         <ScrollArea.Viewport className="ScrollAreaViewport">
-          <FormattedMessage id="style.menu.color" />
           <MenuGrid>
             {Object.keys(strokes.light).map((style: string) => (
               <div key={style} id={`TD-Styles-Color-Swatch-${style}`}>
@@ -110,7 +109,6 @@ export const StyleMenu = React.memo(function ColorMenu() {
               </div>
             ))}
           </MenuGrid>
-          <FormattedMessage id="style.menu.size" />
           <MenuGrid>
             <ToolButton
               variant="icon"
@@ -149,6 +147,6 @@ export const StyleMenu = React.memo(function ColorMenu() {
 export const MenuGrid = styled("div", {
   display: "grid",
   gridTemplateColumns: "repeat(2, auto)",
-  // justifyItems: "center",
+  justifyItems: "center",
   gap: 0,
 });
