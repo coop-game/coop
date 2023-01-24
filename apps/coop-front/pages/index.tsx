@@ -23,6 +23,7 @@ import Layout from "@components/layout";
 import LogoImage from "@components/layout/LogoImage";
 import useHistoryBack from "@hooks/usehistoryBack";
 import { css } from "@emotion/react";
+import PostIt from "@components/layout/PostIt/PostIt";
 
 export default function Home({
   roomId,
@@ -77,7 +78,6 @@ export default function Home({
           w={"100%"}
           h={"100%"}
           minHeight={"500px"}
-          p="1em"
           justifyContent={"center"}
           flexDirection={{ base: "column", md: "row" }}
           gap={{ base: "10px", md: "20px" }}
@@ -85,69 +85,77 @@ export default function Home({
           <Flex
             w={{ base: "100%", md: "350px", xl: "600px" }}
             height="100%"
-            borderRadius={"15px"}
-            background={"beige"}
-            // border="3px solid gray"
-            boxShadow="dark-lg"
             rounded="md"
-            p={10}
+            // p={10}
             flexDirection={"column"}
             minHeight={"500px"}
             position="relative"
           >
-            <AvatarImage
-              avatarIndex={avatarIndex}
-              borderColor={color}
-              randomAvatarHandler={randomAvatarHandler}
-            ></AvatarImage>
-            <FormControl isInvalid={isError}>
-              <FormLabel>{translation["user.nickname"]}</FormLabel>
-              <Input
-                type="email"
-                value={nickname}
-                onChange={(e) => {
-                  setNickname(e.target.value);
-                  setIsError(e.target.value === "");
-                }}
-              />
-              <Flex ml={5}>
-                {!isError ? (
-                  <FormHelperText>
-                    {translation["user.success.nickname"]}
-                  </FormHelperText>
-                ) : (
-                  <FormErrorMessage>
-                    {translation["user.required.nickname"]}
-                  </FormErrorMessage>
-                )}
+            <PostIt>
+              <Flex
+                css={css`
+                  height: 100%;
+                  width: 100%;
+                  flex-direction: column;
+                  justify-content: space-between;
+                  padding: 0 10% 10% 10%;
+                  align-items: space-between;
+                `}
+              >
+                <AvatarImage
+                  avatarIndex={avatarIndex}
+                  borderColor={color}
+                  randomAvatarHandler={randomAvatarHandler}
+                ></AvatarImage>
+                <FormControl isInvalid={isError}>
+                  <FormLabel>{translation["user.nickname"]}</FormLabel>
+                  <Input
+                    type="email"
+                    value={nickname}
+                    onChange={(e) => {
+                      setNickname(e.target.value);
+                      setIsError(e.target.value === "");
+                    }}
+                  />
+                  <Flex ml={5}>
+                    {!isError ? (
+                      <FormHelperText>
+                        {translation["user.success.nickname"]}
+                      </FormHelperText>
+                    ) : (
+                      <FormErrorMessage>
+                        {translation["user.required.nickname"]}
+                      </FormErrorMessage>
+                    )}
+                  </Flex>
+                  <Flex width={"100%"} justifyContent={"flex-end"}>
+                    <Button onClick={pushLobbyHander}>GO LOBBY</Button>
+                  </Flex>
+                </FormControl>
+                <div
+                  css={css`
+                    & {
+                      position: absolute;
+                      content: "";
+                      top: -5px;
+                      left: 0;
+                      height: 10px;
+                      width: 11px;
+                      background-size: 9px 12px;
+                      background-image: radial-gradient(
+                        circle at 5% 40%,
+                        transparent 70%,
+                        #555 20%
+                      );
+                      transform: rotateX(90deg);
+                    }
+                  `}
+                ></div>
               </Flex>
-              <Flex width={"100%"} justifyContent={"flex-end"}>
-                <Button onClick={pushLobbyHander}>GO LOBBY</Button>
-              </Flex>
-            </FormControl>
-          <div css={css`
-              & {
-                position: absolute;
-                content: '';
-                top: -5px;
-                left: 0;
-                height: 10px;
-                width: 11px;
-                background-size: 9px 12px;
-                background-image: radial-gradient(circle at 5% 40%, transparent 70%, #555 20%);
-                transform: rotateX(90deg);
-              }
-            `}></div>
+            </PostIt>
           </Flex>
-          <Flex
-            w={{ base: "100%", md: "350px", xl: "600px" }}
-            height="100%"
-            borderRadius={"15px"}
-            // border="3px solid gray"
-            boxShadow="dark-lg"
-            rounded="md"
-          >
-            asdf
+          <Flex w={{ base: "100%", md: "350px", xl: "600px" }} height="100%">
+            <PostIt>{}</PostIt>
           </Flex>
         </Flex>
       </Layout>

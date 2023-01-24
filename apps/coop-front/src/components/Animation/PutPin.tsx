@@ -1,7 +1,10 @@
+import { transitionPageAnimationState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
 import Image from "next/image";
+import { useRecoilValue } from "recoil";
 
 const PutPin = () => {
+  const isAnimationend = useRecoilValue(transitionPageAnimationState);
   return (
     <div
       css={css`
@@ -10,24 +13,24 @@ const PutPin = () => {
         border-radius: 0px 0px 0px 95px;
         overflow: hidden;
         position: relative;
-      `}
-    >
-      <div
-        css={css`
-          @keyframes movePin {
-            100% {
-              transform: translate(0px, 30px);
-            }
+        @keyframes movePin {
+          100% {
+            transform: translate(0px, 30px);
           }
+        }
+        & > .pin {
           transform: translate(20px, 10px);
-          animation: movePin 0.2s ease-out;
-          animation-delay: 3s;
-          animation-fill-mode: forwards;
           & > img {
             filter: drop-shadow(3px 3px 3px #4d4c4c);
           }
-        `}
-      >
+        }
+        & > .move {
+          animation: movePin 0.2s ease-out;
+          animation-fill-mode: forwards;
+        }
+      `}
+    >
+      <div className={"pin" + (isAnimationend === true ? " move" : "")}>
         <Image
           src={"/images/pin.png"}
           width={100}

@@ -17,11 +17,11 @@ const AvatarImage = ({
 }) => {
   return (
     <Flex
+      flexGrow={1}
       flexDirection="column"
       justifyContent={"center"}
       alignItems="center"
       width="100%"
-      height="100%"
       minWidth="200px"
       minHeight="250px"
       gap="10px"

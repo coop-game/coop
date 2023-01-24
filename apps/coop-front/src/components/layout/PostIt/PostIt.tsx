@@ -2,18 +2,17 @@ import PutPin from "@components/Animation/PutPin";
 import { css } from "@emotion/react";
 
 const cssPostIt = css`
-  /* Some positioning and ratios */
   .sticky-container {
-    max-width: 1000px;
+    width: 100%;
+    height: 100%;
     position: relative;
   }
 
   .sticky-outer {
     display: flex;
-    padding-top: 92.5925926%;
     position: relative;
-
     width: 100%;
+    height: 100%;
   }
 
   .sticky {
@@ -24,19 +23,17 @@ const cssPostIt = css`
     bottom: 0;
   }
 
-  /* Shadow behind the sticky note */
   .sticky:before {
     box-shadow: -2px 2px 15px 0 rgba(0, 0, 0, 0.5);
     background-color: rgba(0, 0, 0, 0.25);
     content: "";
     width: 90%;
     left: 5px;
-    height: 75%;
+    height: 70%;
     position: absolute;
     top: 30%;
   }
 
-  /* The sticky note itself */
   .sticky-content {
     background: linear-gradient(
       180deg,
@@ -47,22 +44,7 @@ const cssPostIt = css`
     );
     width: 100%;
     height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Kalam", cursive;
-    font-size: 1.25rem;
-
     clip-path: url(#stickyClip);
-  }
-
-  /* Position the sticky nicely, so it looks better */
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    font-size: 16px;
   }
 
   .container {
@@ -73,8 +55,8 @@ const cssPostIt = css`
     height: 100%;
   }
   .container-inner {
-    width: 75%;
-    margin: 25px;
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -92,10 +74,11 @@ const PostIt = ({ children }) => {
           <div className="sticky-container">
             <div
               css={css`
+                transform: rotate(-20deg);
                 position: absolute;
                 z-index: 1000;
                 top: -60px;
-                left: calc(50% - 40px);
+                left: calc(50% - 55px);
               `}
             >
               <PutPin></PutPin>
