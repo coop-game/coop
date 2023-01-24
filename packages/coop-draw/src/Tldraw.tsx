@@ -539,10 +539,10 @@ const InnerTldraw = React.memo(function InnerTldraw({
               />
             </StyledUI>
           )}
+          <BackToContent></BackToContent>
           <DrawLayout>
             <ContextMenu>
               <ErrorBoundary FallbackComponent={ErrorFallback}>
-                <BackToContent></BackToContent>
                 <Renderer
                   id={id}
                   containerRef={rWrapper}
@@ -678,19 +678,21 @@ const ZoomLayout = styled("div", {
   position: "absolute",
   right: 0,
   top: 0,
+  zIndex:100,
 });
 const QuestionsLayout = styled("div", {
   position: "absolute",
   left: 0,
   top: 0,
+  zIndex:100,
 });
 
 const DrawLayout = styled("div", {
   position: "relative",
   display: "flex",
   flexGrow: 1,
-  width: "100%",
-  height: "100%",
+  flexBasis:"auto",
+  minHeight: "500px",
 });
 
 const StyledUI = styled("div", {
@@ -701,7 +703,6 @@ const StyledUI = styled("div", {
   alignItems: "flex-start",
   justifyContent: "flex-start",
   pointerEvents: "none",
-  zIndex: 1000,
   "& > *": {
     pointerEvents: "all",
   },

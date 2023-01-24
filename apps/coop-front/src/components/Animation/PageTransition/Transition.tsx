@@ -39,9 +39,7 @@ const PageTurningAnimation = ({
   const [_, setIsAnimationEnd] = useRecoilState(transitionPageAnimationState);
 
   const ref = useRef(null);
-  useEffect(() => {
-    console.log("123animation End", _);
-  }, [_]);
+
   useEffect(() => {
     const handler = (event: React.AnimationEvent<HTMLDivElement>) => {
       if ((event.target as HTMLDivElement).id === "flipInOut") {

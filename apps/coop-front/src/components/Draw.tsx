@@ -15,6 +15,7 @@ import {
 import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import { useRecoilValue } from "recoil";
 import {
+  transitionPageAnimationState,
   userProfilesSelector,
   userSelector,
   yjsGameState,
@@ -22,7 +23,7 @@ import {
 } from "@common/recoil/recoil.atom";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Box, Button } from "@chakra-ui/react";
 import Progress from "./Progress";
 import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
@@ -46,6 +47,8 @@ function Editor({}) {
       pageIndex: gameState?.gamePagesIndex,
     });
 
+  const isAnimationEnd = useRecoilValue(transitionPageAnimationState);
+
   return (
     <div
       css={css`
@@ -54,24 +57,24 @@ function Editor({}) {
         height: 100%;
       `}
     >
-      <Tldraw
-        showMenu={false}
-        // autofocus
-        // disableAssets
-        showPages={false}
-        onMount={onMount}
-        onChangePage={onChangePage}
-        onUndo={onUndo}
-        onRedo={onRedo}
-        onChangePresence={onChangePresence}
-        // disableAssets={true}
-        components={{
-          Cursor: NewCursor as CursorComponent,
-          CurrentQuestionNumber: (
-            <CurrentQuestionNumber></CurrentQuestionNumber>
-          ),
-        }}
-      />
+      {isAnimationEnd && (
+        <Tldraw
+          showMenu={false}
+          // autofocus
+          // disableAssets
+          showPages={false}
+          onMount={onMount}
+          onChangePage={onChangePage}
+          onUndo={onUndo}
+          onRedo={onRedo}
+          onChangePresence={onChangePresence}
+          // disableAssets={true}
+          components={{
+            Cursor: NewCursor as CursorComponent,
+            CurrentQuestionNumber: <SideBarOfDraw></SideBarOfDraw>,
+          }}
+        />
+      )}
     </div>
   );
 }
@@ -119,10 +122,13 @@ function Draw() {
   }, [roomId]);
 
   const questionTimeOut = useCallback(() => {
-    if (getSolverId() === providerState?.provider?.awareness.clientID) {
+    if (
+      getSolverId() === providerState?.provider?.awareness.clientID &&
+      roomId !== undefined
+    ) {
       setQuestionEnd();
     }
-  }, [getSolverId, setQuestionEnd]);
+  }, [getSolverId, roomId, setQuestionEnd]);
 
   useEffect(() => {
     const isSolverInUserProfiles = () => {
@@ -159,7 +165,6 @@ function Draw() {
           />
         )}
 
-      <div>{gameState?.gamePagesIndex} 번째 문제</div>
       <div
         css={css`
           display: flex;
@@ -168,37 +173,10 @@ function Draw() {
         `}
       >
         {providerState.provider !== null && (
-          <Box
-            w="100%"
-            h="100%"
-            // css={css`
-            //   position: relative;
-            //   top: 0;
-            //   left: 0;
-            // `}
-          >
+          <Box w="100%" h="100%">
             <Editor />
           </Box>
-          // <div
-          //   className="tldraw"
-          //   css={css`
-          //     /* flex-grow: 1;
-          //     flex-basis: 500px;
-
-          //     width: 100%; */
-          //     /* height: 100%; */
-          //   `}
-          // >
-          //   <Editor />
-          // </div>
         )}
-        <div
-          css={css`
-            flex-basis: 200px;
-          `}
-        >
-          <SideBarOfDraw></SideBarOfDraw>
-        </div>
       </div>
       <Solver></Solver>
     </>

@@ -133,7 +133,7 @@ export const LobbyMain = () => {
           w={{ base: "100%", md: "350px", xl: "600px" }}
           h={"100%"}
           borderRadius={"15px"}
-          border="3px solid gray"
+          // border="3px solid gray"
           boxShadow="dark-lg"
           rounded="md"
           flexDirection={"column"}

@@ -14,10 +14,6 @@ const SideBarOfDraw = () => {
 
   return (
     <div>
-      {userProfiles &&
-        userProfiles.map((v, idx) => {
-          return <div key={idx}></div>;
-        })}
       <div
         css={css`
           margin: 0px 5px 0px 5px;
@@ -27,7 +23,7 @@ const SideBarOfDraw = () => {
           display: flex;
           justify-content: center;
           align-items: center;
-        `}
+          `}
       >
         맞춘 문제수
       </div>
@@ -36,12 +32,13 @@ const SideBarOfDraw = () => {
           display: flex;
           justify-content: center;
           align-items: center;
-        `}
+          `}
       >
         {`${questions.filter((v) => v.inputAnswer.includes(v.answer)).length}/${
           questions.length
         }`}
       </div>
+      <div>{gameState?.gamePagesIndex} 번째 문제</div>
     </div>
   );
 };

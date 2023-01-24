@@ -54,8 +54,8 @@ export const _ContextMenu = ({ onBlur, children }: ContextMenuProps) => {
   const container = useContainer();
 
   return (
-    <RadixContextMenu.Root dir="ltr">
-      <RadixContextMenu.Trigger dir="ltr">{children}</RadixContextMenu.Trigger>
+    <StyledRadixContextMenu_Root dir="ltr">
+      <StyledRadixContextMenu_Trigger dir="ltr">{children}</StyledRadixContextMenu_Trigger>
       <RadixContextMenu.Portal container={container.current}>
         <RadixContextMenu.Content
           onEscapeKeyDown={preventDefault}
@@ -68,7 +68,7 @@ export const _ContextMenu = ({ onBlur, children }: ContextMenuProps) => {
           </MenuContent>
         </RadixContextMenu.Content>
       </RadixContextMenu.Portal>
-    </RadixContextMenu.Root>
+    </StyledRadixContextMenu_Root>
   );
 };
 
@@ -509,6 +509,18 @@ function AlignDistributeSubMenu({
     </RadixContextMenu.Sub>
   );
 }
+
+
+const StyledRadixContextMenu_Root = styled(RadixContextMenu.Root, {
+  width:"100%",
+  height:"100%"
+});
+
+const StyledRadixContextMenu_Trigger = styled(RadixContextMenu.Trigger, {
+  width:"100%",
+  height:"100%"
+});
+
 
 const StyledGridContent = styled(MenuContent, {
   display: "grid",

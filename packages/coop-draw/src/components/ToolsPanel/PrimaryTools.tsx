@@ -8,19 +8,23 @@ import {
 } from "@radix-ui/react-icons";
 import * as React from "react";
 import { useIntl } from "react-intl";
-import { ToolButton } from "~components/Primitives/ToolButton";
+import { ToolButton, ToolButtonWithTooltip } from "~components/Primitives/ToolButton";
 import { EraserIcon } from "~components/Primitives/icons";
 import { useTldrawApp } from "~hooks";
 import { styled } from "~styles/stitches.config";
 import { TDShapeType, TDSnapshot } from "~types";
-import { MenuGrid } from "~components/TopPanel/StyleMenu";
+import { ShapesMenu } from "./ShapesMenu";
 
 const activeToolSelector = (s: TDSnapshot) => s.appState.activeTool;
+const toolLockedSelector = (s: TDSnapshot) => s.appState.isToolLocked
 const dockPositionState = (s: TDSnapshot) => s.settings.dockPosition;
 
 export const PrimaryTools = React.memo(function PrimaryTools() {
   const app = useTldrawApp();
   const intl = useIntl();
+
+  const isToolLocked = app.useStore(toolLockedSelector)
+
 
   const activeTool = app.useStore(activeToolSelector);
 
@@ -39,7 +43,14 @@ export const PrimaryTools = React.memo(function PrimaryTools() {
   }, [app]);
 
   return (
-    <MenuGrid id="TD-PrimaryTools">
+    <>
+      <ToolButton
+        onClick={selectSelectTool}
+        isActive={activeTool === 'select'}
+      >
+        <CursorArrowIcon />
+      </ToolButton>
+   
       <ToolButton
         onClick={selectDrawTool}
         isActive={activeTool === TDShapeType.Draw}
@@ -50,6 +61,7 @@ export const PrimaryTools = React.memo(function PrimaryTools() {
       <ToolButton onClick={selectEraseTool} isActive={activeTool === "erase"}>
         <EraserIcon />
       </ToolButton>
-    </MenuGrid>
+      <ShapesMenu activeTool={activeTool} isToolLocked={isToolLocked}/>
+    </>
   );
 });

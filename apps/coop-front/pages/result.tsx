@@ -9,9 +9,7 @@ const Result = () => {
 
   return (
     <Layout>
-      <div className={styles.container}>
-        <GameResult />
-      </div>
+      <GameResult />
     </Layout>
   );
 };

@@ -88,7 +88,7 @@ export const ShapesMenu = React.memo(function ShapesMenu({
           {shapeShapeIcons[lastActiveTool]}
         </ToolButton>
       </DropdownMenu.Trigger>
-      <DropdownMenu.Content asChild side={contentSide} sideOffset={12}>
+      <DropdownMenu.Content asChild side={"bottom"} sideOffset={12}>
         <Panel side="center" style={{ flexDirection: panelStyle }}>
           {shapeShapes.map((shape, i) => (
             <Tooltip

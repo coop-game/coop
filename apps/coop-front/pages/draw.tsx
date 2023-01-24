@@ -10,9 +10,7 @@ function DrawPage() {
 
   return (
     <Layout>
-      <div className={styles.container}>
         <Draw></Draw>
-      </div>
     </Layout>
   );
 }

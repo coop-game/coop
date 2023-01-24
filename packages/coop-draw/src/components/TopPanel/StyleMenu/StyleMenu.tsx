@@ -85,68 +85,41 @@ export const StyleMenu = React.memo(function ColorMenu() {
 
   return (
     <>
-      <ScrollArea.Root className="ScrollAreaRoot">
-        <ScrollArea.Viewport className="ScrollAreaViewport">
-          <MenuGrid>
-            {Object.keys(strokes.light).map((style: string) => (
-              <div key={style} id={`TD-Styles-Color-Swatch-${style}`}>
-                <ToolButton
-                  variant="icon"
-                  isActive={displayedStyle.color === style}
-                  onClick={() => app.style({ color: style as ColorStyle })}
-                >
-                  <CircleIcon
-                    size={18}
-                    strokeWidth={2.5}
-                    fill={
-                      displayedStyle.isFilled
-                        ? fills[theme][style as ColorStyle]
-                        : "transparent"
-                    }
-                    stroke={strokes.light[style as ColorStyle]}
-                  />
-                </ToolButton>
-              </div>
-            ))}
-          </MenuGrid>
-          <MenuGrid>
-            <ToolButton
-              variant="icon"
-              isActive={SizeStyle.Small === displayedStyle.size}
-              onClick={() => handleSizeChange(SizeStyle.Small)}
-            >
-              {SIZE_ICONS[SizeStyle.Small as SizeStyleExcludeMedium]}
-            </ToolButton>
-            <ToolButton
-              variant="icon"
-              isActive={SizeStyle.Large === displayedStyle.size}
-              onClick={() => handleSizeChange(SizeStyle.Large)}
-            >
-              {SIZE_ICONS[SizeStyle.Large as SizeStyleExcludeMedium]}
-            </ToolButton>
-          </MenuGrid>
-        </ScrollArea.Viewport>
-        <ScrollArea.Scrollbar
-          className="ScrollAreaScrollbar"
-          orientation="vertical"
-        >
-          <ScrollArea.Thumb className="ScrollAreaThumb" />
-        </ScrollArea.Scrollbar>
-        <ScrollArea.Scrollbar
-          className="ScrollAreaScrollbar"
-          orientation="horizontal"
-        >
-          <ScrollArea.Thumb className="ScrollAreaThumb" />
-        </ScrollArea.Scrollbar>
-        <ScrollArea.Corner className="ScrollAreaCorner" />
-      </ScrollArea.Root>
+      {Object.keys(strokes.light).map((style: string) => (
+        <div key={style} id={`TD-Styles-Color-Swatch-${style}`}>
+          <ToolButton
+            variant="icon"
+            isActive={displayedStyle.color === style}
+            onClick={() => app.style({ color: style as ColorStyle })}
+          >
+            <CircleIcon
+              size={18}
+              strokeWidth={2.5}
+              fill={
+                displayedStyle.isFilled
+                  ? fills[theme][style as ColorStyle]
+                  : "transparent"
+              }
+              stroke={strokes.light[style as ColorStyle]}
+            />
+          </ToolButton>
+        </div>
+      ))}
+      <ToolButton
+        variant="icon"
+        isActive={SizeStyle.Small === displayedStyle.size}
+        onClick={() => handleSizeChange(SizeStyle.Small)}
+      >
+        {SIZE_ICONS[SizeStyle.Small as SizeStyleExcludeMedium]}
+      </ToolButton>
+      <ToolButton
+        variant="icon"
+        isActive={SizeStyle.Large === displayedStyle.size}
+        onClick={() => handleSizeChange(SizeStyle.Large)}
+      >
+        {SIZE_ICONS[SizeStyle.Large as SizeStyleExcludeMedium]}
+      </ToolButton>
     </>
   );
 });
 
-export const MenuGrid = styled("div", {
-  display: "grid",
-  gridTemplateColumns: "repeat(2, auto)",
-  justifyItems: "center",
-  gap: 0,
-});

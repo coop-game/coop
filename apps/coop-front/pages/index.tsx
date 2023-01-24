@@ -86,7 +86,8 @@ export default function Home({
             w={{ base: "100%", md: "350px", xl: "600px" }}
             height="100%"
             borderRadius={"15px"}
-            border="3px solid gray"
+            background={"beige"}
+            // border="3px solid gray"
             boxShadow="dark-lg"
             rounded="md"
             p={10}
@@ -142,7 +143,7 @@ export default function Home({
             w={{ base: "100%", md: "350px", xl: "600px" }}
             height="100%"
             borderRadius={"15px"}
-            border="3px solid gray"
+            // border="3px solid gray"
             boxShadow="dark-lg"
             rounded="md"
           >

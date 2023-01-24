@@ -101,3 +101,11 @@ export const ChattingSelector = selector({
     set(ChattingState, newValue);
   },
 });
+
+/**
+ * transition page animation state
+ */
+export const transitionPageAnimationState = atom<boolean>({
+  key: "TRANSITION_PAGE_ANIMATION_STATE",
+  default: false,
+});

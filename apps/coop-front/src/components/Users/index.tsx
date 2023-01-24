@@ -16,7 +16,7 @@ const Users = ({ userProfiles }: UsersPropsType) => {
       overflowX={{ base: "scroll", md: "hidden" }}
       overflowY={{ base: "hidden", md: "scroll" }}
       bgColor={"#E2E0A5"}
-      border="3px solid gray"
+      // border="3px solid gray"
       boxShadow="dark-lg"
       rounded="md"
       css={css`

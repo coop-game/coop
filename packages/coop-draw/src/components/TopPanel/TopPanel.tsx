@@ -7,10 +7,11 @@ import { styled } from "~styles";
 import { Menu } from "./Menu/Menu";
 import { MultiplayerMenu } from "./MultiplayerMenu";
 import { PageMenu } from "./PageMenu";
-import { MenuGrid, StyleMenu } from "./StyleMenu";
+import {  StyleMenu } from "./StyleMenu";
 import { ZoomMenu } from "./ZoomMenu";
 import { ToolsPanel } from "~components/ToolsPanel";
 import { PrimaryTools } from "~components/ToolsPanel/PrimaryTools";
+import * as ScrollArea from "@radix-ui/react-scroll-area";
 
 interface TopPanelProps {
   readOnly: boolean;
@@ -34,27 +35,49 @@ export function _TopPanel({
   return (
     <>
       <StyledTopPanel className="asdfqwer">
-        <MenuGrid>
-          <ToolButton>
-            <UndoIcon onClick={app.undo} />
-          </ToolButton>
-          <ToolButton>
-            <UndoIcon onClick={app.redo} flipHorizontal />
-          </ToolButton>
-        </MenuGrid>
-        <StyleMenu />
-        <PrimaryTools />
+        <ScrollArea.Root className="ScrollAreaRoot">
+          <ScrollArea.Viewport className="ScrollAreaViewport">
+            <StyledPanelContent>
+              <MenuGrid>
+                <ToolButton>
+                  <UndoIcon onClick={app.undo} />
+                </ToolButton>
+                <ToolButton>
+                  <UndoIcon onClick={app.redo} flipHorizontal />
+                </ToolButton>
+                <StyleMenu />
+                <PrimaryTools />
+              </MenuGrid>
+            </StyledPanelContent>
+          </ScrollArea.Viewport>
+          <ScrollArea.Scrollbar className="ScrollAreaScrollbar" orientation="vertical">
+            <ScrollArea.Thumb className="ScrollAreaThumb" />
+          </ScrollArea.Scrollbar>
+          <ScrollArea.Scrollbar className="ScrollAreaScrollbar" orientation="horizontal">
+            <ScrollArea.Thumb className="ScrollAreaThumb" />
+          </ScrollArea.Scrollbar>
+          <ScrollArea.Corner className="ScrollAreaCorner" />
+        </ScrollArea.Root>
       </StyledTopPanel>
     </>
   );
 }
 
-const StyledTopPanel = styled("div", {
-  // width: "150px",
-  // position: "absolute",
-  // top: 0,
-  // left: 0,
+const MenuGrid = styled("div", {
+  display: "grid",
+  gridTemplateColumns: "repeat(2, auto)",
+  justifyItems: "center",
+  gap: "3px",
+});
 
+const StyledPanelContent = styled("div", { 
+  // background:"white",
+  shadows: '0px 12px 17px rgba(0, 0, 0, 1)',
+  // borderRadius: 3,
+  // padding: '$3 $3 $3 $3',
+});
+
+const StyledTopPanel = styled("div", {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -63,13 +86,6 @@ const StyledTopPanel = styled("div", {
   "& > *": {
     pointerEvents: "all",
   },
-});
-
-export const PanelGrid = styled("div", {
-  display: "flex",
-  flexDirection: "row",
-  placeContent: "center",
-  gap: 0,
 });
 
 export const TopPanel = React.memo(_TopPanel);
