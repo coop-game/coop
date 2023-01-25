@@ -1,3 +1,4 @@
+import DrawingHand from "@components/Animation/DrawingSvg/DrawingHand";
 import Rollinghexagone from "@components/Animation/RollingHexagone";
 import RollingSelect from "@components/Animation/RollingSelect";
 import CanvasViewer from "@components/CanvasViewer";
@@ -8,7 +9,7 @@ const Example = () => {
     <>
       {/* <RollingSelect></RollingSelect> */}
       {/* <Rollinghexagone></Rollinghexagone> */}
-      <PostIt>{}</PostIt>
+      <DrawingHand></DrawingHand>
     </>
   );
 };
