@@ -1,3 +1,4 @@
+import AnswerSuccess from "@components/Animation/DrawingSvg/AnswerSuccess";
 import DrawingHand from "@components/Animation/DrawingSvg/DrawingHand";
 import Rollinghexagone from "@components/Animation/RollingHexagone";
 import RollingSelect from "@components/Animation/RollingSelect";
@@ -10,6 +11,7 @@ const Example = () => {
       {/* <RollingSelect></RollingSelect> */}
       {/* <Rollinghexagone></Rollinghexagone> */}
       <DrawingHand></DrawingHand>
+      <AnswerSuccess></AnswerSuccess>
     </>
   );
 };
