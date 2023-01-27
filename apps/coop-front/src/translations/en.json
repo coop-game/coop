@@ -48,5 +48,9 @@
   "relay.race.draw.answer": "Draw the answer",
   "relay.race.draw.submit": "Submit picture",
 
-  "result": "result"
+  "result": "result",
+
+  "main.description.draw": "Draw!",
+  "main.description.communicate": "Communicate!",
+  "main.description.corrent": "Correct!"
 }

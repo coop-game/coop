@@ -49,5 +49,9 @@
   "relay.race.draw.answer": "다음 주제를 그려주세요!",
   "relay.race.draw.submit": "그림 제출하기",
 
-  "result": "결과"
+  "result": "결과",
+
+  "main.description.draw": "그린다!",
+  "main.description.communicate": "소통한다!",
+  "main.description.corrent": "맞춘다!"
 }

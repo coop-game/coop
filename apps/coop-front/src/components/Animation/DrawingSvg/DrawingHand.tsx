@@ -65,7 +65,6 @@ const DrawingHand = () => {
             height: 100%;
             width: 100%;
             overflow: visible;
-            transform: scale(0.7);
           `}
         >
           <motion.path

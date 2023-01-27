@@ -84,7 +84,7 @@ const TalkingHumans = () => {
             />
           </motion.svg>
           <motion.svg
-            fill="#FFFFFF"
+            fill="#4a895a"
             width="100%"
             height="80px"
             viewBox="0 0 56 56"
@@ -110,7 +110,7 @@ const TalkingHumans = () => {
             />
           </motion.svg>
           <motion.svg
-            fill="#FFFFFF"
+            fill="#4a895a"
             width="100%"
             height="80px"
             viewBox="0 0 56 56"

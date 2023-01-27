@@ -4,6 +4,10 @@ import AnswerSuccess from "@components/Animation/DrawingSvg/AnswerSuccess";
 import { css } from "@emotion/react";
 import PiTimer from "@components/Timer/PiTimer";
 import TalkingHumans from "@components/Animation/DrawingSvg/TalkingHumans";
+import { FormattedMessage } from "react-intl";
+import { useRouter } from "next/router";
+import Transition from "@components/Animation/PageTransition/Transition";
+import { motion } from "framer-motion";
 
 type DescriptionPropsType = {
   animationTime?: number;
@@ -16,7 +20,13 @@ const Description = ({
 }: DescriptionPropsType) => {
   const [number, setNumber] = useState<number>(0);
 
-  const textArray = ["그린다!", "소통한다!", "맞춘다!"];
+  const textArray = [
+    "main.description.draw",
+    "main.description.communicate",
+    "main.description.corrent",
+  ];
+
+  const router = useRouter();
 
   return (
     <div
@@ -34,7 +44,10 @@ const Description = ({
           font-size: 2rem;
         `}
       >
-        <div>{textArray[number]}</div>
+        <FormattedMessage
+          id={textArray[number]}
+          values={{ locale: router.locale }}
+        ></FormattedMessage>
       </div>
       <div
         css={css`
@@ -81,7 +94,14 @@ const Description = ({
           padding-bottom: 60px;
         `}
       >
-        {number === 0 && <DrawingHand></DrawingHand>}
+        {/* <motion.div exit={{ translateX: 100 }} transition={{ duration: 1 }}>
+          <DrawingHand></DrawingHand>
+        </motion.div> */}
+        {number === 0 && (
+          <motion.div exit={{ translateX: 100 }} transition={{ duration: 1 }}>
+            <DrawingHand></DrawingHand>
+          </motion.div>
+        )}
         {number === 1 && <TalkingHumans></TalkingHumans>}
         {number === 2 && <AnswerSuccess></AnswerSuccess>}
       </div>
