@@ -41,7 +41,7 @@ const Description = ({
           display: flex;
           justify-content: center;
           align-items: center;
-          font-size: 2rem;
+          font-size: 2.5rem;
         `}
       >
         <FormattedMessage
@@ -91,17 +91,18 @@ const Description = ({
           display: flex;
           justify-content: center;
           align-items: center;
-          padding-bottom: 60px;
+          padding-bottom: 100px;
         `}
       >
-        {/* <motion.div exit={{ translateX: 100 }} transition={{ duration: 1 }}>
-          <DrawingHand></DrawingHand>
-        </motion.div> */}
-        {number === 0 && (
-          <motion.div exit={{ translateX: 100 }} transition={{ duration: 1 }}>
-            <DrawingHand></DrawingHand>
-          </motion.div>
-        )}
+        {/* {number === 0 && (
+            <motion.div
+              animate={{ translateX: "-300%" }}
+              transition={{ delay: animationTime - 1, duration: 1 }}
+            >
+              <DrawingHand></DrawingHand>
+            </motion.div>
+          )} */}
+        {number === 0 && <DrawingHand></DrawingHand>}
         {number === 1 && <TalkingHumans></TalkingHumans>}
         {number === 2 && <AnswerSuccess></AnswerSuccess>}
       </div>
