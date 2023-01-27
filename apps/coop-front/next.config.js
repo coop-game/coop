@@ -16,8 +16,8 @@ const nextConfig = {
   },
   i18n: {
     //지원하고 싶은 로케일을 적으면 된다.
-    locales: ["ko", "en"],
-    defaultLocale: "ko",
+    // locales: ["ko", "en"],
+    // defaultLocale: "ko",
     // localeDetection: true,
   },
   // trailingSlash: true,
