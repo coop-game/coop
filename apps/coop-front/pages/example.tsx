@@ -12,10 +12,10 @@ const Example = () => {
     <>
       {/* <RollingSelect></RollingSelect> */}
       {/* <Rollinghexagone></Rollinghexagone> */}
-      <DrawingHand></DrawingHand>
+      {/* <DrawingHand></DrawingHand>
       <AnswerSuccess></AnswerSuccess>
       <Description></Description>
-      <TalkingHumans></TalkingHumans>
+      <TalkingHumans></TalkingHumans> */}
     </>
   );
 };
