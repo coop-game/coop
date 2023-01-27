@@ -10,18 +10,18 @@ const nextConfig = {
       "./../../packages/coop-core",
       "./../../packages/coop-draw",
     ],
-    fontLoaders: [
-      { loader: "@next/font/google", options: { subsets: ["korean"] } },
-    ],
+    // fontLoaders: [
+    //   { loader: "@next/font/google", options: { subsets: ["korean"] } },
+    // ],
   },
   i18n: {
     //지원하고 싶은 로케일을 적으면 된다.
     locales: ["ko", "en"],
     defaultLocale: "ko",
-    localeDetection: true,
+    // localeDetection: true,
   },
-  trailingSlash: true,
-  reactStrictMode: false,
+  // trailingSlash: true,
+  // reactStrictMode: false,
   swcMinify: true,
 };
 
