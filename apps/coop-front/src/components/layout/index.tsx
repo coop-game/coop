@@ -2,7 +2,7 @@ import { Flex } from "@chakra-ui/react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Flex w={"100%"} h={"100%"} p={{ base: "0em", md: "0em" }}>
+    <Flex className="test" w={"100%"} h={"100%"} p={{ base: "0em", md: "0em" }}>
       <Flex
         direction={{ base: "column" }}
         w={"100%"}

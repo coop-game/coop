@@ -3,14 +3,20 @@ import DrawingHand from "@components/Animation/DrawingSvg/DrawingHand";
 import AnswerSuccess from "@components/Animation/DrawingSvg/AnswerSuccess";
 import { css } from "@emotion/react";
 import PiTimer from "@components/Timer/PiTimer";
+import TalkingHumans from "@components/Animation/DrawingSvg/TalkingHumans";
 
 type DescriptionPropsType = {
   animationTime?: number;
+  maxNumber?: number;
 };
 
-const Description = ({ animationTime = 5 }: DescriptionPropsType) => {
+const Description = ({
+  animationTime = 6,
+  maxNumber = 3,
+}: DescriptionPropsType) => {
   const [number, setNumber] = useState<number>(0);
-  const maxNumber = 2;
+
+  const textArray = ["그린다!", "소통한다!", "맞춘다!"];
 
   return (
     <div
@@ -22,13 +28,24 @@ const Description = ({ animationTime = 5 }: DescriptionPropsType) => {
     >
       <div
         css={css`
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 2rem;
+        `}
+      >
+        <div>{textArray[number]}</div>
+      </div>
+      <div
+        css={css`
           width: 100%;
           height: 100%;
           display: flex;
           flex-direction: row;
           justify-content: center;
-          gap: 30px;
+          align-items: flex-end;
           position: absolute;
+          gap: 30px;
         `}
       >
         {new Array(maxNumber).fill(null).map((_, idx) => {
@@ -36,8 +53,8 @@ const Description = ({ animationTime = 5 }: DescriptionPropsType) => {
             <div
               key={idx}
               css={css`
-                width: 40px;
-                height: 40px;
+                width: 35px;
+                height: 35px;
               `}
             >
               <PiTimer
@@ -61,10 +78,12 @@ const Description = ({ animationTime = 5 }: DescriptionPropsType) => {
           display: flex;
           justify-content: center;
           align-items: center;
+          padding-bottom: 60px;
         `}
       >
         {number === 0 && <DrawingHand></DrawingHand>}
-        {number === 1 && <AnswerSuccess></AnswerSuccess>}
+        {number === 1 && <TalkingHumans></TalkingHumans>}
+        {number === 2 && <AnswerSuccess></AnswerSuccess>}
       </div>
     </div>
   );

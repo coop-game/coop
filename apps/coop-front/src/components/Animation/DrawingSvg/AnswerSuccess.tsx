@@ -13,8 +13,6 @@ const questionMark = `M715.720415 207.522102C675.902539 136.26685 603.803606 95.
 
 const questionMark3 = `M513.19385 757.121218c-47.433535 0-85.859952 38.423345-85.859951 85.859952 0 47.433535 38.426416 85.859952 85.859951 85.859952 47.364935 0 85.791351-38.426416 85.791352-85.859952 0-47.436607-38.426416-85.859952-85.791352-85.859952z" fill="#000000"></path><path d="M513.19385 875.187483c-17.812533 0-32.206313-14.39378-32.206313-32.206313 0-17.744957 14.39378-32.206313 32.206313-32.206313 17.744957 0 32.138736 14.461356 32.138737 32.206313-0.001024 17.812533-14.39378 32.206313-32.138737 32.206313z`;
 
-const test = `<svg fill="#000000" width="105px" height="105px" viewBox="0 0 24 24" id="exclamation" xmlns="http://www.w3.org/2000/svg" class="icon line"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path id="primary" d="M13,13H11a1,1,0,0,1-1-1V4a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1v8A1,1,0,0,1,13,13Zm1,6a2,2,0,1,0-2,2A2,2,0,0,0,14,19Z" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></path></g></svg>`;
-
 const whiteIcon = {
   hidden: {
     pathLength: 0,
@@ -25,17 +23,6 @@ const whiteIcon = {
     pathLength: 1,
     opacity: 1,
     fill: "rgba(255, 255, 255, 1)",
-  },
-};
-
-const blackIcon = {
-  hidden: {
-    pathLength: 0,
-    // fill: "rgba(0, 0, 0, 0)",
-  },
-  visible: {
-    pathLength: 1,
-    // fill: "rgba(0, 0, 0, 1)",
   },
 };
 
@@ -60,7 +47,12 @@ const AnswerSuccess = () => {
 
   const transition = getTransition();
   return (
-    <div>
+    <div
+      css={css`
+        width: 100%;
+        height: 100%;
+      `}
+    >
       {isAnimationEnd && (
         <motion.svg
           xmlns="http://www.w3.org/2000/svg"
@@ -69,6 +61,11 @@ const AnswerSuccess = () => {
             height: 100%;
             width: 100%;
             overflow: visible;
+            transform: translate(6%) scale(1.1);
+
+            @media (max-width: 1200px) {
+              transform: translate(10%) scale(1.1);
+            }
           `}
         >
           <motion.path

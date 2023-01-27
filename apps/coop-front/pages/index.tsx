@@ -66,7 +66,7 @@ export default function Home({
   };
 
   return (
-    <div>
+    <Flex w={"100%"} h={"100%"} m={"10px"} ml={"20px"}>
       <Layout>
         <LogoImage
           src={DraweeLogo}
@@ -179,7 +179,7 @@ export default function Home({
           </Flex>
         </Flex>
       </Layout>
-    </div>
+    </Flex>
   );
 }
 
