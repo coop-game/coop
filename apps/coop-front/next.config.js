@@ -31,18 +31,20 @@ const nextConfig = {
 
 // module.exports = withBundleAnalyzer({ nextConfig });
 
-const withPlugins = require("next-compose-plugins");
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
+// const withPlugins = require("next-compose-plugins");
+// const withBundleAnalyzer = require("@next/bundle-analyzer")({
+//   enabled: process.env.ANALYZE === "true",
+// });
 
 // module.exports = withBundleAnalyzer(withPWA(nextConfig));
 
-module.exports = withPlugins(
-  [
-    [withBundleAnalyzer],
-    // [withPWA],
-    // your other plugins here
-  ],
-  nextConfig
-);
+// module.exports = withPlugins(
+//   [
+//     [withBundleAnalyzer],
+//     // [withPWA],
+//     // your other plugins here
+//   ],
+//   nextConfig
+// );
+
+module.exports = nextConfig;
