@@ -29,11 +29,14 @@ const ErrorPage = ({ statusCode, errorMessage }: ErrorPagePropsType) => {
 };
 export default ErrorPage;
 
-export async function getServerSideProps(context) {
+ErrorPage.getInitialProps = ({ res, req, err }) => {
+  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+  const errorMessage = res ? res.errorMessage : err ? err.errorMessage : 404;
+
   return {
     props: {
-      statusCode: context?.query?.statusCode ?? null,
-      errorMessage: context?.query?.errorMessage ?? null,
+      statusCode,
+      errorMessage,
     },
   };
-}
+};
