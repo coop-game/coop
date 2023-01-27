@@ -51,6 +51,8 @@ const DrawingHand = () => {
   return (
     <div
       css={css`
+        width: 100%;
+        height: 100%;
         display: flex;
         justify-content: center;
       `}
@@ -60,8 +62,8 @@ const DrawingHand = () => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 448.378 448.378"
           css={css`
-            height: 600px;
-            width: 600px;
+            height: 100%;
+            width: 100%;
             overflow: visible;
           `}
         >

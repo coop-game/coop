@@ -24,6 +24,7 @@ import LogoImage from "@components/layout/LogoImage";
 import useHistoryBack from "@hooks/usehistoryBack";
 import { css } from "@emotion/react";
 import PostIt from "@components/layout/PostIt/PostIt";
+import Description from "@components/Description/Description";
 
 export default function Home({
   roomId,
@@ -165,7 +166,16 @@ export default function Home({
             </PostIt>
           </Flex>
           <Flex w={{ base: "100%", md: "350px", xl: "600px" }} height="100%">
-            <PostIt>{}</PostIt>
+            <PostIt>
+              <div
+                css={css`
+                  width: 100%;
+                  height: calc(100% - 200px);
+                `}
+              >
+                <Description></Description>
+              </div>
+            </PostIt>
           </Flex>
         </Flex>
       </Layout>

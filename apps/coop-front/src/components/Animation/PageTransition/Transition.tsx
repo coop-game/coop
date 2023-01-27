@@ -65,7 +65,6 @@ const PageTurningAnimation = ({
     >
       <div
         className={styles.root}
-        onAnimationEnd={(event) => {}}
         css={css`
           width: 100%;
           height: 100%;

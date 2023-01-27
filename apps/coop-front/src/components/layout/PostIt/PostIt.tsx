@@ -45,6 +45,9 @@ const cssPostIt = css`
     width: 100%;
     height: 100%;
     clip-path: url(#stickyClip);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .container {

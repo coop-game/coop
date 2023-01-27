@@ -44,9 +44,9 @@ const AnswerSuccess = () => {
   const getTransition = () => {
     let delay = 0;
     const duration = 1;
-    return (sameDelay = false) => {
-      const prevDelay = delay;
-      if (sameDelay === false) delay += duration;
+    return (sameDelay = false, addDelay = 0) => {
+      const prevDelay = delay + addDelay;
+      if (sameDelay === false) delay = delay + duration + addDelay;
       return {
         default: { delay: prevDelay, duration: duration, ease: "linear" },
         fill: {
@@ -66,8 +66,8 @@ const AnswerSuccess = () => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 105.104 105.104"
           css={css`
-            height: 300px;
-            width: 300px;
+            height: 100%;
+            width: 100%;
             overflow: visible;
           `}
         >
@@ -115,8 +115,7 @@ const AnswerSuccess = () => {
               strokeLinejoin={"round"}
               transition={{
                 delay: 3,
-                duration: 1,
-                ease: [0, 1, 1, 0],
+                duration: 0,
               }}
             />
             <motion.path
@@ -139,8 +138,7 @@ const AnswerSuccess = () => {
               strokeLinejoin={"round"}
               transition={{
                 delay: 3,
-                duration: 1,
-                ease: [0, 1, 1, 0],
+                duration: 0,
               }}
             />
           </motion.g>
@@ -170,14 +168,27 @@ const AnswerSuccess = () => {
           <motion.g transform="translate(31, 13) scale(0.9, 0.9)">
             <motion.path
               d={`M13,13H11a1,1,0,0,1-1-1V4a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1v8A1,1,0,0,1,13,13Zm1,6a2,2,0,1,0-2,2A2,2,0,0,0,14,19Z`}
-              variants={whiteIcon}
+              variants={{
+                hidden: {
+                  opacity: 0,
+                  fill: "rgba(255, 255, 255, 0)",
+                },
+                visible: {
+                  opacity: [0, 1],
+                  scale: [1.2, 1],
+                  fill: "rgba(255, 255, 255, 1)",
+                },
+              }}
               initial="hidden"
               animate="visible"
               stroke={"#4a895a"}
               strokeWidth="1.5"
               strokeLinecap={"round"}
               strokeLinejoin={"round"}
-              transition={transition()}
+              transition={{
+                delay: 3,
+                duration: 0.2,
+              }}
             />
           </motion.g>
         </motion.svg>
