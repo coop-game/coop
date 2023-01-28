@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { relayRaceTypeCheck } from "@common/lib/getGameType";
 import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
 import {
@@ -18,7 +18,8 @@ import { useRecoilValue } from "recoil";
 import RelayRaceResult from "./RelayRace/RelayRaceResult";
 import DraweeResult from "./DraweeResult";
 import { useRouter } from "next/router";
-import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
+import PostIt from "@components/layout/PostIt/PostIt";
 
 const Result = () => {
   const gameState = useRecoilValue(yjsGameState);
@@ -54,42 +55,53 @@ const Result = () => {
   }, [isPlay]);
 
   return (
-    <Box w="100%" h="100%" position={"relative"}>
-      <div>
-        <FormattedMessage id={"result"} values={{ locale: router.locale }} />
-      </div>
-      {isPlay && (
-        <Progress
-          time={5000}
-          callback={timerReset}
-          play={"running"}
-          startTime={startTime}
-        />
-      )}
-      <div
-        css={css`
-          display: flex;
-          width: 100%;
-          height: 100%;
-          flex-direction: column;
-        `}
-      >
+    <Flex
+      w="100%"
+      h="100%"
+      position={"relative"}
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+    >
+      <Box w="100%" h="100%" maxW={"1200px"}>
+        <Box w="100%">
+          <FormattedMessage id={"result"} values={{ locale: router.locale }} />
+        </Box>
+        <Box w="100%">
+          {isPlay && (
+            <Progress
+              time={5000}
+              callback={timerReset}
+              play={"running"}
+              startTime={startTime}
+            />
+          )}
+        </Box>
         <div
           css={css`
-            flex-grow: 1;
-            /* flex-basis: 500px; */
+            display: flex;
             width: 100%;
             height: 100%;
+            flex-direction: column;
           `}
         >
-          {relayRaceTypeCheck(gameState) ? (
-            <RelayRaceResult nowPageIndex={nowPageIndex} />
-          ) : (
-            <DraweeResult nowPageIndex={nowPageIndex} />
-          )}
+          <div
+            css={css`
+              flex-grow: 1;
+              /* flex-basis: 500px; */
+              width: 100%;
+              height: 100%;
+            `}
+          >
+            {relayRaceTypeCheck(gameState) ? (
+              <RelayRaceResult nowPageIndex={nowPageIndex} />
+            ) : (
+              <DraweeResult nowPageIndex={nowPageIndex} />
+            )}
+          </div>
         </div>
-      </div>
-    </Box>
+      </Box>
+    </Flex>
   );
 };
 
