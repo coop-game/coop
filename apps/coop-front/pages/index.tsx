@@ -25,6 +25,7 @@ import useHistoryBack from "@hooks/usehistoryBack";
 import { css } from "@emotion/react";
 import PostIt from "@components/layout/PostIt/PostIt";
 import Description from "@components/Description/Description";
+import Logo from "@components/Animation/Logo/Logo";
 
 export default function Home({
   roomId,
@@ -68,12 +69,18 @@ export default function Home({
   return (
     <Flex w={"100%"} h={"100%"} m={"10px"} ml={"20px"}>
       <Layout>
-        <LogoImage
-          src={DraweeLogo}
-          height={150}
-          width={150}
-          heightPadding={25}
-        />
+        <div
+          css={css`
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 150px;
+          `}
+        >
+          <Logo color={"#711480b1"}></Logo>
+          {/* <Logo color={"#8b75ed"}></Logo> */}
+        </div>
         <Flex
           w={"100%"}
           h={"100%"}
