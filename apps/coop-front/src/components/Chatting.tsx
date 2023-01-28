@@ -6,17 +6,16 @@ import useChattingUpdate from "@hooks/gameHooks/gameChatting/useChattingUpdate";
 import React from "react";
 import { useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
-import { FormattedMessage, useIntl } from "react-intl";
+import { useTranslation } from "next-i18next";
 
 const Chatting = () => {
+  const { t } = useTranslation("common");
   const router = useRouter();
   const chattingState = useRecoilValue(ChattingSelector);
   const { inputString, setInputString, messagesEndRef, onClickHandler } =
     useChattingUpdate();
-  const { formatMessage } = useIntl();
-  const chattingInputPlaceholder = formatMessage({
-    id: "chatting.input.placeholder",
-  });
+
+  const chattingInputPlaceholder = t("chatting.input.placeholder");
 
   const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -97,12 +96,7 @@ const Chatting = () => {
           }}
           onKeyPress={onKeyPressHandler}
         />
-        <Button onClick={onClickHandler}>
-          <FormattedMessage
-            id="chatting.input"
-            values={{ locale: router.locale }}
-          ></FormattedMessage>
-        </Button>
+        <Button onClick={onClickHandler}>{t("chatting.input")}</Button>
       </div>
     </Flex>
   );

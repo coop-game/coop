@@ -3,7 +3,7 @@ import Image from "next/image";
 import DraweeLogo from "@asset/images/DraweeLogo.png";
 import { css, keyframes } from "@emotion/react";
 import { useRouter } from "next/router";
-import { FormattedMessage } from "react-intl";
+import { useTranslation } from "next-i18next";
 
 const scroll = keyframes`
   0%{
@@ -15,6 +15,7 @@ const scroll = keyframes`
   }
 `;
 function TopContent() {
+  const { t } = useTranslation("common");
   const router = useRouter();
   return (
     <Center w="100%" h="max-content">
@@ -24,10 +25,7 @@ function TopContent() {
         </Center>
         <Center marginTop={{ base: "40px", sm: "20px", md: "40px" }}>
           <Text fontSize={{ base: "6xl", sm: "3xl", md: "6xl" }}>
-            <FormattedMessage
-              id={"welcome.site.title"}
-              values={{ locale: router.locale }}
-            />
+            {t("welcome.site.title")}
           </Text>
         </Center>
         <Center marginTop={{ base: "40px", sm: "20px", md: "40px" }}>
@@ -35,10 +33,7 @@ function TopContent() {
             fontSize={{ base: "4xl", sm: "2xl", md: "4xl" }}
             textAlign="center"
           >
-            <FormattedMessage
-              id={"welcome.site.tutorial1"}
-              values={{ locale: router.locale }}
-            />
+            {t("welcome.site.tutorial1")}
           </Text>
         </Center>
         <Center marginTop={{ base: "20px", sm: "10px", md: "20px" }}>
@@ -46,10 +41,7 @@ function TopContent() {
             fontSize={{ base: "2xl", sm: "lg", md: "2xl" }}
             textAlign="center"
           >
-            <FormattedMessage
-              id={"welcome.site.tutorial2"}
-              values={{ locale: router.locale }}
-            />
+            {t("welcome.site.tutorial2")}
           </Text>
         </Center>
         <Center marginTop={{ base: "10px", sm: "5px", md: "10px" }}>
@@ -57,10 +49,7 @@ function TopContent() {
             fontSize={{ base: "2xl", sm: "lg", md: "2xl" }}
             textAlign="center"
           >
-            <FormattedMessage
-              id={"welcome.site.tutorial3"}
-              values={{ locale: router.locale }}
-            />
+            {t("welcome.site.tutorial3")}
           </Text>
         </Center>
         <Center
@@ -73,10 +62,7 @@ function TopContent() {
               router.push("/");
             }}
           >
-            <FormattedMessage
-              id={"welcome.site.start.button"}
-              values={{ locale: router.locale }}
-            />
+            {t("welcome.site.start.button")}
           </Button>
         </Center>
         <Center>

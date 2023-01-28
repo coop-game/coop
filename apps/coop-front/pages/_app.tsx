@@ -10,8 +10,9 @@ import Transition from "@components/Animation/PageTransition/Transition";
 import koMsg from "./../src/translations/main.json";
 import enMsg from "./../src/translations/en.json";
 import { IntlProvider } from "react-intl";
+import { appWithTranslation } from "next-i18next";
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   const messages = { en: enMsg, "en-US": enMsg, ko: koMsg }[router.locale];
@@ -31,3 +32,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </ChakraProvider>
   );
 }
+
+export default appWithTranslation(App);

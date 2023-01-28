@@ -18,8 +18,7 @@ import { useRecoilValue } from "recoil";
 import RelayRaceResult from "./RelayRace/RelayRaceResult";
 import DraweeResult from "./DraweeResult";
 import { useRouter } from "next/router";
-import { FormattedMessage } from "react-intl";
-import PostIt from "@components/layout/PostIt/PostIt";
+import { useTranslation } from "next-i18next";
 
 const Result = () => {
   const gameState = useRecoilValue(yjsGameState);
@@ -29,6 +28,7 @@ const Result = () => {
   const { isOwner } = useRecoilValue(userProfilesSelector);
   const [startTime, setStartTime] = useState<number>();
   const router = useRouter();
+  const { t } = useTranslation("common");
 
   useProfileUpdate();
   useGameStateUpdate(roomId);
@@ -64,9 +64,7 @@ const Result = () => {
       flexDirection="column"
     >
       <Box w="100%" h="100%" maxW={"1200px"}>
-        <Box w="100%">
-          <FormattedMessage id={"result"} values={{ locale: router.locale }} />
-        </Box>
+        <Box w="100%">{t("result")}</Box>
         <Box w="100%">
           {isPlay && (
             <Progress

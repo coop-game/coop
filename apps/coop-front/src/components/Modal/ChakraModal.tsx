@@ -16,9 +16,9 @@ import {
 import { userProfilesState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
 import { useRouter } from "next/router";
-import { FormattedMessage } from "react-intl";
 import React from "react";
 import { useRecoilValue } from "recoil";
+import { useTranslation } from "next-i18next";
 
 type ChakraModalPropsType = {
   children?: React.ReactNode;
@@ -27,7 +27,7 @@ type ChakraModalPropsType = {
 
 const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
   const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
-
+  const { t } = useTranslation("common");
   const initialRef = React.useRef(null);
   const { isOwner } = useRecoilValue(userProfilesState);
 
@@ -82,10 +82,7 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
                 `}
                 onClick={onCloseAllHandler}
               >
-                <FormattedMessage
-                  id="draw.modal.next"
-                  values={{ locale: router.locale }}
-                />
+                {t("draw.modal.next")}
               </Button>
             )}
             {!isOwner && (
@@ -99,12 +96,7 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
                 `}
               >
                 <Spinner color="red.700" size="lg" />
-                <div css={css``}>
-                  <FormattedMessage
-                    id="draw.modal.next.wait.owner"
-                    values={{ locale: router.locale }}
-                  />
-                </div>
+                <div css={css``}>{t("draw.modal.next.wait.owner")}</div>
               </div>
             )}
           </ModalFooter>

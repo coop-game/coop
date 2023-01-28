@@ -11,12 +11,13 @@ import { nextContentType } from "@pages/welcome";
 import Image from "next/image";
 import { css } from "@emotion/react";
 import { useRouter } from "next/dist/client/router";
-import { FormattedMessage } from "react-intl";
+import { useTranslation } from "next-i18next";
 
 function MiddleContent({ nextContent }: { nextContent: nextContentType }) {
   const [nowDetect, setNowDetect] = useState<number>(1);
   const images = [stock1, stock2, stock3, stock4];
   const { locale } = useRouter();
+  const { t } = useTranslation("common");
 
   const detectComponent = ({ index }: { index: number }) => {
     setNowDetect((prev) => {
@@ -105,10 +106,7 @@ function MiddleContent({ nextContent }: { nextContent: nextContentType }) {
               </motion.div>
             </motion.div>
             <Text w="100%" left="0px" fontSize="6xl" maxWidth="1024px">
-              <FormattedMessage
-                id={"welcome.site.drawing"}
-                values={{ locale }}
-              />
+              {t("welcome.site.drawing")}
             </Text>
 
             <motion.div

@@ -9,7 +9,7 @@ import CanvasViewer from "@components/CanvasViewer";
 import { css } from "@emotion/react";
 import { userState } from "@common/recoil/recoil.atom";
 import { useRouter } from "next/router";
-import { FormattedMessage, useIntl } from "react-intl";
+import { useTranslation } from "next-i18next";
 
 const AnswerInput = ({
   pushArrayHandler,
@@ -26,7 +26,7 @@ const AnswerInput = ({
   >(yjsRelayRaceAnswerState);
   const user = useRecoilValue(userState);
   const router = useRouter();
-  const { formatMessage } = useIntl();
+  const { t } = useTranslation("common");
 
   const onClick = async () => {
     doc.transact(() => {
@@ -75,26 +75,16 @@ const AnswerInput = ({
         )}
       </div>
       <Text fontSize={"5xl"} fontWeight="bold">
-        <FormattedMessage
-          id="relay.race.answer.suggest"
-          values={{ locale: router.locale }}
-        />
+        {t("relay.race.answer.suggest")}
       </Text>
       <Input
-        placeholder={formatMessage({
-          id: "relay.race.answer.input.placeholder",
-        })}
+        placeholder={t("relay.race.answer.input.placeholder")}
         onChange={(e) => {
           setAnswer(e.target.value);
         }}
         value={answer}
       ></Input>
-      <Button onClick={onClick}>
-        <FormattedMessage
-          id="relay.race.answer.submit"
-          values={{ locale: router.locale }}
-        />
-      </Button>
+      <Button onClick={onClick}>{t("relay.race.answer.submit")}</Button>
     </div>
   );
 };

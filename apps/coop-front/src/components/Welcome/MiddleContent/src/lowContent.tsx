@@ -6,8 +6,8 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import Image, { StaticImageData } from "next/image";
 import Picture from "./lowImageScroll";
 import { useRouter } from "next/dist/client/router";
-import { FormattedMessage } from "react-intl";
 import { motion, Variants } from "framer-motion";
+import { useTranslation } from "next-i18next";
 
 function MiddleLowContent({
   setRatio,
@@ -16,6 +16,7 @@ function MiddleLowContent({
   setRatio: ({ ratio, detect }: nextContentType) => void;
   images: StaticImageData[];
 }) {
+  const { t } = useTranslation("common");
   const { isRatio, isDetect, targetRef } = useObserver();
   const router = useRouter();
   const pencilVariants: Variants = {
@@ -96,10 +97,7 @@ function MiddleLowContent({
             </motion.div>
           </motion.div>
           <Text w="100%" top="5px" left="0px" fontSize="6xl" maxWidth="1024px">
-            <FormattedMessage
-              id={"welcome.site.correct"}
-              values={{ locale: router.locale }}
-            />
+            {t("welcome.site.correct")}
           </Text>
 
           <motion.div

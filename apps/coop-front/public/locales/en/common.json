@@ -1,0 +1,56 @@
+{
+  "welcome.site.title": "Drawee!",
+  "welcome.site.tutorial1": "Draw a picture with other people and guess the answer!",
+  "welcome.site.tutorial2": "Drawee is a game where you team up and draw together.",
+  "welcome.site.tutorial3": "When the team members look at the word and draw, the other person looks at the picture and guesses the word.",
+  "welcome.site.start.button": "Start",
+  "welcome.site.correct": "Correct",
+  "welcome.site.drawing": "Drawing",
+  "welcome.site.play.now": "Just Play Now!",
+
+  "room.id": "Room Title",
+
+  "user.nickname": "Nickname",
+  "user.success.nickname": "GOGO Lobby",
+  "user.required.nickname": "Nickname is required",
+
+  "lobby.invite.button": "Invite",
+  "lobby.next.button": "Next",
+  "lobby.select.by.owner": "Selecting from Onwer",
+  "lobby.toast.invite.title": "Invite",
+  "lobby.toast.invite.description": "Copy invite url",
+
+  "start.input.answer": "Input answer",
+  "start.push.question": "Drawing answer!",
+
+  "draw.answer": "Answer!!",
+  "draw.solver": "Solver",
+  "draw.answer.submit": "Answer submit",
+  "draw.input.in.answer": "Is this really correct?..",
+  "draw.input.required.answer": "input answer required",
+  "draw.answer.history": "Answer history",
+
+  "chatting.input.placeholder": "Input your chat",
+  "chatting.input": "Chat",
+
+  "draw.modal.answer": "Answer!",
+  "draw.modal.correct.answer": "got the answer right!",
+  "draw.modal.next": "Next",
+  "draw.modal.next.wait.owner": "Waiting Owner",
+
+  "backspace": "Are you sure you want to get out? Data may be lost?",
+
+  "relay.race.wating.other.player": "Waiting for other player",
+  "relay.race.answer.input.placeholder": "Enter the answer",
+  "relay.race.answer.suggest": "What do you think? plase enter the answer",
+  "relay.race.answer.submit": "Submit answer",
+
+  "relay.race.draw.answer": "Draw the answer",
+  "relay.race.draw.submit": "Submit picture",
+
+  "result": "result",
+
+  "main.description.draw": "Draw!",
+  "main.description.communicate": "Communicate!",
+  "main.description.corrent": "Correct!"
+}

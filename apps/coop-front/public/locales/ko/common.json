@@ -1,0 +1,57 @@
+{
+  "welcome.site.title": "협동 조합 게임!",
+  "welcome.site.tutorial1": "다른 사람들과 함께 그림을 그리고 정답을 맞춰보세요!",
+  "welcome.site.tutorial2": "협동 조합 게임은 팀을 짜고 함께 그림을 그리는 게임 입니다.",
+  "welcome.site.tutorial3": "팀원이 제시어를 보고 그리면 나머지 한명이 그림을 보고 제시어를 맞추는 방식입니다.",
+  "welcome.site.start.button": "시작하기",
+  "welcome.site.correct": "맞춘다",
+  "welcome.site.drawing": "그린다",
+  "welcome.site.play.now": "지금 당장 시작해보세요!",
+
+  "room.id": "방 제목",
+
+  "user.nickname": "Nickname",
+
+  "user.success.nickname": "로비로 GOGO",
+  "user.required.nickname": "닉네임 필요합니다.",
+
+  "lobby.invite.button": "초대하기",
+  "lobby.next.button": "다음으로 넘어가기",
+  "lobby.select.by.owner": "방장이 선택하는 중입니다.",
+  "lobby.toast.invite.title": "초대하기",
+  "lobby.toast.invite.description": "초대주소가 복사되었습니다.",
+
+  "start.input.answer": "정답을 입력하세요",
+  "start.push.question": "정답을 그려라!",
+
+  "draw.answer": "정답!",
+  "draw.solver": "맞추는 사람",
+  "draw.answer.submit": "정답 제출",
+  "draw.input.in.answer": "이게 ... 정답일까?",
+  "draw.input.required.answer": "정답을 입력하세요",
+  "draw.answer.history": "정답 히스토리",
+
+  "chatting.input.placeholder": "채팅을 입력하세요",
+  "chatting.input": "채팅",
+
+  "draw.modal.answer": "정답!",
+  "draw.modal.correct.answer": "이 정답을 맞췄습니다",
+  "draw.modal.next": "다음",
+  "draw.modal.next.wait.owner": "방장을 기다리는 중입니다.",
+
+  "backspace": "정말 나가시겠습니까? 데이터가 날라갈지도 모릅니다?",
+
+  "relay.race.wating.other.player": "다른 플레이어를 기다리는 중입니다.",
+  "relay.race.answer.input.placeholder": "정답 입력하기",
+  "relay.race.answer.suggest": "당신이 생각한 것을 입력해주세요",
+  "relay.race.answer.submit": "정답 제출하기",
+
+  "relay.race.draw.answer": "다음 주제를 그려주세요!",
+  "relay.race.draw.submit": "그림 제출하기",
+
+  "result": "결과",
+
+  "main.description.draw": "그린다!",
+  "main.description.communicate": "소통한다!",
+  "main.description.corrent": "맞춘다!"
+}

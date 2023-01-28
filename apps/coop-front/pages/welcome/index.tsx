@@ -9,6 +9,8 @@ import stock2 from "../../src/asset/stock2.jpg";
 import stock3 from "../../src/asset/stock3.jpg";
 import stock4 from "../../src/asset/stock4.jpg";
 import BottomContent from "@components/Welcome/BottomContent";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 
 export type nextContentType = {
   ratio: number | undefined;
@@ -59,5 +61,10 @@ function Welcome() {
     </Box>
   );
 }
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale ?? "ko", ["common"])),
+  },
+});
 
 export default Welcome;

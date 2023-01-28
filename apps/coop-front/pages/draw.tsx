@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Layout from "@components/layout";
 import useHistoryBack from "@hooks/usehistoryBack";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 
 function DrawPage() {
   useHistoryBack();
@@ -15,3 +17,9 @@ function DrawPage() {
   );
 }
 export default DrawPage;
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale ?? "ko", ["common"])),
+  },
+});
