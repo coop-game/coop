@@ -28,7 +28,6 @@ import {
 import DraweeLogo from "@asset/images/DraweeLogo.png";
 import Users from "@components/Users";
 import Chatting from "./Chatting";
-import LogoImage from "./layout/LogoImage";
 
 import { useEffect } from "react";
 import {
@@ -120,7 +119,6 @@ export const LobbyMain = () => {
 
   return (
     <>
-      <LogoImage src={DraweeLogo} height={150} width={150} heightPadding={25} />
       <Flex
         w={"100%"}
         h={"100%"}
