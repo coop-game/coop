@@ -24,8 +24,8 @@ const LetterLineRightE = () => {
           x2="376.5"
           y2="60.5"
           // stroke="black"
-          stroke-width="9"
-          stroke-linecap="round"
+          strokeWidth="9"
+          strokeLinecap="round"
         />
         <motion.line
           x1="330.5"
@@ -33,8 +33,8 @@ const LetterLineRightE = () => {
           x2="330.5"
           y2="125.5"
           // stroke="black"
-          stroke-width="9"
-          stroke-linecap="round"
+          strokeWidth="9"
+          strokeLinecap="round"
         />
         <motion.line
           x1="330.5"
@@ -42,8 +42,8 @@ const LetterLineRightE = () => {
           x2="376.5"
           y2="125.5"
           // stroke="black"
-          stroke-width="9"
-          stroke-linecap="round"
+          strokeWidth="9"
+          strokeLinecap="round"
         />
         <motion.line
           x1="330.5"
@@ -51,8 +51,8 @@ const LetterLineRightE = () => {
           x2="376.5"
           y2="94.5"
           // stroke="black"
-          stroke-width="9"
-          stroke-linecap="round"
+          strokeWidth="9"
+          strokeLinecap="round"
         />
         <motion.line
           x1="376.5"
@@ -60,8 +60,8 @@ const LetterLineRightE = () => {
           x2="376.5"
           y2="94.5"
           // stroke="black"
-          stroke-width="9"
-          stroke-linecap="round"
+          strokeWidth="9"
+          strokeLinecap="round"
         />
         <motion.g
           animate={{
@@ -82,8 +82,8 @@ const LetterLineRightE = () => {
             x2="363"
             y2="76"
             // stroke="black"
-            stroke-width="6"
-            stroke-linecap="square"
+            strokeWidth="6"
+            strokeLinecap="square"
           />
           <motion.line
             x1="344"
@@ -91,8 +91,8 @@ const LetterLineRightE = () => {
             x2="344"
             y2="76"
             // stroke="black"
-            stroke-width="6"
-            stroke-linecap="square"
+            strokeWidth="6"
+            strokeLinecap="square"
           />
         </motion.g>
       </motion.svg>
@@ -117,7 +117,7 @@ const LetterLineRightE = () => {
           x2="335"
           y2="67"
           // stroke="black"
-          stroke-width="15"
+          strokeWidth="15"
         />
       </motion.svg>
     </motion.g>

@@ -25,6 +25,8 @@ const LetterLineLeftE = () => {
           translateX: ["10px", "12px", "10px"],
           rotate: ["30deg", "40deg", "30deg"],
         }}
+        // whileHover={{ scale: 10 }}
+        // whileTap={{ scale: 5 }}
         transition={{
           delay: 0,
           duration: 1,
@@ -35,7 +37,6 @@ const LetterLineLeftE = () => {
         style={{
           originX: "272px",
           originY: "60px",
-          originZ: "0px",
         }}
       >
         <motion.line
@@ -44,8 +45,8 @@ const LetterLineLeftE = () => {
           x2="315.5"
           y2="60.5"
           // stroke="black"
-          stroke-width="9"
-          stroke-linecap="round"
+          strokeWidth="9"
+          strokeLinecap="round"
         />
         <motion.line
           x1="269.5"
@@ -53,8 +54,8 @@ const LetterLineLeftE = () => {
           x2="269.5"
           y2="125.5"
           // stroke="black"
-          stroke-width="9"
-          stroke-linecap="round"
+          strokeWidth="9"
+          strokeLinecap="round"
         />
         <motion.line
           x1="269.5"
@@ -62,8 +63,8 @@ const LetterLineLeftE = () => {
           x2="315.5"
           y2="125.5"
           // stroke="black"
-          stroke-width="9"
-          stroke-linecap="round"
+          strokeWidth="9"
+          strokeLinecap="round"
         />
         <motion.line
           x1="269.5"
@@ -71,8 +72,8 @@ const LetterLineLeftE = () => {
           x2="315.5"
           y2="94.5"
           // stroke="black"
-          stroke-width="9"
-          stroke-linecap="round"
+          strokeWidth="9"
+          strokeLinecap="round"
         />
         <motion.line
           x1="315.5"
@@ -80,8 +81,8 @@ const LetterLineLeftE = () => {
           x2="315.5"
           y2="94.5"
           // stroke="black"
-          stroke-width="9"
-          stroke-linecap="round"
+          strokeWidth="9"
+          strokeLinecap="round"
         />
         <motion.g
           animate={{
@@ -102,8 +103,8 @@ const LetterLineLeftE = () => {
             x2="302.997"
             y2="76.16"
             // stroke="black"
-            stroke-width="6"
-            stroke-linecap="square"
+            strokeWidth="6"
+            strokeLinecap="square"
           />
           <motion.line
             x1="283.997"
@@ -111,8 +112,8 @@ const LetterLineLeftE = () => {
             x2="283.997"
             y2="76.16"
             // stroke="black"
-            stroke-width="6"
-            stroke-linecap="square"
+            strokeWidth="6"
+            strokeLinecap="square"
           />
         </motion.g>
       </motion.svg>
@@ -144,7 +145,6 @@ const LetterLineLeftE = () => {
         style={{
           originX: "272px",
           originY: "60px",
-          originZ: "0px",
         }}
       >
         {/* 연필 겹치는 부분*/}
@@ -154,7 +154,7 @@ const LetterLineLeftE = () => {
           x2="274"
           y2="78"
           // stroke="black"
-          stroke-width="30"
+          strokeWidth="30"
         />
       </motion.svg>
     </motion.g>

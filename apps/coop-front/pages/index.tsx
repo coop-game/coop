@@ -69,18 +69,6 @@ export default function Home({
   return (
     <Flex w={"100%"} h={"100%"} m={"10px"} ml={"20px"}>
       <Layout>
-        <div
-          css={css`
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 150px;
-          `}
-        >
-          <Logo color={"#711480b1"}></Logo>
-          {/* <Logo color={"#8b75ed"}></Logo> */}
-        </div>
         <Flex
           w={"100%"}
           h={"100%"}

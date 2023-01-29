@@ -17,7 +17,7 @@ const Example = () => {
       <AnswerSuccess></AnswerSuccess>
       <Description></Description>
       <TalkingHumans></TalkingHumans> */}
-      <Logo></Logo>
+      <Logo color="darkviolet"></Logo>
     </>
   );
 };

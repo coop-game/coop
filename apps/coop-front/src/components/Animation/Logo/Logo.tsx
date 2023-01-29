@@ -1,54 +1,54 @@
 import { css } from "@emotion/react";
-import { motion } from "framer-motion";
+import { ForwardRefComponent, motion, SVGMotionProps } from "framer-motion";
 import LetterLineLeftE from "./LetterLineLeftE";
 import LetterLineRightE from "./LetterLineRightE";
 import LetterPath from "./LetterPath";
 import LogoPencil from "./LogoPenCil";
 
 const Logo = ({ color }: { color: string }) => {
-  const wordsArray: Array<{ d: string; CoverLine: React.ElementType }> = [
+  const wordsArray: Array<{ d: string; coverline: React.ReactNode }> = [
     {
       d: D,
-      CoverLine: () => (
+      coverline: (
         <motion.line
           x1="22.5"
           y1="69"
           x2="37"
           y2="69"
           //   stroke={"#fff"}
-          stroke-width="10"
+          strokeWidth="10"
         />
       ),
     },
     {
       d: R,
-      CoverLine: () => (
+      coverline: (
         <motion.line
           x1="83.5"
           y1="68"
           x2="97.4"
           y2="68"
           //   stroke="black"
-          stroke-width="10"
+          strokeWidth="10"
         />
       ),
     },
     {
       d: A,
-      CoverLine: () => (
+      coverline: (
         <motion.line
           x1="151.2"
           y1="64"
           x2="164.2"
           y2="69.5"
           //   stroke="black"
-          stroke-width="15"
+          strokeWidth="15"
         />
       ),
     },
     {
       d: W,
-      CoverLine: () => (
+      coverline: (
         <>
           <motion.line
             x1="195.7"
@@ -56,7 +56,7 @@ const Logo = ({ color }: { color: string }) => {
             x2="208.8"
             y2="65.5"
             // stroke="black"
-            stroke-width="10"
+            strokeWidth="10"
           />
           <motion.line
             x1="209.5"
@@ -64,7 +64,7 @@ const Logo = ({ color }: { color: string }) => {
             x2="220.8"
             y2="70.5959"
             // stroke="black"
-            stroke-width="13"
+            strokeWidth="13"
           />
         </>
       ),
@@ -97,11 +97,11 @@ const Logo = ({ color }: { color: string }) => {
           z-index: 1;
         `}
       >
-        {wordsArray.map(({ d, CoverLine }, idx) => {
-          return <LetterPath key={idx} d={d}></LetterPath>;
+        {wordsArray.map(({ d, ...etc }, idx) => {
+          return <LetterPath key={idx} d={d} {...etc}></LetterPath>;
         })}
       </motion.svg>
-      {wordsArray.map(({ d, CoverLine }, idx) => {
+      {wordsArray.map(({ coverline }, idx) => {
         return (
           <motion.svg
             width="397"
@@ -116,7 +116,7 @@ const Logo = ({ color }: { color: string }) => {
               z-index: 10;
             `}
           >
-            <CoverLine></CoverLine>
+            {coverline}
           </motion.svg>
         );
       })}
