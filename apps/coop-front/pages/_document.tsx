@@ -8,15 +8,16 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        
         <link rel="manifest" href="/manifest.json" />
         <link
-          href="images/favicon-16x16.png"
+          href="favicon-16x16.png"
           rel="icon"
           type="image/png"
           sizes="16x16"
         />
         <link
-          href="images/favicon-32x32.png"
+          href="favicon-32x32.png"
           rel="icon"
           type="image/png"
           sizes="32x32"
