@@ -8,11 +8,14 @@ import { RecoilRoot } from "recoil";
 import router, { useRouter } from "next/router";
 import Transition from "@components/Animation/PageTransition/Transition";
 import { appWithTranslation } from "next-i18next";
+import { DefaultSeo } from "next-seo";
+import SEO from "next-seo-config";
 
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   return (
     <ChakraProvider theme={theme}>
+      <DefaultSeo {...SEO} />
       <RecoilRoot>
         {router.pathname === "/welcome" ? (
           <Component {...pageProps} />

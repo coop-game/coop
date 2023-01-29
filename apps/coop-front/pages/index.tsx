@@ -28,6 +28,7 @@ import Logo from "@components/Animation/Logo/Logo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { GetServerSideProps } from "next/types";
+import { NextSeo } from "next-seo";
 
 export default function Home({
   roomId,
