@@ -1,20 +1,20 @@
 import { providerState, yUserProfilesState } from "@common/yjsStore/userStore";
 import router from "next/router";
 import { useEffect, useState } from "react";
-import { useIntl } from "react-intl";
+import { useTranslation } from "next-i18next";
 
 const useHistoryBack = () => {
-  const { formatMessage } = useIntl();
+  const { t } = useTranslation("common");
 
   useEffect(() => {
     router.beforePopState(({ url, as, options }) => {
       window.history.pushState(null, "", router.asPath);
-      const isConfirmed = confirm(`${formatMessage({ id: "backspace" })}`);
+      const isConfirmed = confirm(t("backspace"));
       if (isConfirmed) {
         window.location.href = "/";
       }
       return isConfirmed;
     });
-  }, [formatMessage]);
+  }, [t]);
 };
 export default useHistoryBack;

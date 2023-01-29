@@ -1,6 +1,7 @@
 import AnswerSuccess from "@components/Animation/DrawingSvg/AnswerSuccess";
 import DrawingHand from "@components/Animation/DrawingSvg/DrawingHand";
 import TalkingHumans from "@components/Animation/DrawingSvg/TalkingHumans";
+import Logo from "@components/Animation/Logo/Logo";
 import Rollinghexagone from "@components/Animation/RollingHexagone";
 import RollingSelect from "@components/Animation/RollingSelect";
 import CanvasViewer from "@components/CanvasViewer";
@@ -16,6 +17,7 @@ const Example = () => {
       <AnswerSuccess></AnswerSuccess>
       <Description></Description>
       <TalkingHumans></TalkingHumans> */}
+      <Logo color="darkviolet"></Logo>
     </>
   );
 };

@@ -24,6 +24,7 @@ import useHistoryBack from "@hooks/usehistoryBack";
 import { css } from "@emotion/react";
 import PostIt from "@components/layout/PostIt/PostIt";
 import Description from "@components/Description/Description";
+import Logo from "@components/Animation/Logo/Logo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { GetServerSideProps } from "next/types";
@@ -31,10 +32,13 @@ import { GetServerSideProps } from "next/types";
 export default function Home({
   roomId,
   isCreater,
+  locale,
 }: {
   roomId: string;
   isCreater: boolean;
+  locale: string;
 }) {
+  console.log(locale);
   const { t } = useTranslation("common");
   const [_, setUserState] = useRecoilState(userSelector);
   const router = useRouter();
@@ -71,12 +75,6 @@ export default function Home({
   return (
     <Flex w={"100%"} h={"100%"} m={"10px"} ml={"20px"}>
       <Layout>
-        <LogoImage
-          src={DraweeLogo}
-          height={150}
-          width={150}
-          heightPadding={25}
-        />
         <Flex
           w={"100%"}
           h={"100%"}
@@ -177,12 +175,13 @@ export default function Home({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const roomId = context.query?.roomId;
-
+  console.log(context.locale);
   return {
     props: {
       ...(await serverSideTranslations(context.locale ?? "ko", ["common"])),
       roomId: roomId === undefined ? nanoid() : roomId,
       isCreater: roomId === undefined,
+      locale: context.locale,
     },
   };
 };
