@@ -1,9 +1,12 @@
 import { Box } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 
 const Main = () => {
   const RelayRaceStart = dynamic(
-    import("@components/relay-race/RelayRaceStart")
+    import("@components/relay-race/RelayRaceStart"),
+    { ssr: false }
   );
   return (
     <Box w="100%" h="100%" minHeight="95vh" position={"relative"}>
@@ -12,3 +15,9 @@ const Main = () => {
   );
 };
 export default Main;
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale ?? "ko", ["common"])),
+  },
+});

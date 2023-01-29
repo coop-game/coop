@@ -3,7 +3,7 @@ import Chatting from "@components/Chatting";
 import Progress from "@components/Progress";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { FormattedMessage } from "react-intl";
+import { useTranslation } from "next-i18next";
 
 const Wating = ({
   isPlay,
@@ -14,6 +14,7 @@ const Wating = ({
   setIsPlay: Dispatch<SetStateAction<"running" | "paused">>;
   startTime: number;
 }) => {
+  const { t } = useTranslation("common");
   const router = useRouter();
   useEffect(() => {
     if (isPlay === "paused") {
@@ -35,10 +36,7 @@ const Wating = ({
         startTime={startTime}
       />
       <Text fontWeight={"extrabold"} fontSize={"4xl"} paddingTop={"5%"}>
-        <FormattedMessage
-          id={"relay.race.wating.other.player"}
-          values={{ locale: router.locale }}
-        />
+        {t("relay.race.wating.other.player")}
       </Text>
       <Box w="100%" height="500px" display="flex" justifyContent="center">
         <Box w="100%" maxW="800px" height="500px">

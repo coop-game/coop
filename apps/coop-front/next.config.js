@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const { i18n } = require("./next-i18next.config");
 const path = require("path");
 const nextConfig = {
   sassOptions: {
@@ -14,12 +15,7 @@ const nextConfig = {
     //   { loader: "@next/font/google", options: { subsets: ["korean"] } },
     // ],
   },
-  i18n: {
-    //지원하고 싶은 로케일을 적으면 된다.
-    locales: ["ko", "en"],
-    defaultLocale: "ko",
-    // localeDetection: true,
-  },
+  i18n,
   // trailingSlash: true,
   // reactStrictMode: false,
   swcMinify: true,

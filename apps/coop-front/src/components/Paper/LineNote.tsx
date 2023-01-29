@@ -4,14 +4,19 @@ const LineNote = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       css={css`
-        position: absolute;
+        top: 3%;
+        left: 0px;
+        /* position: absolute; */
         width: 100%;
+        max-width: 900px;
+        height: 100%;
+        max-height: 600px;
         .paper {
           position: relative;
           width: 100%;
           /* max-width: 100%; */
-          min-width: 400px;
-          height: 480px;
+          min-width: 200px;
+          height: 100%;
           margin: 0 auto;
           background: #fafafa;
           border-radius: 10px;

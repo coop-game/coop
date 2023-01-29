@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import DraweeLogo from "@asset/images/DraweeLogo.png";
 import lodashRandom from "lodash/random";
-import { FormattedMessage } from "react-intl";
 
 import {
   Button,
@@ -26,6 +25,9 @@ import { css } from "@emotion/react";
 import PostIt from "@components/layout/PostIt/PostIt";
 import Description from "@components/Description/Description";
 import Logo from "@components/Animation/Logo/Logo";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
+import { GetServerSideProps } from "next/types";
 
 export default function Home({
   roomId,
@@ -34,6 +36,7 @@ export default function Home({
   roomId: string;
   isCreater: boolean;
 }) {
+  const { t } = useTranslation("common");
   const [_, setUserState] = useRecoilState(userSelector);
   const router = useRouter();
 
@@ -103,12 +106,7 @@ export default function Home({
                   randomAvatarHandler={randomAvatarHandler}
                 ></AvatarImage>
                 <FormControl isInvalid={isError}>
-                  <FormLabel>
-                    <FormattedMessage
-                      id="user.nickname"
-                      values={{ locale: router.locale }}
-                    ></FormattedMessage>
-                  </FormLabel>
+                  <FormLabel>{t("user.nickname")}</FormLabel>
                   <Input
                     type="email"
                     value={nickname}
@@ -120,17 +118,11 @@ export default function Home({
                   <Flex ml={5}>
                     {!isError ? (
                       <FormHelperText>
-                        <FormattedMessage
-                          id="user.success.nickname"
-                          values={{ locale: router.locale }}
-                        ></FormattedMessage>
+                        {t("user.success.nickname")}
                       </FormHelperText>
                     ) : (
                       <FormErrorMessage>
-                        <FormattedMessage
-                          id="user.required.nickname"
-                          values={{ locale: router.locale }}
-                        ></FormattedMessage>
+                        {t("user.required.nickname")}
                       </FormErrorMessage>
                     )}
                   </Flex>
@@ -178,12 +170,13 @@ export default function Home({
   );
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const roomId = context.query?.roomId;
   return {
     props: {
+      ...(await serverSideTranslations(context.locale ?? "ko", ["common"])),
       roomId: roomId === undefined ? nanoid() : roomId,
       isCreater: roomId === undefined,
     },
   };
-}
+};

@@ -14,10 +14,11 @@ import { useMultiplayerState } from "@hooks/useMultiplayerState";
 import { CPGameRelayRaceAnswer } from "@types";
 import { useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
-import { FormattedMessage, useIntl } from "react-intl";
+import { useTranslation } from "next-i18next";
 
 function Editor({ pageIndex }: { pageIndex: number }) {
   const userState = useRecoilValue(userSelector);
+
   const { onMount, onChangePage, onUndo, onRedo, onChangePresence } =
     useMultiplayerState({
       provider: providerState?.provider,
@@ -61,7 +62,7 @@ const AnswerDraw = ({
   const RelayRaceAnswerState = useRecoilValue(yjsRelayRaceAnswerState);
   const user = useRecoilValue(userState);
   const router = useRouter();
-
+  const { t } = useTranslation("common");
   const drawEnd = () => {
     const temp: CPGameRelayRaceAnswer = {
       id: doc.clientID,
@@ -91,12 +92,7 @@ const AnswerDraw = ({
             alignItems={"center"}
             flexDirection={"column"}
           >
-            <Text fontSize={"xl"}>
-              <FormattedMessage
-                id="relay.race.draw.answer"
-                values={{ locale: router.locale }}
-              />
-            </Text>
+            <Text fontSize={"xl"}>{t("relay.race.draw.answer")}</Text>
             <Box>
               <Text fontSize={"3xl"} fontWeight="bold">
                 {RelayRaceAnswerState[RelayRaceAnswerState.length - 1].answer}
@@ -109,12 +105,7 @@ const AnswerDraw = ({
         <Editor pageIndex={gamepageIndex} />
       </Box>
       <Flex w={"100%"} justifyContent="center" alignItems={"center"}>
-        <Button onClick={drawEnd}>
-          <FormattedMessage
-            id="relay.race.draw.submit"
-            values={{ locale: router.locale }}
-          />
-        </Button>
+        <Button onClick={drawEnd}>{t("relay.race.draw.submit")}</Button>
       </Flex>
     </Box>
   );

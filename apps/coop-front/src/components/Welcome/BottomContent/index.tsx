@@ -5,10 +5,11 @@ import DraweeLogo from "@asset/images/DraweeLogo.png";
 import { css } from "@emotion/react";
 import MotionDrawTools from "./MotionDrawTools";
 import { useRouter } from "next/dist/client/router";
-import { FormattedMessage } from "react-intl";
+import { useTranslation } from "next-i18next";
 
 function BottomContent() {
   const { locale } = useRouter();
+  const { t } = useTranslation("common");
   return (
     <Center w="100%" h="100vh" overflow={"hidden"}>
       <Flex direction="column">
@@ -30,10 +31,7 @@ function BottomContent() {
 
         <Center marginTop={{ base: "40px", sm: "10px", md: "40px" }} zIndex={2}>
           <Text fontSize={{ base: "6xl", sm: "3xl", md: "6xl" }}>
-            <FormattedMessage
-              id={"welcome.site.title"}
-              values={{ locale: locale }}
-            />
+            {t("welcome.site.title")}
           </Text>
         </Center>
         <Center marginTop={{ base: "40px", sm: "10px", md: "40px" }} zIndex={2}>
@@ -41,10 +39,7 @@ function BottomContent() {
             fontSize={{ base: "4xl", sm: "2xl", md: "4xl" }}
             textAlign="center"
           >
-            <FormattedMessage
-              id={"welcome.site.play.now"}
-              values={{ locale }}
-            />
+            {t("welcome.site.play.now")}
           </Text>
         </Center>
         <Center
@@ -52,10 +47,7 @@ function BottomContent() {
           zIndex={2}
         >
           <Button width="150px" bg="colors.third">
-            <FormattedMessage
-              id={"welcome.site.start.button"}
-              values={{ locale }}
-            />
+            {t("welcome.site.start.button")}
           </Button>
         </Center>
       </Flex>

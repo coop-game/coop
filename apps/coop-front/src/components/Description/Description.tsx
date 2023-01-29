@@ -4,10 +4,10 @@ import AnswerSuccess from "@components/Animation/DrawingSvg/AnswerSuccess";
 import { css } from "@emotion/react";
 import PiTimer from "@components/Timer/PiTimer";
 import TalkingHumans from "@components/Animation/DrawingSvg/TalkingHumans";
-import { FormattedMessage } from "react-intl";
 import { useRouter } from "next/router";
 import Transition from "@components/Animation/PageTransition/Transition";
 import { motion } from "framer-motion";
+import { useTranslation } from "next-i18next";
 
 type DescriptionPropsType = {
   animationTime?: number;
@@ -18,6 +18,7 @@ const Description = ({
   animationTime = 6,
   maxNumber = 3,
 }: DescriptionPropsType) => {
+  const { t } = useTranslation("common");
   const [number, setNumber] = useState<number>(0);
 
   const textArray = [
@@ -44,10 +45,7 @@ const Description = ({
           font-size: 2.5rem;
         `}
       >
-        <FormattedMessage
-          id={textArray[number]}
-          values={{ locale: router.locale }}
-        ></FormattedMessage>
+        {t(textArray[number])}
       </div>
       <div
         css={css`

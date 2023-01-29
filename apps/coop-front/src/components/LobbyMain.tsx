@@ -14,8 +14,6 @@ import useCheckCreatedProvider from "@hooks/pageMove/useCheckCreatedProvider";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 
-import { FormattedMessage, useIntl } from "react-intl";
-
 import {
   doc,
   getChangeGameStateHandler,
@@ -40,17 +38,12 @@ import {
   CPGameTypes,
 } from "@types";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 export const LobbyMain = () => {
-  const { formatMessage } = useIntl();
-
-  const lobbyToastInviteTitle = formatMessage({
-    id: "lobby.toast.invite.title",
-  });
-  const lobbyToastInviteDescription = formatMessage({
-    id: "lobby.toast.invite.description",
-  });
-
+  const { t } = useTranslation("common");
+  const lobbyToastInviteTitle = t("lobby.toast.invite.title");
+  const lobbyToastInviteDescription = t("lobby.toast.invite.description");
   const router = useRouter();
   const toast = useToast();
   useCheckCreatedProvider(
@@ -185,10 +178,7 @@ export const LobbyMain = () => {
                 `}
                 onClick={onClickInviteHandler}
               >
-                <FormattedMessage
-                  id="lobby.invite.button"
-                  values={{ locale: router.locale }}
-                ></FormattedMessage>
+                {t("lobby.invite.button")}
               </Button>
               <Button
                 css={css`
@@ -196,11 +186,7 @@ export const LobbyMain = () => {
                 `}
                 onClick={() => onClickGameStartHandler("DRAWEE")}
               >
-                <FormattedMessage
-                  id="lobby.next.button"
-                  values={{ locale: router.locale }}
-                ></FormattedMessage>
-                1
+                {t("lobby.next.button")}1
               </Button>
               <Button
                 css={css`
@@ -208,11 +194,7 @@ export const LobbyMain = () => {
                 `}
                 onClick={() => onClickGameStartHandler("RELAY_RACE")}
               >
-                <FormattedMessage
-                  id="lobby.next.button"
-                  values={{ locale: router.locale }}
-                ></FormattedMessage>
-                2
+                {t("lobby.next.button")}2
               </Button>
             </Flex>
           )}

@@ -18,7 +18,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             justify-content: center;
             align-items: center;
             width: 100%;
-            height: 130px;
+            height: 140px;
           `}
         >
           {/* <Logo color={"#711480b1"}></Logo> */}
