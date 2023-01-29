@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const LetterLineLeftE = () => {
   return (
-    <motion.g
+    <motion.div
       css={css`
         position: relative;
       `}
@@ -157,7 +157,7 @@ const LetterLineLeftE = () => {
           strokeWidth="30"
         />
       </motion.svg>
-    </motion.g>
+    </motion.div>
   );
 };
 
