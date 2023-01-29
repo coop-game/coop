@@ -32,13 +32,10 @@ import { GetServerSideProps } from "next/types";
 export default function Home({
   roomId,
   isCreater,
-  locale,
 }: {
   roomId: string;
   isCreater: boolean;
-  locale: string;
 }) {
-  console.log(locale);
   const { t } = useTranslation("common");
   const [_, setUserState] = useRecoilState(userSelector);
   const router = useRouter();
@@ -175,13 +172,11 @@ export default function Home({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const roomId = context.query?.roomId;
-  console.log(context.locale);
   return {
     props: {
       ...(await serverSideTranslations(context.locale ?? "ko", ["common"])),
       roomId: roomId === undefined ? nanoid() : roomId,
       isCreater: roomId === undefined,
-      locale: context.locale,
     },
   };
 };
