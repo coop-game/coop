@@ -177,6 +177,7 @@ export default function Home({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const roomId = context.query?.roomId;
+
   return {
     props: {
       ...(await serverSideTranslations(context.locale ?? "ko", ["common"])),
