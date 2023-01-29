@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const { i18n } = require("./next-i18next.config");
 const path = require("path");
+const withPWA = require("next-pwa")({
+  dest: "public",
+});
 const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
@@ -27,20 +30,10 @@ const nextConfig = {
 
 // module.exports = withBundleAnalyzer({ nextConfig });
 
-// const withPlugins = require("next-compose-plugins");
 // const withBundleAnalyzer = require("@next/bundle-analyzer")({
 //   enabled: process.env.ANALYZE === "true",
 // });
 
 // module.exports = withBundleAnalyzer(withPWA(nextConfig));
 
-// module.exports = withPlugins(
-//   [
-//     [withBundleAnalyzer],
-//     // [withPWA],
-//     // your other plugins here
-//   ],
-//   nextConfig
-// );
-
-module.exports = nextConfig;
+module.exports = withPWA({ nextConfig });
