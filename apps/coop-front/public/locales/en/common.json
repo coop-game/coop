@@ -52,5 +52,7 @@
 
   "main.description.draw": "Draw!",
   "main.description.communicate": "Communicate!",
-  "main.description.corrent": "Correct!"
+  "main.description.corrent": "Correct!",
+
+  "alert.warning.multiple.instances": "Cannot open multiple instances"
 }

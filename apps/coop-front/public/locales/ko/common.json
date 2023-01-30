@@ -53,5 +53,7 @@
 
   "main.description.draw": "그린다!",
   "main.description.communicate": "소통한다!",
-  "main.description.corrent": "맞춘다!"
+  "main.description.corrent": "맞춘다!",
+
+  "alert.warning.multiple.instances": "다른 탭에서 이미 사용중입니다."
 }

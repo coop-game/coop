@@ -6,6 +6,7 @@ import { css } from "@emotion/react";
 import MotionDrawTools from "./MotionDrawTools";
 import { useRouter } from "next/dist/client/router";
 import { useTranslation } from "next-i18next";
+import Logo from "@components/Animation/Logo/Logo";
 
 function BottomContent() {
   const { locale } = useRouter();
@@ -18,7 +19,7 @@ function BottomContent() {
           position="relative"
         >
           <MotionDrawTools></MotionDrawTools>
-          <Image
+          {/* <Image
             src={DraweeLogo}
             width={300}
             height={300}
@@ -26,7 +27,8 @@ function BottomContent() {
             css={css`
               z-index: 2;
             `}
-          />
+          /> */}
+          <Logo color={"blueviolet"}></Logo>
         </Center>
 
         <Center marginTop={{ base: "40px", sm: "10px", md: "40px" }} zIndex={2}>
