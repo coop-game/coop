@@ -4,7 +4,12 @@ import { css } from "@emotion/react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Flex className="test" w={"100%"} h={"100%"} p={{ base: "0em", md: "0em" }}>
+    <Flex
+      className="layout_main"
+      w={"100%"}
+      h={"100%"}
+      p={{ base: "0em", md: "0em" }}
+    >
       <Flex
         direction={{ base: "column" }}
         w={"100%"}

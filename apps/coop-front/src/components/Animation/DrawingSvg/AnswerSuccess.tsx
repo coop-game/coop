@@ -100,7 +100,7 @@ const AnswerSuccess = () => {
                   fill: "rgba(255, 255, 255, 0)",
                 },
                 visible: {
-                  opacity: [0, 1, 0],
+                  opacity: [1, 0],
                   fill: "rgba(255, 255, 255, 1)",
                 },
               }}
@@ -117,30 +117,25 @@ const AnswerSuccess = () => {
             />
             <motion.path
               d={questionMark3}
-              // variants={{
-              //   hidden: {
-              //     opacity: [0, 1, 1, 0],
-              //     fill: "rgba(255, 255, 255, 0)",
-              //   },
-              //   visible: {
-              //     opacity: [0, 1, 1, 0],
-              //     fill: "rgba(255, 255, 255, 1)",
-              //   },
-              // }}
-              // initial="hidden"
-              // animate="visible"
-              animate={{
-                opacity: [0, 1, 1, 0],
-                fill: "rgba(255, 255, 255, 0)",
+              variants={{
+                hidden: {
+                  opacity: 0,
+                  fill: "rgba(255, 255, 255, 0)",
+                },
+                visible: {
+                  opacity: [1, 0],
+                  fill: "rgba(255, 255, 255, 1)",
+                },
               }}
+              initial="hidden"
+              animate="visible"
               stroke={"#4a895a"}
               strokeWidth="50"
               strokeLinecap={"round"}
               strokeLinejoin={"round"}
               transition={{
-                delay: 0,
-                duration: 1,
-                time: [0, 0.1, 0.9, 0],
+                delay: 3,
+                duration: 0,
               }}
             />
           </motion.g>

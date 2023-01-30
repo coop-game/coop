@@ -57,10 +57,9 @@ const PageTurningAnimation = ({
         css={css`
           width: 100%;
           height: 100%;
-          background-color: #0c5900;
-          background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
         `}
       >
+        <BackgroundNote></BackgroundNote>
         <div ref={ref} className="book">
           <Flex
             id={"flipInOut"}

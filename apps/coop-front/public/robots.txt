@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://drawee.art
+
+# Sitemaps
+Sitemap: https://drawee.art/sitemap.xml

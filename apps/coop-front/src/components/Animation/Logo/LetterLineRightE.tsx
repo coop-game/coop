@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const LetterLineRightE = () => {
   return (
-    <motion.g>
+    <motion.div>
       <motion.svg
         width="397"
         height="156"
@@ -120,7 +120,7 @@ const LetterLineRightE = () => {
           strokeWidth="15"
         />
       </motion.svg>
-    </motion.g>
+    </motion.div>
   );
 };
 

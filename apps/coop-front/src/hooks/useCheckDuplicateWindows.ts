@@ -3,8 +3,10 @@ import { userSelector } from "@common/recoil/recoil.atom";
 import { useRecoilValue } from "recoil";
 import { useEffect } from "react";
 import { providerState } from "@common/yjsStore/userStore";
+import { useTranslation } from "react-i18next";
 
 const useCheckDuplicateWindows = () => {
+  const { t } = useTranslation("common");
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const router = useRouter();
   useEffect(() => {
@@ -16,7 +18,7 @@ const useCheckDuplicateWindows = () => {
       }
       if (msg.data === "already-open") {
         isOriginal = false;
-        alert("Cannot open multiple instances");
+        alert(t("alert.warning.multiple.instances"));
         providerState.provider.disconnect();
         router.push("/welcome");
       }
