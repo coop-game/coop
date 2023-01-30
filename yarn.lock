@@ -35,19 +35,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apideck/better-ajv-errors@npm:^0.3.1":
-  version: 0.3.6
-  resolution: "@apideck/better-ajv-errors@npm:0.3.6"
-  dependencies:
-    json-schema: ^0.4.0
-    jsonpointer: ^5.0.0
-    leven: ^3.1.0
-  peerDependencies:
-    ajv: ">=8"
-  checksum: b70ec9aae3b30ba1ac06948e585cd96aabbfe7ef6a1c27dc51e56c425f01290a58e9beb19ed95ee64da9f32df3e9276cd1ea58e78792741d74a519cb56955491
-  languageName: node
-  linkType: hard
-
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.10.4, @babel/code-frame@npm:^7.12.13, @babel/code-frame@npm:^7.18.6, @babel/code-frame@npm:^7.5.5, @babel/code-frame@npm:^7.8.3":
   version: 7.18.6
   resolution: "@babel/code-frame@npm:7.18.6"
@@ -6178,18 +6165,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@surma/rollup-plugin-off-main-thread@npm:^2.2.3":
-  version: 2.2.3
-  resolution: "@surma/rollup-plugin-off-main-thread@npm:2.2.3"
-  dependencies:
-    ejs: ^3.1.6
-    json5: ^2.2.0
-    magic-string: ^0.25.0
-    string.prototype.matchall: ^4.0.6
-  checksum: 2c021349442e2e2cec96bb50fd82ec8bf8514d909bc73594f6cfc89b3b68f2feed909a8161d7d307d9455585c97e6b66853ce334db432626c7596836d4549c0c
-  languageName: node
-  linkType: hard
-
 "@swc-node/core@npm:^1.9.2":
   version: 1.9.2
   resolution: "@swc-node/core@npm:1.9.2"
@@ -6710,15 +6685,6 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: dacfde02c260fd98bed2eb775ed0c7ce1397be4c0844f907a50763b081a4008f81f57071889a16eb1350ddcf0927f3cf1a6541702c8ad03de3c70383ef931e3f
-  languageName: node
-  linkType: hard
-
-"@types/resolve@npm:1.17.1":
-  version: 1.17.1
-  resolution: "@types/resolve@npm:1.17.1"
-  dependencies:
-    "@types/node": "*"
-  checksum: dc6a6df507656004e242dcb02c784479deca516d5f4b58a1707e708022b269ae147e1da0521f3e8ad0d63638869d87e0adc023f0bd5454aa6f72ac66c7525cf5
   languageName: node
   linkType: hard
 
@@ -9494,6 +9460,9 @@ __metadata:
     next-auth: ^4.18.0
     next-compose-plugins: ^2.2.1
     next-i18next: ^13.0.3
+    next-pwa: ^5.6.0
+    next-seo: ^5.15.0
+    next-sitemap: ^3.1.48
     react: 18.2.0
     react-dom: 18.2.0
     react-i18next: ^12.1.4
@@ -14001,9 +13970,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-diff@npm:^29.3.1":
-  version: 29.3.1
-  resolution: "jest-diff@npm:29.3.1"
+"jake@npm:^10.8.5":
+  version: 10.8.5
+  resolution: "jake@npm:10.8.5"
+  dependencies:
+    async: ^3.2.3
+    chalk: ^4.0.2
+    filelist: ^1.0.1
+    minimatch: ^3.0.4
+  bin:
+    jake: ./bin/cli.js
+  checksum: 56c913ecf5a8d74325d0af9bc17a233bad50977438d44864d925bb6c45c946e0fee8c4c1f5fe2225471ef40df5222e943047982717ebff0d624770564d3c46ba
+  languageName: node
+  linkType: hard
+
+"jest-diff@npm:^29.4.1":
+  version: 29.4.1
+  resolution: "jest-diff@npm:29.4.1"
   dependencies:
     chalk: ^4.0.0
     diff-sequences: ^29.3.1
@@ -15561,6 +15544,49 @@ __metadata:
   languageName: node
   linkType: hard
 
+"next-pwa@npm:^5.6.0":
+  version: 5.6.0
+  resolution: "next-pwa@npm:5.6.0"
+  dependencies:
+    babel-loader: ^8.2.5
+    clean-webpack-plugin: ^4.0.0
+    globby: ^11.0.4
+    terser-webpack-plugin: ^5.3.3
+    workbox-webpack-plugin: ^6.5.4
+    workbox-window: ^6.5.4
+  peerDependencies:
+    next: ">=9.0.0"
+  checksum: 47f249a819ed4ec98d2c68f47f7789a0e83b82e7c5ef9a3be330162b609ce82c2467de4a75cafac6a0720c4527dea5f251428fda799d64cd11cdba319012cc9b
+  languageName: node
+  linkType: hard
+
+"next-seo@npm:^5.15.0":
+  version: 5.15.0
+  resolution: "next-seo@npm:5.15.0"
+  peerDependencies:
+    next: ^8.1.1-canary.54 || >=9.0.0
+    react: ">=16.0.0"
+    react-dom: ">=16.0.0"
+  checksum: 05b0769d9c9abcc6a0179e5d724e87b1a3a7591a9c2caa4ef5b791769fcf868cb97fbcd90264106101cf7fbc073b0375ab90026aa519d2e899fbabea12cafbfb
+  languageName: node
+  linkType: hard
+
+"next-sitemap@npm:^3.1.48":
+  version: 3.1.48
+  resolution: "next-sitemap@npm:3.1.48"
+  dependencies:
+    "@corex/deepmerge": ^4.0.29
+    minimist: ^1.2.7
+  peerDependencies:
+    "@next/env": "*"
+    next: "*"
+  bin:
+    next-sitemap: bin/next-sitemap.mjs
+    next-sitemap-cjs: bin/next-sitemap.cjs
+  checksum: 84a3983c400cf67705757434b87f28a63a4fa57a71185076d0653a2082488cb402e4c4b981f04cff0da28da3f4f09d47a058822bb45a83613c6d48998641dff6
+  languageName: node
+  linkType: hard
+
 "next@npm:13.0.6":
   version: 13.0.6
   resolution: "next@npm:13.0.6"
@@ -16885,13 +16911,6 @@ __metadata:
   bin:
     prettier: bin-prettier.js
   checksum: 92f2ceb522d454370e02082aa74ad27388672f7cee8975028b59517c069fe643bdc73e322675c8faf2ff173d7a626d1a6389f26b474000308e793aa25fff46e5
-  languageName: node
-  linkType: hard
-
-"pretty-bytes@npm:^5.3.0, pretty-bytes@npm:^5.4.1":
-  version: 5.6.0
-  resolution: "pretty-bytes@npm:5.6.0"
-  checksum: 9c082500d1e93434b5b291bd651662936b8bd6204ec9fa17d563116a192d6d86b98f6d328526b4e8d783c07d5499e2614a807520249692da9ec81564b2f439cd
   languageName: node
   linkType: hard
 

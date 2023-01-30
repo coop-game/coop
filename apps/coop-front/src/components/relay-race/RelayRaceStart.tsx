@@ -22,6 +22,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import useArrayUpdate from "@hooks/gameHooks/updateState/useArrayUpdate";
 import AnswerInput from "./AnswerInput";
 import AnswerDraw from "./AnswerDraw";
+import LineNote from "@components/Paper/LineNote";
 
 const RelayRaceStart = () => {
   const { provider } = providerState;
@@ -47,9 +48,6 @@ const RelayRaceStart = () => {
   // gameStateHandler 게임 상태값 변하게 하는 핸들러
   const changeGameStateHandler =
     getChangeGameStateHandler<CPGameRelayRace>(roomId);
-
-  console.log(gameState);
-  console.log("relayRace", relayRaceAnswerState);
 
   const { pushArrayHandler } = useArrayUpdate<CPGameRelayRaceAnswer>({
     yjsState: yRelayRaceAnswerState,
@@ -113,19 +111,25 @@ const RelayRaceStart = () => {
     return (
       <Flex
         w="100%"
+        h="100%"
         justifyContent={"center"}
         alignItems={"center"}
         position="absolute"
-        top={"3%"}
-        // transform={`translateY(-50%)`}
       >
-        <Box w="100%" h="100%" maxW={"1204px"}>
-          <Wating
-            isPlay={isPlay}
-            setIsPlay={setIsPlay}
-            startTime={gameState.pageStartTime}
-          />
-        </Box>
+        <LineNote
+          maxWidth="1200px"
+          maxHeight="800px"
+          display="flex"
+          justifyContent="center"
+        >
+          <Box w="100%" h="100%" maxW={"1000px"}>
+            <Wating
+              isPlay={isPlay}
+              setIsPlay={setIsPlay}
+              startTime={gameState.pageStartTime}
+            />
+          </Box>
+        </LineNote>
       </Flex>
     );
   }
@@ -143,13 +147,27 @@ const RelayRaceStart = () => {
           justifyContent={"center"}
           alignItems={"center"}
         >
-          <Box w={"100%"} h="100%" maxW={"1204px"} maxH={"1000px"}>
-            <AnswerInput
-              gamepageIndex={gameState.gamePagesIndex}
-              pushArrayHandler={pushArrayHandler}
-              startTime={gameState.pageStartTime}
-            ></AnswerInput>
-          </Box>
+          <LineNote
+            maxWidth="1200px"
+            maxHeight="900px"
+            display="flex"
+            justifyContent="center"
+          >
+            <Flex
+              w={"100%"}
+              h="100%"
+              maxW={"1000px"}
+              maxH={"800px"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <AnswerInput
+                gamepageIndex={gameState.gamePagesIndex}
+                pushArrayHandler={pushArrayHandler}
+                startTime={gameState.pageStartTime}
+              ></AnswerInput>
+            </Flex>
+          </LineNote>
         </Flex>
       );
     } else {
@@ -161,13 +179,20 @@ const RelayRaceStart = () => {
           justifyContent={"center"}
           alignItems={"center"}
         >
-          <Box w="100%" h="100%" maxW={"1204px"} maxH={"720px"}>
-            <AnswerDraw
-              gamepageIndex={gameState.gamePagesIndex}
-              pushArrayHandler={pushArrayHandler}
-              startTime={gameState.pageStartTime}
-            />
-          </Box>
+          <LineNote
+            maxWidth="1200px"
+            maxHeight="900px"
+            display="flex"
+            justifyContent="center"
+          >
+            <Box w="100%" h="100%" maxW={"1000px"} maxH={"800px"}>
+              <AnswerDraw
+                gamepageIndex={gameState.gamePagesIndex}
+                pushArrayHandler={pushArrayHandler}
+                startTime={gameState.pageStartTime}
+              />
+            </Box>
+          </LineNote>
         </Flex>
       );
     }
