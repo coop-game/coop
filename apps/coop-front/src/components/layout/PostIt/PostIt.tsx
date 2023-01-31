@@ -35,10 +35,31 @@ const cssPostIt = css`
   }
 
   .sticky-content {
+    /* background: linear-gradient(
+      180deg,
+      hsl(198.33333333333331, 63.52941176470588%, 66.66666666666666%) 0%,
+      RGB(106, 191, 224) 12%,
+      RGB(96, 191, 224) 75%,
+      RGB(86, 191, 224) 100%
+    ); */
+    /* background: linear-gradient(
+      180deg,
+      RGB(129, 193, 71) 0%,
+      rgb(129, 193, 71) 12%,
+      RGB(129, 193, 71) 75%,
+      RGB(129, 193, 71) 100%
+    ); */
+    /* background: linear-gradient(
+      180deg,
+      RGB(247, 245, 224) 0%,
+      RGB(247, 245, 224) 12%,
+      RGB(247, 245, 224) 75%,
+      RGB(247, 245, 224) 100%
+    ); */
     background: linear-gradient(
       180deg,
-      rgb(230, 230, 151) 0%,
-      rgb(230, 230, 151) 12%,
+      rgb(220, 230, 151) 0%,
+      rgb(220, 230, 151) 12%,
       rgb(225, 225, 124) 75%,
       rgb(210, 210, 113) 100%
     );

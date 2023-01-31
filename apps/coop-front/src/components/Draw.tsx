@@ -24,7 +24,7 @@ import {
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, useColorMode, useTheme } from "@chakra-ui/react";
 import Progress from "./Progress";
 import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
 import Solver from "./Solver";
@@ -48,7 +48,7 @@ function Editor({}) {
     });
 
   const isAnimationEnd = useRecoilValue(transitionPageAnimationState);
-
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <div
       css={css`
@@ -68,6 +68,7 @@ function Editor({}) {
           onUndo={onUndo}
           onRedo={onRedo}
           onChangePresence={onChangePresence}
+          darkMode={colorMode !== "light"}
           // disableAssets={true}
           components={{
             Cursor: NewCursor as CursorComponent,
