@@ -84,19 +84,22 @@ const StyledPanelContent = styled("div", {
 });
 
 const StyledTopPanel = styled("div", {
+  position: "relative",
+  zIndex: "1000",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
+  alignSelf: "center",
   // pointerEvents: "none",
   "& > *": {
     pointerEvents: "all",
   },
-  background: "gray",
+  background: "$panelContrast",
   padding: "5px",
   borderRadius: "15px",
   // height: "",
-  // overflow: "hidden scroll",
+  // overflowY: "scroll",
 });
 
 export const TopPanel = React.memo(_TopPanel);

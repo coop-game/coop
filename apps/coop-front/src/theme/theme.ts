@@ -15,6 +15,10 @@ const customColor = {
       // ...
       900: "#171923",
     },
+    test: {
+      50: "#ffffffb2",
+      100: "#ffffff",
+    },
     // ...
   },
 };

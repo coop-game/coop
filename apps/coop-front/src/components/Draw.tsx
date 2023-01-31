@@ -1,10 +1,5 @@
-import { useMultiplayerState } from "./../hooks/useMultiplayerState";
-
 import { css } from "@emotion/react";
 
-import NewCursor, { CursorComponent } from "@components/NewCursor";
-
-import { Tldraw, TldrawApp } from "@coop/draw";
 import {
   doc,
   getChangeGameStateHandler,
@@ -15,7 +10,6 @@ import {
 import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import { useRecoilValue } from "recoil";
 import {
-  transitionPageAnimationState,
   userProfilesSelector,
   userSelector,
   yjsGameState,
@@ -23,62 +17,15 @@ import {
 } from "@common/recoil/recoil.atom";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Box, Button, useColorMode, useTheme } from "@chakra-ui/react";
+import { useCallback, useEffect, useState } from "react";
+import { Box, Flex } from "@chakra-ui/react";
 import Progress from "./Progress";
-import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
 import Solver from "./Solver";
 import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
 import AnswerModal from "./Modal/AnswerModal";
 import { CPGameDrawee } from "@types";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
-import CanvasViewer from "./CanvasViewer";
-import CurrentQuestionNumber from "./CurrentQuestionNumber";
-
-function Editor({}) {
-  const userState = useRecoilValue(userSelector);
-  const gameState = useRecoilValue(yjsGameState);
-  const { onMount, onChangePage, onUndo, onRedo, onChangePresence } =
-    useMultiplayerState({
-      color: userState?.color,
-      provider: providerState?.provider,
-      room: providerState?.room,
-      customUserId: userState?.nickname,
-      pageIndex: gameState?.gamePagesIndex,
-    });
-
-  const isAnimationEnd = useRecoilValue(transitionPageAnimationState);
-  const { colorMode, toggleColorMode } = useColorMode();
-  return (
-    <div
-      css={css`
-        position: relative;
-        width: 100%;
-        height: 100%;
-      `}
-    >
-      {isAnimationEnd && (
-        <Tldraw
-          showMenu={false}
-          // autofocus
-          // disableAssets
-          showPages={false}
-          onMount={onMount}
-          onChangePage={onChangePage}
-          onUndo={onUndo}
-          onRedo={onRedo}
-          onChangePresence={onChangePresence}
-          darkMode={colorMode !== "light"}
-          // disableAssets={true}
-          components={{
-            Cursor: NewCursor as CursorComponent,
-            CurrentQuestionNumber: <SideBarOfDraw></SideBarOfDraw>,
-          }}
-        />
-      )}
-    </div>
-  );
-}
+import DrawEditor from "./DrawEditor";
 
 function Draw() {
   const gameState = useRecoilValue(yjsGameState);
@@ -108,18 +55,19 @@ function Draw() {
   const { getSolverId } = useSolver();
 
   const setQuestionEnd = useCallback(() => {
-    const gamePagesIndex = yGameState.get(roomId).gamePagesIndex;
-    doc.transact(() => {
-      const question = yQuestionsState.get(gamePagesIndex);
+    const gamePagesIndex = yGameState.get(roomId)?.gamePagesIndex;
+    gamePagesIndex &&
+      doc.transact(() => {
+        const question = yQuestionsState.get(gamePagesIndex);
 
-      if (question === undefined) return;
-      const newQuestion = {
-        ...question,
-        isQuestionEnd: true,
-      };
-      yQuestionsState.delete(gamePagesIndex);
-      yQuestionsState.insert(gamePagesIndex, [newQuestion]);
-    });
+        if (question === undefined) return;
+        const newQuestion = {
+          ...question,
+          isQuestionEnd: true,
+        };
+        yQuestionsState.delete(gamePagesIndex);
+        yQuestionsState.insert(gamePagesIndex, [newQuestion]);
+      });
   }, [roomId]);
 
   const questionTimeOut = useCallback(() => {
@@ -144,16 +92,6 @@ function Draw() {
 
   return (
     <>
-      <Progress
-        play={isPlay}
-        startTime={gameState?.pageStartTime}
-        time={20000000}
-        callback={() => {
-          setIsPlay("paused");
-          questionTimeOut();
-        }}
-      ></Progress>
-
       {gameState &&
         questionsState.length >= gameState.gamePagesIndex &&
         questionsState[gameState.gamePagesIndex]?.isQuestionEnd && (
@@ -165,21 +103,35 @@ function Draw() {
             }}
           />
         )}
-
-      <div
+      <Flex
         css={css`
-          display: flex;
+          position: relative;
           width: 100%;
-          heigth: 100%;
+          height: 100%;
+          flex-direction: column;
+          align-items: center;
         `}
       >
-        {providerState.provider !== null && (
-          <Box w="100%" h="100%">
-            <Editor />
-          </Box>
-        )}
-      </div>
-      <Solver></Solver>
+        <Box
+          width={{ base: "500px", sm: "1000px" }}
+          height={{ base: "500px", sm: "500px" }}
+          css={css`
+            position: relative;
+          `}
+        >
+          <Progress
+            play={isPlay}
+            startTime={gameState?.pageStartTime}
+            time={20000000}
+            callback={() => {
+              setIsPlay("paused");
+              questionTimeOut();
+            }}
+          ></Progress>
+          <DrawEditor />
+          <Solver></Solver>
+        </Box>
+      </Flex>
     </>
   );
 }

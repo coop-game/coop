@@ -694,6 +694,9 @@ const DrawLayout = styled("div", {
   flexGrow: 1,
   flexBasis: "auto",
   minHeight: "500px",
+  borderRadius: "15px",
+  overflow: "hidden",
+  boxShadow: "var(--shadows-panel)",
 });
 
 const StyledUI = styled("div", {

@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
 import { css } from "@emotion/react";
 import React from "react";
@@ -28,31 +29,37 @@ const Progress = ({
   return (
     <>
       {isView && (
-        <div
+        <Box
           className="progress-outer"
           onAnimationEnd={() => {
             callback();
           }}
+          boxShadow={"dark-lg"}
           css={css`
-            border-radius: 4px;
-            border: 4px solid black;
             width: 100%;
-            height: 30px;
-            background: white;
             position: relative;
+            background: #ffffff45;
+            border-radius: 15px;
+            height: 22px;
             overflow: hidden;
+            z-index: 100;
+            margin: 3px;
           `}
         >
-          <div
+          <Box
             className="progress-inner"
+            onAnimationEnd={() => {
+              callback();
+            }}
             css={css`
               position: absolute;
+              z-index: 1;
               top: 0;
               left: 0;
-              transform: translate(-100%);
+              transform: translate(0%);
               height: 22px;
+              /* overflow: hidden; */
               width: 100%;
-              background: white;
               @keyframes progress {
                 from {
                   transform: translate(0%);
@@ -74,8 +81,8 @@ const Progress = ({
               animation-timing-function: linear;
               animation-play-state: ${play};
             `}
-          ></div>
-        </div>
+          ></Box>
+        </Box>
       )}
     </>
   );
