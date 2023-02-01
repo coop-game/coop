@@ -1,7 +1,15 @@
 import { css } from "@emotion/react";
 import { motion } from "framer-motion";
 
-const LetterLineLeftE = () => {
+const LetterLineLeftE = ({
+  viewBox,
+  svgWidth,
+  svgHeight,
+}: {
+  viewBox: string;
+  svgWidth: string;
+  svgHeight: string;
+}) => {
   return (
     <motion.div
       css={css`
@@ -9,9 +17,9 @@ const LetterLineLeftE = () => {
       `}
     >
       <motion.svg
-        width="397"
-        height="156"
-        viewBox="0 0 397 156"
+        width={svgWidth}
+        height={svgHeight}
+        viewBox={viewBox}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -119,9 +127,9 @@ const LetterLineLeftE = () => {
       </motion.svg>
 
       <motion.svg
-        width="397"
-        height="156"
-        viewBox="0 0 397 156"
+        width={svgWidth}
+        height={svgHeight}
+        viewBox={viewBox}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"

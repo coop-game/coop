@@ -1,12 +1,20 @@
 import { css } from "@emotion/react";
 import { motion } from "framer-motion";
 
-const LogoPencil = () => {
+const LogoPencil = ({
+  viewBox,
+  svgWidth,
+  svgHeight,
+}: {
+  viewBox: string;
+  svgWidth: string;
+  svgHeight: string;
+}) => {
   return (
     <motion.svg
-      width="397"
-      height="156"
-      viewBox="0 0 397 156"
+      width={svgWidth}
+      height={svgHeight}
+      viewBox={viewBox}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -20,7 +28,7 @@ const LogoPencil = () => {
       <rect
         stroke="none"
         y="62"
-        width="397"
+        width={svgWidth}
         height="11"
         fill="url(#pattern0)"
       />

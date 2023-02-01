@@ -11,6 +11,7 @@ import CanvasViewer from "@components/CanvasViewer";
 import Description from "@components/Description/Description";
 import PostIt from "@components/layout/PostIt/PostIt";
 import Progress from "@components/Progress";
+import Swoosh from "@components/Sound/Swoosh";
 import ToggleTheme from "@components/ToggleTheme";
 import { useRecoilValue } from "recoil";
 
@@ -35,6 +36,7 @@ const Example = () => {
         ></Progress>
       )}
       <ToggleTheme></ToggleTheme>
+      <Swoosh></Swoosh>
     </>
   );
 };
