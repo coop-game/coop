@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Flex,
   FormControl,
@@ -6,6 +7,7 @@ import {
   FormHelperText,
   FormLabel,
   Input,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { yjsGameState, yjsQuestionsState } from "@common/recoil/recoil.atom";
 import {
@@ -19,6 +21,7 @@ import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import AnswerHistory from "./AnswerHistory";
 
 const Solver = () => {
   const [answer, setAnswer] = useState("");
@@ -28,10 +31,6 @@ const Solver = () => {
 
   const gameState = useRecoilValue(yjsGameState);
   const questionsState = useRecoilValue(yjsQuestionsState);
-
-  const router = useRouter();
-
-  const drawSolver = t("draw.solver");
 
   const answerChangeHandler = () => {
     doc.transact(() => {
@@ -52,56 +51,66 @@ const Solver = () => {
   const { getSolverId, getSovlerNicknameFromId } = useSolver();
 
   return (
-    <div>
-      <div>
-        {drawSolver} : {getSovlerNicknameFromId(getSolverId())}
-      </div>
+    <Flex
+      maxH={200}
+      css={css`
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+        flex-direction: column;
+        gap: 10px;
+      `}
+    >
+      <Box
+        css={css`
+          border-radius: 15px;
+        `}
+      >
+        {t("draw.solver")} : {getSovlerNicknameFromId(getSolverId())}
+      </Box>
       {getSolverId() === providerState?.provider?.awareness?.clientID && (
         <FormControl isInvalid={isError}>
           <FormLabel>{t("draw.answer")}</FormLabel>
-          <Input
-            type="text"
-            value={answer}
-            onChange={(e) => {
-              setAnswer(e.target.value);
-              setIsError(e.target.value === "");
-            }}
-          />
+          <Flex
+            css={css`
+              justify-content: center;
+              align-items: center;
+              gap: 5px;
+            `}
+          >
+            <Input
+              type="text"
+              value={answer}
+              height={"45px"}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  answerChangeHandler();
+                }
+              }}
+              onChange={(e) => {
+                setAnswer(e.target.value);
+                setIsError(e.target.value === "");
+              }}
+            />
+            <Button height={"45px"} onClick={answerChangeHandler}>
+              {t("draw.answer.submit")}
+            </Button>
+          </Flex>
           <Flex ml={5}>
             {!isError ? (
               <FormHelperText>{t("draw.input.in.answer")}</FormHelperText>
             ) : (
-              <FormErrorMessage>
-                {t("draw.input.required.answer")}
-              </FormErrorMessage>
+              <>
+                <FormErrorMessage>
+                  {t("draw.input.required.answer")}
+                </FormErrorMessage>
+              </>
             )}
-          </Flex>
-          <Flex width={"100%"} justifyContent={"flex-end"}>
-            <Button onClick={answerChangeHandler}>
-              {t("draw.answer.submit")}
-            </Button>
           </Flex>
         </FormControl>
       )}
-      <div
-        css={css`
-          height: 200px;
-          background: gray;
-          overflow-y: scroll;
-        `}
-      >
-        <div>{t("draw.answer.history")}</div>
-        {questionsState.length >= gameState?.gamePagesIndex && (
-          <div>
-            {questionsState[gameState.gamePagesIndex].inputAnswer.map(
-              (v, idx) => {
-                return <div key={idx}>{v}</div>;
-              }
-            )}
-          </div>
-        )}
-      </div>
-    </div>
+      <AnswerHistory />
+    </Flex>
   );
 };
 export default Solver;

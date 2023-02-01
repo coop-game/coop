@@ -678,21 +678,25 @@ const ZoomLayout = styled("div", {
   position: "absolute",
   right: 0,
   top: 0,
-  zIndex:100,
+  zIndex: 100,
 });
 const QuestionsLayout = styled("div", {
   position: "absolute",
   left: 0,
   top: 0,
-  zIndex:100,
+  zIndex: 100,
+  background: "none",
 });
 
 const DrawLayout = styled("div", {
   position: "relative",
   display: "flex",
   flexGrow: 1,
-  flexBasis:"auto",
+  flexBasis: "auto",
   minHeight: "500px",
+  borderRadius: "15px",
+  overflow: "hidden",
+  boxShadow: "var(--shadows-panel)",
 });
 
 const StyledUI = styled("div", {
