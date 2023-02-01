@@ -18,6 +18,7 @@ const AnswerHistory = () => {
     >
       <Flex
         bg={bg}
+        shadow={"base"}
         css={css`
           border-radius: 15px;
           padding: 5px;
@@ -28,9 +29,10 @@ const AnswerHistory = () => {
         {t("draw.answer.history")}
       </Flex>
       <Flex
+        shadow={"base"}
         css={css`
           height: 40px;
-          background: gray;
+          background: #ffffff84;
           overflow-y: scroll;
           border-radius: 15px;
           padding: 5px;
