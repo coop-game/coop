@@ -1,3 +1,4 @@
+import { color, useColorMode } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 type LineNoteType = {
   top?: string;
@@ -21,6 +22,7 @@ const LineNote = ({
   justifyContent = "",
   children,
 }: LineNoteType) => {
+  const { colorMode } = useColorMode();
   return (
     <div
       css={css`
@@ -38,7 +40,7 @@ const LineNote = ({
           min-width: 200px;
           height: 100%;
           margin: 0 auto;
-          background: #fafafa;
+          background: ${colorMode === "dark" ? "#3a3a3a" : "#fafafa"};
           border-radius: 10px;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
           overflow: hidden;
@@ -49,10 +51,12 @@ const LineNote = ({
           top: 0;
           bottom: 0;
           left: 0;
-          width: 60px;
+          width: 20%;
           background: radial-gradient(#575450 6px, transparent 7px) repeat-y;
           background-size: 30px 30px;
-          border-right: 3px solid #d44147;
+          border-right: ${colorMode === "dark"
+            ? "3px solid #802e30"
+            : "3px solid #d44147"};
           box-sizing: border-box;
         }
 
@@ -62,11 +66,10 @@ const LineNote = ({
           right: 0;
           bottom: 30px;
           left: 60px;
-          background: linear-gradient(
-            transparent,
-            transparent 28px,
-            #91d1d3 28px
-          );
+          background: ${colorMode === "dark"
+            ? "linear-gradient(transparent, transparent 28px, #666666 28px)"
+            : "linear-gradient(transparent, transparent 28px, #91d1d3 28px)"};
+
           background-size: 30px 30px;
           display: ${display};
           justify-content: ${justifyContent};

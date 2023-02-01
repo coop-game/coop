@@ -35,12 +35,13 @@ const Result = () => {
   useSyncPageFromGameState();
   const [nowPageIndex, setNowPageIndex] = useState<number>(0);
   const timerReset = () => {
-    if (nowPageIndex + 1 <= gameState.gamePagesIndex) {
+    console.log("타이머 끝");
+    if (isPlay && nowPageIndex + 1 <= gameState.gamePagesIndex) {
       setNowPageIndex((prev) => {
         return prev + 1;
       });
       setIsPlay(false);
-    } else {
+    } else if (nowPageIndex + 1 > gameState.gamePagesIndex) {
       if (isOwner) {
         gameChangeHandler({ path: "/lobby" });
       }
@@ -48,6 +49,7 @@ const Result = () => {
   };
 
   useEffect(() => {
+    console.log("나는 트리거야");
     if (!isPlay) {
       setIsPlay(true);
       setStartTime(getUtcTimeStamp());

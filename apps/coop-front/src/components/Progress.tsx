@@ -48,9 +48,6 @@ const Progress = ({
         >
           <Box
             className="progress-inner"
-            onAnimationEnd={() => {
-              callback();
-            }}
             css={css`
               position: absolute;
               z-index: 1;

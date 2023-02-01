@@ -14,9 +14,15 @@ import NewCursor, { CursorComponent } from "./NewCursor";
 
 type drawEditorPropsType = {
   pageIndex: number;
+  useOnChangePresence?: boolean;
+  useSideBarDraw?: boolean;
 };
 
-const DrawEditor = ({ pageIndex }: drawEditorPropsType) => {
+const DrawEditor = ({
+  pageIndex,
+  useOnChangePresence = true,
+  useSideBarDraw = true,
+}: drawEditorPropsType) => {
   const userState = useRecoilValue(userSelector);
   const gameState = useRecoilValue(yjsGameState);
   const { onMount, onChangePage, onUndo, onRedo, onChangePresence } =
@@ -42,13 +48,24 @@ const DrawEditor = ({ pageIndex }: drawEditorPropsType) => {
           onChangePage={onChangePage}
           onUndo={onUndo}
           onRedo={onRedo}
-          onChangePresence={onChangePresence}
+          {...(useOnChangePresence
+            ? { onChangePresence: onChangePresence }
+            : {})}
           darkMode={colorMode !== "light"}
           // disableAssets={true}
-          components={{
-            Cursor: NewCursor as CursorComponent,
-            CurrentQuestionNumber: <SideBarOfDraw />,
-          }}
+          {...(useSideBarDraw
+            ? {
+                components: {
+                  Cursor: NewCursor as CursorComponent,
+                  CurrentQuestionNumber: <SideBarOfDraw />,
+                },
+              }
+            : {
+                components: {
+                  Cursor: NewCursor as CursorComponent,
+                  CurrentQuestionNumber: null,
+                },
+              })}
         />
       )}
     </>

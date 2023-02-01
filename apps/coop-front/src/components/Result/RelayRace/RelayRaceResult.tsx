@@ -14,6 +14,7 @@ const RelayRaceResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
   const relayRaceState = useRecoilValue<CPGameRelayRaceAnswer[]>(
     yjsRelayRaceAnswerState
   );
+  console.log(nowPageIndex);
   return (
     <Flex
       w="100%"
@@ -37,34 +38,17 @@ const RelayRaceResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
       <Flex w="100%" h="100%" flex={{ base: 6, lg: 7 }} position={"relative"}>
         <LineNote>
           {relayRaceState[nowPageIndex] ? (
-            <div
-              css={css`
-                width: 100%;
-                height: 100%;
-              `}
-            >
+            <Box w="100%" h="100%">
               {relayRaceState[nowPageIndex].isDraw ? (
-                <div
-                  css={css`
-                    width: 100%;
-                    height: 100%;
-                  `}
-                >
-                  <Box w={"100%"} h={"100%"} position={"relative"}>
-                    <CanvasViewer pageIndex={nowPageIndex}></CanvasViewer>
-                  </Box>
-                </div>
+                <Box w={"100%"} h={"100%"} position={"relative"}>
+                  <CanvasViewer pageIndex={nowPageIndex}></CanvasViewer>
+                </Box>
               ) : (
-                <div
-                  css={css`
-                    width: 100%;
-                    height: 100%;
-                  `}
-                >
+                <Box w="100%" h="100%">
                   <Text>{relayRaceState[nowPageIndex].answer}</Text>
-                </div>
+                </Box>
               )}
-            </div>
+            </Box>
           ) : (
             <div></div>
           )}
