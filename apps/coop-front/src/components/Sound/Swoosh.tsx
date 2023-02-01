@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, css } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 
 const Swoosh = () => {
@@ -11,7 +11,11 @@ const Swoosh = () => {
   }, [ref.current]);
   return (
     <>
-      <div>
+      <div
+        css={css`
+          visibility: none;
+        `}
+      >
         <audio
           ref={ref}
           autoPlay
