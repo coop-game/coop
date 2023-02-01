@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
 import { css } from "@emotion/react";
 import React from "react";
@@ -26,6 +26,10 @@ const Progress = ({
   const endTime = startTime + time;
   const utcTimeStamp = getUtcTimeStamp();
 
+  const colorGreen = useColorModeValue("#00b400", "#008000c0");
+  const colorOrange = useColorModeValue("#ffb500", "#ffa600c0");
+  const colorRed = useColorModeValue("#ff1000", "#ff0000c0");
+
   return (
     <>
       {isView && (
@@ -38,7 +42,7 @@ const Progress = ({
           css={css`
             width: 100%;
             position: relative;
-            background: #ffffff45;
+            /* background: #ffffff45; */
             border-radius: 15px;
             height: 22px;
             overflow: hidden;
@@ -63,15 +67,15 @@ const Progress = ({
               @keyframes progress {
                 from {
                   transform: translate(0%);
-                  background: green;
+                  background: ${colorGreen};
                 }
                 50% {
                   transform: translate(-50%);
-                  background: orange;
+                  background: ${colorOrange};
                 }
                 to {
                   transform: translate(-100%);
-                  background: red;
+                  background: ${colorRed};
                 }
               }
               animation-name: progress;

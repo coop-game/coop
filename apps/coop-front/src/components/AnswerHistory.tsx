@@ -33,7 +33,7 @@ const AnswerHistory = () => {
       <Flex
         shadow={"base"}
         css={css`
-          height: 100px;
+          height: 50px;
           /* background: #ffffff84;
           border-radius: 15px; */
           align-items: center;
