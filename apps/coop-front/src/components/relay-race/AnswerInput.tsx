@@ -1,4 +1,4 @@
-import { Button, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Input, Text } from "@chakra-ui/react";
 import { yjsRelayRaceAnswerState } from "@common/recoil/recoil.atom";
 import { doc } from "@common/yjsStore/userStore";
 import Progress from "@components/Progress";
@@ -43,37 +43,20 @@ const AnswerInput = ({
     setAnswer("");
   };
   return (
-    <div
-      css={css`
-        width: 100%;
-        height: 100%;
-      `}
-    >
+    <Flex width="100%" height="100%" flexDirection={"column"}>
       <Progress
         time={50000}
         callback={onClick}
         play={"running"}
         startTime={startTime}
       />
-      <div
-        css={css`
-          display: flex;
-          width: 100%;
-          flex-direction: column;
-        `}
-      >
+      <Flex width="100%" padding={"3%"} flexDirection="column">
         {relayRaceAnswerState.length > 0 && (
-          <div
-            css={css`
-              flex-grow: 1;
-              flex-basis: 500px;
-              width: 100%;
-            `}
-          >
+          <Box flexGrow="1" flexBasis="500px" width="100%">
             <CanvasViewer pageIndex={gamepageIndex - 1} />
-          </div>
+          </Box>
         )}
-      </div>
+      </Flex>
       <Text fontSize={"5xl"} fontWeight="bold">
         {t("relay.race.answer.suggest")}
       </Text>
@@ -85,7 +68,7 @@ const AnswerInput = ({
         value={answer}
       ></Input>
       <Button onClick={onClick}>{t("relay.race.answer.submit")}</Button>
-    </div>
+    </Flex>
   );
 };
 

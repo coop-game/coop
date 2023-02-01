@@ -1,16 +1,36 @@
 import { css } from "@emotion/react";
-
-const LineNote = ({ children }: { children: React.ReactNode }) => {
+type LineNoteType = {
+  top?: string;
+  left?: string;
+  width?: string;
+  maxWidth?: string;
+  height?: string;
+  maxHeight?: string;
+  display?: string;
+  justifyContent?: string;
+  children: React.ReactNode;
+};
+const LineNote = ({
+  top = "0%",
+  left = "0px",
+  width = "100%",
+  maxWidth = "900px",
+  height = "100%",
+  maxHeight = "600px",
+  display = "",
+  justifyContent = "",
+  children,
+}: LineNoteType) => {
   return (
     <div
       css={css`
-        top: 3%;
-        left: 0px;
+        top: ${top};
+        left: ${left};
         /* position: absolute; */
-        width: 100%;
-        max-width: 900px;
-        height: 100%;
-        max-height: 600px;
+        width: ${width};
+        max-width: ${maxWidth};
+        height: ${height};
+        max-height: ${maxHeight};
         .paper {
           position: relative;
           width: 100%;
@@ -48,6 +68,8 @@ const LineNote = ({ children }: { children: React.ReactNode }) => {
             #91d1d3 28px
           );
           background-size: 30px 30px;
+          display: ${display};
+          justify-content: ${justifyContent};
         }
       `}
     >
