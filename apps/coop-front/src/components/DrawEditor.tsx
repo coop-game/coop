@@ -12,7 +12,11 @@ import { useRecoilValue } from "recoil";
 import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
 import NewCursor, { CursorComponent } from "./NewCursor";
 
-const DrawEditor = () => {
+type drawEditorPropsType = {
+  pageIndex: number;
+};
+
+const DrawEditor = ({ pageIndex }: drawEditorPropsType) => {
   const userState = useRecoilValue(userSelector);
   const gameState = useRecoilValue(yjsGameState);
   const { onMount, onChangePage, onUndo, onRedo, onChangePresence } =
@@ -21,7 +25,7 @@ const DrawEditor = () => {
       provider: providerState?.provider,
       room: providerState?.room,
       customUserId: userState?.nickname,
-      pageIndex: gameState?.gamePagesIndex,
+      pageIndex,
     });
 
   const isAnimationEnd = useRecoilValue(transitionPageAnimationState);

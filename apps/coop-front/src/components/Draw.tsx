@@ -128,7 +128,7 @@ function Draw() {
               questionTimeOut();
             }}
           ></Progress>
-          <DrawEditor />
+          <DrawEditor pageIndex={gameState?.gamePagesIndex} />
           <Solver></Solver>
         </Box>
       </Flex>
