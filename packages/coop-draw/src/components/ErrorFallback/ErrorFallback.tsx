@@ -1,35 +1,38 @@
-import * as React from 'react'
-import { FallbackProps } from 'react-error-boundary'
-import { Divider } from '~components/Primitives/Divider'
-import { RowButton } from '~components/Primitives/RowButton'
-import { useTldrawApp } from '~hooks'
-import { styled } from '~styles'
+import * as React from "react";
+import { FallbackProps } from "react-error-boundary";
+import { Divider } from "~components/Primitives/Divider";
+import { RowButton } from "~components/Primitives/RowButton";
+import { useTldrawApp } from "~hooks";
+import { styled } from "~styles";
 
-export function ErrorFallback({ error, resetErrorBoundary }: FallbackProps): any {
-  const app = useTldrawApp()
+export function ErrorFallback({
+  error,
+  resetErrorBoundary,
+}: FallbackProps): any {
+  const app = useTldrawApp();
 
   const refreshPage = () => {
-    window.location.reload()
-    resetErrorBoundary()
-  }
+    window.location.reload();
+    resetErrorBoundary();
+  };
 
   const copyError = () => {
-    const textarea = document.createElement('textarea')
-    textarea.value = error.message
-    document.body.appendChild(textarea)
-    textarea.select()
-    document.execCommand('copy')
-    textarea.remove()
-  }
+    const textarea = document.createElement("textarea");
+    textarea.value = error.message;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    textarea.remove();
+  };
 
   const downloadBackup = () => {
-    app.saveProjectAs()
-  }
+    app.saveProjectAs();
+  };
 
   const resetDocument = () => {
-    app.resetDocument()
-    resetErrorBoundary()
-  }
+    app.resetDocument();
+    resetErrorBoundary();
+  };
 
   return (
     <Container>
@@ -44,11 +47,11 @@ export function ErrorFallback({ error, resetErrorBoundary }: FallbackProps): any
         </Buttons>
         <Divider />
         <p>
-          Keep getting this error?{' '}
+          Keep getting this error?{" "}
           <a onClick={downloadBackup} title="Download your project">
             Download your project
-          </a>{' '}
-          as a backup and then{' '}
+          </a>{" "}
+          as a backup and then{" "}
           <a onClick={resetDocument} title="Reset the document">
             reset the document
           </a>
@@ -56,67 +59,67 @@ export function ErrorFallback({ error, resetErrorBoundary }: FallbackProps): any
         </p>
       </InnerContainer>
     </Container>
-  )
+  );
 }
 
-const Container = styled('div', {
-  position: 'absolute',
+const Container = styled("div", {
+  position: "absolute",
   top: 0,
   left: 0,
-  width: '100%',
-  height: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundColor: '$canvas',
-})
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: "$canvas",
+});
 
-const InnerContainer = styled('div', {
-  backgroundColor: '$panel',
+const InnerContainer = styled("div", {
+  backgroundColor: "$panel",
   border: '1px solid $panelContrast',
-  padding: '$5',
+  padding: "$5",
   borderRadius: 8,
-  boxShadow: '$panel',
+  boxShadow: "$panel",
   maxWidth: 320,
-  color: '$text',
-  fontFamily: '$ui',
-  fontSize: '$2',
-  textAlign: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '$3',
-  '& > pre': {
-    marginTop: '$3',
-    marginBottom: '$3',
-    textAlign: 'left',
-    whiteSpace: 'pre-wrap',
-    backgroundColor: '$hover',
-    padding: '$4',
-    borderRadius: '$2',
+  color: "$text",
+  fontFamily: "$ui",
+  fontSize: "$2",
+  textAlign: "center",
+  display: "flex",
+  flexDirection: "column",
+  gap: "$3",
+  "& > pre": {
+    marginTop: "$3",
+    marginBottom: "$3",
+    textAlign: "left",
+    whiteSpace: "pre-wrap",
+    backgroundColor: "$hover",
+    padding: "$4",
+    borderRadius: "$2",
     fontFamily: '"Menlo", "Monaco", monospace',
     fontWeight: 500,
   },
-  '& p': {
-    fontFamily: '$body',
+  "& p": {
+    fontFamily: "$body",
     lineHeight: 1.7,
-    padding: '$5',
+    padding: "$5",
     margin: 0,
   },
-  '& a': {
-    color: '$text',
-    cursor: 'pointer',
-    textDecoration: 'underline',
+  "& a": {
+    color: "$text",
+    cursor: "pointer",
+    textDecoration: "underline",
   },
-  '& hr': {
-    marginLeft: '-$5',
-    marginRight: '-$5',
+  "& hr": {
+    marginLeft: "-$5",
+    marginRight: "-$5",
   },
-})
+});
 
-const Buttons = styled('div', {
-  display: 'flex',
-  '& > button > div': {
-    justifyContent: 'center',
-    textAlign: 'center',
+const Buttons = styled("div", {
+  display: "flex",
+  "& > button > div": {
+    justifyContent: "center",
+    textAlign: "center",
   },
-})
+});

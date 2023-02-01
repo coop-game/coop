@@ -34,11 +34,11 @@ export function useMultiplayerState({
 
   const onMount = useCallback(
     (app: TldrawApp) => {
-      app.loadRoom(provider.roomName, color);
+      app.loadRoom(provider?.roomName, color);
       app.pause();
       setApp(app);
     },
-    [color, provider.roomName]
+    [color, provider?.roomName]
   );
 
   // draw 좌표 전송 부분

@@ -59,7 +59,7 @@ const PageTurningAnimation = ({
           height: 100%;
         `}
       >
-        <BackgroundNote></BackgroundNote>
+        <BackgroundNote />
         <div ref={ref} className="book">
           <Flex
             id={"flipInOut"}
@@ -78,7 +78,7 @@ const PageTurningAnimation = ({
                 height: 100%;
               `}
             >
-              <BackgroundNote></BackgroundNote>
+              <BackgroundNote />
               <Flex className={`book__page`}>{children}</Flex>
             </Flex>
           </Flex>

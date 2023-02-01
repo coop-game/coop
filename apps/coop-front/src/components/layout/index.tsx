@@ -1,5 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import Logo from "@components/Animation/Logo/Logo";
+import ToggleTheme from "@components/ToggleTheme";
 import { css } from "@emotion/react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -27,10 +28,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           `}
         >
           {/* <Logo color={"#711480b1"}></Logo> */}
-          <Logo color={"#721480b2"}></Logo>
+          <Logo color={"#721480"}></Logo>
         </div>
         {children}
       </Flex>
+      <ToggleTheme></ToggleTheme>
     </Flex>
   );
 };

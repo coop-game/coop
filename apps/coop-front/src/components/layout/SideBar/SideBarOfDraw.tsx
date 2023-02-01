@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import {
   userProfilesSelector,
   yjsGameState,
@@ -5,41 +6,59 @@ import {
 } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useRecoilValue } from "recoil";
+
+export type SideBarOfDraw<T = any> = () => any;
 
 const SideBarOfDraw = () => {
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
   const questions = useRecoilValue(yjsQuestionsState);
   const gameState = useRecoilValue(yjsGameState);
-
+  const { t } = useTranslation("common");
   return (
-    <div>
-      <div
+    <Box
+      css={css`
+        margin: 5px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #ffffff2b;
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        overflow: hidden;
+        pointer-events: none;
+        user-select: none;
+      `}
+    >
+      <Box>{`${gameState?.gamePagesIndex + 1} ${t(
+        "draw.question.number"
+      )}`}</Box>
+      <Box
         css={css`
           margin: 0px 5px 0px 5px;
           width: 100%;
-          height: 40px;
-          background: #f5f5f5;
           display: flex;
           justify-content: center;
           align-items: center;
-          `}
+        `}
       >
-        맞춘 문제수
-      </div>
-      <div
+        {t("draw.correct.question.number")}
+      </Box>
+      <Box
         css={css`
           display: flex;
           justify-content: center;
           align-items: center;
-          `}
+        `}
       >
         {`${questions.filter((v) => v.inputAnswer.includes(v.answer)).length}/${
           questions.length
         }`}
-      </div>
-      <div>{gameState?.gamePagesIndex} 번째 문제</div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 export default SideBarOfDraw;

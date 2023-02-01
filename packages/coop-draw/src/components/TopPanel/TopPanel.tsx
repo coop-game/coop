@@ -7,7 +7,7 @@ import { styled } from "~styles";
 import { Menu } from "./Menu/Menu";
 import { MultiplayerMenu } from "./MultiplayerMenu";
 import { PageMenu } from "./PageMenu";
-import {  StyleMenu } from "./StyleMenu";
+import { StyleMenu } from "./StyleMenu";
 import { ZoomMenu } from "./ZoomMenu";
 import { ToolsPanel } from "~components/ToolsPanel";
 import { PrimaryTools } from "~components/ToolsPanel/PrimaryTools";
@@ -34,7 +34,7 @@ export function _TopPanel({
 
   return (
     <>
-      <StyledTopPanel className="asdfqwer">
+      <StyledTopPanel className="StyledTopPanel">
         <ScrollArea.Root className="ScrollAreaRoot">
           <ScrollArea.Viewport className="ScrollAreaViewport">
             <StyledPanelContent>
@@ -50,10 +50,16 @@ export function _TopPanel({
               </MenuGrid>
             </StyledPanelContent>
           </ScrollArea.Viewport>
-          <ScrollArea.Scrollbar className="ScrollAreaScrollbar" orientation="vertical">
+          <ScrollArea.Scrollbar
+            className="ScrollAreaScrollbar"
+            orientation="vertical"
+          >
             <ScrollArea.Thumb className="ScrollAreaThumb" />
           </ScrollArea.Scrollbar>
-          <ScrollArea.Scrollbar className="ScrollAreaScrollbar" orientation="horizontal">
+          <ScrollArea.Scrollbar
+            className="ScrollAreaScrollbar"
+            orientation="horizontal"
+          >
             <ScrollArea.Thumb className="ScrollAreaThumb" />
           </ScrollArea.Scrollbar>
           <ScrollArea.Corner className="ScrollAreaCorner" />
@@ -70,22 +76,30 @@ const MenuGrid = styled("div", {
   gap: "3px",
 });
 
-const StyledPanelContent = styled("div", { 
+const StyledPanelContent = styled("div", {
   // background:"white",
-  shadows: '0px 12px 17px rgba(0, 0, 0, 1)',
+  shadows: "0px 12px 17px rgba(0, 0, 0, 1)",
   // borderRadius: 3,
   // padding: '$3 $3 $3 $3',
 });
 
 const StyledTopPanel = styled("div", {
+  position: "relative",
+  zIndex: "1000",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  pointerEvents: "none",
+  alignSelf: "center",
+  // pointerEvents: "none",
   "& > *": {
     pointerEvents: "all",
   },
+  background: "$panelContrast",
+  padding: "5px",
+  borderRadius: "15px",
+  // height: "",
+  // overflowY: "scroll",
 });
 
 export const TopPanel = React.memo(_TopPanel);

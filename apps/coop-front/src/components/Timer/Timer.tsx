@@ -13,7 +13,7 @@ const Timer = (props: TimerPropsType) => {
   return (
     <Progress
       sx={{
-        "& > div:first-child": {
+        "& > div:first-type": {
           transitionProperty: "width",
         },
       }}
