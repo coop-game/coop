@@ -194,11 +194,7 @@ export const StyledToolButton = styled("button", {
       bp: "mobile",
       css: {
         height: 40,
-        width: 36,
-        [`& ${StyledToolButtonInner} > svg`]: {
-          width: 16,
-          height: 16,
-        },
+        width: 40,
       },
     },
     {

@@ -10,6 +10,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       w={"100%"}
       h={"100%"}
       p={{ base: "0em", md: "0em" }}
+      css={css`
+        justify-content: center;
+      `}
     >
       <Flex
         direction={{ base: "column" }}
@@ -17,6 +20,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         h={"100%"}
         rounded="md"
         position="relative"
+        css={css`
+          @media screen and (max-width: 600px) {
+            padding: 5px;
+          }
+          max-width: 1200px;
+        `}
       >
         <div
           css={css`
@@ -24,7 +33,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             justify-content: center;
             align-items: center;
             width: 100%;
-            height: 140px;
+            height: 130px;
+            @media screen and (max-width: 600px) {
+              display: none;
+            }
           `}
         >
           {/* <Logo color={"#711480b1"}></Logo> */}
@@ -32,7 +44,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         </div>
         {children}
       </Flex>
-      <ToggleTheme></ToggleTheme>
+      {/* <ToggleTheme></ToggleTheme> */}
     </Flex>
   );
 };

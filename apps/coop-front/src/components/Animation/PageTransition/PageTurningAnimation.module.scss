@@ -29,7 +29,7 @@ $--page-turnning-duration: 1s;
     100% {
       // border-radius: 15px;
       // border: 3px solid #E2E0A5;
-      transform: scale(1);
+      transform: scale(0.1);
     }
   }
   animation: scaleOut #{$--page-turnning-duration * 0.2} cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -38,23 +38,24 @@ $--page-turnning-duration: 1s;
 
 .flipIn {
   @keyframes flipIn {
-    // 0% {
-    //   opacity: 0;
-    // }
-    // 30% {
-    //   opacity: 0;
-    // }
-    // 100% {
-    //   opacity: 1;
-    // }
     0% {
-      transform:  translate(0%,-100%);
+      opacity: 0;
+    }
+    30% {
+      opacity: 0;
     }
     100% {
-      transform:  translate(0%,0%);
+      opacity: 1;
+    }
+    0% {
+      transform: translate(0%, -100%);
+    }
+    100% {
+      transform: translate(0%, 0%);
     }
   }
-  transform:  translate(0%,-100%);
+  transform: translate(0%, -100%);
+
   animation: flipIn #{$--page-turnning-duration} cubic-bezier(0.645, 0.045, 0.355, 1);
   animation-delay: #{$--page-turnning-duration};
   animation-fill-mode: forwards;
@@ -63,17 +64,11 @@ $--page-turnning-duration: 1s;
   pointer-events: none;
   transform-origin: 0% 100%;
   @keyframes flipOut {
-    // 0% {
-    //   transform: rotateX(0deg) rotateY(0deg);
-    // }
-    // 100%{
-    //   transform: rotateX(-90deg) rotateY(-80deg);
-    // }
     0% {
-      transform:  translate(0%,0%);
+      transform: translate(0%, 0%);
     }
     100% {
-      transform:  translate(0%,100%);
+      transform: translate(0%, 100%);
     }
   }
   // 1. 종이비행기마냥 날라가기

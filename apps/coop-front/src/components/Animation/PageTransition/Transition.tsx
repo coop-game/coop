@@ -5,6 +5,7 @@ import {
 
 import React from "react";
 import PageTurningAnimation from "./PageTurningAnimation";
+import { css } from "@emotion/react";
 
 type TransitionKind<RC> = {
   children: RC;
@@ -19,7 +20,13 @@ const Transition = ({
 }: TransitionKind<React.ReactNode>) => {
   return (
     <>
-      <TransitionGroup style={{ position: "relative" }}>
+      <TransitionGroup
+        css={css`
+          position: "relative";
+          width: 100%;
+          height: 100%;
+        `}
+      >
         <ReactTransition key={location} timeout={duration}>
           {(status: string) => (
             <PageTurningAnimation transitionState={status}>

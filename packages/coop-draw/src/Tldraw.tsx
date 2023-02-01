@@ -528,7 +528,7 @@ const InnerTldraw = React.memo(function InnerTldraw({
           <Loading />
           <OneOff focusableRef={rWrapper} autofocus={autofocus} />
           {showUI && (
-            <StyledUI ref={setDialogContainer}>
+            <StyledUI className={"StyledUIPanel"} ref={setDialogContainer}>
               <TopPanel
                 readOnly={readOnly}
                 showPages={showPages}
@@ -659,14 +659,17 @@ const StyledLayout = styled("div", {
   position: "relative",
   display: "flex",
   flexDirection: "row",
+  "@media screen and (max-width: 600px)": {
+    flexDirection: "column-reverse",
+  },
   height: "100%",
+  maxHeight: "500px",
   width: "100%",
   boxSizing: "border-box",
   outline: "none",
   "& > span": {
     width: "100%",
   },
-
   "& input, textarea, button, select, label, button": {
     webkitTouchCallout: "none",
     webkitUserSelect: "none",
@@ -694,6 +697,9 @@ const DrawLayout = styled("div", {
   flexGrow: 1,
   flexBasis: "auto",
   minHeight: "500px",
+  "@media screen and (max-width: 600px)": {
+    minHeight: "380px",
+  },
   borderRadius: "15px",
   overflow: "hidden",
   boxShadow: "var(--shadows-panel)",
@@ -704,10 +710,14 @@ const StyledUI = styled("div", {
   height: "100%",
   padding: "8px 8px 0 8px",
   display: "flex",
-  alignItems: "flex-start",
-  justifyContent: "flex-start",
-  pointerEvents: "none",
-  "& > *": {
-    pointerEvents: "all",
+  justifyContent: "center",
+  alignItems: "center",
+
+  // marginLeft: "auto",
+  "@media screen and (max-width: 600px)": {
+    height: "120px",
+    width: "100%",
+    overflow: "auto hidden",
+    justifyContent: "flex-start",
   },
 });

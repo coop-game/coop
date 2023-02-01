@@ -10,6 +10,7 @@ const AnswerHistory = () => {
   const gameState = useRecoilValue(yjsGameState);
   const questionsState = useRecoilValue(yjsQuestionsState);
   const bg = useColorModeValue("#ffffff", "#000000");
+
   return (
     <Flex
       css={css`
@@ -24,6 +25,7 @@ const AnswerHistory = () => {
           padding: 5px;
           justify-content: center;
           align-items: center;
+          /* overflow-x: scroll; */
         `}
       >
         {t("draw.answer.history")}
@@ -31,14 +33,13 @@ const AnswerHistory = () => {
       <Flex
         shadow={"base"}
         css={css`
-          height: 40px;
-          background: #ffffff84;
-          overflow-y: scroll;
-          border-radius: 15px;
-          padding: 5px;
+          height: 50px;
+          /* background: #ffffff84;
+          border-radius: 15px; */
           align-items: center;
-          overflow: hidden;
+          overflow: scroll hidden;
           position: relative;
+          margin-left: 10px;
           flex-grow: 1;
         `}
       >
@@ -46,11 +47,13 @@ const AnswerHistory = () => {
           <Flex
             css={css`
               gap: 10px;
+              background: #ffffff84;
+              border-radius: 15px;
+              /* padding: 5px; */
               flex-direction: row-reverse;
-              overflow: hidden;
               justify-content: center;
-              margin-left: 10px;
               position: absolute;
+              user-select: none;
             `}
           >
             {questionsState[gameState.gamePagesIndex]?.inputAnswer.map(
@@ -60,14 +63,20 @@ const AnswerHistory = () => {
                     animate={{
                       x: [-100, 0],
                       opacity: [0.8, 1],
-                      scale: [0.8, 1],
                     }}
-                    transition={{ duration: 1, ease: "easeInOut" }}
+                    transition={{
+                      type: "spring",
+                      // duration: 1,
+                      // damping: 5,
+                      // stiffness: 100,
+                      stiffness: 50,
+                      velocity: 10,
+                    }}
                     key={idx}
                     css={css`
                       padding: 5px;
                       border-radius: 15px;
-                      background: white;
+                      background: ${bg};
                     `}
                   >
                     {v}
