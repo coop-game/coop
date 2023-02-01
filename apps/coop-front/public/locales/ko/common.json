@@ -44,12 +44,15 @@
   "relay.race.wating.other.player": "다른 플레이어를 기다리는 중입니다.",
   "relay.race.answer.input.placeholder": "정답 입력하기",
   "relay.race.answer.suggest": "당신이 생각한 것을 입력해주세요",
+  "relay.race.answer.relay.input":"그림을 보고 생각나는 것을 입력해주세요",
   "relay.race.answer.submit": "정답 제출하기",
 
   "relay.race.draw.answer": "다음 주제를 그려주세요!",
   "relay.race.draw.submit": "그림 제출하기",
 
   "result": "결과",
+
+  "relay.race.draw.submit.answer" : "제출한 답변",
 
   "main.description.draw": "그린다!",
   "main.description.communicate": "소통한다!",

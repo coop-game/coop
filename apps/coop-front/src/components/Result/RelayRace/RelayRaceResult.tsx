@@ -9,11 +9,13 @@ import { useRecoilValue } from "recoil";
 import { css } from "@emotion/react";
 import SideUserBar from "./SideUserBar";
 import LineNote from "@components/Paper/LineNote";
+import { useTranslation } from "next-i18next";
 
 const RelayRaceResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
   const relayRaceState = useRecoilValue<CPGameRelayRaceAnswer[]>(
     yjsRelayRaceAnswerState
   );
+  const { t } = useTranslation("common");
   console.log(nowPageIndex);
   return (
     <Flex
@@ -38,17 +40,34 @@ const RelayRaceResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
       <Flex w="100%" h="100%" flex={{ base: 6, lg: 7 }} position={"relative"}>
         <LineNote>
           {relayRaceState[nowPageIndex] ? (
-            <Box w="100%" h="100%">
+            <Flex w="100%" h="100%" justifyContent={"center"}>
               {relayRaceState[nowPageIndex].isDraw ? (
-                <Box w={"100%"} h={"100%"} position={"relative"}>
+                <Flex w={"100%"} h={"100%"} justifyContent={"center"}>
                   <CanvasViewer pageIndex={nowPageIndex}></CanvasViewer>
-                </Box>
+                </Flex>
               ) : (
-                <Box w="100%" h="100%">
-                  <Text>{relayRaceState[nowPageIndex].answer}</Text>
-                </Box>
+                <Flex
+                  w="100%"
+                  h="100%"
+                  justifyContent={"center"}
+                  flexDirection="column"
+                >
+                  <Flex w="100%" flex={3}>
+                    <Text>{t("relay.race.draw.submit.answer")}</Text>
+                  </Flex>
+                  <Flex
+                    w="100%"
+                    flex={7}
+                    justifyContent={"center"}
+                    alignItems="center"
+                  >
+                    <Text fontSize={"3xl"}>
+                      {relayRaceState[nowPageIndex].answer}
+                    </Text>
+                  </Flex>
+                </Flex>
               )}
-            </Box>
+            </Flex>
           ) : (
             <div></div>
           )}

@@ -22,9 +22,9 @@ const nextConfig = {
       "./../../packages/coop-core",
       "./../../packages/coop-draw",
     ],
-    // fontLoaders: [
-    //   { loader: "@next/font/google", options: { subsets: ["korean"] } },
-    // ],
+    fontLoaders: [
+      { loader: "@next/font/google", options: { subsets: ["korean"] } },
+    ],
   },
   i18n,
   // trailingSlash: true,
