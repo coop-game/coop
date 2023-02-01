@@ -1,9 +1,17 @@
 /** @type {import('next').NextConfig} */
 const { i18n } = require("./next-i18next.config");
 const path = require("path");
+
+const runtimeCaching = require("next-pwa/cache");
+
 const withPWA = require("next-pwa")({
+  runtimeCaching,
+  buildExcludes: [/middleware-manifest\.json$/],
+  disable: process.env.NODE_ENV === "development" ? true : false,
   dest: "public",
+  mode: "production",
 });
+
 const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
