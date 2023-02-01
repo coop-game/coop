@@ -113,10 +113,13 @@ function Draw() {
         `}
       >
         <Box
-          width={{ base: "500px", sm: "1000px" }}
-          height={{ base: "500px", sm: "500px" }}
+          // width={{ base: "500px", sm: "1000px" }}
+          // height={{ base: "500px", sm: "500px" }}
+
           css={css`
             position: relative;
+            width: 100%;
+            height: 500px;
           `}
         >
           <Progress

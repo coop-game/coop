@@ -71,7 +71,13 @@ export function _TopPanel({
 
 const MenuGrid = styled("div", {
   display: "grid",
+  width: "100%",
+  margin: "auto",
   gridTemplateColumns: "repeat(2, auto)",
+  "@media screen and (max-width: 600px)": {
+    gridTemplateColumns: "repeat(10, auto)",
+  },
+
   justifyItems: "center",
   gap: "3px",
 });
@@ -86,15 +92,18 @@ const StyledPanelContent = styled("div", {
 const StyledTopPanel = styled("div", {
   position: "relative",
   zIndex: "1000",
+  // width: "80px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  alignItems: "center",
-  alignSelf: "center",
+  // alignItems: "center",
+  // alignSelf: "center",
   // pointerEvents: "none",
-  "& > *": {
-    pointerEvents: "all",
-  },
+  // "& > *": {
+  //   pointerEvents: "all",
+  // },
+  margin: "auto",
+
   background: "$panelContrast",
   padding: "5px",
   borderRadius: "15px",

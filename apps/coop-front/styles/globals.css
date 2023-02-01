@@ -1,28 +1,29 @@
 html,
-body {
+body,
+#__next {
+  width: 100%;
+  height: 100%;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
-    /* background note design */
-    /* background-color: #fff;
+  /* background note design */
+  /* background-color: #fff;
     background-image:
     linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
     linear-gradient(#eee .1em, transparent .1em);
     background-size: 100% 1.2em; */
-    
 }
 
 html {
   cursor: url("/images/pencil/cursor.png") 0 34, pointer;
 }
 
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
   width: 10px;
 }
 
-/* background: rgb(179, 177, 177); */
 *::-webkit-scrollbar-track {
   border-radius: 5px;
 }
@@ -35,7 +36,7 @@ html {
   background-position: center top, center bottom, center center;
   background-repeat: no-repeat, no-repeat, repeat;
   background-size: 10px 15px, 10px 15px, 10px calc(100% - 30px);
-}
+} */
 
 a {
   color: inherit;
@@ -52,6 +53,6 @@ a {
   }
   body {
     color: white;
-    background: black;
+    background: white;
   }
 }

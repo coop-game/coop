@@ -77,7 +77,6 @@ const Logo = ({ color }: { color: string }) => {
         position: relative;
         width: 397px;
         height: 156px;
-        /* overflow: hidden; */
         & > * {
           stroke: ${color};
           fill: ${color};

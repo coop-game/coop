@@ -47,9 +47,12 @@ const PageTurningAnimation = ({
       css={css`
         position: absolute;
         z-index: 10;
-        width: 100vw;
-        height: 100vh;
-        overflow-x: hidden;
+        /* width: 100vw; */
+        /* height: 100vh; */
+        /* height: 100vh; */
+        width: 100%;
+        height: 100%;
+        overflow: hidden scroll;
       `}
     >
       <div

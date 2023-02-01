@@ -102,6 +102,15 @@ const theme = extendTheme({
   breakpoints,
   space,
   sizes,
+  styles: {
+    global: (props: StyleFunctionProps) => ({
+      body: {
+        color: "default",
+        backgroundColor: props.colorMode === "light" ? "#0c5900" : "#000000",
+        backgroundImage: `url("/images/45-degree-fabric-light.png")`,
+      },
+    }),
+  },
   colors: { ...customColor },
   fonts: {
     body: `'Jua', sans-serif`,
