@@ -48,8 +48,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <div
           css={css`
             position: absolute;
-            right: 0;
-            top: 0;
+            right: 30px;
+            top: 30px;
           `}
         >
           <MuteButton></MuteButton>
