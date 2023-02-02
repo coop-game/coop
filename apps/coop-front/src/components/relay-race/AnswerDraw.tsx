@@ -15,6 +15,7 @@ import { CPGameRelayRaceAnswer } from "@types";
 import { useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import DrawEditor from "@components/DrawEditor";
 
 function Editor({ pageIndex }: { pageIndex: number }) {
   const userState = useRecoilValue(userSelector);
@@ -77,7 +78,7 @@ const AnswerDraw = ({
     <Box w="100%" h="100%">
       <Box w="100%" h="10%">
         <Progress
-          time={5000000}
+          time={50000}
           callback={drawEnd}
           play={"running"}
           startTime={startTime}
@@ -102,7 +103,11 @@ const AnswerDraw = ({
         )}
       </Flex>
       <Box w="100%" h="65%" position={"relative"}>
-        <Editor pageIndex={gamepageIndex} />
+        <DrawEditor
+          pageIndex={gamepageIndex}
+          useOnChangePresence={false}
+          useSideBarDraw={false}
+        />
       </Box>
       <Flex w={"100%"} justifyContent="center" alignItems={"center"}>
         <Button onClick={drawEnd}>{t("relay.race.draw.submit")}</Button>

@@ -1,3 +1,4 @@
+import { useColorMode } from "@chakra-ui/react";
 import { doc, providerState } from "@common/yjsStore/userStore";
 import { TldrawApp, TDShape, TDBinding, Tldraw } from "@coop/draw";
 import { css } from "@emotion/react";
@@ -7,6 +8,7 @@ const CanvasViewer = ({ pageIndex }: { pageIndex: number }) => {
   const [app, setApp] = useState<TldrawApp>();
   const yShapes = doc.getMap<TDShape>(`shapes ${pageIndex}`);
   const yBindings = doc.getMap<TDBinding>(`bindings ${pageIndex}`);
+  const { colorMode } = useColorMode();
 
   const onMount = useCallback((app: TldrawApp) => {
     app.loadRoom(providerState.provider.roomName);
@@ -44,6 +46,7 @@ const CanvasViewer = ({ pageIndex }: { pageIndex: number }) => {
         showUI={false}
         readOnly={true}
         onMount={onMount}
+        darkMode={colorMode !== "light"}
       />
     </div>
   );
