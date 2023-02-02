@@ -42,7 +42,7 @@ const SideUserBar = ({ nowPageIndex }: { nowPageIndex: number }) => {
         >
           <motion.div
             animate={{
-              y: `${+nowPageIndex * -100 + 25}%`,
+              y: `${+nowPageIndex * -100 + 10}%`,
             }}
             transition={{ ease: "easeOut", duration: 1 }}
             css={css`

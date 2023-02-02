@@ -25,7 +25,6 @@ const AnswerInput = ({
     CPGameRelayRaceAnswer[]
   >(yjsRelayRaceAnswerState);
   const user = useRecoilValue(userState);
-  const router = useRouter();
   const { t } = useTranslation("common");
 
   const onClick = async () => {
@@ -50,24 +49,44 @@ const AnswerInput = ({
         play={"running"}
         startTime={startTime}
       />
-      <Flex width="100%" padding={"3%"} flexDirection="column">
+      <Flex width="100%" padding={"2%"} flexDirection="column">
         {relayRaceAnswerState.length > 0 && (
           <Box flexGrow="1" flexBasis="500px" width="100%">
             <CanvasViewer pageIndex={gamepageIndex - 1} />
           </Box>
         )}
       </Flex>
-      <Text fontSize={"5xl"} fontWeight="bold">
-        {t("relay.race.answer.suggest")}
-      </Text>
+      {gamepageIndex > 1 ? (
+        <Text
+          fontSize={{ base: "xl", md: "5xl" }}
+          fontWeight="bold"
+          textAlign={"center"}
+        >
+          {t("relay.race.answer.relay.input")}
+        </Text>
+      ) : (
+        <Text
+          fontSize={{ base: "xl", md: "5xl" }}
+          fontWeight="bold"
+          textAlign={"center"}
+        >
+          {t("relay.race.answer.suggest")}
+        </Text>
+      )}
+
       <Input
         placeholder={t("relay.race.answer.input.placeholder")}
         onChange={(e) => {
           setAnswer(e.target.value);
         }}
         value={answer}
+        marginBottom="3%"
       ></Input>
-      <Button onClick={onClick}>{t("relay.race.answer.submit")}</Button>
+      <Flex w="100%" justifyContent={"center"}>
+        <Button width={"15%"} minW="150px" onClick={onClick}>
+          {t("relay.race.answer.submit")}
+        </Button>
+      </Flex>
     </Flex>
   );
 };

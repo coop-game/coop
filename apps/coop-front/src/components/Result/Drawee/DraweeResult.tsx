@@ -69,14 +69,13 @@ const DraweeResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
   }, [questionState, userProfiles]);
 
   return (
-    <Box w="100%" height="100%" position={"relative"}>
-      {animation && (
-        <Box w="80%" height="80%">
-          <CanvasViewer pageIndex={nowPageIndex} />
-        </Box>
-      )}
-
-      <Box w="100%" h="20%">
+    <Flex
+      w="100%"
+      height="100%"
+      position={"relative"}
+      flexDirection={{ sm: "column-reverse", md: "row" }}
+    >
+      <Box w="20%" h="100%">
         {answerState && answerState.length > 0 && (
           <Flex w={"100%"} h={"100%"}>
             <Flex flex={1} direction={"column"}>
@@ -124,7 +123,13 @@ const DraweeResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
           </Flex>
         )}
       </Box>
-    </Box>
+      <Box></Box>
+      {animation && (
+        <Box w="80%" height="100%">
+          <CanvasViewer pageIndex={nowPageIndex} />
+        </Box>
+      )}
+    </Flex>
   );
 };
 

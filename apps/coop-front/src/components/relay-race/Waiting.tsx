@@ -35,7 +35,11 @@ const Wating = ({
         play={isPlay}
         startTime={startTime}
       />
-      <Text fontWeight={"extrabold"} fontSize={"4xl"} paddingTop={"5%"}>
+      <Text
+        fontWeight={"extrabold"}
+        fontSize={{ sm: "xl", md: "4xl" }}
+        paddingTop={"5%"}
+      >
         {t("relay.race.wating.other.player")}
       </Text>
       <Box w="100%" height="500px" display="flex" justifyContent="center">
