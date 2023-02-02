@@ -11,32 +11,16 @@ import CanvasViewer from "@components/CanvasViewer";
 import Description from "@components/Description/Description";
 import PostIt from "@components/layout/PostIt/PostIt";
 import Progress from "@components/Progress";
+import HistoryScroll from "@components/Scroll/HistoryScroll";
 import Swoosh from "@components/Sound/Swoosh";
 import ToggleTheme from "@components/ToggleTheme";
 import { useRecoilValue } from "recoil";
 
 const Example = () => {
-  const utcTimeStamp = getUtcTimeStamp();
-  const isAnimationEnd = useRecoilValue(transitionPageAnimationState);
   return (
     <>
       <Logo color="darkviolet"></Logo>
-      {/* <RollingSelect></RollingSelect> */}
-      {/* <Rollinghexagone></Rollinghexagone> */}
-      {/* <DrawingHand></DrawingHand>
-      <AnswerSuccess></AnswerSuccess>
-      <Description></Description>
-      <TalkingHumans></TalkingHumans> */}
-      {isAnimationEnd && (
-        <Progress
-          play={"running"}
-          startTime={utcTimeStamp}
-          time={10000}
-          callback={() => {}}
-        ></Progress>
-      )}
-      <ToggleTheme></ToggleTheme>
-      <Swoosh></Swoosh>
+      <HistoryScroll></HistoryScroll>
     </>
   );
 };
