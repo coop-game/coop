@@ -2,6 +2,7 @@ import { TDUser } from "@coop/draw";
 import { Presence } from "@y-presence/client";
 
 declare module "*.scss";
+
 declare global {
   interface IMAGE {
     [x: string]: any;

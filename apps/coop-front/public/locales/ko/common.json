@@ -58,5 +58,8 @@
   "alert.warning.multiple.instances": "다른 탭에서 이미 사용중입니다.",
 
   "draw.correct.question.number": "맞춘 문제수",
-  "draw.question.number": "번째 문제"
+  "draw.question.number": "번째 문제",
+
+  "tooltip.sound.up.hover": "게임 플레이 도중 소리가 재생됩니다.",
+  "tooltip.sound.mute.hover": "게임 플레이 도중 음소거 됩니다."
 }

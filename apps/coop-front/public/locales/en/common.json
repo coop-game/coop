@@ -57,5 +57,8 @@
   "alert.warning.multiple.instances": "Cannot open multiple instances",
 
   "draw.correct.question.number": "Correct Question",
-  "draw.question.number": "st Number"
+  "draw.question.number": "st Number",
+
+  "tooltip.sound.up.hover": "Sounds play during gameplay.",
+  "tooltip.sound.mute.hover": "Mute during gameplay."
 }

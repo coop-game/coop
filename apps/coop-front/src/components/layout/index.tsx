@@ -1,5 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import Logo from "@components/Animation/Logo/Logo";
+import MuteButton from "@components/Sound/MuteButton";
 import ToggleTheme from "@components/ToggleTheme";
 import { css } from "@emotion/react";
 
@@ -43,6 +44,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         >
           {/* <Logo color={"#711480b1"}></Logo> */}
           <Logo color={"#721480"}></Logo>
+        </div>
+        <div
+          css={css`
+            position: absolute;
+            right: 0;
+            top: 0;
+          `}
+        >
+          <MuteButton></MuteButton>
         </div>
         {children}
       </Flex>
