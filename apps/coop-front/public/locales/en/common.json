@@ -59,5 +59,11 @@
   "alert.warning.multiple.instances": "Cannot open multiple instances",
 
   "draw.correct.question.number": "Correct Question",
-  "draw.question.number": "st Number"
+  "draw.question.number": "st Number",
+
+  "drawee.result.question.maker":"Question maker",
+  "drawee.result.question.solver":"Solver",
+  "drawee.result.question.answer":"Answer",
+  "drawee.result.question.success":"Solve success",
+  "drawee.result.question.failure":"Solve failure"
 }

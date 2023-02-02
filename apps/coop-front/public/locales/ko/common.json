@@ -61,5 +61,11 @@
   "alert.warning.multiple.instances": "다른 탭에서 이미 사용중입니다.",
 
   "draw.correct.question.number": "맞춘 문제수",
-  "draw.question.number": "번째 문제"
+  "draw.question.number": "번째 문제",
+
+  "drawee.result.question.maker":"출제자",
+  "drawee.result.question.solver":"맞추는 사람",
+  "drawee.result.question.answer":"정답",
+  "drawee.result.question.success":"풀이성공",
+  "drawee.result.question.failure":"풀이실패"
 }

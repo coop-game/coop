@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, useColorMode } from "@chakra-ui/react";
 import {
   userProfilesSelector,
   yjsRelayRaceAnswerState,
@@ -15,6 +15,7 @@ const SideUserBar = ({ nowPageIndex }: { nowPageIndex: number }) => {
   const relayRaceState = useRecoilValue<CPGameRelayRaceAnswer[]>(
     yjsRelayRaceAnswerState
   );
+  const { colorMode } = useColorMode();
   return (
     <Flex
       w="100%"
@@ -35,7 +36,7 @@ const SideUserBar = ({ nowPageIndex }: { nowPageIndex: number }) => {
           alignItems={"center"}
           flexDirection="column"
           position={"absolute"}
-          bgColor={"#E2E0A5"}
+          bgColor={colorMode === "light" ? "#E2E0A5" : "#b3b18a"}
           overflow="hidden"
           boxShadow={"dark-lg"}
           borderRadius="8px"

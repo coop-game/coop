@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
+import { Avatar, Box, Flex, Text, useColorMode } from "@chakra-ui/react";
 import {
   userProfilesSelector,
   yjsQuestionsState,
@@ -8,8 +8,8 @@ import CanvasViewer from "@components/CanvasViewer";
 import { CPGameQuestions, CPGameRelayRaceAnswer } from "@types";
 import { useRecoilValue } from "recoil";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { css } from "@emotion/react";
+import { useTranslation } from "next-i18next";
 
 type CPGameDraweeResult = {
   solve: boolean;
@@ -28,6 +28,8 @@ const DraweeResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
   const [answerState, setAnswerState] = useState<CPGameDraweeResult[]>();
   const [animation, setAnimation] = useState<boolean>(false);
   const animationFlag = document.querySelector(".book");
+  const { colorMode } = useColorMode();
+  const { t } = useTranslation("common");
 
   useEffect(() => {
     animationFlag.addEventListener("animationend", () => {
@@ -64,7 +66,6 @@ const DraweeResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
       };
       return answer;
     });
-    console.log(tempAnswerList);
     setAnswerState(tempAnswerList);
   }, [questionState, userProfiles]);
 
@@ -75,13 +76,37 @@ const DraweeResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
       position={"relative"}
       flexDirection={{ sm: "column-reverse", md: "row" }}
     >
-      <Box w="20%" h="100%">
+      <Flex
+        w={{ sm: "100%", md: "20%" }}
+        h={{ sm: "20%", md: "100%" }}
+        maxH="500px"
+        flexDirection={{ sm: "row", md: "column" }}
+        marginTop={{ sm: "0%", md: "5%" }}
+        marginRight={{ sm: "0%", md: "5%" }}
+      >
         {answerState && answerState.length > 0 && (
-          <Flex w={"100%"} h={"100%"}>
-            <Flex flex={1} direction={"column"}>
-              <Text fontWeight={"extrabold"}>문제 제출한 사람</Text>
+          <Flex
+            w={"100%"}
+            h={"100%"}
+            flexDirection={{ sm: "row", md: "column" }}
+            bgColor={colorMode === "light" ? "#E2E0A5" : "#b3b18a"}
+            overflow="hidden"
+            boxShadow={"dark-lg"}
+            borderRadius="8px"
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <Flex flex={1} direction={"column"} alignItems={"center"}>
+              <Text fontSize={"xl"} fontWeight={"extrabold"} textAlign="center">
+                {t("drawee.result.question.maker")}
+              </Text>
               {answerState[nowPageIndex].questionerNickname && (
-                <Flex w="100%" h="100%" direction={"column"}>
+                <Flex
+                  w="100%"
+                  h="100%"
+                  direction={"column"}
+                  alignItems={"center"}
+                >
                   <Avatar
                     size={"xl"}
                     css={css`
@@ -91,12 +116,16 @@ const DraweeResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
                     `}
                     src={`./images/avatar/${answerState[nowPageIndex].questionerAvatar}.png`}
                   ></Avatar>
-                  <Text>{answerState[nowPageIndex].questionerNickname}</Text>
+                  <Text textAlign="center">
+                    {answerState[nowPageIndex].questionerNickname}
+                  </Text>
                 </Flex>
               )}
             </Flex>
             <Flex flex={1} direction={"column"}>
-              <Text fontWeight={"extrabold"}>문제 푼 사람</Text>
+              <Text fontSize={"xl"} fontWeight={"extrabold"} textAlign="center">
+                {t("drawee.result.question.solver")}
+              </Text>
               {answerState[nowPageIndex].solverNickname && (
                 <Flex w="100%" h="100%" direction={"column"}>
                   <Avatar
@@ -107,27 +136,40 @@ const DraweeResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
                     `}
                     src={`./images/avatar/${answerState[nowPageIndex].solverAvatar}.png`}
                   ></Avatar>
-                  <Text>{answerState[nowPageIndex].solverNickname}</Text>
+                  <Text textAlign="center">
+                    {answerState[nowPageIndex].solverNickname}
+                  </Text>
                 </Flex>
               )}
             </Flex>
             <Flex flex={1} direction={"column"}>
-              <Text>정답</Text>
-              <Text>{answerState[nowPageIndex].answer}</Text>
+              <Text fontSize={"xl"} textAlign="center">
+                {t("drawee.result.question.answer")}
+              </Text>
+              <Text textAlign="center">{answerState[nowPageIndex].answer}</Text>
               {answerState[nowPageIndex].solve ? (
-                <Text>풀이성공</Text>
+                <Text textAlign="center">
+                  {t("drawee.result.question.success")}
+                </Text>
               ) : (
-                <Text>풀이못함</Text>
+                <Text textAlign="center">
+                  {t("drawee.result.question.failure")}
+                </Text>
               )}
             </Flex>
           </Flex>
         )}
-      </Box>
-      <Box></Box>
+      </Flex>
       {animation && (
-        <Box w="80%" height="100%">
+        <Flex
+          w={{ sm: "100%", md: "75%" }}
+          height={{ sm: "70%", md: "100%" }}
+          justifyContent={"center"}
+          alignItems={"center"}
+          marginTop={{ sm: "2%", md: "5%" }}
+        >
           <CanvasViewer pageIndex={nowPageIndex} />
-        </Box>
+        </Flex>
       )}
     </Flex>
   );
