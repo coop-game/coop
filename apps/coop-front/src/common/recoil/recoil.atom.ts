@@ -109,3 +109,11 @@ export const transitionPageAnimationState = atom<boolean>({
   key: "TRANSITION_PAGE_ANIMATION_STATE",
   default: false,
 });
+
+/**
+ * soundVolumeState
+ */
+export const soundVolumeState = atom<boolean>({
+  key: "SOUND_VOLUME_STATE",
+  default: true,
+});

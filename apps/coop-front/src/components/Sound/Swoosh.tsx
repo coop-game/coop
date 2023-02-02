@@ -1,39 +1,26 @@
 import { Button, css } from "@chakra-ui/react";
-import { useEffect, useRef } from "react";
-
+import { soundVolumeState } from "@common/recoil/recoil.atom";
+import React, { forwardRef, useEffect, useRef } from "react";
+import { useRecoilValue } from "recoil";
+import sound from "./../../asset/sound/Swoosh.mp3";
 const Swoosh = () => {
   const ref = useRef(null);
-  useEffect(() => {
-    if (ref.current !== null) {
-      console.log(ref.current);
-      ref.current.play();
-    }
-  }, [ref.current]);
+  const useVolume = useRecoilValue(soundVolumeState);
   return (
     <>
       <div
+        className="swoosh_audio"
         css={css`
-          visibility: none;
+          visibility: hidden;
+          opacity: 0;
+          position: absolute;
         `}
       >
-        <audio
-          ref={ref}
-          autoPlay
-          controls
-          loop={false}
-          onLoadedData={() => {
-            ref.current.play();
-          }}
-        >
-          <source src="/sound/Swoosh.mp3" type="audio/mpeg" />
+        <audio ref={ref} autoPlay controls loop={false} muted={!useVolume}>
+          <source src={sound} type="audio/mpeg" />
         </audio>
-        <Button
-          onClick={() => {
-            ref.current.play();
-          }}
-        ></Button>
       </div>
     </>
   );
 };
-export default Swoosh;
+export default React.memo(forwardRef(Swoosh));

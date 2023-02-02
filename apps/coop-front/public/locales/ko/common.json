@@ -67,5 +67,7 @@
   "drawee.result.question.solver":"맞추는 사람",
   "drawee.result.question.answer":"정답",
   "drawee.result.question.success":"풀이성공",
-  "drawee.result.question.failure":"풀이실패"
+  "drawee.result.question.failure":"풀이실패",
+  "tooltip.sound.up.hover": "게임 플레이 도중 소리가 재생됩니다.",
+  "tooltip.sound.mute.hover": "게임 플레이 도중 음소거 됩니다."
 }

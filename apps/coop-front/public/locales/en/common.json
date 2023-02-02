@@ -65,5 +65,7 @@
   "drawee.result.question.solver":"Solver",
   "drawee.result.question.answer":"Answer",
   "drawee.result.question.success":"Solve success",
-  "drawee.result.question.failure":"Solve failure"
+  "drawee.result.question.failure":"Solve failure",
+  "tooltip.sound.up.hover": "Sounds play during gameplay.",
+  "tooltip.sound.mute.hover": "Mute during gameplay."
 }
