@@ -71,12 +71,18 @@ const Logo = ({ color }: { color: string }) => {
       ),
     },
   ];
+
+  const viewBox = "0 0 397 156";
+  const svgWidth = "397";
+  const svgHeight = "156";
   return (
     <div
       css={css`
         position: relative;
-        width: 397px;
-        height: 156px;
+        width: ${svgWidth}px;
+        height: ${svgHeight}px;
+        transform: scale(0.7);
+        margin: 0 auto;
         & > * {
           stroke: ${color};
           fill: ${color};
@@ -84,9 +90,9 @@ const Logo = ({ color }: { color: string }) => {
       `}
     >
       <motion.svg
-        width="397"
-        height="156"
-        viewBox="0 0 397 156"
+        width={svgWidth}
+        height={svgHeight}
+        viewBox={viewBox}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -104,9 +110,9 @@ const Logo = ({ color }: { color: string }) => {
       {wordsArray.map(({ coverline }, idx) => {
         return (
           <motion.svg
-            width="397"
-            height="156"
-            viewBox="0 0 397 156"
+            width={svgWidth}
+            height={svgHeight}
+            viewBox={viewBox}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -120,9 +126,21 @@ const Logo = ({ color }: { color: string }) => {
           </motion.svg>
         );
       })}
-      <LetterLineLeftE></LetterLineLeftE>
-      <LetterLineRightE></LetterLineRightE>
-      <LogoPencil></LogoPencil>
+      <LetterLineLeftE
+        viewBox={viewBox}
+        svgWidth={svgWidth}
+        svgHeight={svgHeight}
+      ></LetterLineLeftE>
+      <LetterLineRightE
+        viewBox={viewBox}
+        svgWidth={svgWidth}
+        svgHeight={svgHeight}
+      ></LetterLineRightE>
+      <LogoPencil
+        viewBox={viewBox}
+        svgWidth={svgWidth}
+        svgHeight={svgHeight}
+      ></LogoPencil>
     </div>
   );
 };

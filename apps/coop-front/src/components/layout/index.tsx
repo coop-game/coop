@@ -37,6 +37,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             @media screen and (max-width: 600px) {
               display: none;
             }
+            /* transform-origin: 2% 0%;
+            transform: scale(0.5); */
           `}
         >
           {/* <Logo color={"#711480b1"}></Logo> */}

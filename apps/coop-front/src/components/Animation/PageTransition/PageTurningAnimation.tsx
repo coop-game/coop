@@ -7,6 +7,7 @@ import { Flex, useColorModeValue } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
 import { transitionPageAnimationState } from "@common/recoil/recoil.atom";
 import React from "react";
+import Swoosh from "@components/Sound/Swoosh";
 
 type PageTurningAnimation<RC> = {
   children: RC;
@@ -82,6 +83,7 @@ const PageTurningAnimation = ({
               `}
             >
               <BackgroundNote />
+              {isTurn && <Swoosh />}
               <Flex className={`book__page`}>{children}</Flex>
             </Flex>
           </Flex>
