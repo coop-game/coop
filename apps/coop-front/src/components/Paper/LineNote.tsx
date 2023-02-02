@@ -61,6 +61,7 @@ const LineNote = ({
         }
 
         .paper-content {
+          /* overflow-y: scroll; */
           position: absolute;
           top: 30px;
           right: 0;

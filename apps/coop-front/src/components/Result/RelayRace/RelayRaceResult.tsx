@@ -1,12 +1,8 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import {
-  userProfilesSelector,
-  yjsRelayRaceAnswerState,
-} from "@common/recoil/recoil.atom";
+import { yjsRelayRaceAnswerState } from "@common/recoil/recoil.atom";
 import CanvasViewer from "@components/CanvasViewer";
 import { CPGameRelayRaceAnswer } from "@types";
 import { useRecoilValue } from "recoil";
-import { css } from "@emotion/react";
 import SideUserBar from "./SideUserBar";
 import LineNote from "@components/Paper/LineNote";
 import { useTranslation } from "next-i18next";
@@ -16,7 +12,6 @@ const RelayRaceResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
     yjsRelayRaceAnswerState
   );
   const { t } = useTranslation("common");
-  console.log(nowPageIndex);
   return (
     <Flex
       w="100%"
@@ -61,7 +56,7 @@ const RelayRaceResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
                     justifyContent={"center"}
                     alignItems="center"
                   >
-                    <Text fontSize={"3xl"}>
+                    <Text fontSize={"4xl"}>
                       {relayRaceState[nowPageIndex].answer}
                     </Text>
                   </Flex>

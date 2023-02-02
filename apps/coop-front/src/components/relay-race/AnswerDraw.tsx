@@ -76,7 +76,7 @@ const AnswerDraw = ({
   };
   return (
     <Box w="100%" h="100%">
-      <Box w="100%" h="10%">
+      <Box w="100%" h={{ sm: "8%", md: "10%" }}>
         <Progress
           time={50000}
           callback={drawEnd}
@@ -84,7 +84,12 @@ const AnswerDraw = ({
           startTime={startTime}
         />
       </Box>
-      <Flex w="100%" h="12%" justifyContent="center" alignItems={"center"}>
+      <Flex
+        w="100%"
+        h={{ sm: "10%", md: "12%" }}
+        justifyContent="center"
+        alignItems={"center"}
+      >
         {RelayRaceAnswerState.length > 0 && (
           <Flex
             w="100%"
@@ -95,14 +100,14 @@ const AnswerDraw = ({
           >
             <Text fontSize={"xl"}>{t("relay.race.draw.answer")}</Text>
             <Box>
-              <Text fontSize={"3xl"} fontWeight="bold">
+              <Text fontSize={{ base: "xl", md: "3xl" }} fontWeight="bold">
                 {RelayRaceAnswerState[RelayRaceAnswerState.length - 1].answer}
               </Text>
             </Box>
           </Flex>
         )}
       </Flex>
-      <Box w="100%" h="65%" position={"relative"}>
+      <Box w="100%" h={{ sm: "78%", md: "65%" }} position={"relative"}>
         <DrawEditor
           pageIndex={gamepageIndex}
           useOnChangePresence={false}

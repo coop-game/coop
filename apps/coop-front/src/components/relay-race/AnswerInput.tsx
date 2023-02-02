@@ -25,7 +25,6 @@ const AnswerInput = ({
     CPGameRelayRaceAnswer[]
   >(yjsRelayRaceAnswerState);
   const user = useRecoilValue(userState);
-  const router = useRouter();
   const { t } = useTranslation("common");
 
   const onClick = async () => {
@@ -58,11 +57,19 @@ const AnswerInput = ({
         )}
       </Flex>
       {gamepageIndex > 1 ? (
-        <Text fontSize={"5xl"} fontWeight="bold" textAlign={"center"}>
+        <Text
+          fontSize={{ base: "xl", md: "5xl" }}
+          fontWeight="bold"
+          textAlign={"center"}
+        >
           {t("relay.race.answer.relay.input")}
         </Text>
       ) : (
-        <Text fontSize={"5xl"} fontWeight="bold" textAlign={"center"}>
+        <Text
+          fontSize={{ base: "xl", md: "5xl" }}
+          fontWeight="bold"
+          textAlign={"center"}
+        >
           {t("relay.race.answer.suggest")}
         </Text>
       )}
