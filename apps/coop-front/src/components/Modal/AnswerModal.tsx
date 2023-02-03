@@ -5,6 +5,7 @@ import useAnswer from "@hooks/gameHooks/DRAWEE/useAnswer";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { useTranslation } from "next-i18next";
+import React from "react";
 
 type AnswerModalPropsType = {
   setIsPlay: Dispatch<SetStateAction<"paused" | "running">>;
@@ -12,7 +13,7 @@ type AnswerModalPropsType = {
 };
 
 type AnswerPropsType = { solverNickname: string; answer: string };
-const Answer = ({ solverNickname, answer }: AnswerPropsType) => {
+const Answer = React.memo(({ solverNickname, answer }: AnswerPropsType) => {
   const { t } = useTranslation("common");
 
   return (
@@ -34,27 +35,33 @@ const Answer = ({ solverNickname, answer }: AnswerPropsType) => {
       <div>{`${solverNickname} ${t("draw.modal.correct.answer")}`}</div>
     </Flex>
   );
-};
-const WrongAnswer = ({ solverNickname, answer }: AnswerPropsType) => {
-  const { t } = useTranslation("common");
-  return (
-    <Flex
-      fontSize={{ base: "2rem", md: "3rem", xl: "4rem" }}
-      css={css`
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      `}
-    >
-      <div>
-        <>{`${t("draw.modal.answer")} : ${answer}`}</>
-      </div>
-      <div>{`${solverNickname} 정답을 맞추지 못함`}</div>
-    </Flex>
-  );
-};
+});
+
+Answer.displayName = "Answer";
+
+const WrongAnswer = React.memo(
+  ({ solverNickname, answer }: AnswerPropsType) => {
+    const { t } = useTranslation("common");
+    return (
+      <Flex
+        fontSize={{ base: "2rem", md: "3rem", xl: "4rem" }}
+        css={css`
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        `}
+      >
+        <div>
+          <>{`${t("draw.modal.answer")} : ${answer}`}</>
+        </div>
+        <div>{`${solverNickname} 정답을 맞추지 못함`}</div>
+      </Flex>
+    );
+  }
+);
+WrongAnswer.displayName = "WrongAnswer";
 
 const AnswerModal = (props: AnswerModalPropsType) => {
   const { getSolverId, getSovlerNicknameFromId } = useSolver();

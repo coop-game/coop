@@ -16,7 +16,7 @@ import {
 import { userProfilesState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { useTranslation } from "next-i18next";
 
@@ -37,6 +37,10 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
     onClose();
     onCloseHandler();
   };
+
+  useEffect(() => {
+    console.log("열렸냐?", isOpen);
+  }, [isOpen]);
 
   return (
     <>

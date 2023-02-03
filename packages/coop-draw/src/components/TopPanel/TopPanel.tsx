@@ -106,7 +106,7 @@ const StyledTopPanel = styled("div", {
 
   background: "$panelContrast",
   padding: "5px",
-  borderRadius: "15px",
+  borderRadius: "8px",
   // height: "",
   // overflowY: "scroll",
 });

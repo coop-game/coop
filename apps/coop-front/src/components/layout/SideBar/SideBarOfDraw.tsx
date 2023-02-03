@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import {
   userProfilesSelector,
   yjsGameState,
@@ -16,8 +16,12 @@ const SideBarOfDraw = () => {
   const questions = useRecoilValue(yjsQuestionsState);
   const gameState = useRecoilValue(yjsGameState);
   const { t } = useTranslation("common");
+
+  const background = useColorModeValue("#ffffffa8", "#0000009f");
+
   return (
     <Box
+      shadow={"Base"}
       css={css`
         margin: 5px;
         width: 100%;
@@ -25,9 +29,9 @@ const SideBarOfDraw = () => {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background: #ffffff2b;
-        backdrop-filter: blur(10px);
-        border-radius: 15px;
+        background: ${background};
+
+        border-radius: 8px;
         overflow: hidden;
         pointer-events: none;
         user-select: none;

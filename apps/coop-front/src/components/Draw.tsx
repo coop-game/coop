@@ -46,6 +46,7 @@ function Draw() {
       const newGameState = {};
       if (gamePagesIndex + 1 >= questionsState.length) {
         newGameState["path"] = "/result";
+        // newGameState["gamePagesIndex"] = gamePagesIndex + 1;
       } else {
         newGameState["gamePagesIndex"] = gamePagesIndex + 1;
       }
@@ -93,6 +94,7 @@ function Draw() {
   return (
     <>
       {gameState &&
+        gameState.path === "/draw" &&
         questionsState.length >= gameState.gamePagesIndex &&
         questionsState[gameState.gamePagesIndex]?.isQuestionEnd && (
           <AnswerModal

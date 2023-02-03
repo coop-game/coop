@@ -700,7 +700,7 @@ const DrawLayout = styled("div", {
   "@media screen and (max-width: 600px)": {
     minHeight: "380px",
   },
-  borderRadius: "15px",
+  borderRadius: "8px",
   overflow: "hidden",
   boxShadow: "var(--shadows-panel)",
 });
