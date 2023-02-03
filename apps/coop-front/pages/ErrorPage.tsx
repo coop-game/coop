@@ -1,6 +1,8 @@
 import { Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useTranslation } from "next-i18next";
+import Head from "next/head";
 
 type ErrorPagePropsType = {
   statusCode: string | null;
@@ -8,6 +10,7 @@ type ErrorPagePropsType = {
 };
 
 const ErrorPage = ({ statusCode, errorMessage }: ErrorPagePropsType) => {
+  const { t } = useTranslation("common");
   const router = useRouter();
   useEffect(() => {
     const interval = setInterval(() => {
@@ -19,6 +22,9 @@ const ErrorPage = ({ statusCode, errorMessage }: ErrorPagePropsType) => {
   }, [router]);
   return (
     <div>
+      <Head>
+        <meta property="og:title" content={t("seo.error.title")} />
+      </Head>
       <div>statusCode</div>
       <div>{statusCode}</div>
       <div>errorMessage</div>

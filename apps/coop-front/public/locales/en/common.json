@@ -52,6 +52,8 @@
 
   "result": "result",
 
+  "relay.race.result.answer.solver":"Solver",
+
   "main.description.draw": "Draw!",
   "main.description.communicate": "Communicate!",
   "main.description.corrent": "Correct!",
@@ -67,5 +69,21 @@
   "drawee.result.question.success":"Solve success",
   "drawee.result.question.failure":"Solve failure",
   "tooltip.sound.up.hover": "Sounds play during gameplay.",
-  "tooltip.sound.mute.hover": "Mute during gameplay."
+  "tooltip.sound.mute.hover": "Mute during gameplay.",
+
+  "seo.main.title":"Drawee",
+  "seo.main.description":"Drawee is a web game that everyone enjoys drawing together.",
+  "seo.main.opengraph.images.alt":"Drawee logo image",
+
+  "seo.lobby.title":"Drawee lobby",
+
+  "seo.result.title":"Game Result",
+
+  "seo.draw.title":"Draw!",
+  "seo.start.title":"Make question!",
+  "seo.error.title":"Oops! Error",
+  "seo.relay.race.title":"Relay Race",
+
+  "seo.welcome.title":"Welcome to Drawee!",
+  "seo.welcome.description":"Drawee is a web game that everyone enjoys drawing together."
 }

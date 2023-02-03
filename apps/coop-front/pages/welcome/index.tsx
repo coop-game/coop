@@ -11,13 +11,21 @@ import stock4 from "../../src/asset/stock4.jpg";
 import BottomContent from "@components/Welcome/BottomContent";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import Head from "next/head";
+import { useTranslation } from "next-i18next";
+import { NextSeo } from "next-seo";
 
 export type nextContentType = {
   ratio: number | undefined;
   detect: boolean | undefined;
 };
 
+const URL =
+  process.env.NEXT_PUBLIC_HOSTNAME + "/welcome" ||
+  "http://localhost:3001/welcome";
+
 function Welcome() {
+  const { t } = useTranslation("common");
   const [nextContent, setNextContent] = useState<nextContentType>({
     ratio: undefined,
     detect: false,
@@ -28,6 +36,31 @@ function Welcome() {
   };
   return (
     <Box bg="colors.primary" w="100%" minH="100vh" color="black" p={4}>
+      <Head>
+        <NextSeo
+          title={t("seo.welcome.title")}
+          description={t("seo.welcome.description")}
+          openGraph={{
+            url: URL,
+            title: t("seo.welcome.title"),
+            description: t("seo.welcome.description"),
+            images: [
+              {
+                url: `/images/DraweeLogo.png`,
+                width: 800,
+                height: 600,
+                alt: t("main.seo.opengraph.images.alt"),
+                type: "image/png",
+              },
+            ],
+          }}
+          twitter={{
+            handle: "@handle",
+            site: "@site",
+            cardType: "summary_large_image",
+          }}
+        />
+      </Head>
       {/* 최상단 부분  */}
       <Flex direction="column">
         <TopContent />

@@ -53,6 +53,7 @@
   "result": "결과",
 
   "relay.race.draw.submit.answer" : "제출한 답변",
+  "relay.race.result.answer.solver":"정답자",
 
   "main.description.draw": "그린다!",
   "main.description.communicate": "소통한다!",
@@ -69,5 +70,22 @@
   "drawee.result.question.success":"풀이성공",
   "drawee.result.question.failure":"풀이실패",
   "tooltip.sound.up.hover": "게임 플레이 도중 소리가 재생됩니다.",
-  "tooltip.sound.mute.hover": "게임 플레이 도중 음소거 됩니다."
+  "tooltip.sound.mute.hover": "게임 플레이 도중 음소거 됩니다.",
+
+  "seo.main.title":"Drawee",
+  "seo.main.description":"모두 다같이 함께 그림을 그리며 즐기는 웹 게임 Drawee입니다.",
+  "seo.main.opengraph.images.alt":"Drawee 로고 이미지",
+
+  "seo.lobby.title":"Drawee 로비",
+
+  "seo.result.title":"게임 결과",
+
+  "seo.draw.title":"그려라!",
+  "seo.start.title":"출제하라!",
+  "seo.error.title":"에러페이지",
+  "seo.relay.race.title":"이어달리기",
+
+  "seo.welcome.title":"Drawee",
+  "seo.welcome.description":"모두 다같이 함께 그림을 그리며 즐기는 웹 게임 Drawee입니다."
+
 }

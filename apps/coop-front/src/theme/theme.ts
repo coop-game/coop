@@ -194,7 +194,7 @@ const theme = extendTheme({
         }),
         // 5. We can add responsive variants
         sm: (props: StyleFunctionProps) => ({
-          bg: props.colorMode === "dark" ? "#D3504A" : "#e4e6eb",
+          bg: props.colorMode === "dark" ? "#564d4f" : "#C5DEDA",
           fontSize: "md",
         }),
       },
