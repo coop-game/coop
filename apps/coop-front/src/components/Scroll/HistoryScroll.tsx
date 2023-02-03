@@ -8,40 +8,7 @@ import {
   useInView,
 } from "framer-motion";
 import { useEffect, useRef } from "react";
-
-const BoxScroll = ({ idx, rootRef }: { idx: number; rootRef: any }) => {
-  const ref = useRef(null);
-  //   const { scrollYProgress } = useScroll({
-  //     target: ref,
-  //     offset: ["end end", "start start"],
-  //   });
-
-  const isInView = useInView(ref, {
-    root: rootRef,
-    margin: "-20% 0px -20% 0px",
-    amount: 1,
-  });
-
-  return (
-    <div
-      className="box_scroll"
-      ref={ref}
-      css={css`
-        scroll-margin-top: 75px;
-        scroll-margin-bottom: 75px;
-        width: 100%;
-        height: 100px;
-        scroll-snap-align: center;
-        /* flex: none; */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      `}
-    >
-      <motion.div animate={{ scale: 1 + (isInView ? 1 : 0) }}>{idx}</motion.div>
-    </div>
-  );
-};
+import ObserverBox from "./ObserverBox";
 
 const HistoryScroll = () => {
   const array = new Array(5).fill(null).map((_, idx) => idx);
@@ -67,7 +34,9 @@ const HistoryScroll = () => {
       `}
     >
       {array.map((v, idx) => {
-        return <BoxScroll key={idx} rootRef={rootRef} idx={idx}></BoxScroll>;
+        return (
+          <ObserverBox key={idx} rootRef={rootRef} idx={idx}></ObserverBox>
+        );
       })}
     </motion.div>
   );

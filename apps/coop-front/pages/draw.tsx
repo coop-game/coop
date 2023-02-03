@@ -5,15 +5,21 @@ import Layout from "@components/layout";
 import useHistoryBack from "@hooks/usehistoryBack";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import Head from "next/head";
 
 function DrawPage() {
   useHistoryBack();
   const Draw = dynamic(() => import("@components/Draw"), { ssr: false });
 
   return (
-    <Layout>
+    <>
+      <Head>
+        
+      </Head>
+      <Layout>
         <Draw></Draw>
-    </Layout>
+      </Layout>
+    </>
   );
 }
 export default DrawPage;
