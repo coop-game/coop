@@ -1,20 +1,18 @@
-import { Button, Flex, Input } from "@chakra-ui/react";
+import { Box, Button, Flex, Input, useColorMode } from "@chakra-ui/react";
 import { ChattingSelector, userSelector } from "@common/recoil/recoil.atom";
 import { doc, providerState } from "@common/yjsStore/userStore";
 import { css } from "@emotion/react";
 import useChattingUpdate from "@hooks/gameHooks/gameChatting/useChattingUpdate";
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
 const Chatting = () => {
   const { t } = useTranslation("common");
-  const router = useRouter();
   const chattingState = useRecoilValue(ChattingSelector);
   const { inputString, setInputString, messagesEndRef, onClickHandler } =
     useChattingUpdate();
-
+  const { colorMode } = useColorMode();
   const chattingInputPlaceholder = t("chatting.input.placeholder");
 
   const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -34,11 +32,13 @@ const Chatting = () => {
       `}
     >
       <Flex
+        backgroundColor={colorMode === "light" ? "#ece6cc" : "#a59a6b"}
         css={css`
           flex-direction: column;
           word-break: break-all;
           overflow-y: scroll;
           height: 100%;
+          border-radius: 8px;
         `}
       >
         {chattingState.map(({ nickname, message, id }, idx) => {
@@ -63,27 +63,30 @@ const Chatting = () => {
                   {nickname}
                 </div>
               )}
-              <div
+              {/*  f5e6a4*/}
+              <Box
+                backgroundColor={colorMode === "light" ? "#d4c78c" : "#131933"}
                 css={css`
-                  background: #00eaff;
                   font-size: 1.1rem;
                   padding: 5px;
                   border-radius: 8px;
                 `}
               >
                 {message}
-              </div>
+              </Box>
             </div>
           );
         })}
         <div ref={messagesEndRef}></div>
       </Flex>
-      <div
+      <Box
         css={css`
           display: flex;
           gap: 3px;
           padding: 3px;
         `}
+        borderRadius="8px"
+        backgroundColor={colorMode === "light" ? "#fffceb" : "#232323"}
       >
         <Input
           css={css`
@@ -97,7 +100,7 @@ const Chatting = () => {
           onKeyPress={onKeyPressHandler}
         />
         <Button onClick={onClickHandler}>{t("chatting.input")}</Button>
-      </div>
+      </Box>
     </Flex>
   );
 };

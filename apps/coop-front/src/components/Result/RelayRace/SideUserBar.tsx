@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, useColorMode } from "@chakra-ui/react";
 import {
   userProfilesSelector,
   yjsRelayRaceAnswerState,
@@ -9,12 +9,15 @@ import { CPGameRelayRaceAnswer } from "@types";
 import { useRecoilValue } from "recoil";
 import { motion } from "framer-motion";
 import { css } from "@emotion/react";
+import { useTranslation } from "next-i18next";
 
 const SideUserBar = ({ nowPageIndex }: { nowPageIndex: number }) => {
   const { userProfiles } = useRecoilValue(userProfilesSelector);
   const relayRaceState = useRecoilValue<CPGameRelayRaceAnswer[]>(
     yjsRelayRaceAnswerState
   );
+  const { colorMode } = useColorMode();
+  const { t } = useTranslation("common");
   return (
     <Flex
       w="100%"
@@ -26,7 +29,9 @@ const SideUserBar = ({ nowPageIndex }: { nowPageIndex: number }) => {
       flexDirection="column"
     >
       <Flex justifyContent={"center"} alignItems="center" w="100%" h="10%">
-        <Text fontSize={{ base: "1.5rem", lg: "2rem" }}>정답자</Text>
+        <Text fontSize={{ base: "1.5rem", lg: "2rem" }}>
+          {t("relay.race.result.answer.solver")}
+        </Text>
       </Flex>
       <Box w="100%" h="80%" maxH={{ base: "200px", lg: "400px" }}>
         <Flex
@@ -35,7 +40,7 @@ const SideUserBar = ({ nowPageIndex }: { nowPageIndex: number }) => {
           alignItems={"center"}
           flexDirection="column"
           position={"absolute"}
-          bgColor={"#E2E0A5"}
+          bgColor={colorMode === "light" ? "#E2E0A5" : "#b3b18a"}
           overflow="hidden"
           boxShadow={"dark-lg"}
           borderRadius="8px"

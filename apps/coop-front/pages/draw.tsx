@@ -4,17 +4,18 @@ import dynamic from "next/dynamic";
 import Layout from "@components/layout";
 import useHistoryBack from "@hooks/usehistoryBack";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 
 function DrawPage() {
   useHistoryBack();
   const Draw = dynamic(() => import("@components/Draw"), { ssr: false });
-
+  const { t } = useTranslation("common");
   return (
     <>
       <Head>
-        
+        <meta property="og:title" content={t("seo.draw.title")} />
       </Head>
       <Layout>
         <Draw></Draw>

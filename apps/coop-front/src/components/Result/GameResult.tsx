@@ -2,6 +2,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import { relayRaceTypeCheck } from "@common/lib/getGameType";
 import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
 import {
+  transitionPageAnimationState,
   userProfilesSelector,
   userSelector,
   yjsGameState,
@@ -29,6 +30,7 @@ const Result = () => {
   const [startTime, setStartTime] = useState<number>();
   const router = useRouter();
   const { t } = useTranslation("common");
+  const isAnimationEnd = useRecoilValue(transitionPageAnimationState);
 
   useProfileUpdate();
   useGameStateUpdate(roomId);
@@ -49,7 +51,6 @@ const Result = () => {
   };
 
   useEffect(() => {
-    console.log("나는 트리거야");
     if (!isPlay) {
       setIsPlay(true);
       setStartTime(getUtcTimeStamp());
@@ -72,7 +73,7 @@ const Result = () => {
             <Progress
               time={5000}
               callback={timerReset}
-              play={"running"}
+              play={isAnimationEnd ? "running" : "pause"}
               startTime={startTime}
             />
           )}
