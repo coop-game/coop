@@ -181,7 +181,11 @@ export default function Home({
               </Flex>
             </PostIt>
           </Flex>
-          <Flex w={{ base: "100%", md: "350px", xl: "600px" }} height="100%">
+          <Flex
+            display={{ base: "none", md: "flex" }}
+            w={{ base: "100%", md: "350px", xl: "600px" }}
+            height="100%"
+          >
             <PostIt>
               <div
                 css={css`

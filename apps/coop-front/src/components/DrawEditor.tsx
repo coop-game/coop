@@ -16,12 +16,14 @@ type drawEditorPropsType = {
   pageIndex: number;
   useOnChangePresence?: boolean;
   useSideBarDraw?: boolean;
+  CurrentQuestionNumber?: React.ReactNode;
 };
 
 const DrawEditor = ({
   pageIndex,
   useOnChangePresence = true,
   useSideBarDraw = true,
+  CurrentQuestionNumber,
 }: drawEditorPropsType) => {
   const userState = useRecoilValue(userSelector);
   const gameState = useRecoilValue(yjsGameState);
@@ -53,19 +55,14 @@ const DrawEditor = ({
             : {})}
           darkMode={colorMode !== "light"}
           // disableAssets={true}
-          {...(useSideBarDraw
-            ? {
-                components: {
+          components={
+            useSideBarDraw === true
+              ? {
                   Cursor: NewCursor as CursorComponent,
-                  CurrentQuestionNumber: <SideBarOfDraw />,
-                },
-              }
-            : {
-                components: {
-                  Cursor: NewCursor as CursorComponent,
-                  CurrentQuestionNumber: null,
-                },
-              })}
+                  CurrentQuestionNumber,
+                }
+              : {}
+          }
         />
       )}
     </>

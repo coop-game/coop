@@ -26,6 +26,9 @@ import AnswerModal from "./Modal/AnswerModal";
 import { CPGameDrawee } from "@types";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
 import DrawEditor from "./DrawEditor";
+import CanvasViewer from "./CanvasViewer";
+import CurrentQuestionNumber from "./CurrentQuestionNumber";
+import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
 
 function Draw() {
   const gameState = useRecoilValue(yjsGameState);
@@ -115,9 +118,6 @@ function Draw() {
         `}
       >
         <Box
-          // width={{ base: "500px", sm: "1000px" }}
-          // height={{ base: "500px", sm: "500px" }}
-
           css={css`
             position: relative;
             width: 100%;
@@ -133,7 +133,17 @@ function Draw() {
               questionTimeOut();
             }}
           ></Progress>
-          <DrawEditor pageIndex={gameState?.gamePagesIndex} />
+          {getSolverId() === providerState?.provider?.awareness?.clientID ? (
+            <CanvasViewer
+              pageIndex={gameState?.gamePagesIndex}
+              CurrentQuestionNumber={<SideBarOfDraw />}
+            />
+          ) : (
+            <DrawEditor
+              pageIndex={gameState?.gamePagesIndex}
+              CurrentQuestionNumber={<SideBarOfDraw />}
+            />
+          )}
           <Solver></Solver>
         </Box>
       </Flex>

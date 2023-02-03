@@ -3,8 +3,17 @@ import { doc, providerState } from "@common/yjsStore/userStore";
 import { TldrawApp, TDShape, TDBinding, Tldraw } from "@coop/draw";
 import { css } from "@emotion/react";
 import { useCallback, useEffect, useState } from "react";
+import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
 
-const CanvasViewer = ({ pageIndex }: { pageIndex: number }) => {
+type CanvasViewerPropsType = {
+  pageIndex: number;
+  CurrentQuestionNumber?: React.ReactNode;
+};
+
+const CanvasViewer = ({
+  pageIndex,
+  CurrentQuestionNumber,
+}: CanvasViewerPropsType) => {
   const [app, setApp] = useState<TldrawApp>();
   const yShapes = doc.getMap<TDShape>(`shapes ${pageIndex}`);
   const yBindings = doc.getMap<TDBinding>(`bindings ${pageIndex}`);
@@ -47,6 +56,7 @@ const CanvasViewer = ({ pageIndex }: { pageIndex: number }) => {
         readOnly={true}
         onMount={onMount}
         darkMode={colorMode !== "light"}
+        components={{ CurrentQuestionNumber }}
       />
     </div>
   );
