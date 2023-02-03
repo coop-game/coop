@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-import useIntersectionObserver from "@hooks/useInterseptionObserver";
 import { useInView, motion, useScroll, useMotionValue } from "framer-motion";
 import { RefObject, useEffect, useRef } from "react";
 
@@ -10,15 +9,14 @@ type ObserverBoxPropsType = {
 
 const ObserverBox = ({ idx, rootRef }: ObserverBoxPropsType) => {
   const ref = useRef(null);
-  const scale = useMotionValue<number>(1);
+  const defaultScale = 1;
+  const scale = useMotionValue<number>(defaultScale);
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            console.log(entry.intersectionRatio);
-            console.log(`${idx}??`, entry.intersectionRatio);
-            scale.set(1 + entry.intersectionRatio);
+            scale.set(defaultScale + entry.intersectionRatio);
           }
         });
       },
@@ -34,7 +32,7 @@ const ObserverBox = ({ idx, rootRef }: ObserverBoxPropsType) => {
     };
   }, []);
   return (
-    <div
+    <motion.div
       className="box_scroll"
       ref={ref}
       css={css`
@@ -43,14 +41,15 @@ const ObserverBox = ({ idx, rootRef }: ObserverBoxPropsType) => {
         width: 100%;
         height: 100px;
         scroll-snap-align: center;
-        /* flex: none; */
         display: flex;
         align-items: center;
         justify-content: center;
+        /* flex: none; */
+        font-size: 30px;
       `}
     >
       <motion.div style={{ scale }}>{idx}</motion.div>
-    </div>
+    </motion.div>
   );
 };
 export default ObserverBox;

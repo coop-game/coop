@@ -23,6 +23,7 @@ const Example = () => {
     <>
       <Logo color="darkviolet"></Logo>
       <HistoryScroll></HistoryScroll>
+      <ToggleTheme></ToggleTheme>
     </>
   );
 };

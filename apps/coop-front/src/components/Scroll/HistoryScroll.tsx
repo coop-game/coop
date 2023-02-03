@@ -18,19 +18,11 @@ const HistoryScroll = () => {
       ref={rootRef}
       css={css`
         overflow: hidden scroll;
-        outline: 1px dashed lightgray;
-
         width: 256px;
         height: 300px;
         flex-flow: column nowrap;
         scroll-snap-type: y mandatory;
-        & > div:nth-child(even) {
-          background: lightblue;
-        }
-
-        & > div:nth-child(odd) {
-          background: tomato;
-        }
+        border-radius: 20px;
       `}
     >
       {array.map((v, idx) => {
