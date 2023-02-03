@@ -218,7 +218,8 @@ export class TldrawApp extends StateManager<TDSnapshot> {
     [TDShapeType.Sticky]: new StickyTool(this),
   };
 
-  currentTool: BaseTool = this.tools.select;
+  // currentTool: BaseTool = this.tools.select;
+  currentTool: BaseTool = this.tools.draw;
 
   session?: TldrawSession;
 
@@ -1175,6 +1176,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
    * @param tool The tool to select, or "select".
    */
   selectTool = (type: TDToolType): this => {
+    console.log("selectTool 사용함?");
     if (this.readOnly || this.session) return this;
 
     this.isPointing = false; // reset pointer state, in case something weird happened
@@ -1231,7 +1233,8 @@ export class TldrawApp extends StateManager<TDSnapshot> {
   resetDocument = (): this => {
     if (this.session) return this;
     this.session = undefined;
-    this.currentTool = this.tools.select;
+    // this.currentTool = this.tools.select;
+    this.currentTool = this.tools.draw;
 
     const doc = TldrawApp.defaultDocument;
 
@@ -4408,7 +4411,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
   static defaultState: TDSnapshot = {
     settings: {
       isCadSelectMode: false,
-      isPenMode: false,
+      isPenMode: true,
       isDarkMode: false,
       isZoomSnap: false,
       isSnapping: false,
@@ -4417,8 +4420,8 @@ export class TldrawApp extends StateManager<TDSnapshot> {
       keepStyleMenuOpen: false,
       nudgeDistanceLarge: 16,
       nudgeDistanceSmall: 1,
-      showRotateHandles: true,
-      showBindingHandles: true,
+      showRotateHandles: false,
+      showBindingHandles: false,
       showCloneHandles: false,
       showGrid: false,
       language: "en",
@@ -4427,7 +4430,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
     },
     appState: {
       status: TDStatus.Idle,
-      activeTool: "select",
+      activeTool: TDShapeType.Draw,
       hoveredId: undefined,
       currentPageId: "page",
       currentStyle: defaultStyle,
