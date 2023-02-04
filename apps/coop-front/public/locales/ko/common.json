@@ -35,7 +35,8 @@
   "chatting.input": "채팅",
 
   "draw.modal.answer": "정답!",
-  "draw.modal.correct.answer": "이 정답을 맞췄습니다",
+  "draw.modal.correct.answer": "이 정답을 맞췄습니다.",
+  "draw.modal.wrong.answer": "이 정답을 맞추지 못하였습니다.",
   "draw.modal.next": "다음",
   "draw.modal.next.wait.owner": "방장을 기다리는 중입니다.",
 

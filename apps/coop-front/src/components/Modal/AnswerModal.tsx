@@ -12,8 +12,17 @@ type AnswerModalPropsType = {
   onClose: () => void;
 };
 
-type AnswerPropsType = { solverNickname: string; answer: string };
-const Answer = React.memo(({ solverNickname, answer }: AnswerPropsType) => {
+type AnswerPropsType = {
+  solverNickname: string;
+  answer: string;
+  isCorrect: boolean;
+};
+
+const AnswerResult = ({
+  solverNickname,
+  answer,
+  isCorrect,
+}: AnswerPropsType) => {
   const { t } = useTranslation("common");
 
   return (
@@ -28,40 +37,16 @@ const Answer = React.memo(({ solverNickname, answer }: AnswerPropsType) => {
       `}
     >
       <div>
-        <>
-          {t("draw.modal.answer")} : {answer}
-        </>
+        <>{`${t("draw.modal.answer")} : ${answer}`}</>
       </div>
-      <div>{`${solverNickname} ${t("draw.modal.correct.answer")}`}</div>
+      <div>{`${solverNickname} ${
+        isCorrect
+          ? t("draw.modal.correct.answer")
+          : t("draw.modal.wrong.answer")
+      }`}</div>
     </Flex>
   );
-});
-
-Answer.displayName = "Answer";
-
-const WrongAnswer = React.memo(
-  ({ solverNickname, answer }: AnswerPropsType) => {
-    const { t } = useTranslation("common");
-    return (
-      <Flex
-        fontSize={{ base: "2rem", md: "3rem", xl: "4rem" }}
-        css={css`
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        `}
-      >
-        <div>
-          <>{`${t("draw.modal.answer")} : ${answer}`}</>
-        </div>
-        <div>{`${solverNickname} 정답을 맞추지 못함`}</div>
-      </Flex>
-    );
-  }
-);
-WrongAnswer.displayName = "WrongAnswer";
+};
 
 const AnswerModal = (props: AnswerModalPropsType) => {
   const { getSolverId, getSovlerNicknameFromId } = useSolver();
@@ -79,14 +64,11 @@ const AnswerModal = (props: AnswerModalPropsType) => {
 
   return (
     <ChakraModal onCloseHandler={props.onClose}>
-      {isAnswerInArray() ? (
-        <Answer solverNickname={solverNickname} answer={answer} />
-      ) : (
-        <WrongAnswer
-          solverNickname={solverNickname}
-          answer={answer}
-        ></WrongAnswer>
-      )}
+      <AnswerResult
+        solverNickname={solverNickname}
+        answer={answer}
+        isCorrect={isAnswerInArray()}
+      ></AnswerResult>
     </ChakraModal>
   );
 };

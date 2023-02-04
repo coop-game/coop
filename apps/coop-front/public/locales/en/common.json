@@ -35,6 +35,7 @@
 
   "draw.modal.answer": "Answer!",
   "draw.modal.correct.answer": "got the answer right!",
+  "draw.modal.wrong.answer": "didn't get the answer",
   "draw.modal.next": "Next",
   "draw.modal.next.wait.owner": "Waiting Owner",
 
@@ -43,16 +44,16 @@
   "relay.race.wating.other.player": "Waiting for other player",
   "relay.race.answer.input.placeholder": "Enter the answer",
   "relay.race.answer.suggest": "Plase enter the answer",
-  "relay.race.answer.relay.input":"What do you think? plase enter the answer",
+  "relay.race.answer.relay.input": "What do you think? plase enter the answer",
   "relay.race.answer.submit": "Submit answer",
 
   "relay.race.draw.answer": "Draw the answer",
   "relay.race.draw.submit": "Submit picture",
-  "relay.race.draw.submit.answer" : "Submitted Response",
+  "relay.race.draw.submit.answer": "Submitted Response",
 
   "result": "result",
 
-  "relay.race.result.answer.solver":"Solver",
+  "relay.race.result.answer.solver": "Solver",
 
   "main.description.draw": "Draw!",
   "main.description.communicate": "Communicate!",
@@ -63,27 +64,27 @@
   "draw.correct.question.number": "Correct Question",
   "draw.question.number": "st Number",
 
-  "drawee.result.question.maker":"Question maker",
-  "drawee.result.question.solver":"Solver",
-  "drawee.result.question.answer":"Answer",
-  "drawee.result.question.success":"Solve success",
-  "drawee.result.question.failure":"Solve failure",
+  "drawee.result.question.maker": "Question maker",
+  "drawee.result.question.solver": "Solver",
+  "drawee.result.question.answer": "Answer",
+  "drawee.result.question.success": "Solve success",
+  "drawee.result.question.failure": "Solve failure",
   "tooltip.sound.up.hover": "Sounds play during gameplay.",
   "tooltip.sound.mute.hover": "Mute during gameplay.",
 
-  "seo.main.title":"Drawee",
-  "seo.main.description":"Drawee is a web game that everyone enjoys drawing together.",
-  "seo.main.opengraph.images.alt":"Drawee logo image",
+  "seo.main.title": "Drawee",
+  "seo.main.description": "Drawee is a web game that everyone enjoys drawing together.",
+  "seo.main.opengraph.images.alt": "Drawee logo image",
 
-  "seo.lobby.title":"Drawee lobby",
+  "seo.lobby.title": "Drawee lobby",
 
-  "seo.result.title":"Game Result",
+  "seo.result.title": "Game Result",
 
-  "seo.draw.title":"Draw!",
-  "seo.start.title":"Make question!",
-  "seo.error.title":"Oops! Error",
-  "seo.relay.race.title":"Relay Race",
+  "seo.draw.title": "Draw!",
+  "seo.start.title": "Make question!",
+  "seo.error.title": "Oops! Error",
+  "seo.relay.race.title": "Relay Race",
 
-  "seo.welcome.title":"Welcome to Drawee!",
-  "seo.welcome.description":"Drawee is a web game that everyone enjoys drawing together."
+  "seo.welcome.title": "Welcome to Drawee!",
+  "seo.welcome.description": "Drawee is a web game that everyone enjoys drawing together."
 }

@@ -12,6 +12,7 @@ import {
   Input,
   FormLabel,
   Spinner,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { userProfilesState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
@@ -42,6 +43,11 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
     console.log("열렸냐?", isOpen);
   }, [isOpen]);
 
+  const backgroundColor = useColorModeValue("#e2e0a5", "#ADAC9A");
+  const color = useColorModeValue("#504538", "#504538");
+  const buttonBackgroundColor = useColorModeValue("#96aca8da", "#564d4fda");
+  const buttonHoverBackgroundColor = useColorModeValue("#c5dedada", "#564d4f");
+  //#564D4F
   return (
     <>
       <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={() => {}}>
@@ -49,7 +55,8 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
         <ModalContent minH={"80vh"} minW={"80vw"}>
           <ModalHeader
             css={css`
-              background: #e2e0a5;
+              background: ${backgroundColor};
+              border-radius: 8px 8px 0px 0px;
             `}
           ></ModalHeader>
           <ModalBody
@@ -58,7 +65,8 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
               display: flex;
               justify-content: center;
               align-items: center;
-              background: #e2e0a5;
+              background: ${backgroundColor};
+              color: ${color};
             `}
           >
             {children}
@@ -67,21 +75,23 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
             css={css`
               display: flex;
               justify-content: center;
-              background: #e2e0a5;
+              background: ${backgroundColor};
+              border-radius: 0px 0px 8px 8px;
             `}
           >
             {isOwner && (
               <Button
+                boxShadow={"Base"}
+                width={"150px"}
+                height={"50px"}
+                borderRadius={"8px"}
+                p={"20px"}
+                fontSize={"1.5rem"}
+                fontWeight={"500"}
+                bg={buttonBackgroundColor}
                 css={css`
-                  width: 150px;
-                  height: 50px;
-                  padding: 20px;
-                  color: white;
-                  font-size: 1.5rem;
-                  font-weight: 500;
-                  background: #d3504a;
                   &:hover {
-                    background: #dd726d;
+                    background: ${buttonHoverBackgroundColor};
                   }
                 `}
                 onClick={onCloseAllHandler}
