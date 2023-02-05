@@ -1,13 +1,21 @@
 import { css } from "@emotion/react";
 import {
   Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
   Flex,
+  Heading,
+  SimpleGrid,
   Spinner,
   Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
+  Text,
+  useColorMode,
   useToast,
 } from "@chakra-ui/react";
 
@@ -66,6 +74,7 @@ export const LobbyMain = () => {
   const changeGameStateHandler = getChangeGameStateHandler<CPGameState>(roomId);
   const [_, setRelayraceAnswerState] = useRecoilState(yjsRelayRaceAnswerState);
   useProfileUpdate();
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     // 로비로 진입시 questionsState, yAgreeState 를 초기화함.
@@ -138,25 +147,114 @@ export const LobbyMain = () => {
         flexDirection={{ base: "column", md: "row" }}
         gap={{ base: "10px", md: "20px" }}
       >
-        <Flex w={{ base: "100%", md: "250px", xl: "350px" }}>
+        <Flex w={{ base: "100%", md: "250px", xl: "350px" }} h="100%">
           <Users userProfiles={userProfiles} />
         </Flex>
-        <Tabs isFitted variant={"enclosed"}>
-          <TabList mb="1em">
-            <Tab>게임</Tab>
-            <Tab>채팅</Tab>
-          </TabList>
-          <TabPanels>
-            <Flex
-              w={{ base: "100%", md: "600px", xl: "600px" }}
-              h={"100%"}
-              borderRadius={"15px"}
-              // border="3px solid gray"
-              boxShadow="dark-lg"
-              rounded="md"
-              flexDirection={"column"}
-            >
-              <TabPanel>
+        <Flex
+          w={{ base: "100%", md: "600px", xl: "600px" }}
+          h={{ base: "70%", sm: "80%", md: "100%" }}
+          borderRadius={"15px"}
+          // border="3px solid gray"
+          boxShadow="dark-lg"
+          rounded="md"
+          // flexDirection={"column"}
+        >
+          <Tabs
+            w="100%"
+            h="100%"
+            // display={"flex"}
+            // flexDirection="column"
+            size={"md"}
+            isFitted
+            variant={"enclosed"}
+            isLazy
+          >
+            <TabList>
+              <Tab>게임</Tab>
+              <Tab>채팅</Tab>
+            </TabList>
+            <TabPanels display={"flex"} w="100%" h="95%">
+              <TabPanel w="100%" h="100%">
+                {!isOwner && (
+                  <Flex
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    m={3}
+                    gap={"10px"}
+                    fontWeight={500}
+                    fontSize={"1.1rem"}
+                  >
+                    <Spinner color="red.500" size="md" />
+                  </Flex>
+                )}
+                {isOwner && (
+                  // <Flex
+                  //   css={css`
+                  //     flex-grow: 1;
+                  //     max-height: 45px;
+                  //     width: 100%;
+                  //     justify-content: space-between;
+                  //   `}
+                  // >
+                  //   <Button
+                  //     css={css`
+                  //       width: 50%;
+                  //     `}
+                  //     onClick={onClickInviteHandler}
+                  //   >
+                  //     {t("lobby.invite.button")}
+                  //   </Button>
+                  //   <Button
+                  //     css={css`
+                  //       width: 50%;
+                  //     `}
+                  //     onClick={() => onClickGameStartHandler("DRAWEE")}
+                  //   >
+                  //     {t("lobby.next.button")}1
+                  //   </Button>
+                  //   <Button
+                  //     css={css`
+                  //       width: 50%;
+                  //     `}
+                  //     onClick={() => onClickGameStartHandler("RELAY_RACE")}
+                  //   >
+                  //     {t("lobby.next.button")}2
+                  //   </Button>
+                  // </Flex>
+                  <SimpleGrid
+                    spacing={2}
+                    templateColumns="reqeat(auto-fill,minmax(250px,1fr))"
+                  >
+                    <Card align={"center"}>
+                      <CardHeader>Drawee</CardHeader>
+                      <CardBody>
+                        <Text>사람들과 함께 그림을 그리면서 즐기는 갓겜</Text>
+                      </CardBody>
+                      <CardFooter>
+                        <Button
+                          onClick={() => onClickGameStartHandler("DRAWEE")}
+                        >
+                          버튼임
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                    <Card align={"center"}>
+                      <CardHeader>이어달리기 모드</CardHeader>
+                      <CardBody>
+                        <Text>팀원이 어떤것을 표현하고자 했는지 맞춰보자</Text>
+                      </CardBody>
+                      <CardFooter>
+                        <Button
+                          onClick={() => onClickGameStartHandler("RELAY_RACE")}
+                        >
+                          버튼임
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  </SimpleGrid>
+                )}
+              </TabPanel>
+              <TabPanel display={"flex"} w="100%" h="100%">
                 <Flex
                   css={css`
                     flex-grow: 1;
@@ -166,57 +264,9 @@ export const LobbyMain = () => {
                   <Chatting></Chatting>
                 </Flex>
               </TabPanel>
-
-              {!isOwner && (
-                <Flex
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  m={3}
-                  gap={"10px"}
-                  fontWeight={500}
-                  fontSize={"1.1rem"}
-                >
-                  <Spinner color="red.500" size="md" />
-                </Flex>
-              )}
-              {isOwner && (
-                <Flex
-                  css={css`
-                    flex-grow: 1;
-                    max-height: 45px;
-                    width: 100%;
-                    justify-content: space-between;
-                  `}
-                >
-                  <Button
-                    css={css`
-                      width: 50%;
-                    `}
-                    onClick={onClickInviteHandler}
-                  >
-                    {t("lobby.invite.button")}
-                  </Button>
-                  <Button
-                    css={css`
-                      width: 50%;
-                    `}
-                    onClick={() => onClickGameStartHandler("DRAWEE")}
-                  >
-                    {t("lobby.next.button")}1
-                  </Button>
-                  <Button
-                    css={css`
-                      width: 50%;
-                    `}
-                    onClick={() => onClickGameStartHandler("RELAY_RACE")}
-                  >
-                    {t("lobby.next.button")}2
-                  </Button>
-                </Flex>
-              )}
-            </Flex>
-          </TabPanels>
-        </Tabs>
+            </TabPanels>
+          </Tabs>
+        </Flex>
       </Flex>
     </>
   );
