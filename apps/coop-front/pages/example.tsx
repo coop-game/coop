@@ -17,6 +17,7 @@ import Swoosh from "@components/Sound/Swoosh";
 import ToggleTheme from "@components/ToggleTheme";
 import { css } from "@emotion/react";
 import { useRecoilValue } from "recoil";
+import RelayRaceInformationAnimation from "@components/Animation/GameInformation/RelayRace";
 
 const Example = () => {
   return (
@@ -32,7 +33,7 @@ const Example = () => {
           history={new Array(10).fill(null).map((_, idx) => String(idx))}
         ></HistoryScroll>
       </div>
-      <ToggleTheme></ToggleTheme>
+      <RelayRaceInformationAnimation />;<ToggleTheme></ToggleTheme>
     </>
   );
 };
