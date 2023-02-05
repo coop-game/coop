@@ -48,7 +48,7 @@ import DraweeLogo from "@asset/images/DraweeLogo.png";
 import Users from "@components/Users";
 import Chatting from "./Chat/Chatting";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   CPGameDrawee,
   CPGameRelayRace,
@@ -57,6 +57,9 @@ import {
 } from "@types";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import ShakeAnimation from "./Animation/ShakeAnimation";
 
 export const LobbyMain = () => {
   const { t } = useTranslation("common");
@@ -76,6 +79,7 @@ export const LobbyMain = () => {
   const [_, setRelayraceAnswerState] = useRecoilState(yjsRelayRaceAnswerState);
   useProfileUpdate();
   const { colorMode } = useColorMode();
+  const [selectedTab, setSelectedTab] = useState(0);
 
   useEffect(() => {
     // 로비로 진입시 questionsState, yAgreeState 를 초기화함.
@@ -137,6 +141,11 @@ export const LobbyMain = () => {
     }
   };
 
+  const imageSrcArray = [
+    { src: "/images/svg/game-control.svg", alt: "setting" },
+    { src: "/images/svg/message.svg", alt: "message" },
+  ];
+
   return (
     <>
       <Flex
@@ -168,11 +177,26 @@ export const LobbyMain = () => {
             size={"md"}
             isFitted
             variant={"enclosed"}
+            colorScheme={"white"}
             isLazy
+            onChange={(idx) => {
+              setSelectedTab(idx);
+            }}
           >
             <TabList>
-              <Tab>게임</Tab>
-              <Tab>채팅</Tab>
+              {imageSrcArray.map(({ src, alt }, idx) => {
+                return (
+                  <Tab key={src} _selected={{ bg: "#C5DEDA" }}>
+                    {selectedTab === idx ? (
+                      <ShakeAnimation>
+                        <Image width={30} height={30} src={src} alt={alt} />
+                      </ShakeAnimation>
+                    ) : (
+                      <Image width={30} height={30} src={src} alt={alt} />
+                    )}
+                  </Tab>
+                );
+              })}
             </TabList>
             <TabPanels display={"flex"} w="100%" h="95%">
               <TabPanel w="100%" h="100%">
