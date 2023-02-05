@@ -17,6 +17,7 @@ const AvatarImage = ({
 }) => {
   return (
     <Flex
+      className="avatar_image"
       flexGrow={1}
       flexDirection="column"
       justifyContent={"center"}

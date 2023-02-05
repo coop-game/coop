@@ -2,7 +2,7 @@ import { Box, Flex, useColorModeValue } from "@chakra-ui/react";
 import { yjsGameState, yjsQuestionsState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
 import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useRecoilValue } from "recoil";
 import HistoryScroll from "./Scroll/HistoryScroll";
 

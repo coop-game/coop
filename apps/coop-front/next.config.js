@@ -27,7 +27,7 @@ const nextConfig = {
     ],
   },
   i18n,
-  trailingSlash: true,
+  // trailingSlash: true,
   // reactStrictMode: false,
   swcMinify: true,
 };
@@ -45,15 +45,15 @@ const nextConfig = {
 // module.exports = withBundleAnalyzer(withPWA(nextConfig));
 module.exports = withPWA({
   ...nextConfig,
-  webpack(config, options) {
-    config.module.rules.push({
-      test: /\.(mp3)$/,
-      type: "asset/resource",
-      generator: {
-        filename: "static/chunks/[path][name].[hash][ext]",
-      },
-    });
+  // webpack(config, options) {
+  //   config.module.rules.push({
+  //     test: /\.(mp3)$/,
+  //     type: "asset/resource",
+  //     generator: {
+  //       filename: "static/chunks/[path][name].[hash][ext]",
+  //     },
+  //   });
 
-    return config;
-  },
+  //   return config;
+  // },
 });

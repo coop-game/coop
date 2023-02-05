@@ -2,7 +2,7 @@ import { Button, Tooltip, useColorModeValue } from "@chakra-ui/react";
 import { soundVolumeState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
 import Image from "next/image";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useRecoilState } from "recoil";
 const MuteButton = () => {
   const [soundVolume, setSoundVolume] = useRecoilState(soundVolumeState);
