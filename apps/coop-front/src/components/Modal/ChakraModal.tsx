@@ -39,10 +39,6 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
     onCloseHandler();
   };
 
-  useEffect(() => {
-    console.log("열렸냐?", isOpen);
-  }, [isOpen]);
-
   const backgroundColor = useColorModeValue("#e2e0a5", "#ADAC9A");
   const color = useColorModeValue("#504538", "#504538");
   const buttonBackgroundColor = useColorModeValue("#96aca8da", "#564d4fda");

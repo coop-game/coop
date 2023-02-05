@@ -8,6 +8,7 @@ import { useRecoilValue } from "recoil";
 import { useTranslation } from "next-i18next";
 import ScrollBottomButton from "../Scroll/ScrollButtonButton";
 import ChatLine from "./ChatLine";
+import Image from "next/image";
 
 const Chatting = () => {
   const { t } = useTranslation("common");
@@ -78,6 +79,7 @@ const Chatting = () => {
         <Input
           css={css`
             flex-grow: 1;
+            height: 40px;
           `}
           placeholder={chattingInputPlaceholder}
           value={inputString}
@@ -86,7 +88,19 @@ const Chatting = () => {
           }}
           onKeyPress={onKeyPressHandler}
         />
-        <Button onClick={onClickHandler}>{t("chatting.input")}</Button>
+        <Button
+          onClick={onClickHandler}
+          css={css`
+            height: 40px;
+          `}
+        >
+          <Image
+            width={35}
+            height={35}
+            src={"/images/svg/send.svg"}
+            alt={"send icon"}
+          />
+        </Button>
       </Box>
     </Flex>
   );

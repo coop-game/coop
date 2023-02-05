@@ -19,11 +19,11 @@
   "lobby.select.by.owner": "Selecting from Onwer",
   "lobby.toast.invite.title": "Invite",
   "lobby.toast.invite.description": "Copy invite url",
-    "lobby.drawee.information":"A game to enjoy while drawing with a group of people",
-  "lobby.relay.race.information":"A game in which team members continuously guess what they wanted to express",
-  "lobby.relay.race.game.title":"Relay-Race mode",
+  "lobby.drawee.information": "A game to enjoy while drawing with a group of people",
+  "lobby.relay.race.information": "A game in which team members continuously guess what they wanted to express",
+  "lobby.relay.race.game.title": "Relay-Race mode",
 
-  "start.input.answer": "Input answer",
+  "start.input.answer": "Input answer! (max length 20)",
   "start.input.checkbox.submit": "Answer Submit",
   "start.push.question": "Drawing answer!",
 

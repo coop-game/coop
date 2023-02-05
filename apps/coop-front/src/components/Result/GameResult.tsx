@@ -37,7 +37,6 @@ const Result = () => {
   useSyncPageFromGameState();
   const [nowPageIndex, setNowPageIndex] = useState<number>(0);
   const timerReset = () => {
-    console.log("타이머 끝");
     if (isPlay && nowPageIndex + 1 <= gameState.gamePagesIndex) {
       setNowPageIndex((prev) => {
         return prev + 1;

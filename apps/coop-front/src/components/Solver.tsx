@@ -22,6 +22,7 @@ import { useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import AnswerHistory from "./AnswerHistory";
+import Image from "next/image";
 
 const Solver = () => {
   const [answer, setAnswer] = useState("");

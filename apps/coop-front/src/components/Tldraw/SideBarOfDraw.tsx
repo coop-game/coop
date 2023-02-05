@@ -21,7 +21,7 @@ const SideBarOfDraw = () => {
 
   return (
     <Box
-      shadow={"Base"}
+      boxShadow={"base"}
       css={css`
         margin: 5px;
         width: 100%;

@@ -27,7 +27,10 @@ import Chatting from "./Chat/Chatting";
 
 const CreateQuestion = () => {
   const { provider } = providerState;
-  const { input, setInput, onChangeHandler } = useInput("");
+  const callbackInput = (value: string) => {
+    return value.slice(0, 20);
+  };
+  const { input, setInput, onChangeHandler } = useInput("", callbackInput);
   const agreeList = useRecoilValue(yjsAgreeState);
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const { t } = useTranslation("common");
