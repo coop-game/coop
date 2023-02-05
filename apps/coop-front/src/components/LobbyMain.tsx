@@ -44,7 +44,6 @@ import {
   yRelayRaceAnswerState,
 } from "@common/yjsStore/userStore";
 
-import DraweeLogo from "@asset/images/DraweeLogo.png";
 import Users from "@components/Users";
 import Chatting from "./Chat/Chatting";
 
@@ -60,6 +59,9 @@ import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import ShakeAnimation from "./Animation/ShakeAnimation";
+import DraweeInformationAnimation from "./Animation/GameInformation/Drawee";
+import RelayRaceInformationAnimation from "./Animation/GameInformation/RelayRace";
+import LinkSVG from "@asset/LinkSVG";
 
 export const LobbyMain = () => {
   const { t } = useTranslation("common");
@@ -200,121 +202,69 @@ export const LobbyMain = () => {
             </TabList>
             <TabPanels display={"flex"} w="100%" h="95%">
               <TabPanel w="100%" h="100%">
-                {!isOwner && (
-                  <Flex
-                    justifyContent={"center"}
-                    alignItems={"center"}
-                    m={3}
-                    gap={"10px"}
-                    fontWeight={500}
-                    fontSize={"1.1rem"}
-                  >
-                    <Spinner color="red.500" size="md" />
-                  </Flex>
-                )}
-                {isOwner && (
-                  // <Flex
-                  //   css={css`
-                  //     flex-grow: 1;
-                  //     max-height: 45px;
-                  //     width: 100%;
-                  //     justify-content: space-between;
-                  //   `}
-                  // >
-                  //   <Button
-                  //     css={css`
-                  //       width: 50%;
-                  //     `}
-                  //     onClick={onClickInviteHandler}
-                  //   >
-                  //     {t("lobby.invite.button")}
-                  //   </Button>
-                  //   <Button
-                  //     css={css`
-                  //       width: 50%;
-                  //     `}
-                  //     onClick={() => onClickGameStartHandler("DRAWEE")}
-                  //   >
-                  //     {t("lobby.next.button")}1
-                  //   </Button>
-                  //   <Button
-                  //     css={css`
-                  //       width: 50%;
-                  //     `}
-                  //     onClick={() => onClickGameStartHandler("RELAY_RACE")}
-                  //   >
-                  //     {t("lobby.next.button")}2
-                  //   </Button>
-                  // </Flex>
-                  <SimpleGrid
-                    paddingTop={"3%"}
-                    paddingBottom={"3%"}
-                    w="100%"
-                    h="100%"
-                    overflowY="scroll"
-                    spacing={2}
-                    templateColumns="reqeat(auto-fill,minmax(250px,1fr))"
-                  >
-                    <Box w={{ sm: "100%", md: "250px" }}>
-                      <Button
-                        maxW="400px"
-                        w={{ sm: "100%", md: "225px" }}
-                        h="50px"
-                        onClick={onClickInviteHandler}
-                      >
-                        <svg
-                          fill="#000000"
-                          viewBox="0 0 80 16"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                          <g
-                            id="SVGRepo_tracerCarrier"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          ></g>
-                          <g id="SVGRepo_iconCarrier">
-                            <path d="M8 6.1a.31.31 0 0 0-.45.32 2.47 2.47 0 0 0 .51 1.22l.15.13A3 3 0 0 1 9.08 10a3.63 3.63 0 0 1-3.55 3.44 3 3 0 0 1-2.11-.85 3 3 0 0 1-.85-2.22A3.55 3.55 0 0 1 3.63 8a3.66 3.66 0 0 1 1.5-.91A5.19 5.19 0 0 1 5 6v-.16a4.84 4.84 0 0 0-2.31 1.3 4.5 4.5 0 0 0-.2 6.37 4.16 4.16 0 0 0 3 1.22 4.79 4.79 0 0 0 3.38-1.42 4.52 4.52 0 0 0 .21-6.38A4.16 4.16 0 0 0 8 6.1z"></path>
-                            <path d="M13.46 2.54a4.16 4.16 0 0 0-3-1.22 4.79 4.79 0 0 0-3.37 1.42 4.52 4.52 0 0 0-.21 6.38A4.21 4.21 0 0 0 8 9.9a.31.31 0 0 0 .45-.31 2.41 2.41 0 0 0-.52-1.23l-.15-.13A3 3 0 0 1 6.92 6a3.63 3.63 0 0 1 3.55-3.44 3 3 0 0 1 2.11.85 3 3 0 0 1 .85 2.22A3.55 3.55 0 0 1 12.37 8a3.66 3.66 0 0 1-1.5.91 5.19 5.19 0 0 1 .13 1.14v.16a4.84 4.84 0 0 0 2.31-1.3 4.5 4.5 0 0 0 .15-6.37z"></path>
-                          </g>
-                        </svg>
-                        {t("lobby.invite.button")}
-                      </Button>
-                    </Box>
-                    <Card align={"center"}>
-                      <CardHeader>
-                        <Text fontWeight={"extrabold"} fontSize={"2xl"}>
-                          Drawee
-                        </Text>
-                      </CardHeader>
-                      <CardBody>
-                        <Text>{t("lobby.drawee.information")}</Text>
-                      </CardBody>
-                      <CardFooter>
+                <SimpleGrid
+                  paddingTop={"3%"}
+                  paddingBottom={"3%"}
+                  w="100%"
+                  h="100%"
+                  overflowY="scroll"
+                  spacing={2}
+                  templateColumns="reqeat(auto-fill,minmax(250px,1fr))"
+                >
+                  <Box w={{ sm: "100%", md: "250px" }}>
+                    <Button
+                      maxW="400px"
+                      w={{ sm: "100%", md: "225px" }}
+                      h="50px"
+                      onClick={onClickInviteHandler}
+                    >
+                      <LinkSVG />
+                      {t("lobby.invite.button")}
+                    </Button>
+                  </Box>
+                  <Card align={"center"}>
+                    <CardHeader>
+                      <Text fontWeight={"extrabold"} fontSize={"2xl"}>
+                        Drawee
+                      </Text>
+                    </CardHeader>
+                    <CardBody>
+                      <Box w="100%" h="90%">
+                        <DraweeInformationAnimation />
+                      </Box>
+                      <Text>{t("lobby.drawee.information")}</Text>
+                    </CardBody>
+                    <CardFooter>
+                      {isOwner && (
                         <Button
                           onClick={() => onClickGameStartHandler("DRAWEE")}
                         >
                           {t("lobby.next.button")}
                         </Button>
-                      </CardFooter>
-                    </Card>
-                    <Card align={"center"}>
-                      <CardHeader fontWeight={"extrabold"} fontSize={"2xl"}>
-                        {t("lobby.relay.race.game.title")}
-                      </CardHeader>
-                      <CardBody>
-                        <Text>{t("lobby.relay.race.information")}</Text>
-                      </CardBody>
-                      <CardFooter>
+                      )}
+                    </CardFooter>
+                  </Card>
+                  <Card align={"center"}>
+                    <CardHeader fontWeight={"extrabold"} fontSize={"2xl"}>
+                      {t("lobby.relay.race.game.title")}
+                    </CardHeader>
+                    <CardBody>
+                      <Box w="100%" h="90%">
+                        <RelayRaceInformationAnimation />
+                      </Box>
+                      <Text>{t("lobby.relay.race.information")}</Text>
+                    </CardBody>
+                    <CardFooter>
+                      {isOwner && (
                         <Button
                           onClick={() => onClickGameStartHandler("RELAY_RACE")}
                         >
                           {t("lobby.next.button")}
                         </Button>
-                      </CardFooter>
-                    </Card>
-                  </SimpleGrid>
-                )}
+                      )}
+                    </CardFooter>
+                  </Card>
+                </SimpleGrid>
               </TabPanel>
               <TabPanel display={"flex"} w="100%" h="100%">
                 <Flex
