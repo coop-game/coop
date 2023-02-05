@@ -10,7 +10,7 @@ import { css } from "@emotion/react";
 import { useMultiplayerState } from "@hooks/useMultiplayerState";
 import { useRecoilValue } from "recoil";
 import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
-import NewCursor, { CursorComponent } from "./NewCursor";
+import NewCursor, { CursorComponent } from "./Tldraw/NewCursor";
 
 type drawEditorPropsType = {
   pageIndex: number;

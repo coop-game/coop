@@ -1,5 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
-import Chatting from "@components/Chatting";
+import Chatting from "@components/Chat/Chatting";
 import Progress from "@components/Progress";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useRouter } from "next/router";

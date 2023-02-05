@@ -9,6 +9,7 @@ import { useTranslation } from "next-i18next";
 const CreateQuestion = dynamic(import("@components/CreateQuestion"), {
   ssr: false,
 });
+
 const Start = () => {
   useHistoryBack();
   const { t } = useTranslation("common");

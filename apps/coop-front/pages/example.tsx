@@ -7,7 +7,7 @@ import TalkingHumans from "@components/Animation/DrawingSvg/TalkingHumans";
 import Logo from "@components/Animation/Logo/Logo";
 import Rollinghexagone from "@components/Animation/RollingHexagone";
 import RollingSelect from "@components/Animation/RollingSelect";
-import CanvasViewer from "@components/CanvasViewer";
+import CanvasViewer from "@components/Tldraw/CanvasViewer";
 import Description from "@components/Description/Description";
 import PostIt from "@components/layout/PostIt/PostIt";
 import Progress from "@components/Progress";
@@ -22,7 +22,16 @@ const Example = () => {
   return (
     <>
       <Logo color="darkviolet"></Logo>
-      <HistoryScroll></HistoryScroll>
+      <div
+        css={css`
+          width: 100px;
+          height: 200px;
+        `}
+      >
+        <HistoryScroll
+          history={new Array(10).fill(null).map((_, idx) => String(idx))}
+        ></HistoryScroll>
+      </div>
       <ToggleTheme></ToggleTheme>
     </>
   );

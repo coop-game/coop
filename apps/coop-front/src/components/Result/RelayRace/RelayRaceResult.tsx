@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { yjsRelayRaceAnswerState } from "@common/recoil/recoil.atom";
-import CanvasViewer from "@components/CanvasViewer";
+import CanvasViewer from "@components/Tldraw/CanvasViewer";
 import { CPGameRelayRaceAnswer } from "@types";
 import { useRecoilValue } from "recoil";
 import SideUserBar from "./SideUserBar";

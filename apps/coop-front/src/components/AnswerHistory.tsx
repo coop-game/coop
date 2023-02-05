@@ -4,12 +4,13 @@ import { css } from "@emotion/react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useRecoilValue } from "recoil";
+import HistoryScroll from "./Scroll/HistoryScroll";
 
 const AnswerHistory = () => {
   const { t } = useTranslation("common");
   const gameState = useRecoilValue(yjsGameState);
   const questionsState = useRecoilValue(yjsQuestionsState);
-  const bg = useColorModeValue("#ffffff", "#000000");
+  const bg = useColorModeValue("#ffffffd2", "#000000");
 
   return (
     <Flex
@@ -25,10 +26,9 @@ const AnswerHistory = () => {
           padding: 5px;
           justify-content: center;
           align-items: center;
-          /* overflow-x: scroll; */
         `}
       >
-        {t("draw.answer.history")}
+        {/* {t("draw.answer.history")} */}
       </Flex>
       <Flex
         shadow={"base"}
@@ -37,7 +37,7 @@ const AnswerHistory = () => {
           /* background: #ffffff84;
           border-radius: 15px; */
           align-items: center;
-          overflow: scroll hidden;
+          /* overflow: scroll hidden; */
           position: relative;
           margin-left: 10px;
           flex-grow: 1;
@@ -48,41 +48,19 @@ const AnswerHistory = () => {
             css={css`
               gap: 10px;
               background: #ffffff84;
-              border-radius: 15px;
+              border-radius: 8px;
               /* padding: 5px; */
               flex-direction: row-reverse;
               justify-content: center;
-              position: absolute;
+              /* position: absolute; */
               user-select: none;
+              width: 100%;
             `}
           >
-            {questionsState[gameState.gamePagesIndex]?.inputAnswer.map(
-              (v, idx) => {
-                return (
-                  <motion.div
-                    animate={{
-                      x: [-100, 0],
-                      opacity: [0.8, 1],
-                    }}
-                    transition={{
-                      type: "spring",
-                      // duration: 1,
-                      // damping: 5,
-                      // stiffness: 100,
-                      stiffness: 50,
-                      velocity: 10,
-                    }}
-                    key={idx}
-                    css={css`
-                      padding: 5px;
-                      border-radius: 15px;
-                      background: ${bg};
-                    `}
-                  >
-                    {v}
-                  </motion.div>
-                );
-              }
+            {questionsState[gameState.gamePagesIndex]?.inputAnswer && (
+              <HistoryScroll
+                history={questionsState[gameState.gamePagesIndex]?.inputAnswer}
+              ></HistoryScroll>
             )}
           </Flex>
         )}

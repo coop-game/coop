@@ -25,6 +25,7 @@ import AnswerHistory from "./AnswerHistory";
 
 const Solver = () => {
   const [answer, setAnswer] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [isError, setIsError] = useState(true);
 
   const { t } = useTranslation("common");
@@ -68,6 +69,7 @@ const Solver = () => {
       >
         {t("draw.solver")} : {getSovlerNicknameFromId(getSolverId())}
       </Box>
+      <AnswerHistory />
       {getSolverId() === providerState?.provider?.awareness?.clientID && (
         <FormControl isInvalid={isError}>
           <FormLabel>{t("draw.answer")}</FormLabel>
@@ -88,8 +90,8 @@ const Solver = () => {
                 }
               }}
               onChange={(e) => {
-                setAnswer(e.target.value);
-                setIsError(e.target.value === "");
+                setAnswer(e.target.value.slice(0, 20));
+                setIsError(e.target.value === "" || e.target.value.length > 20);
               }}
             />
             <Button height={"45px"} onClick={answerChangeHandler}>
@@ -109,7 +111,6 @@ const Solver = () => {
           </Flex>
         </FormControl>
       )}
-      <AnswerHistory />
     </Flex>
   );
 };

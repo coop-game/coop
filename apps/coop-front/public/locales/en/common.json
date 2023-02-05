@@ -21,6 +21,7 @@
   "lobby.toast.invite.description": "Copy invite url",
 
   "start.input.answer": "Input answer",
+  "start.input.checkbox.submit": "Answer Submit",
   "start.push.question": "Drawing answer!",
 
   "draw.answer": "Answer!!",
@@ -29,6 +30,7 @@
   "draw.input.in.answer": "Is this really correct?..",
   "draw.input.required.answer": "input answer required",
   "draw.answer.history": "Answer history",
+  "draw.answer.history.scroll.down": "history paused due to scroll",
 
   "chatting.input.placeholder": "Input your chat",
   "chatting.input": "Chat",

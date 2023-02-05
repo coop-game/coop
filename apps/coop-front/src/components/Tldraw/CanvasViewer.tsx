@@ -3,7 +3,7 @@ import { doc, providerState } from "@common/yjsStore/userStore";
 import { TldrawApp, TDShape, TDBinding, Tldraw } from "@coop/draw";
 import { css } from "@emotion/react";
 import { useCallback, useEffect, useState } from "react";
-import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
+import SideBarOfDraw from "../layout/SideBar/SideBarOfDraw";
 
 type CanvasViewerPropsType = {
   pageIndex: number;
