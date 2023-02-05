@@ -18,6 +18,7 @@ const HistoryScroll = ({ history }: { history: string[] }) => {
       css={css`
         position: relative;
         width: 100%;
+        height: 100px;
       `}
     >
       <div
@@ -26,10 +27,11 @@ const HistoryScroll = ({ history }: { history: string[] }) => {
         css={css`
           overflow: hidden scroll;
           width: 100%;
-          height: 60px;
+          height: 100%;
           flex-flow: column nowrap;
           scroll-snap-type: y mandatory;
           border-radius: 8px;
+          position: relative;
         `}
       >
         {history.map((v, idx) => {
@@ -37,10 +39,20 @@ const HistoryScroll = ({ history }: { history: string[] }) => {
         })}
         <ObserverBox rootRef={rootRef} value={""} />
       </div>
-      <ScrollBottomButton
-        rootRef={rootRef}
-        input={history}
-      ></ScrollBottomButton>
+      <div
+        css={css`
+          position: absolute;
+          width: 200px;
+          left: 50%;
+          bottom: 0px;
+          transform: translateX(-50%);
+        `}
+      >
+        <ScrollBottomButton
+          rootRef={rootRef}
+          input={history}
+        ></ScrollBottomButton>
+      </div>
     </div>
   );
 };

@@ -10,30 +10,36 @@ const AnswerHistory = () => {
   const { t } = useTranslation("common");
   const gameState = useRecoilValue(yjsGameState);
   const questionsState = useRecoilValue(yjsQuestionsState);
-  const bg = useColorModeValue("#ffffffd2", "#000000");
+  const bg = useColorModeValue("#ffffff", "#000000");
 
   return (
     <Flex
       css={css`
         width: 100%;
+        height: 100px;
+        position: relative;
       `}
     >
       <Flex
         bg={bg}
         shadow={"base"}
         css={css`
-          border-radius: 15px;
+          position: absolute;
+          top: 10px;
+          left: 20px;
+          border-radius: 8px;
           padding: 5px;
           justify-content: center;
           align-items: center;
+          z-index: 10;
         `}
       >
-        {/* {t("draw.answer.history")} */}
+        {t("draw.answer.history")}
       </Flex>
       <Flex
         shadow={"base"}
         css={css`
-          height: 50px;
+          height: 100%;
           /* background: #ffffff84;
           border-radius: 15px; */
           align-items: center;
@@ -55,6 +61,7 @@ const AnswerHistory = () => {
               /* position: absolute; */
               user-select: none;
               width: 100%;
+              height: 100%;
             `}
           >
             {questionsState[gameState.gamePagesIndex]?.inputAnswer && (

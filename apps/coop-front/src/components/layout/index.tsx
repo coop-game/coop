@@ -23,7 +23,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         position="relative"
         css={css`
           @media screen and (max-width: 600px) {
-            padding: 5px;
+            padding: 0px 5px 0px 5px;
           }
           max-width: 1200px;
         `}
@@ -36,10 +36,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             width: 100%;
             height: 130px;
             @media screen and (max-width: 600px) {
-              display: none;
+              /* display: none; */
+              height: 70px;
+              transform: scale(0.5);
             }
-            /* transform-origin: 2% 0%;
-            transform: scale(0.5); */
+            /* transform-origin: 2% 0%; */
           `}
         >
           {/* <Logo color={"#711480b1"}></Logo> */}
@@ -50,6 +51,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             position: absolute;
             right: 30px;
             top: 30px;
+            @media screen and (max-width: 600px) {
+              /* display: none; */
+              top: 20px;
+              transform: scale(0.8);
+            }
           `}
         >
           <MuteButton></MuteButton>
