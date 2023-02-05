@@ -43,7 +43,6 @@ const nextConfig = {
 // });
 
 // module.exports = withBundleAnalyzer(withPWA(nextConfig));
-
 module.exports = withPWA({
   ...nextConfig,
   webpack(config, options) {
