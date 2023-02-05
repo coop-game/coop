@@ -12,13 +12,16 @@ const Timer = (props: TimerPropsType) => {
   const { colorScheme, percent } = useTimer(props);
   return (
     <Progress
+      borderRadius={"15px"}
+      border={"1px solid white"}
+      background={"#ffffff85"}
       sx={{
         "& > div:first-type": {
           transitionProperty: "width",
         },
       }}
       colorScheme={colorScheme}
-      height="32px"
+      height="20px"
       value={percent}
     />
   );

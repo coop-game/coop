@@ -4,7 +4,7 @@ import {
   yjsQuestionsState,
   yjsRelayRaceAnswerState,
 } from "@common/recoil/recoil.atom";
-import CanvasViewer from "@components/CanvasViewer";
+import CanvasViewer from "@components/Tldraw/CanvasViewer";
 import { CPGameQuestions, CPGameRelayRaceAnswer } from "@types";
 import { useRecoilValue } from "recoil";
 import { useState, useEffect } from "react";

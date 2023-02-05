@@ -22,6 +22,7 @@
   "lobby.toast.invite.description": "초대주소가 복사되었습니다.",
 
   "start.input.answer": "정답을 입력하세요",
+  "start.input.checkbox.submit": "정답 제출",
   "start.push.question": "정답을 그려라!",
 
   "draw.answer": "정답!",
@@ -30,6 +31,7 @@
   "draw.input.in.answer": "이게 ... 정답일까?",
   "draw.input.required.answer": "정답을 입력하세요",
   "draw.answer.history": "정답 히스토리",
+  "draw.answer.history.scroll.down": "맨 아래로 내리기",
 
   "chatting.input.placeholder": "채팅을 입력하세요",
   "chatting.input": "채팅",
@@ -45,7 +47,7 @@
   "relay.race.wating.other.player": "다른 플레이어를 기다리는 중입니다.",
   "relay.race.answer.input.placeholder": "정답 입력하기",
   "relay.race.answer.suggest": "당신이 생각한 것을 입력해주세요",
-  "relay.race.answer.relay.input":"그림을 보고 생각나는 것을 입력해주세요",
+  "relay.race.answer.relay.input": "그림을 보고 생각나는 것을 입력해주세요",
   "relay.race.answer.submit": "정답 제출하기",
 
   "relay.race.draw.answer": "다음 주제를 그려주세요!",
@@ -53,8 +55,8 @@
 
   "result": "결과",
 
-  "relay.race.draw.submit.answer" : "제출한 답변",
-  "relay.race.result.answer.solver":"정답자",
+  "relay.race.draw.submit.answer": "제출한 답변",
+  "relay.race.result.answer.solver": "정답자",
 
   "main.description.draw": "그린다!",
   "main.description.communicate": "소통한다!",
@@ -65,28 +67,27 @@
   "draw.correct.question.number": "맞춘 문제수",
   "draw.question.number": "번째 문제",
 
-  "drawee.result.question.maker":"출제자",
-  "drawee.result.question.solver":"맞추는 사람",
-  "drawee.result.question.answer":"정답",
-  "drawee.result.question.success":"풀이성공",
-  "drawee.result.question.failure":"풀이실패",
+  "drawee.result.question.maker": "출제자",
+  "drawee.result.question.solver": "맞추는 사람",
+  "drawee.result.question.answer": "정답",
+  "drawee.result.question.success": "풀이성공",
+  "drawee.result.question.failure": "풀이실패",
   "tooltip.sound.up.hover": "게임 플레이 도중 소리가 재생됩니다.",
   "tooltip.sound.mute.hover": "게임 플레이 도중 음소거 됩니다.",
 
-  "seo.main.title":"Drawee",
-  "seo.main.description":"모두 다같이 함께 그림을 그리며 즐기는 웹 게임 Drawee입니다.",
-  "seo.main.opengraph.images.alt":"Drawee 로고 이미지",
+  "seo.main.title": "Drawee",
+  "seo.main.description": "모두 다같이 함께 그림을 그리며 즐기는 웹 게임 Drawee입니다.",
+  "seo.main.opengraph.images.alt": "Drawee 로고 이미지",
 
-  "seo.lobby.title":"Drawee 로비",
+  "seo.lobby.title": "Drawee 로비",
 
-  "seo.result.title":"게임 결과",
+  "seo.result.title": "게임 결과",
 
-  "seo.draw.title":"그려라!",
-  "seo.start.title":"출제하라!",
-  "seo.error.title":"에러페이지",
-  "seo.relay.race.title":"이어달리기",
+  "seo.draw.title": "그려라!",
+  "seo.start.title": "출제하라!",
+  "seo.error.title": "에러페이지",
+  "seo.relay.race.title": "이어달리기",
 
-  "seo.welcome.title":"Drawee",
-  "seo.welcome.description":"모두 다같이 함께 그림을 그리며 즐기는 웹 게임 Drawee입니다."
-
+  "seo.welcome.title": "Drawee",
+  "seo.welcome.description": "모두 다같이 함께 그림을 그리며 즐기는 웹 게임 Drawee입니다."
 }

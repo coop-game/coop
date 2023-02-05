@@ -3,11 +3,11 @@ import { useInView, motion, useScroll, useMotionValue } from "framer-motion";
 import { RefObject, useEffect, useRef } from "react";
 
 type ObserverBoxPropsType = {
-  idx: number;
+  value: string;
   rootRef: any;
 };
 
-const ObserverBox = ({ idx, rootRef }: ObserverBoxPropsType) => {
+const ObserverBox = ({ value, rootRef }: ObserverBoxPropsType) => {
   const ref = useRef(null);
   const defaultScale = 1;
   const scale = useMotionValue<number>(defaultScale);
@@ -36,19 +36,21 @@ const ObserverBox = ({ idx, rootRef }: ObserverBoxPropsType) => {
       className="box_scroll"
       ref={ref}
       css={css`
-        scroll-margin-top: 75px;
-        scroll-margin-bottom: 75px;
+        /* scroll-margin-top: 30px;
+        scroll-margin-bottom: 30px; */
         width: 100%;
-        height: 100px;
+        height: 30%;
         scroll-snap-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
-        /* flex: none; */
-        font-size: 30px;
+        align-self: center;
+        flex: none;
+        font-size: 0.8em;
+        margin: 0px 10px 0px 10px;
       `}
     >
-      <motion.div style={{ scale }}>{idx}</motion.div>
+      <motion.div style={{ scale }}>{value}</motion.div>
     </motion.div>
   );
 };

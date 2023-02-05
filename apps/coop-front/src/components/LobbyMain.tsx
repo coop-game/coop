@@ -45,7 +45,7 @@ import {
 
 import DraweeLogo from "@asset/images/DraweeLogo.png";
 import Users from "@components/Users";
-import Chatting from "./Chatting";
+import Chatting from "./Chat/Chatting";
 
 import { useEffect } from "react";
 import {

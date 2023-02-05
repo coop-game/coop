@@ -44,6 +44,13 @@ html {
   height: 5px;
 }
 
+@media screen and (max-width: 600px) {
+  *::-webkit-scrollbar {
+    width: 10px !important;
+    height: 10px !important;
+  }
+}
+
 /* Track */
 /* ::-webkit-scrollbar-track {
   border-radius: 5px;

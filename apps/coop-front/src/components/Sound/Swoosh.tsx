@@ -2,7 +2,6 @@ import { Button, css } from "@chakra-ui/react";
 import { soundVolumeState } from "@common/recoil/recoil.atom";
 import React, { forwardRef, useEffect, useRef } from "react";
 import { useRecoilValue } from "recoil";
-import sound from "./../../asset/sound/Swoosh.mp3";
 const Swoosh = () => {
   const ref = useRef(null);
   const useVolume = useRecoilValue(soundVolumeState);
@@ -17,7 +16,7 @@ const Swoosh = () => {
         `}
       >
         <audio ref={ref} autoPlay controls loop={false} muted={!useVolume}>
-          <source src={sound} type="audio/mpeg" />
+          <source src={"/sound/Swoosh.mp3"} type="audio/mpeg" />
         </audio>
       </div>
     </>

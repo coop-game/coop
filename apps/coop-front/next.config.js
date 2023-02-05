@@ -27,7 +27,7 @@ const nextConfig = {
     ],
   },
   i18n,
-  // trailingSlash: true,
+  trailingSlash: true,
   // reactStrictMode: false,
   swcMinify: true,
 };

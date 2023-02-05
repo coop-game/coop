@@ -1,4 +1,4 @@
-import { Input, Button, Checkbox } from "@chakra-ui/react";
+import { Input, Button, Checkbox, Box } from "@chakra-ui/react";
 import {
   userProfilesSelector,
   userSelector,
@@ -22,6 +22,8 @@ import useAgreeUpdate from "@hooks/gameHooks/updateState/useAgreeUpdate";
 import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
 import { useRouter } from "next/dist/client/router";
 import { useTranslation } from "next-i18next";
+import { css } from "@emotion/react";
+import Chatting from "./Chat/Chatting";
 
 const CreateQuestion = () => {
   const { provider } = providerState;
@@ -51,32 +53,41 @@ const CreateQuestion = () => {
   const [isAgree, setIsAgree] = useState(false);
 
   const onClickButtonHandler = async () => {
-    setIsAgree(true);
-    doc.transact(() => {
-      yAgreeState.set(String(providerState.provider.awareness.clientID), true);
-      if (!!provider && input !== "") {
-        // userProfiles 기준으로 다음 user의 id를 문제 맞추는 사람으로 설정함.
-        const nextUserClientId =
-          userProfiles[
-            (userProfiles
-              .map((v) => v.id)
-              .indexOf(provider.awareness.clientID) +
-              1) %
-              userProfiles.length
-          ].id;
-        const newQuestion: CPGameQuestion = {
-          answer: input,
-          inputAnswer: [],
-          question: startPushQuestion,
-          questioner: provider.awareness.clientID,
-          isQuestionEnd: false,
-          solver: nextUserClientId,
-          path: "/draw",
-        };
-        pushQuestionHandler(newQuestion);
-      }
-    });
-    setInput("");
+    if (input !== "") {
+      setIsAgree(true);
+      doc.transact(() => {
+        const result = yAgreeState.get(
+          String(providerState.provider.awareness.clientID)
+        );
+        if (result === true) return;
+        yAgreeState.set(
+          String(providerState.provider.awareness.clientID),
+          true
+        );
+        if (!!provider) {
+          // userProfiles 기준으로 다음 user의 id를 문제 맞추는 사람으로 설정함.
+          const nextUserClientId =
+            userProfiles[
+              (userProfiles
+                .map((v) => v.id)
+                .indexOf(provider.awareness.clientID) +
+                1) %
+                userProfiles.length
+            ].id;
+          const newQuestion: CPGameQuestion = {
+            answer: input,
+            inputAnswer: [],
+            question: startPushQuestion,
+            questioner: provider.awareness.clientID,
+            isQuestionEnd: false,
+            solver: nextUserClientId,
+            path: "/draw",
+          };
+          pushQuestionHandler(newQuestion);
+        }
+      });
+      setInput("");
+    }
   };
 
   const nextPageHandlerByOwner = useCallback(() => {
@@ -95,30 +106,72 @@ const CreateQuestion = () => {
   }, [agreeList, nextPageHandlerByOwner, userProfiles]);
 
   return (
-    <div>
-      <Timer
-        time={5000}
-        gaugeColor={["red", "orange", "green"]}
-        callback={async () => {
-          onClickButtonHandler();
-          nextPageHandlerByOwner();
-        }}
-      />
-      <div>{t("start.input.answer")}</div>
-      <Input value={input} onChange={onChangeHandler} />
-      <Button
-        onClick={() => {
-          onClickButtonHandler();
-        }}
+    <div
+      css={css`
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        height: 100%;
+      `}
+    >
+      <div
+        css={css`
+          flex-basis: 30px;
+          justify-content: center;
+          align-items: center;
+        `}
       >
-        <Checkbox size="md" colorScheme="green" isChecked={isAgree}>
-          Checkbox
-        </Checkbox>
-      </Button>
-      <div>
-        {agreeList.map((v) => {
-          return <div key={v}>{`${v}`}</div>;
-        })}
+        <Timer
+          time={150000000}
+          gaugeColor={["red", "orange", "green"]}
+          callback={async () => {
+            nextPageHandlerByOwner();
+          }}
+        />
+      </div>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: column;
+          height: 500px;
+        `}
+      >
+        <Chatting />
+      </div>
+      <div
+        css={css`
+          display: flex;
+          flex-grow: 1;
+          flex-direction: column;
+        `}
+      >
+        <div>{t("start.input.answer")}</div>
+        <Input value={input} onChange={onChangeHandler} />
+        <div
+          css={css`
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+          `}
+        >
+          <Box
+            css={css`
+              user-select: none;
+              font-size: 1.5rem;
+            `}
+          >
+            {agreeList.length}/{userProfiles.length}
+          </Box>
+          <Button
+            onClick={() => {
+              onClickButtonHandler();
+            }}
+          >
+            <Checkbox size="md" colorScheme="green" isChecked={isAgree}>
+              {t("start.input.checkbox.submit")}
+            </Checkbox>
+          </Button>
+        </div>
       </div>
     </div>
   );

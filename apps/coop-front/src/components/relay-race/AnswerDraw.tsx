@@ -6,7 +6,7 @@ import {
   yjsRelayRaceAnswerState,
 } from "@common/recoil/recoil.atom";
 import { doc, providerState } from "@common/yjsStore/userStore";
-import NewCursor, { CursorComponent } from "@components/NewCursor";
+import NewCursor, { CursorComponent } from "@components/Tldraw/NewCursor";
 import Progress from "@components/Progress";
 import { Tldraw } from "@coop/draw";
 import { css } from "@emotion/react";

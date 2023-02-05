@@ -30,10 +30,8 @@ const useTimer = ({
     if (isStop === false) {
       interval = setTimeout(() => {
         if (timeState < 0) {
-          clearInterval(interval);
-        } else if (timeState === 0) {
           callback();
-          setTimeState(time);
+          clearInterval(interval);
         } else {
           setTimeState((prev) => prev - addTime);
         }
