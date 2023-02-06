@@ -14,17 +14,17 @@ import Progress from "@components/Progress";
 import HistoryScroll from "@components/Scroll/HistoryScroll";
 import ObserverBox from "@components/Scroll/ObserverBox";
 import Swoosh from "@components/Sound/Swoosh";
-import ToggleTheme from "@components/ToggleTheme";
+import ToggleTheme from "@components/ToggleThemeButton";
 import { css } from "@emotion/react";
 import { useRecoilValue } from "recoil";
 import RelayRaceInformationAnimation from "@components/Animation/GameInformation/RelayRace";
-import SideMenuBar from "@components/Modal/SideMenuModal";
+import SideMenuModal from "@components/Modal/SideMenuModal";
 
 const Example = () => {
   return (
     <>
       <ToggleTheme></ToggleTheme>
-      <SideMenuBar></SideMenuBar>
+      <SideMenuModal></SideMenuModal>
     </>
   );
 };

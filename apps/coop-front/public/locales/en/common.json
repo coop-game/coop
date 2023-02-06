@@ -75,8 +75,15 @@
   "drawee.result.question.answer": "Answer",
   "drawee.result.question.success": "Solve success",
   "drawee.result.question.failure": "Solve failure",
-  "tooltip.sound.up.hover": "Sounds play during gameplay.",
-  "tooltip.sound.mute.hover": "Mute during gameplay.",
+
+  "tooltip.sound.up.hover": "Sounds play during play",
+  "tooltip.sound.mute.hover": "Mute during play",
+
+  "tooltip.hover.setting": "Settings window opens",
+  "tooltip.hover.cross": "Close window",
+
+  "tooltip.hover.darkmode": "Darkmode",
+  "tooltip.hover.lightmode": "Lightmode",
 
   "seo.main.title": "Drawee",
   "seo.main.description": "Drawee is a web game that everyone enjoys drawing together.",

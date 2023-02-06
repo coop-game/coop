@@ -10,22 +10,25 @@ import Transition from "@components/Animation/PageTransition/Transition";
 import { appWithTranslation } from "next-i18next";
 import { DefaultSeo } from "next-seo";
 import SEO from "next-seo-config";
+import { css } from "@emotion/react";
 
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   return (
-    <ChakraProvider theme={theme}>
-      <DefaultSeo {...SEO} />
-      <RecoilRoot>
-        {router.pathname === "/welcome" ? (
-          <Component {...pageProps} />
-        ) : (
-          <Transition location={router.pathname}>
+    <>
+      <ChakraProvider theme={theme}>
+        <DefaultSeo {...SEO} />
+        <RecoilRoot>
+          {router.pathname === "/welcome" ? (
             <Component {...pageProps} />
-          </Transition>
-        )}
-      </RecoilRoot>
-    </ChakraProvider>
+          ) : (
+            <Transition location={router.pathname}>
+              <Component {...pageProps} />
+            </Transition>
+          )}
+        </RecoilRoot>
+      </ChakraProvider>
+    </>
   );
 }
 

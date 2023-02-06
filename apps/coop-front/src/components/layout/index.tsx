@@ -1,7 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import Logo from "@components/Animation/Logo/Logo";
-import MuteButton from "@components/Sound/MuteButton";
-import ToggleTheme from "@components/ToggleTheme";
+import SideMenuModal from "@components/Modal/SideMenuModal";
 import { css } from "@emotion/react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -26,40 +25,51 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             padding: 0px 5px 0px 5px;
           }
           max-width: 1200px;
+          justify-content: center;
+          align-items: center;
         `}
       >
-        <div
+        <Flex
+          w={{ base: "100%", md: "750px", xl: "1200px" }}
           css={css`
-            display: flex;
-            justify-content: center;
+            justify-content: space-around;
             align-items: center;
-            width: 100%;
-            height: 130px;
-            @media screen and (max-width: 600px) {
-              /* display: none; */
-              height: 70px;
-              transform: scale(0.5);
-            }
-            /* transform-origin: 2% 0%; */
+            max-width: 1200px;
           `}
         >
-          {/* <Logo color={"#711480b1"}></Logo> */}
-          <Logo color={"#721480"}></Logo>
-        </div>
-        <div
-          css={css`
-            position: absolute;
-            right: 30px;
-            top: 30px;
-            @media screen and (max-width: 600px) {
-              /* display: none; */
-              top: 20px;
-              transform: scale(0.8);
-            }
-          `}
-        >
-          <MuteButton></MuteButton>
-        </div>
+          <Flex
+            css={css`
+              margin-left: 80px;
+            `}
+          ></Flex>
+          <Flex
+            css={css`
+              flex-grow: 1;
+              height: 130px;
+              @media screen and (max-width: 600px) {
+                height: 70px;
+                transform-origin: 50% 10%;
+                transform: scale(0.5);
+              }
+            `}
+          >
+            <Logo color={"#721480"}></Logo>
+          </Flex>
+          <Flex
+            css={css`
+              flex-grow: 0;
+              flex-basis: 40px;
+              margin-right: 40px;
+              width: 40px;
+              height: 40px;
+              @media screen and (max-width: 600px) {
+                transform: scale(0.8);
+              }
+            `}
+          >
+            <SideMenuModal></SideMenuModal>
+          </Flex>
+        </Flex>
         {children}
       </Flex>
       {/* <ToggleTheme></ToggleTheme> */}
