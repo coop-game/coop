@@ -101,5 +101,7 @@
   "seo.relay.race.title": "이어달리기",
 
   "seo.welcome.title": "Drawee",
-  "seo.welcome.description": "모두 다같이 함께 그림을 그리며 즐기는 웹 게임 Drawee입니다."
+  "seo.welcome.description": "모두 다같이 함께 그림을 그리며 즐기는 웹 게임 Drawee입니다.",
+
+  "lobby.game.selected":"선택됨"
 }

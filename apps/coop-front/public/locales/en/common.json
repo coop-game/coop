@@ -99,5 +99,7 @@
   "seo.relay.race.title": "Relay Race",
 
   "seo.welcome.title": "Welcome to Drawee!",
-  "seo.welcome.description": "Drawee is a web game that everyone enjoys drawing together."
+  "seo.welcome.description": "Drawee is a web game that everyone enjoys drawing together.",
+
+  "lobby.game.selected":"selected"
 }

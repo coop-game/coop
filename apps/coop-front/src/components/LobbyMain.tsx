@@ -8,6 +8,7 @@ import {
   CardHeader,
   Flex,
   Heading,
+  Highlight,
   SimpleGrid,
   Spinner,
   Tab,
@@ -25,6 +26,7 @@ import {
   userSelector,
   yjsQuestionsState,
   yjsRelayRaceAnswerState,
+  yjsSelectGameType,
 } from "@common/recoil/recoil.atom";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -42,6 +44,7 @@ import {
   yGameState,
   yQuestionsState,
   yRelayRaceAnswerState,
+  ySelectGameType,
 } from "@common/yjsStore/userStore";
 
 import Users from "@components/Users";
@@ -54,20 +57,18 @@ import {
   CPGameState,
   CPGameTypes,
 } from "@types";
-import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import ShakeAnimation from "./Animation/ShakeAnimation";
 import DraweeInformationAnimation from "./Animation/GameInformation/Drawee";
 import RelayRaceInformationAnimation from "./Animation/GameInformation/RelayRace";
 import LinkSVG from "@asset/LinkSVG";
+import useGameSelector from "@hooks/gameHooks/updateState/useGameSelector";
 
 export const LobbyMain = () => {
   const { t } = useTranslation("common");
   const lobbyToastInviteTitle = t("lobby.toast.invite.title");
   const lobbyToastInviteDescription = t("lobby.toast.invite.description");
-  const router = useRouter();
   const toast = useToast();
   useCheckCreatedProvider(
     "/ErrorPage/?errorMessage=잘못된 접근입니다.&statusCode=403"
@@ -80,9 +81,11 @@ export const LobbyMain = () => {
   const changeGameStateHandler = getChangeGameStateHandler<CPGameState>(roomId);
   const [_, setRelayraceAnswerState] = useRecoilState(yjsRelayRaceAnswerState);
   useProfileUpdate();
-  const { colorMode } = useColorMode();
   const [selectedTab, setSelectedTab] = useState(0);
 
+  const [selectedGame, setSelectedGame] = useState<number>(-1);
+  const selectGameType = useRecoilValue(yjsSelectGameType);
+  useGameSelector();
   useEffect(() => {
     // 로비로 진입시 questionsState, yAgreeState 를 초기화함.
     if (isOwner) {
@@ -98,6 +101,7 @@ export const LobbyMain = () => {
         yQuestionsState.delete(0, yQuestionsState.length);
         yRelayRaceAnswerState.delete(0, yRelayRaceAnswerState.length);
         yAgreeState.clear();
+        ySelectGameType.set("gameIndex", 0);
       });
     }
     // 나중에 결과 페이지에서 처리
@@ -201,16 +205,16 @@ export const LobbyMain = () => {
             </TabList>
             <TabPanels display={"flex"} w="100%" h={"calc(100% - 50px)"}>
               <TabPanel w="100%" h="100%">
-                <SimpleGrid
+                <Flex
                   paddingTop={"3%"}
+                  flexDirection="column"
                   paddingBottom={"3%"}
                   w="100%"
                   h="100%"
                   overflowY="scroll"
-                  spacing={2}
-                  templateColumns="reqeat(auto-fill,minmax(250px,1fr))"
+                  // templateColumns="reqeat(auto-fill,minmax(100px,1fr))"
                 >
-                  <Box w={{ sm: "100%", md: "250px" }}>
+                  <Box w={{ sm: "100%", md: "250px" }} marginBottom="3%">
                     <Button
                       maxW="400px"
                       w={{ sm: "100%", md: "225px" }}
@@ -221,49 +225,143 @@ export const LobbyMain = () => {
                       {t("lobby.invite.button")}
                     </Button>
                   </Box>
-                  <Card align={"center"}>
-                    <CardHeader>
+                  <Card align={"center"} marginBottom="3%">
+                    <CardHeader
+                      onClick={() => {
+                        if (isOwner) {
+                          ySelectGameType.set("gameIndex", 0);
+                        }
+                        setSelectedGame(0);
+                      }}
+                      css={css`
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        :hover {
+                          cursor: pointer;
+                        }
+                      `}
+                    >
+                      {selectGameType === 0 && (
+                        <Text position="absolute" left="5%">
+                          <Highlight
+                            query={t("lobby.game.selected")}
+                            styles={{
+                              px: "2",
+                              py: "1",
+                              rounded: "full",
+                              bg: "red.100",
+                            }}
+                          >
+                            {t("lobby.game.selected")}
+                          </Highlight>
+                        </Text>
+                      )}
+
                       <Text fontWeight={"extrabold"} fontSize={"2xl"}>
                         Drawee
                       </Text>
                     </CardHeader>
-                    <CardBody>
-                      <Box w="100%" h="90%">
-                        <DraweeInformationAnimation />
-                      </Box>
-                      <Text>{t("lobby.drawee.information")}</Text>
-                    </CardBody>
-                    <CardFooter>
-                      {isOwner && (
-                        <Button
-                          onClick={() => onClickGameStartHandler("DRAWEE")}
-                        >
-                          {t("lobby.next.button")}
-                        </Button>
-                      )}
-                    </CardFooter>
+
+                    <Flex
+                      w="100%"
+                      h={selectedGame === 0 ? "300px" : "0px"}
+                      overflow="hidden"
+                      flexDirection={"column"}
+                      justifyContent="center"
+                      alignItems={"center"}
+                      css={css`
+                        transition-duration: 500ms;
+                        transition-timing-function: ease-in-out;
+                      `}
+                    >
+                      <CardBody>
+                        <Box w="100%" h="90%">
+                          <DraweeInformationAnimation />
+                        </Box>
+                        <Text>{t("lobby.drawee.information")}</Text>
+                      </CardBody>
+                      <CardFooter>
+                        {isOwner && (
+                          <Button
+                            onClick={() => onClickGameStartHandler("DRAWEE")}
+                          >
+                            {t("lobby.next.button")}
+                          </Button>
+                        )}
+                      </CardFooter>
+                    </Flex>
                   </Card>
                   <Card align={"center"}>
-                    <CardHeader fontWeight={"extrabold"} fontSize={"2xl"}>
-                      {t("lobby.relay.race.game.title")}
-                    </CardHeader>
-                    <CardBody>
-                      <Box w="100%" h="90%">
-                        <RelayRaceInformationAnimation />
-                      </Box>
-                      <Text>{t("lobby.relay.race.information")}</Text>
-                    </CardBody>
-                    <CardFooter>
-                      {isOwner && (
-                        <Button
-                          onClick={() => onClickGameStartHandler("RELAY_RACE")}
-                        >
-                          {t("lobby.next.button")}
-                        </Button>
+                    <CardHeader
+                      onClick={() => {
+                        if (isOwner) {
+                          ySelectGameType.set("gameIndex", 1);
+                        }
+                        setSelectedGame(1);
+                      }}
+                      css={css`
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        :hover {
+                          cursor: pointer;
+                        }
+                      `}
+                    >
+                      {selectGameType === 1 && (
+                        <Text position="absolute" left="5%">
+                          <Highlight
+                            query={t("lobby.game.selected")}
+                            styles={{
+                              px: "2",
+                              py: "1",
+                              rounded: "full",
+                              bg: "red.100",
+                            }}
+                          >
+                            {t("lobby.game.selected")}
+                          </Highlight>
+                        </Text>
                       )}
-                    </CardFooter>
+                      <Text fontWeight={"extrabold"} fontSize={"2xl"}>
+                        {t("lobby.relay.race.game.title")}
+                      </Text>
+                    </CardHeader>
+                    <Flex
+                      w="100%"
+                      h={selectedGame === 1 ? "300px" : "0px"}
+                      overflow="hidden"
+                      flexDirection={"column"}
+                      justifyContent="center"
+                      alignItems={"center"}
+                      css={css`
+                        transition-duration: 500ms;
+                        transition-timing-function: ease-in-out;
+                      `}
+                    >
+                      <CardBody>
+                        <Box w="100%" h="90%">
+                          <RelayRaceInformationAnimation />
+                        </Box>
+                        <Text>{t("lobby.relay.race.information")}</Text>
+                      </CardBody>
+                      <CardFooter>
+                        {isOwner && (
+                          <Button
+                            onClick={() =>
+                              onClickGameStartHandler("RELAY_RACE")
+                            }
+                          >
+                            {t("lobby.next.button")}
+                          </Button>
+                        )}
+                      </CardFooter>
+                    </Flex>
                   </Card>
-                </SimpleGrid>
+                </Flex>
               </TabPanel>
               <TabPanel display={"flex"} w="100%" h="100%">
                 <Chatting></Chatting>

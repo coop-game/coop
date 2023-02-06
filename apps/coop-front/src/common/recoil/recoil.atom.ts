@@ -19,6 +19,11 @@ export const userState = atom<CPUserType | null>({
   default: null,
 });
 
+export const yjsSelectGameType = atom<number>({
+  key: "GAME_SELECTOR",
+  default: 0,
+});
+
 export const userSelector = selector({
   key: "USER_SELECTOR",
   get: ({ get }) => {
