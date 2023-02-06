@@ -7,6 +7,8 @@ export type CPUserType = {
   isOwner?: boolean;
 };
 
+
+
 export type CPChatType = {
   id: number;
   nickname: string;
@@ -27,7 +29,7 @@ export type CPGameRelayRaceAnswer = {
   answer?: string;
   isDraw: boolean;
   id: number;
-} & Omit<CPUserType,"utcTimeStamp"|"isBanned"|"isOwner"|"roomId">;
+} & Omit<CPUserType, "utcTimeStamp" | "isBanned" | "isOwner" | "roomId">;
 
 export type CPGameRelayRaceAnswers = CPGameRelayRaceAnswer[];
 

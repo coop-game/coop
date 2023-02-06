@@ -41,6 +41,9 @@ export const yChattingState = doc.getArray<CPChatType>("chatting");
 export const yGameUserProfileStates =
   doc.getArray<CPUserProfile>("gameUserProfiles");
 
+// 로비에서 선택한 게임 보여주기 위한 yjs
+export const ySelectGameType = doc.getMap<number>("selectGameType");
+
 export const getChangeGameStateHandler = <T>(roomId: string) => {
   return (partialGameState = {} as Partial<T>) => {
     const gameState = yGameState.get(roomId);
