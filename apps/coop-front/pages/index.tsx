@@ -19,7 +19,6 @@ import AvatarImage from "@components/AvatarImage";
 import { providerState } from "@common/yjsStore/userStore";
 import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
 import Layout from "@components/layout";
-import LogoImage from "@components/layout/LogoImage";
 import useHistoryBack from "@hooks/usehistoryBack";
 import { css } from "@emotion/react";
 import PostIt from "@components/layout/PostIt/PostIt";

@@ -27,8 +27,7 @@ import { CPGameDrawee } from "@types";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
 import DrawEditor from "./DrawEditor";
 import CanvasViewer from "./Tldraw/CanvasViewer";
-import CurrentQuestionNumber from "./Tldraw/CurrentQuestionNumber";
-import SideBarOfDraw from "./layout/SideBar/SideBarOfDraw";
+import SideBarOfDraw from "./Tldraw/SideBarOfDraw";
 
 function Draw() {
   const gameState = useRecoilValue(yjsGameState);

@@ -36,7 +36,7 @@ const User = ({ userProfile }: { userProfile: CPUserProfile }) => {
               /* background: rgb(200, 100, 100, 30%); */
               border: 3px solid ${color};
             `}
-            src={`./images/avatar/${avatarIndex}.png`}
+            src={`/images/avatar/${avatarIndex}.png`}
           />
         </Flex>
       </Tooltip>

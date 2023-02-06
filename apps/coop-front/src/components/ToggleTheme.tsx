@@ -4,9 +4,9 @@ import { useEffect } from "react";
 const ToggleTheme = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const theme = useTheme();
-  useEffect(() => {
-    console.log("theme", theme);
-  }, []);
+  // useEffect(() => {
+  //   console.log("theme", theme);
+  // }, []);
   return (
     <div
       css={css`

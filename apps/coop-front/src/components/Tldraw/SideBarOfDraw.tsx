@@ -6,7 +6,7 @@ import {
 } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
 import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useRecoilValue } from "recoil";
 
 export type SideBarOfDraw<T = any> = () => any;
@@ -21,7 +21,7 @@ const SideBarOfDraw = () => {
 
   return (
     <Box
-      shadow={"Base"}
+      boxShadow={"base"}
       css={css`
         margin: 5px;
         width: 100%;

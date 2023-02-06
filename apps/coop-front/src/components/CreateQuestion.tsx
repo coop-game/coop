@@ -27,7 +27,10 @@ import Chatting from "./Chat/Chatting";
 
 const CreateQuestion = () => {
   const { provider } = providerState;
-  const { input, setInput, onChangeHandler } = useInput("");
+  const callbackInput = (value: string) => {
+    return value.slice(0, 20);
+  };
+  const { input, setInput, onChangeHandler } = useInput("", callbackInput);
   const agreeList = useRecoilValue(yjsAgreeState);
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const { t } = useTranslation("common");
@@ -111,11 +114,11 @@ const CreateQuestion = () => {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        height: 100%;
       `}
     >
       <div
         css={css`
+          flex-grow: 1;
           flex-basis: 30px;
           justify-content: center;
           align-items: center;
@@ -132,8 +135,12 @@ const CreateQuestion = () => {
       <div
         css={css`
           display: flex;
+          flex-grow: 1;
           flex-direction: column;
-          height: 500px;
+          height: 600px;
+          @media screen and (max-height: 670px) {
+            height: 400px;
+          }
         `}
       >
         <Chatting />
@@ -141,7 +148,7 @@ const CreateQuestion = () => {
       <div
         css={css`
           display: flex;
-          flex-grow: 1;
+          flex-basis: 120px;
           flex-direction: column;
         `}
       >

@@ -20,11 +20,11 @@
   "lobby.select.by.owner": "방장이 선택하는 중입니다.",
   "lobby.toast.invite.title": "초대하기",
   "lobby.toast.invite.description": "초대주소가 복사되었습니다.",
-  "lobby.drawee.information":"여러 사람들과 함께 그림을 그리면서 즐기는 게임",
-  "lobby.relay.race.information":"팀원이 어떤것을 표현하고자 했는지 연속적으로 맞추는 게임",
-  "lobby.relay.race.game.title":"이어달리기 모드",
+  "lobby.drawee.information": "여러 사람들과 함께 그림을 그리면서 즐기는 게임",
+  "lobby.relay.race.information": "팀원이 어떤것을 표현하고자 했는지 연속적으로 맞추는 게임",
+  "lobby.relay.race.game.title": "이어달리기 모드",
 
-  "start.input.answer": "정답을 입력하세요",
+  "start.input.answer": "정답을 입력하세요! (최대 20자)",
   "start.input.checkbox.submit": "정답 제출",
   "start.push.question": "정답을 그려라!",
 
@@ -33,7 +33,7 @@
   "draw.answer.submit": "정답 제출",
   "draw.input.in.answer": "이게 ... 정답일까?",
   "draw.input.required.answer": "정답을 입력하세요",
-  "draw.answer.history": "정답 히스토리",
+  "draw.answer.history": "정답 목록",
   "draw.answer.history.scroll.down": "맨 아래로 내리기",
 
   "chatting.input.placeholder": "채팅을 입력하세요",

@@ -3,7 +3,7 @@ import { userSelector } from "@common/recoil/recoil.atom";
 import { useRecoilValue } from "recoil";
 import { useEffect } from "react";
 import { providerState } from "@common/yjsStore/userStore";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 const useCheckDuplicateWindows = () => {
   const { t } = useTranslation("common");
