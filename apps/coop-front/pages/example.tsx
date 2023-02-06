@@ -18,22 +18,13 @@ import ToggleTheme from "@components/ToggleTheme";
 import { css } from "@emotion/react";
 import { useRecoilValue } from "recoil";
 import RelayRaceInformationAnimation from "@components/Animation/GameInformation/RelayRace";
+import SideMenuBar from "@components/Modal/SideMenuModal";
 
 const Example = () => {
   return (
     <>
-      <Logo color="darkviolet"></Logo>
-      <div
-        css={css`
-          width: 100px;
-          height: 200px;
-        `}
-      >
-        <HistoryScroll
-          history={new Array(10).fill(null).map((_, idx) => String(idx))}
-        ></HistoryScroll>
-      </div>
-      <RelayRaceInformationAnimation />;<ToggleTheme></ToggleTheme>
+      <ToggleTheme></ToggleTheme>
+      <SideMenuBar></SideMenuBar>
     </>
   );
 };

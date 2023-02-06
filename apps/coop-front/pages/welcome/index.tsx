@@ -36,29 +36,29 @@ function Welcome() {
   };
   return (
     <Box bg="colors.primary" w="100%" minH="100vh" color="black" p={4}>
-      <NextSeo
-        title={t("seo.welcome.title")}
-        description={t("seo.welcome.description")}
-        openGraph={{
-          url: URL,
-          title: t("seo.welcome.title"),
-          description: t("seo.welcome.description"),
-          images: [
-            {
-              url: `/images/DraweeLogo.png`,
-              width: 800,
-              height: 600,
-              alt: t("main.seo.opengraph.images.alt"),
-              type: "image/png",
-            },
-          ],
-        }}
-        twitter={{
-          handle: "@handle",
-          site: "@site",
-          cardType: "summary_large_image",
-        }}
-      />
+        <NextSeo
+          title={t("seo.welcome.title")}
+          description={t("seo.welcome.description")}
+          openGraph={{
+            url: URL,
+            title: t("seo.welcome.title"),
+            description: t("seo.welcome.description"),
+            images: [
+              {
+                url: `/images/DraweeLogo.png`,
+                width: 800,
+                height: 600,
+                alt: t("main.seo.opengraph.images.alt"),
+                type: "image/png",
+              },
+            ],
+          }}
+          twitter={{
+            handle: "@handle",
+            site: "@site",
+            cardType: "summary_large_image",
+          }}
+        />
       {/* 최상단 부분  */}
       <Flex direction="column">
         <TopContent />
