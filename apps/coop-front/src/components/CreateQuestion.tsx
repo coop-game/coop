@@ -125,7 +125,7 @@ const CreateQuestion = () => {
         `}
       >
         <Timer
-          time={150000000}
+          time={20000}
           gaugeColor={["red", "orange", "green"]}
           callback={async () => {
             nextPageHandlerByOwner();

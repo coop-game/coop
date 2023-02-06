@@ -126,7 +126,7 @@ function Draw() {
           <Progress
             play={isPlay}
             startTime={gameState?.pageStartTime}
-            time={20000000}
+            time={50000}
             callback={() => {
               setIsPlay("paused");
               questionTimeOut();
