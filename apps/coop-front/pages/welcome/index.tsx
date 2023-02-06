@@ -35,7 +35,7 @@ function Welcome() {
     setNextContent({ ratio, detect });
   };
   return (
-    <Box bg="colors.primary" w="100%" minH="100vh" color="black" p={4}>
+    <>
         <NextSeo
           title={t("seo.welcome.title")}
           description={t("seo.welcome.description")}
@@ -59,6 +59,7 @@ function Welcome() {
             cardType: "summary_large_image",
           }}
         />
+    <Box bg="colors.primary" w="100%" minH="100vh" color="black" p={4}>
       {/* 최상단 부분  */}
       <Flex direction="column">
         <TopContent />
@@ -90,6 +91,7 @@ function Welcome() {
         <BottomContent />
       </Flex>
     </Box>
+    </>
   );
 }
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
