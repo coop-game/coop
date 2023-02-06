@@ -78,10 +78,13 @@ const Logo = ({ color }: { color: string }) => {
   return (
     <div
       css={css`
-        position: relative;
-        width: ${svgWidth}px;
-        height: ${svgHeight}px;
+        /* position: absolute;
+        left: 0;
+        top: 0; */
+        width: ${Number(svgWidth) * 0.7}px;
+        height: ${Number(svgHeight) * 0.7}px;
         transform: scale(0.7);
+        transform-origin: 0% 0%;
         margin: 0 auto;
         & > * {
           stroke: ${color};

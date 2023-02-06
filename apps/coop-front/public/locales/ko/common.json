@@ -76,8 +76,16 @@
   "drawee.result.question.answer": "정답",
   "drawee.result.question.success": "풀이성공",
   "drawee.result.question.failure": "풀이실패",
+
   "tooltip.sound.up.hover": "게임 플레이 도중 소리가 재생됩니다.",
   "tooltip.sound.mute.hover": "게임 플레이 도중 음소거 됩니다.",
+
+  "tooltip.hover.setting": "설정 창이 열립니다.",
+
+  "tooltip.hover.cross": "창 닫기",
+
+  "tooltip.hover.darkmode": "다크모드",
+  "tooltip.hover.lightmode": "라이트모드",
 
   "seo.main.title": "Drawee",
   "seo.main.description": "모두 다같이 함께 그림을 그리며 즐기는 웹 게임 Drawee입니다.",

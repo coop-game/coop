@@ -43,8 +43,8 @@ const LetterLineLeftE = ({
           repeat: Infinity,
         }}
         style={{
-          originX: "272px",
-          originY: "60px",
+          originX: "68.513%",
+          originY: "38.461%",
         }}
       >
         <motion.line
