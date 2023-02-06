@@ -54,10 +54,8 @@ import {
   CPGameState,
   CPGameTypes,
 } from "@types";
-import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import ShakeAnimation from "./Animation/ShakeAnimation";
 import DraweeInformationAnimation from "./Animation/GameInformation/Drawee";
 import RelayRaceInformationAnimation from "./Animation/GameInformation/RelayRace";
@@ -67,7 +65,6 @@ export const LobbyMain = () => {
   const { t } = useTranslation("common");
   const lobbyToastInviteTitle = t("lobby.toast.invite.title");
   const lobbyToastInviteDescription = t("lobby.toast.invite.description");
-  const router = useRouter();
   const toast = useToast();
   useCheckCreatedProvider(
     "/ErrorPage/?errorMessage=잘못된 접근입니다.&statusCode=403"
@@ -80,8 +77,8 @@ export const LobbyMain = () => {
   const changeGameStateHandler = getChangeGameStateHandler<CPGameState>(roomId);
   const [_, setRelayraceAnswerState] = useRecoilState(yjsRelayRaceAnswerState);
   useProfileUpdate();
-  const { colorMode } = useColorMode();
   const [selectedTab, setSelectedTab] = useState(0);
+
 
   useEffect(() => {
     // 로비로 진입시 questionsState, yAgreeState 를 초기화함.

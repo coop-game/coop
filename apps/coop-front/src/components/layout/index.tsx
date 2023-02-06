@@ -1,15 +1,16 @@
-import { Flex } from "@chakra-ui/react";
+import { Badge, Flex } from "@chakra-ui/react";
 import { yjsGameState } from "@common/recoil/recoil.atom";
 import Logo from "@components/Animation/Logo/Logo";
 import MuteButton from "@components/Sound/MuteButton";
 import ToggleTheme from "@components/ToggleTheme";
 import { css } from "@emotion/react";
+import { useTranslation } from "next-i18next";
 import { useRecoilValue } from "recoil";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const gameState = useRecoilValue(yjsGameState);
-  
-  console.log("레이아웃의 게임 스테이트", gameState);
+  const { t } = useTranslation("common");
+
   return (
     <Flex
       className="layout_main"
@@ -36,8 +37,22 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <div
           css={css`
             position: absolute;
+            left: 30px;
+            top: 90px;
+            @media screen and (max-width: 600px) {
+              /* display: none; */
+              top: 40px;
+            }
           `}
-        ></div>
+        >
+          {gameState &&
+            gameState.isGameStart &&
+            (gameState.gameType === "DRAWEE" ? (
+              <Badge>{"Drawee"}</Badge>
+            ) : (
+              <Badge>{t("lobby.relay.race.game.title")}</Badge>
+            ))}
+        </div>
         <div
           css={css`
             display: flex;

@@ -74,31 +74,29 @@ export default function Home({
 
   return (
     <>
-      <Head>
-        <NextSeo
-          title={t("seo.main.title")}
-          description={t("seo.main.description")}
-          openGraph={{
-            url: URL,
-            title: t("seo.main.title"),
-            description: t("seo.main.description"),
-            images: [
-              {
-                url: `/images/DraweeLogo.png`,
-                width: 800,
-                height: 600,
-                alt: t("seo.main.opengraph.images.alt"),
-                type: "image/png",
-              },
-            ],
-          }}
-          twitter={{
-            handle: "@handle",
-            site: "@site",
-            cardType: "summary_large_image",
-          }}
-        />
-      </Head>
+      <NextSeo
+        title={t("seo.main.title")}
+        description={t("seo.main.description")}
+        openGraph={{
+          url: URL,
+          title: t("seo.main.title"),
+          description: t("seo.main.description"),
+          images: [
+            {
+              url: `/images/DraweeLogo.png`,
+              width: 800,
+              height: 600,
+              alt: t("seo.main.opengraph.images.alt"),
+              type: "image/png",
+            },
+          ],
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <Layout>
         <Flex
           w={"100%"}
