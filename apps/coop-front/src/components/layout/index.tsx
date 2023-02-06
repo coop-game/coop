@@ -31,47 +31,50 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             padding: 0px 5px 0px 5px;
           }
           max-width: 1200px;
-          justify-content: center;
           align-items: center;
         `}
       >
         <Flex
           w={{ base: "100%", md: "750px", xl: "1200px" }}
           css={css`
+            width: 100%;
             justify-content: space-around;
             align-items: center;
             max-width: 1200px;
-          `}
-        >
-          <div
-            css={css`
-              position: absolute;
+            position:relative;
             `}
-          >
-            {gameState &&
-              gameState.isGameStart &&
-              (gameState.gameType === "DRAWEE" ? (
-                <Badge>{"Drawee"}</Badge>
-              ) : (
-                <Badge>{t("lobby.relay.race.game.title")}</Badge>
-              ))}
-          </div>
-
+        >
+              <div
+                css={css`
+                  position: absolute;
+                  bottom: 0%;
+                  left: 3%;
+                `}
+              >
+                {gameState &&
+                  gameState.isGameStart &&
+                  (gameState.gameType === "DRAWEE" ? (
+                    <Badge>{"Drawee"}</Badge>
+                  ) : (
+                    <Badge>{t("lobby.relay.race.game.title")}</Badge>
+                  ))}
+              </div>
           <Flex
             css={css`
               margin-left: 80px;
-            `}
+              `}
           ></Flex>
           <Flex
             css={css`
+            position: relative;
               flex-grow: 1;
               height: 130px;
               @media screen and (max-width: 600px) {
-                height: 70px;
+                 height: 70px;
                 transform-origin: 50% 10%;
-                transform: scale(0.5);
+                transform: scale(0.5); 
               }
-            `}
+              `}
           >
             <Logo color={"#721480"}></Logo>
           </Flex>

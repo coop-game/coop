@@ -234,6 +234,10 @@ export const LobbyMain = () => {
                         setSelectedGame(0);
                       }}
                       css={css`
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
                         :hover {
                           cursor: pointer;
                         }
@@ -298,6 +302,10 @@ export const LobbyMain = () => {
                         setSelectedGame(1);
                       }}
                       css={css`
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
                         :hover {
                           cursor: pointer;
                         }
