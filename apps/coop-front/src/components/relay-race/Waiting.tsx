@@ -30,7 +30,7 @@ const Wating = ({
       alignItems="center"
     >
       <Progress
-        time={50000}
+        time={20000}
         callback={() => {}}
         play={isPlay}
         startTime={startTime}

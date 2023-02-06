@@ -44,7 +44,7 @@ const AnswerInput = ({
   return (
     <Flex width="100%" height="100%" flexDirection={"column"}>
       <Progress
-        time={50000}
+        time={20000}
         callback={onClick}
         play={"running"}
         startTime={startTime}

@@ -78,7 +78,7 @@ const AnswerDraw = ({
     <Box w="100%" h="100%">
       <Box w="100%" h={{ sm: "8%", md: "10%" }}>
         <Progress
-          time={50000}
+          time={20000}
           callback={drawEnd}
           play={"running"}
           startTime={startTime}
