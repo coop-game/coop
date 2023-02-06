@@ -36,7 +36,6 @@ function Welcome() {
   };
   return (
     <Box bg="colors.primary" w="100%" minH="100vh" color="black" p={4}>
-      <Head>
         <NextSeo
           title={t("seo.welcome.title")}
           description={t("seo.welcome.description")}
@@ -60,7 +59,6 @@ function Welcome() {
             cardType: "summary_large_image",
           }}
         />
-      </Head>
       {/* 최상단 부분  */}
       <Flex direction="column">
         <TopContent />

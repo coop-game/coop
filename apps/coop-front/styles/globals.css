@@ -5,38 +5,15 @@ body,
   height: 100%;
   padding: 0;
   margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
-
-  /* background note design */
-  /* background-color: #fff;
-    background-image:
-    linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
-    linear-gradient(#eee .1em, transparent .1em);
-    background-size: 100% 1.2em; */
 }
 
 html {
   cursor: url("/images/pencil/cursor.png") 0 34, pointer;
 }
 
-/* *::-webkit-scrollbar {
-  width: 10px;
+body {
+  overscroll-behavior: contain;
 }
-
-*::-webkit-scrollbar-track {
-  border-radius: 5px;
-}
-
-*::-webkit-scrollbar-thumb {
-  border-radius: 5px 5px 100px 100px;
-  margin-bottom: 30px;
-  background-image: url("/images/pencil/pencilTop.png"),
-    url("/images/pencil/pencilBottom.png"), url("/images/pencil/pencilBody.png");
-  background-position: center top, center bottom, center center;
-  background-repeat: no-repeat, no-repeat, repeat;
-  background-size: 10px 15px, 10px 15px, 10px calc(100% - 30px);
-} */
 
 /* width */
 ::-webkit-scrollbar {
@@ -50,12 +27,6 @@ html {
     height: 10px !important;
   }
 }
-
-/* Track */
-/* ::-webkit-scrollbar-track {
-  border-radius: 5px;
-  background: #eec3c368;
-} */
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
@@ -76,13 +47,3 @@ a {
 * {
   box-sizing: border-box;
 }
-
-/* @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: white;
-  }
-} */

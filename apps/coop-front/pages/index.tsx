@@ -74,7 +74,6 @@ export default function Home({
 
   return (
     <>
-      <Head>
         <NextSeo
           title={t("seo.main.title")}
           description={t("seo.main.description")}
@@ -98,7 +97,6 @@ export default function Home({
             cardType: "summary_large_image",
           }}
         />
-      </Head>
       <Layout>
         <Flex
           w={"100%"}
