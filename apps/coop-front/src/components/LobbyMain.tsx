@@ -159,23 +159,22 @@ export const LobbyMain = () => {
         flexDirection={{ base: "column", md: "row" }}
         gap={{ base: "10px", md: "20px" }}
       >
-        <Flex w={{ base: "100%", md: "250px", xl: "350px" }} h="100%">
+        <Flex
+          w={{ base: "100%", md: "250px", xl: "350px" }}
+          h={{ base: "80px", md: "100%" }}
+        >
           <Users userProfiles={userProfiles} />
         </Flex>
         <Flex
           w={{ base: "100%", md: "600px", xl: "600px" }}
           h={{ base: "70%", sm: "80%", md: "100%" }}
           borderRadius={"15px"}
-          // border="3px solid gray"
           boxShadow="dark-lg"
           rounded="md"
-          // flexDirection={"column"}
         >
           <Tabs
             w="100%"
             h="100%"
-            // display={"flex"}
-            // flexDirection="column"
             size={"md"}
             isFitted
             variant={"enclosed"}
@@ -185,7 +184,7 @@ export const LobbyMain = () => {
               setSelectedTab(idx);
             }}
           >
-            <TabList>
+            <TabList h={50}>
               {imageSrcArray.map(({ src, alt }, idx) => {
                 return (
                   <Tab key={src} _selected={{ bg: "#C5DEDA" }}>
@@ -200,7 +199,7 @@ export const LobbyMain = () => {
                 );
               })}
             </TabList>
-            <TabPanels display={"flex"} w="100%" h="95%">
+            <TabPanels display={"flex"} w="100%" h={"calc(100% - 50px)"}>
               <TabPanel w="100%" h="100%">
                 <SimpleGrid
                   paddingTop={"3%"}
@@ -267,14 +266,7 @@ export const LobbyMain = () => {
                 </SimpleGrid>
               </TabPanel>
               <TabPanel display={"flex"} w="100%" h="100%">
-                <Flex
-                  css={css`
-                    flex-grow: 1;
-                    overflow: hidden;
-                  `}
-                >
-                  <Chatting></Chatting>
-                </Flex>
+                <Chatting></Chatting>
               </TabPanel>
             </TabPanels>
           </Tabs>
