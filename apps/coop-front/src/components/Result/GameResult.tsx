@@ -44,7 +44,7 @@ const Result = () => {
       setIsPlay(false);
     } else if (nowPageIndex + 1 > gameState.gamePagesIndex) {
       if (isOwner) {
-        gameChangeHandler({ path: "/lobby" });
+        gameChangeHandler({ path: "/lobby", isGameStart: false });
       }
     }
   };

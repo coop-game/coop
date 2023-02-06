@@ -114,6 +114,8 @@ const CreateQuestion = () => {
         display: flex;
         flex-direction: column;
         gap: 10px;
+        height: 100%;
+        width: 100%;
       `}
     >
       <div
