@@ -1,10 +1,15 @@
 import { Flex } from "@chakra-ui/react";
+import { yjsGameState } from "@common/recoil/recoil.atom";
 import Logo from "@components/Animation/Logo/Logo";
 import MuteButton from "@components/Sound/MuteButton";
 import ToggleTheme from "@components/ToggleTheme";
 import { css } from "@emotion/react";
+import { useRecoilValue } from "recoil";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const gameState = useRecoilValue(yjsGameState);
+  
+  console.log("레이아웃의 게임 스테이트", gameState);
   return (
     <Flex
       className="layout_main"
@@ -28,6 +33,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           max-width: 1200px;
         `}
       >
+        <div
+          css={css`
+            position: absolute;
+          `}
+        ></div>
         <div
           css={css`
             display: flex;
