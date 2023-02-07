@@ -34,7 +34,15 @@ function MiddleContentPictureSlide({
       >
         {images.map((v, idx) => {
           return (
-            <Image key={idx} width="1280" src={v} alt="테스트 이미지"></Image>
+            <Image
+              css={css`
+                margin-right: 10px;
+              `}
+              key={idx}
+              width="1280"
+              src={v}
+              alt="테스트 이미지"
+            ></Image>
           );
         })}
       </motion.div>

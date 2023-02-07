@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import Image, { StaticImageData } from "next/image";
 import Picture from "./lowImageScroll";
-import { useRouter } from "next/dist/client/router";
 import { motion, Variants } from "framer-motion";
 import { useTranslation } from "next-i18next";
 
@@ -18,7 +17,6 @@ function MiddleLowContent({
 }) {
   const { t } = useTranslation("common");
   const { isRatio, isDetect, targetRef } = useObserver();
-  const router = useRouter();
   const pencilVariants: Variants = {
     offscreen: {
       x: `-300%`,
@@ -125,19 +123,15 @@ function MiddleLowContent({
           display: flex;
           align-items: center;
           flex-direction: column;
-          /* overflow-y: scroll; */
-          /* scroll-snap-type: y mandatory; */
         `}
       >
         {images.map((e, i) => (
           <div
             key={i}
             css={css`
-              /* width: 100%; */
               height: 100vh;
               display: flex;
               align-items: center;
-              /* scroll-snap-align: start; */
             `}
           >
             <Picture images={e} />

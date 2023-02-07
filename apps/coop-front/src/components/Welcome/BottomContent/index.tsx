@@ -1,15 +1,11 @@
 import { Button, Center, Flex, Text } from "@chakra-ui/react";
-import Image from "next/image";
-
-import DraweeLogo from "@asset/images/DraweeLogo.png";
-import { css } from "@emotion/react";
 import MotionDrawTools from "./MotionDrawTools";
-import { useRouter } from "next/dist/client/router";
 import { useTranslation } from "next-i18next";
 import Logo from "@components/Animation/Logo/Logo";
+import { useRouter } from "next/router";
 
 function BottomContent() {
-  const { locale } = useRouter();
+  const router = useRouter();
   const { t } = useTranslation("common");
   return (
     <Center w="100%" h="100vh" overflow={"hidden"}>
@@ -19,15 +15,6 @@ function BottomContent() {
           position="relative"
         >
           <MotionDrawTools></MotionDrawTools>
-          {/* <Image
-            src={DraweeLogo}
-            width={300}
-            height={300}
-            alt="로고이미지"
-            css={css`
-              z-index: 2;
-            `}
-          /> */}
           <Logo color={"blueviolet"}></Logo>
         </Center>
 
@@ -48,7 +35,13 @@ function BottomContent() {
           marginTop={{ base: "70px", sm: "10px", md: "100px", lg: "60px" }}
           zIndex={2}
         >
-          <Button width="150px" bg="colors.third">
+          <Button
+            width="150px"
+            bg="colors.third"
+            onClick={() => {
+              router.push("/");
+            }}
+          >
             {t("welcome.site.start.button")}
           </Button>
         </Center>
