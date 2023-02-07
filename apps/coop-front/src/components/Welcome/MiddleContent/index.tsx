@@ -1,5 +1,5 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import MiddleContentPictureSlide from "./src/contents";
 import MiddleContentScrollDetector from "./src/detect";
 import stock1 from "../../../../src/asset/stock1.jpg";

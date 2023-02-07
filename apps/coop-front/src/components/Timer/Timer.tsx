@@ -1,4 +1,4 @@
-import { Progress, css } from "@chakra-ui/react";
+import { Progress } from "@chakra-ui/react";
 import useTimer, { TimerPropsType } from "@hooks/useTimer";
 
 /**

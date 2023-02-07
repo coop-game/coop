@@ -7,24 +7,19 @@ import {
   CardFooter,
   CardHeader,
   Flex,
-  Heading,
   Highlight,
-  SimpleGrid,
-  Spinner,
   Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
   Text,
-  useColorMode,
   useToast,
 } from "@chakra-ui/react";
 
 import {
   userProfilesSelector,
   userSelector,
-  yjsQuestionsState,
   yjsRelayRaceAnswerState,
   yjsSelectGameType,
 } from "@common/recoil/recoil.atom";

@@ -1,13 +1,5 @@
-import { Box, Button, Flex, useColorModeValue } from "@chakra-ui/react";
 import { css } from "@emotion/react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useViewportScroll,
-  useInView,
-} from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import ObserverBox from "./ObserverBox";
 import ScrollBottomButton from "./ScrollButtonButton";
 

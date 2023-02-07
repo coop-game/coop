@@ -1,6 +1,5 @@
 import { useColorModeValue } from "@chakra-ui/react";
 import { css } from "@emotion/react";
-import { useEffect, useRef } from "react";
 
 const BackgroundNote = () => {
   const backgroundColor = useColorModeValue("#0c5900", "#000000");

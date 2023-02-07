@@ -13,8 +13,6 @@ const AvatarImage = ({
       h={"fit-content"}
       alignItems={"center"}
       direction="column"
-      //   position={"fixed"}
-      //   bottom={"50px"}
       mt={3}
     >
       <Avatar

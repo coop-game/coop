@@ -1,8 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import Chatting from "@components/Chat/Chatting";
 import Progress from "@components/Game/common/Progress";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { useTranslation } from "next-i18next";
 
 const Wating = ({
@@ -15,7 +14,6 @@ const Wating = ({
   startTime: number;
 }) => {
   const { t } = useTranslation("common");
-  const router = useRouter();
   useEffect(() => {
     if (isPlay === "paused") {
       setIsPlay("running");

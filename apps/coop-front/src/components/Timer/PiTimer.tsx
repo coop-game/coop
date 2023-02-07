@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-import { useEffect, useRef } from "react";
 
 type PiTimerPropsType = {
   onclickHandler: () => void;

@@ -1,11 +1,10 @@
-import { Avatar, Box, Flex, Text, useColorMode } from "@chakra-ui/react";
+import { Avatar, Flex, Text, useColorMode } from "@chakra-ui/react";
 import {
   userProfilesSelector,
   yjsQuestionsState,
-  yjsRelayRaceAnswerState,
 } from "@common/recoil/recoil.atom";
 import CanvasViewer from "@components/Tldraw/CanvasViewer";
-import { CPGameQuestions, CPGameRelayRaceAnswer } from "@types";
+import { CPGameQuestions } from "@types";
 import { useRecoilValue } from "recoil";
 import { useState, useEffect } from "react";
 import { css } from "@emotion/react";

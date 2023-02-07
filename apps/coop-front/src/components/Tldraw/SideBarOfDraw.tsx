@@ -5,7 +5,6 @@ import {
   yjsQuestionsState,
 } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
-import { useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import { useRecoilValue } from "recoil";
 

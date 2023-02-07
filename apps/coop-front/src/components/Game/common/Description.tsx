@@ -1,12 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import DrawingHand from "@components/Animation/DrawingSvg/DrawingHand";
 import AnswerSuccess from "@components/Animation/DrawingSvg/AnswerSuccess";
 import { css } from "@emotion/react";
 import PiTimer from "@components/Timer/PiTimer";
 import TalkingHumans from "@components/Animation/DrawingSvg/TalkingHumans";
 import { useRouter } from "next/router";
-import Transition from "@components/Animation/PageTransition/Transition";
-import { motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
 
 type DescriptionPropsType = {

@@ -1,4 +1,4 @@
-import { color, useColorMode } from "@chakra-ui/react";
+import {  useColorMode } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 type LineNoteType = {
   top?: string;

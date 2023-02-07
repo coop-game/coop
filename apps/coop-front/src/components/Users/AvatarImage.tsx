@@ -1,9 +1,6 @@
 import { Button, Flex, Stack } from "@chakra-ui/react";
-import { userSelector, userState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
 import Image from "next/image";
-import { useState } from "react";
-import { useRecoilValue } from "recoil";
 import { RepeatIcon } from "@chakra-ui/icons";
 
 const AvatarImage = ({

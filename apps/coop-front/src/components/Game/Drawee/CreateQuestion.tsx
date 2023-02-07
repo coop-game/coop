@@ -21,7 +21,6 @@ import {
 import { CPGameDrawee, CPGameQuestion } from "@types";
 import useAgreeUpdate from "@hooks/gameHooks/updateState/useAgreeUpdate";
 import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
-import { useRouter } from "next/dist/client/router";
 import { useTranslation } from "next-i18next";
 import { css } from "@emotion/react";
 import Chatting from "../../Chat/Chatting";
@@ -35,7 +34,6 @@ const CreateQuestion = () => {
   const agreeList = useRecoilValue(yjsAgreeState);
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const { t } = useTranslation("common");
-  const router = useRouter();
   const startPushQuestion = t("start.push.question");
 
   // gameState.path 에 따라 페이지 동기화
