@@ -9,7 +9,7 @@ import { useTranslation } from "next-i18next";
 const Main = () => {
   const { t } = useTranslation("common");
   const RelayRaceStart = dynamic(
-    import("@components/relay-race/RelayRaceStart"),
+    import("@components/Game/relay-race/RelayRaceStart"),
     { ssr: false }
   );
   return (

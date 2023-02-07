@@ -1,6 +1,4 @@
-import { Box, Button, Center, Flex, Text } from "@chakra-ui/react";
-import Image from "next/image";
-import DraweeLogo from "@asset/images/DraweeLogo.png";
+import { Button, Center, Flex, Text } from "@chakra-ui/react";
 import { css, keyframes } from "@emotion/react";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";

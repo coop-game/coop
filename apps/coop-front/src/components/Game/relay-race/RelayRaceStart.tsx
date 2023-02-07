@@ -16,7 +16,7 @@ import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import shuffle from "lodash/shuffle";
-import { CPGameRelayRace, CPGameRelayRaceAnswer, CPGameState } from "@types";
+import { CPGameRelayRace, CPGameRelayRaceAnswer } from "@types";
 import Wating from "./Waiting";
 import { Box, Flex } from "@chakra-ui/react";
 import useArrayUpdate from "@hooks/gameHooks/updateState/useArrayUpdate";

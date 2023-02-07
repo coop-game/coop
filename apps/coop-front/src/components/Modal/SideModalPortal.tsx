@@ -1,17 +1,14 @@
 import {
   useDisclosure,
   useColorModeValue,
-  Button,
-  Box,
   Flex,
   Tooltip,
 } from "@chakra-ui/react";
 import { css } from "@emotion/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 import ModalPortal from "./ModalPortal";
-import MuteButton from "@components/Sound/MuteButton";
 import Image from "next/image";
 
 type SideModalPortalPropsType = {
@@ -68,7 +65,7 @@ const SideModalPortal = ({ children }: SideModalPortalPropsType) => {
               overflow: hidden;
             `}
           >
-            <div
+            <motion.div
               className="overlay"
               onClick={() => onClose()}
               css={css`
@@ -80,6 +77,8 @@ const SideModalPortal = ({ children }: SideModalPortalPropsType) => {
                 background: #000000b2;
                 z-index: 10;
               `}
+              animate={{ opacity: [0, 1] }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
             />
             <motion.div
               css={css`

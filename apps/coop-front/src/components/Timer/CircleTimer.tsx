@@ -1,4 +1,3 @@
-import { Progress } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import useTimer, { TimerPropsType } from "@hooks/useTimer";
 

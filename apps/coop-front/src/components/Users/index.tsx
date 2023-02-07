@@ -1,4 +1,4 @@
-import { Box, Flex, useColorMode } from "@chakra-ui/react";
+import { Flex, useColorMode } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import User from "./User";
 import { CPUserProfile } from "@types";

@@ -1,6 +1,5 @@
 import { Avatar, Flex, Text, Badge, Box } from "@chakra-ui/react";
 import { Tooltip } from "@chakra-ui/react";
-import AvatarImage from "@components/AvatarImage";
 import { CPUserProfile } from "@types";
 import { css } from "@emotion/react";
 import { useState } from "react";

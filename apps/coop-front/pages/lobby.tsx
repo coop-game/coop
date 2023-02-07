@@ -14,7 +14,7 @@ const Lobby = (_props: InferGetStaticPropsType<typeof getStaticProps>) => {
   useHistoryBack();
   useCheckDuplicateWindows();
   const { t } = useTranslation("common");
-  const LobbyMain = dynamic(() => import("@components/LobbyMain"), {
+  const LobbyMain = dynamic(() => import("@components/Game/common/LobbyMain"), {
     ssr: false,
   });
 

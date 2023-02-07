@@ -1,11 +1,10 @@
-import { Flex, transition } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import ChakraModal from "@components/Modal/ChakraModal";
 import { css } from "@emotion/react";
 import useAnswer from "@hooks/gameHooks/DRAWEE/useAnswer";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { useTranslation } from "next-i18next";
-import React from "react";
 
 type AnswerModalPropsType = {
   setIsPlay: Dispatch<SetStateAction<"paused" | "running">>;

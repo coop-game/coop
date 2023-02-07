@@ -10,20 +10,20 @@ import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import { useCallback, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import Timer from "./Timer/Timer";
+import Timer from "../../Timer/Timer";
 import {
   doc,
   getChangeGameStateHandler,
   providerState,
   yAgreeState,
+  yQuestionsState,
 } from "@common/yjsStore/userStore";
 import { CPGameDrawee, CPGameQuestion } from "@types";
 import useAgreeUpdate from "@hooks/gameHooks/updateState/useAgreeUpdate";
 import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
-import { useRouter } from "next/dist/client/router";
 import { useTranslation } from "next-i18next";
 import { css } from "@emotion/react";
-import Chatting from "./Chat/Chatting";
+import Chatting from "../../Chat/Chatting";
 
 const CreateQuestion = () => {
   const { provider } = providerState;
@@ -34,7 +34,6 @@ const CreateQuestion = () => {
   const agreeList = useRecoilValue(yjsAgreeState);
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const { t } = useTranslation("common");
-  const router = useRouter();
   const startPushQuestion = t("start.push.question");
 
   // gameState.path 에 따라 페이지 동기화
@@ -93,20 +92,34 @@ const CreateQuestion = () => {
     }
   };
 
-  const nextPageHandlerByOwner = useCallback(() => {
-    if (isOwner) {
-      yAgreeState.clear();
-      doc.transact(() => {
-        changeGameStateHandler({ path: "/draw", gamePagesIndex: 0 });
-      });
-    }
-  }, [changeGameStateHandler, isOwner]);
+  const isGamePageEmpty = () => {
+    return yQuestionsState.length === 0;
+  };
+
+  const routePush_lobby = useCallback(() => {
+    const newGameState: Partial<CPGameDrawee> = {};
+    newGameState.path = "/lobby";
+    newGameState.isGameStart = false;
+    changeGameStateHandler(newGameState);
+  }, [changeGameStateHandler]);
+
+  const nextPageHandler = useCallback(() => {
+    yAgreeState.clear();
+    doc.transact(() => {
+      changeGameStateHandler({ path: "/draw", gamePagesIndex: 0 });
+    });
+  }, [changeGameStateHandler]);
 
   useEffect(() => {
-    if (agreeList && userProfiles && agreeList.length === userProfiles.length) {
-      nextPageHandlerByOwner();
+    if (
+      isOwner === true &&
+      agreeList &&
+      userProfiles &&
+      agreeList.length === userProfiles.length
+    ) {
+      nextPageHandler();
     }
-  }, [agreeList, nextPageHandlerByOwner, userProfiles]);
+  }, [agreeList, isOwner, nextPageHandler, userProfiles]);
 
   return (
     <div
@@ -127,10 +140,14 @@ const CreateQuestion = () => {
         `}
       >
         <Timer
-          time={20000}
+          time={15000}
           gaugeColor={["red", "orange", "green"]}
           callback={async () => {
-            nextPageHandlerByOwner();
+            if (isGamePageEmpty()) {
+              routePush_lobby();
+            } else {
+              nextPageHandler();
+            }
           }}
         />
       </div>

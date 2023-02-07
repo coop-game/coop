@@ -1,5 +1,4 @@
-import { css } from "@emotion/react";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 type ModalPortalPropsType = {

@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { css } from "@emotion/react";

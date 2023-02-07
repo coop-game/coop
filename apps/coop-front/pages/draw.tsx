@@ -10,7 +10,9 @@ import Head from "next/head";
 
 function DrawPage() {
   useHistoryBack();
-  const Draw = dynamic(() => import("@components/Draw"), { ssr: false });
+  const Draw = dynamic(() => import("@components/Game/Drawee/Draw"), {
+    ssr: false,
+  });
   const { t } = useTranslation("common");
   return (
     <>

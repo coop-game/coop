@@ -17,7 +17,7 @@ import {
 import { userProfilesState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
 import { useRecoilValue } from "recoil";
 import { useTranslation } from "next-i18next";
 

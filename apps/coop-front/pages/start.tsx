@@ -6,9 +6,12 @@ import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { useTranslation } from "next-i18next";
 
-const CreateQuestion = dynamic(import("@components/CreateQuestion"), {
-  ssr: false,
-});
+const CreateQuestion = dynamic(
+  import("@components/Game/Drawee/CreateQuestion"),
+  {
+    ssr: false,
+  }
+);
 
 const Start = () => {
   useHistoryBack();

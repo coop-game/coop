@@ -1,14 +1,12 @@
 import { Box, Button, Flex, Input, Text } from "@chakra-ui/react";
 import { yjsRelayRaceAnswerState } from "@common/recoil/recoil.atom";
 import { doc } from "@common/yjsStore/userStore";
-import Progress from "@components/Progress";
+import Progress from "@components/Game/common/Progress";
 import { CPGameRelayRaceAnswer } from "@types";
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import CanvasViewer from "@components/Tldraw/CanvasViewer";
-import { css } from "@emotion/react";
 import { userState } from "@common/recoil/recoil.atom";
-import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
 const AnswerInput = ({

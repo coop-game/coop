@@ -17,26 +17,25 @@ import {
 } from "@common/recoil/recoil.atom";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
-import Progress from "./Progress";
+import Progress from "../common/Progress";
 import Solver from "./Solver";
 import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
-import AnswerModal from "./Modal/AnswerModal";
+import AnswerModal from "../../Modal/AnswerModal";
 import { CPGameDrawee } from "@types";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
 import DrawEditor from "./DrawEditor";
-import CanvasViewer from "./Tldraw/CanvasViewer";
-import SideBarOfDraw from "./Tldraw/SideBarOfDraw";
+import CanvasViewer from "../../Tldraw/CanvasViewer";
+import SideBarOfDraw from "../../Tldraw/SideBarOfDraw";
 
 function Draw() {
   const gameState = useRecoilValue(yjsGameState);
   const { roomId } = useRecoilValue(userSelector) ?? {};
+  const questionsState = useRecoilValue(yjsQuestionsState);
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
   const changeGameStateHandler =
     getChangeGameStateHandler<CPGameDrawee>(roomId);
-  const questionsState = useRecoilValue(yjsQuestionsState);
-
   useProfileUpdate();
   useQuestionUpdate();
   useGameStateUpdate(roomId);
@@ -46,28 +45,28 @@ function Draw() {
     if (isOwner === true) {
       const gamePagesIndex = yGameState.get(roomId).gamePagesIndex;
       const newGameState = {};
-      if (gamePagesIndex + 1 >= questionsState.length) {
+      if (gamePagesIndex + 1 >= yQuestionsState.length) {
         newGameState["path"] = "/result";
-        // newGameState["gamePagesIndex"] = gamePagesIndex + 1;
       } else {
         newGameState["gamePagesIndex"] = gamePagesIndex + 1;
       }
       changeGameStateHandler(newGameState);
     }
-  }, [changeGameStateHandler, isOwner, questionsState.length, roomId]);
+  }, [changeGameStateHandler, isOwner, roomId]);
   const { getSolverId } = useSolver();
 
   const setQuestionEnd = useCallback(() => {
     const gamePagesIndex = yGameState.get(roomId)?.gamePagesIndex;
-    gamePagesIndex &&
+    gamePagesIndex !== undefined &&
       doc.transact(() => {
         const question = yQuestionsState.get(gamePagesIndex);
-
+        console.log("question 이거", question);
         if (question === undefined) return;
         const newQuestion = {
           ...question,
           isQuestionEnd: true,
         };
+        console.log("changePagePageIndex", gamePagesIndex);
         yQuestionsState.delete(gamePagesIndex);
         yQuestionsState.insert(gamePagesIndex, [newQuestion]);
       });
@@ -82,7 +81,7 @@ function Draw() {
     }
   }, [getSolverId, roomId, setQuestionEnd]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const isSolverInUserProfiles = () => {
       return userProfiles.filter((v) => v.id === getSolverId()).length > 0;
     };
@@ -97,8 +96,8 @@ function Draw() {
     <>
       {gameState &&
         gameState.path === "/draw" &&
-        questionsState.length >= gameState.gamePagesIndex &&
-        questionsState[gameState.gamePagesIndex]?.isQuestionEnd && (
+        questionsState.length > gameState.gamePagesIndex &&
+        questionsState[gameState.gamePagesIndex].isQuestionEnd && (
           <AnswerModal
             setIsPlay={setIsPlay}
             onClose={() => {
