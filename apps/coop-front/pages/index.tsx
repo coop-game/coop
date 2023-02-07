@@ -83,11 +83,11 @@ export default function Home({
           description: t("seo.main.description"),
           images: [
             {
-              url: `/images/DraweeLogo.png`,
+              url: `/images/logo.svg`,
               width: 800,
               height: 600,
               alt: t("seo.main.opengraph.images.alt"),
-              type: "image/png",
+              type: "image/svg+xml",
             },
           ],
         }}
