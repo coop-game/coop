@@ -140,7 +140,7 @@ const CreateQuestion = () => {
         `}
       >
         <Timer
-          time={5000}
+          time={15000}
           gaugeColor={["red", "orange", "green"]}
           callback={async () => {
             if (isGamePageEmpty()) {
