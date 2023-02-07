@@ -17,7 +17,7 @@ import {
 } from "@common/recoil/recoil.atom";
 import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import Progress from "./Progress";
 import Solver from "./Solver";
@@ -35,26 +35,20 @@ function Draw() {
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
   const changeGameStateHandler =
     getChangeGameStateHandler<CPGameDrawee>(roomId);
-  const questionsState = useRecoilValue(yjsQuestionsState);
-
-  useProfileUpdate();
-  useQuestionUpdate();
-  useGameStateUpdate(roomId);
-  useSyncPageFromGameState();
+  // const questionsState = useRecoilValue(yjsQuestionsState);
 
   const nextPageHandler = useCallback(() => {
     if (isOwner === true) {
       const gamePagesIndex = yGameState.get(roomId).gamePagesIndex;
       const newGameState = {};
-      if (gamePagesIndex + 1 >= questionsState.length) {
+      if (gamePagesIndex + 1 >= yQuestionsState.length) {
         newGameState["path"] = "/result";
-        // newGameState["gamePagesIndex"] = gamePagesIndex + 1;
       } else {
         newGameState["gamePagesIndex"] = gamePagesIndex + 1;
       }
       changeGameStateHandler(newGameState);
     }
-  }, [changeGameStateHandler, isOwner, questionsState.length, roomId]);
+  }, [changeGameStateHandler, isOwner, roomId]);
   const { getSolverId } = useSolver();
 
   const setQuestionEnd = useCallback(() => {
@@ -82,7 +76,12 @@ function Draw() {
     }
   }, [getSolverId, roomId, setQuestionEnd]);
 
-  useEffect(() => {
+  useProfileUpdate();
+  useQuestionUpdate();
+  useGameStateUpdate(roomId);
+  useSyncPageFromGameState();
+
+  useLayoutEffect(() => {
     const isSolverInUserProfiles = () => {
       return userProfiles.filter((v) => v.id === getSolverId()).length > 0;
     };
@@ -97,8 +96,8 @@ function Draw() {
     <>
       {gameState &&
         gameState.path === "/draw" &&
-        questionsState.length >= gameState.gamePagesIndex &&
-        questionsState[gameState.gamePagesIndex]?.isQuestionEnd && (
+        yQuestionsState.length >= gameState.gamePagesIndex &&
+        yQuestionsState.get(gameState.gamePagesIndex)?.isQuestionEnd && (
           <AnswerModal
             setIsPlay={setIsPlay}
             onClose={() => {
@@ -126,10 +125,11 @@ function Draw() {
           <Progress
             play={isPlay}
             startTime={gameState?.pageStartTime}
-            time={50000}
+            time={10000}
             callback={() => {
               setIsPlay("paused");
               questionTimeOut();
+              nextPageHandler();
             }}
           ></Progress>
           {getSolverId() === providerState?.provider?.awareness?.clientID ? (

@@ -16,6 +16,7 @@ import {
   getChangeGameStateHandler,
   providerState,
   yAgreeState,
+  yQuestionsState,
 } from "@common/yjsStore/userStore";
 import { CPGameDrawee, CPGameQuestion } from "@types";
 import useAgreeUpdate from "@hooks/gameHooks/updateState/useAgreeUpdate";
@@ -93,20 +94,34 @@ const CreateQuestion = () => {
     }
   };
 
-  const nextPageHandlerByOwner = useCallback(() => {
-    if (isOwner) {
-      yAgreeState.clear();
-      doc.transact(() => {
-        changeGameStateHandler({ path: "/draw", gamePagesIndex: 0 });
-      });
-    }
-  }, [changeGameStateHandler, isOwner]);
+  const isGamePageEmpty = () => {
+    return yQuestionsState.length === 0;
+  };
+
+  const routePush_lobby = useCallback(() => {
+    const newGameState: Partial<CPGameDrawee> = {};
+    newGameState.path = "/lobby";
+    newGameState.isGameStart = false;
+    changeGameStateHandler(newGameState);
+  }, [changeGameStateHandler]);
+
+  const nextPageHandler = useCallback(() => {
+    yAgreeState.clear();
+    doc.transact(() => {
+      changeGameStateHandler({ path: "/draw", gamePagesIndex: 0 });
+    });
+  }, [changeGameStateHandler]);
 
   useEffect(() => {
-    if (agreeList && userProfiles && agreeList.length === userProfiles.length) {
-      nextPageHandlerByOwner();
+    if (
+      isOwner === true &&
+      agreeList &&
+      userProfiles &&
+      agreeList.length === userProfiles.length
+    ) {
+      nextPageHandler();
     }
-  }, [agreeList, nextPageHandlerByOwner, userProfiles]);
+  }, [agreeList, isOwner, nextPageHandler, userProfiles]);
 
   return (
     <div
@@ -127,10 +142,14 @@ const CreateQuestion = () => {
         `}
       >
         <Timer
-          time={20000}
+          time={5000}
           gaugeColor={["red", "orange", "green"]}
           callback={async () => {
-            nextPageHandlerByOwner();
+            if (isGamePageEmpty()) {
+              routePush_lobby();
+            } else {
+              nextPageHandler();
+            }
           }}
         />
       </div>

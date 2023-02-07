@@ -2,7 +2,7 @@ import { yjsQuestionsState } from "./../../common/recoil/recoil.atom";
 import { yjsGameState } from "../../common/recoil/recoil.atom";
 import { useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 
 /**
  *
@@ -26,6 +26,7 @@ const useSyncPageFromGameState = () => {
         router.push("/");
       }
     } else if (gameState.path && gameState.path !== router.pathname) {
+      console.log("useSyncPageFromGameState", gameState.path, router.pathname);
       router.push(gameState.path);
     }
   }, [gameState, router]);
