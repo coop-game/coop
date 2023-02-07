@@ -20,7 +20,6 @@ function TopContent() {
     <Center w="100%" h="max-content">
       <Flex direction="column">
         <Center marginTop={{ base: "50px", sm: "10px", md: "50px" }}>
-          {/* <Image src={DraweeLogo} width={300} height={300} alt="로고이미지" /> */}
           <Logo color={"blueviolet"}></Logo>
         </Center>
         <Center marginTop={{ base: "40px", sm: "20px", md: "40px" }}>
