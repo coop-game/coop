@@ -8,7 +8,7 @@ import {
   yjsGameState,
 } from "@common/recoil/recoil.atom";
 import { getChangeGameStateHandler } from "@common/yjsStore/userStore";
-import Progress from "@components/Progress";
+import Progress from "@components/Game/common/Progress";
 import { css } from "@emotion/react";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";

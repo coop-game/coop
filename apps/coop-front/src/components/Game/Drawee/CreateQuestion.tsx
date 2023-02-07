@@ -10,7 +10,7 @@ import useProfileUpdate from "@hooks/gameHooks/updateState/useProfileUpdate";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import { useCallback, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import Timer from "./Timer/Timer";
+import Timer from "../../Timer/Timer";
 import {
   doc,
   getChangeGameStateHandler,
@@ -24,7 +24,7 @@ import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
 import { useRouter } from "next/dist/client/router";
 import { useTranslation } from "next-i18next";
 import { css } from "@emotion/react";
-import Chatting from "./Chat/Chatting";
+import Chatting from "../../Chat/Chatting";
 
 const CreateQuestion = () => {
   const { provider } = providerState;

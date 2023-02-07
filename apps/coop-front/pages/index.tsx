@@ -15,14 +15,14 @@ import {
 import { userSelector } from "@common/recoil/recoil.atom";
 import { nanoid } from "nanoid";
 import { useRecoilState } from "recoil";
-import AvatarImage from "@components/AvatarImage";
+import AvatarImage from "@components/Users/AvatarImage";
 import { providerState } from "@common/yjsStore/userStore";
 import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
 import Layout from "@components/layout";
 import useHistoryBack from "@hooks/usehistoryBack";
 import { css } from "@emotion/react";
 import PostIt from "@components/layout/PostIt/PostIt";
-import Description from "@components/Description/Description";
+import Description from "@components/Game/common/Description";
 import Logo from "@components/Animation/Logo/Logo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
@@ -74,29 +74,29 @@ export default function Home({
 
   return (
     <>
-        <NextSeo
-          title={t("seo.main.title")}
-          description={t("seo.main.description")}
-          openGraph={{
-            url: URL,
-            title: t("seo.main.title"),
-            description: t("seo.main.description"),
-            images: [
-              {
-                url: `/images/DraweeLogo.png`,
-                width: 800,
-                height: 600,
-                alt: t("seo.main.opengraph.images.alt"),
-                type: "image/png",
-              },
-            ],
-          }}
-          twitter={{
-            handle: "@handle",
-            site: "@site",
-            cardType: "summary_large_image",
-          }}
-        />
+      <NextSeo
+        title={t("seo.main.title")}
+        description={t("seo.main.description")}
+        openGraph={{
+          url: URL,
+          title: t("seo.main.title"),
+          description: t("seo.main.description"),
+          images: [
+            {
+              url: `/images/DraweeLogo.png`,
+              width: 800,
+              height: 600,
+              alt: t("seo.main.opengraph.images.alt"),
+              type: "image/png",
+            },
+          ],
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <Layout>
         <Flex
           w={"100%"}

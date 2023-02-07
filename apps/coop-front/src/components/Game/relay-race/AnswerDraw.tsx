@@ -7,7 +7,7 @@ import {
 } from "@common/recoil/recoil.atom";
 import { doc, providerState } from "@common/yjsStore/userStore";
 import NewCursor, { CursorComponent } from "@components/Tldraw/NewCursor";
-import Progress from "@components/Progress";
+import Progress from "@components/Game/common/Progress";
 import { Tldraw } from "@coop/draw";
 import { css } from "@emotion/react";
 import { useMultiplayerState } from "@hooks/useMultiplayerState";
@@ -15,7 +15,7 @@ import { CPGameRelayRaceAnswer } from "@types";
 import { useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import DrawEditor from "@components/DrawEditor";
+import DrawEditor from "@components/Game/Drawee/DrawEditor";
 
 function Editor({ pageIndex }: { pageIndex: number }) {
   const userState = useRecoilValue(userSelector);

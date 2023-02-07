@@ -48,7 +48,7 @@ import {
 } from "@common/yjsStore/userStore";
 
 import Users from "@components/Users";
-import Chatting from "./Chat/Chatting";
+import Chatting from "../../Chat/Chatting";
 
 import { useEffect, useState } from "react";
 import {
@@ -59,9 +59,9 @@ import {
 } from "@types";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
-import ShakeAnimation from "./Animation/ShakeAnimation";
-import DraweeInformationAnimation from "./Animation/GameInformation/Drawee";
-import RelayRaceInformationAnimation from "./Animation/GameInformation/RelayRace";
+import ShakeAnimation from "../../Animation/ShakeAnimation";
+import DraweeInformationAnimation from "../../Animation/GameInformation/Drawee";
+import RelayRaceInformationAnimation from "../../Animation/GameInformation/RelayRace";
 import LinkSVG from "@asset/LinkSVG";
 import useGameSelector from "@hooks/gameHooks/updateState/useGameSelector";
 

@@ -19,15 +19,15 @@ import useSyncPageFromGameState from "@hooks/pageMove/useSyncPageFromGameState";
 import useGameStateUpdate from "@hooks/gameHooks/updateState/useGameStateUpdate";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
-import Progress from "./Progress";
+import Progress from "../common/Progress";
 import Solver from "./Solver";
 import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
-import AnswerModal from "./Modal/AnswerModal";
+import AnswerModal from "../../Modal/AnswerModal";
 import { CPGameDrawee } from "@types";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
 import DrawEditor from "./DrawEditor";
-import CanvasViewer from "./Tldraw/CanvasViewer";
-import SideBarOfDraw from "./Tldraw/SideBarOfDraw";
+import CanvasViewer from "../../Tldraw/CanvasViewer";
+import SideBarOfDraw from "../../Tldraw/SideBarOfDraw";
 
 function Draw() {
   const gameState = useRecoilValue(yjsGameState);

@@ -22,11 +22,11 @@ export default function DraweeInformationAnimation() {
     <Box w="100%" display={"flex"} justifyContent="center">
       {/* 놀란 얼굴 */}
       <motion.svg viewBox="0 -1.5 256 256" xmlns="http://www.w3.org/2000/svg">
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g
           id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></g>
         <g id="SVGRepo_iconCarrier">
           <path
@@ -57,11 +57,11 @@ export default function DraweeInformationAnimation() {
       </motion.svg>
       {/* 느낌표 */}
       <motion.svg viewBox="15.0 0 156 156" xmlns="http://www.w3.org/2000/svg">
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g
           id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></g>
         <g id="SVGRepo_iconCarrier">
           <title>exclamation-point</title>
@@ -102,11 +102,11 @@ export default function DraweeInformationAnimation() {
       </motion.svg>
       {/* 노트 */}
       <svg viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g
           id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></g>
         <g id="SVGRepo_iconCarrier">
           <g clipPath="url(#clip0)">

@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 import ModalPortal from "./ModalPortal";
-import MuteButton from "@components/Sound/MuteButton";
+import MuteButton from "@components/Button/MuteButton";
 import Image from "next/image";
 
 type SideModalPortalPropsType = {

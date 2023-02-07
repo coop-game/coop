@@ -9,8 +9,8 @@ import { Tldraw } from "@coop/draw";
 import { css } from "@emotion/react";
 import { useMultiplayerState } from "@hooks/useMultiplayerState";
 import { useRecoilValue } from "recoil";
-import SideBarOfDraw from "./Tldraw/SideBarOfDraw";
-import NewCursor, { CursorComponent } from "./Tldraw/NewCursor";
+import SideBarOfDraw from "../../Tldraw/SideBarOfDraw";
+import NewCursor, { CursorComponent } from "../../Tldraw/NewCursor";
 
 type drawEditorPropsType = {
   pageIndex: number;
