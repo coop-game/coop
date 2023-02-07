@@ -85,6 +85,8 @@
   "tooltip.hover.darkmode": "Darkmode",
   "tooltip.hover.lightmode": "Lightmode",
 
+  "tooltip.hover.language": "Language",
+
   "seo.main.title": "Drawee",
   "seo.main.description": "Drawee is a web game that everyone enjoys drawing together.",
   "seo.main.opengraph.images.alt": "Drawee logo image",
@@ -101,5 +103,5 @@
   "seo.welcome.title": "Welcome to Drawee!",
   "seo.welcome.description": "Drawee is a web game that everyone enjoys drawing together.",
 
-  "lobby.game.selected":"selected"
+  "lobby.game.selected": "selected"
 }

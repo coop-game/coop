@@ -86,6 +86,7 @@
 
   "tooltip.hover.darkmode": "다크모드",
   "tooltip.hover.lightmode": "라이트모드",
+  "tooltip.hover.language": "언어",
 
   "seo.main.title": "Drawee",
   "seo.main.description": "모두 다같이 함께 그림을 그리며 즐기는 웹 게임 Drawee입니다.",
@@ -103,5 +104,5 @@
   "seo.welcome.title": "Drawee",
   "seo.welcome.description": "모두 다같이 함께 그림을 그리며 즐기는 웹 게임 Drawee입니다.",
 
-  "lobby.game.selected":"선택됨"
+  "lobby.game.selected": "선택됨"
 }

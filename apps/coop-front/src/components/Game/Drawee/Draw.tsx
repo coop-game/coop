@@ -32,10 +32,14 @@ import SideBarOfDraw from "../../Tldraw/SideBarOfDraw";
 function Draw() {
   const gameState = useRecoilValue(yjsGameState);
   const { roomId } = useRecoilValue(userSelector) ?? {};
+  const questionsState = useRecoilValue(yjsQuestionsState);
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
   const changeGameStateHandler =
     getChangeGameStateHandler<CPGameDrawee>(roomId);
-  // const questionsState = useRecoilValue(yjsQuestionsState);
+  useProfileUpdate();
+  useQuestionUpdate();
+  useGameStateUpdate(roomId);
+  useSyncPageFromGameState();
 
   const nextPageHandler = useCallback(() => {
     if (isOwner === true) {
@@ -53,15 +57,16 @@ function Draw() {
 
   const setQuestionEnd = useCallback(() => {
     const gamePagesIndex = yGameState.get(roomId)?.gamePagesIndex;
-    gamePagesIndex &&
+    gamePagesIndex !== undefined &&
       doc.transact(() => {
         const question = yQuestionsState.get(gamePagesIndex);
-
+        console.log("question 이거", question);
         if (question === undefined) return;
         const newQuestion = {
           ...question,
           isQuestionEnd: true,
         };
+        console.log("changePagePageIndex", gamePagesIndex);
         yQuestionsState.delete(gamePagesIndex);
         yQuestionsState.insert(gamePagesIndex, [newQuestion]);
       });
@@ -75,11 +80,6 @@ function Draw() {
       setQuestionEnd();
     }
   }, [getSolverId, roomId, setQuestionEnd]);
-
-  useProfileUpdate();
-  useQuestionUpdate();
-  useGameStateUpdate(roomId);
-  useSyncPageFromGameState();
 
   useLayoutEffect(() => {
     const isSolverInUserProfiles = () => {
@@ -96,8 +96,8 @@ function Draw() {
     <>
       {gameState &&
         gameState.path === "/draw" &&
-        yQuestionsState.length >= gameState.gamePagesIndex &&
-        yQuestionsState.get(gameState.gamePagesIndex)?.isQuestionEnd && (
+        questionsState.length > gameState.gamePagesIndex &&
+        questionsState[gameState.gamePagesIndex].isQuestionEnd && (
           <AnswerModal
             setIsPlay={setIsPlay}
             onClose={() => {
@@ -129,7 +129,6 @@ function Draw() {
             callback={() => {
               setIsPlay("paused");
               questionTimeOut();
-              nextPageHandler();
             }}
           ></Progress>
           {getSolverId() === providerState?.provider?.awareness?.clientID ? (

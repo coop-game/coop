@@ -9,9 +9,12 @@ import Head from "next/head";
 
 const Result = () => {
   useHistoryBack();
-  const GameResult = dynamic(() => import("@components/Result/GameResult"), {
-    ssr: false,
-  });
+  const GameResult = dynamic(
+    () => import("@components/Game/Result/GameResult"),
+    {
+      ssr: false,
+    }
+  );
   const { t } = useTranslation("common");
 
   return (

@@ -3,7 +3,7 @@ import {
   userProfilesSelector,
   yjsRelayRaceAnswerState,
 } from "@common/recoil/recoil.atom";
-import AvatarImage from "@components/Result/AvatarImage";
+import AvatarImage from "@components/Game/Result/AvatarImage";
 import PostIt from "@components/layout/PostIt/PostIt";
 import { CPGameRelayRaceAnswer } from "@types";
 import { useRecoilValue } from "recoil";
