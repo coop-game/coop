@@ -27,8 +27,8 @@ const SEO = {
     images: [
       {
         url: "/images/logo.png",
-        width: 285,
-        height: 167,
+        width: 397,
+        height: 156,
         alt: "Drawee로고",
       },
     ],

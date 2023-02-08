@@ -84,8 +84,8 @@ export default function Home({
           images: [
             {
               url: `/images/logo.png`,
-              width: 800,
-              height: 600,
+              width: 397,
+              height: 156,
               alt: t("seo.main.opengraph.images.alt"),
               type: "image/png",
             },

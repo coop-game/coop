@@ -50,9 +50,9 @@ function Welcome() {
           description: t("seo.welcome.description"),
           images: [
             {
-              url: `/images/DraweeLogo.png`,
-              width: 800,
-              height: 600,
+              url: `/images/logo.png`,
+              width: 397,
+              height: 156,
               alt: t("main.seo.opengraph.images.alt"),
               type: "image/png",
             },
