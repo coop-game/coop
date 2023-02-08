@@ -18887,6 +18887,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"storybook-addon-next-router@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "storybook-addon-next-router@npm:4.0.2"
+  dependencies:
+    tslib: 2.4.0
+  peerDependencies:
+    "@storybook/addon-actions": ^6.0.0
+    "@storybook/addons": ^6.0.0
+    "@storybook/client-api": ^6.0.0
+    next: ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 5e3d1b2510700c21d175e10d56bcad970a8b390715bbd8e9767528e60165c4bc651ef94a7a854f042185454c51c57d884b03c625c0ee28000d3916e11a6d865f
+  languageName: node
+  linkType: hard
+
 "storybook-addon-next@npm:^1.7.1":
   version: 1.7.1
   resolution: "storybook-addon-next@npm:1.7.1"
@@ -18915,8 +18931,12 @@ __metadata:
   resolution: "storybook@workspace:apps/storybook"
   dependencies:
     "@babel/core": ^7.20.5
+    "@chakra-ui/icons": ^2.0.13
+    "@chakra-ui/react": ^2.4.2
     "@coop/core": "*"
     "@coop/draw": "*"
+    "@emotion/react": 11
+    "@emotion/styled": 11
     "@storybook/addon-actions": ^6.5.14
     "@storybook/addon-essentials": ^6.5.14
     "@storybook/addon-interactions": ^6.5.14
@@ -18925,7 +18945,31 @@ __metadata:
     "@storybook/manager-webpack5": ^6.5.14
     "@storybook/react": ^6.5.14
     "@storybook/testing-library": ^0.0.13
+    "@y-presence/client": 1.1.8
+    "@y-presence/react": ^2.0.1
     babel-loader: ^8.3.0
+    framer-motion: 6
+    i18next: ^22.4.9
+    lib0: ^0.2.58
+    lodash: ^4.17.21
+    nanoid: ^4.0.0
+    next: 13.0.6
+    next-auth: ^4.18.0
+    next-i18next: ^13.0.3
+    next-pwa: ^5.6.0
+    next-seo: ^5.15.0
+    next-sitemap: ^3.1.48
+    react: 18.2.0
+    react-dom: 18.2.0
+    react-i18next: ^12.1.4
+    react-transition-group: ^4.4.5
+    recoil: ^0.7.6
+    storybook-addon-next-router: ^4.0.2
+    typescript: 4.9.3
+    y-protocols: ^1.0.5
+    y-webrtc: ^10.2.3
+    y-websocket: ^1.4.5
+    yjs: ^13.5.43
   languageName: unknown
   linkType: soft
 
