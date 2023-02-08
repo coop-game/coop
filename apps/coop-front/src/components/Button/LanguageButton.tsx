@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
@@ -8,6 +9,7 @@ import { Tooltip } from "@chakra-ui/react";
 const LanguageButton = ({ t, i18n }) => {
   // const { t } = useTranslation("common");
   const router = useRouter();
+  console.log(t, i18n, router.locale);
   return (
     <Tooltip label={t("tooltip.hover.language")}>
       <button
