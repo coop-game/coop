@@ -28,6 +28,7 @@ import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
 import DrawEditor from "./DrawEditor";
 import CanvasViewer from "../../Tldraw/CanvasViewer";
 import SideBarOfDraw from "../../Tldraw/SideBarOfDraw";
+import { DRAWEE_DRAWING_TIME } from "src/constant/games";
 
 function Draw() {
   const gameState = useRecoilValue(yjsGameState);
@@ -123,7 +124,7 @@ function Draw() {
           <Progress
             play={isPlay}
             startTime={gameState?.pageStartTime}
-            time={50000000}
+            time={DRAWEE_DRAWING_TIME}
             callback={() => {
               setIsPlay("paused");
               questionTimeOut();

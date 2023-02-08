@@ -24,6 +24,7 @@ import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
 import { useTranslation } from "next-i18next";
 import { css } from "@emotion/react";
 import Chatting from "../../Chat/Chatting";
+import { DRAWEE_QUESTION_TIME } from "src/constant/games";
 
 const CreateQuestion = () => {
   const { provider } = providerState;
@@ -140,7 +141,7 @@ const CreateQuestion = () => {
         `}
       >
         <Timer
-          time={15000}
+          time={DRAWEE_QUESTION_TIME}
           gaugeColor={["red", "orange", "green"]}
           callback={async () => {
             if (isGamePageEmpty()) {

@@ -10,3 +10,6 @@ export const DEFAULT_GAME_STATE: CPGames = {
     path: "/start",
   },
 };
+
+export const DRAWEE_QUESTION_TIME = 15000;
+export const DRAWEE_DRAWING_TIME = 50000;
