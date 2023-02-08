@@ -87,6 +87,8 @@
 
   "tooltip.hover.language": "Language",
 
+  "tooltip.hover.profile.change": "Profile change",
+
   "seo.main.title": "Drawee",
   "seo.main.description": "Drawee is a web game that everyone enjoys drawing together.",
   "seo.main.opengraph.images.alt": "Drawee logo image",

@@ -88,6 +88,8 @@
   "tooltip.hover.lightmode": "라이트모드",
   "tooltip.hover.language": "언어",
 
+  "tooltip.hover.profile.change": "프로필 바꾸기",
+
   "seo.main.title": "Drawee",
   "seo.main.description": "모두 다같이 함께 그림을 그리며 즐기는 웹 게임 Drawee입니다.",
   "seo.main.opengraph.images.alt": "Drawee 로고 이미지",

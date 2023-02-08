@@ -10,6 +10,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <meta name="theme-color" content="hsl(24.3, 97.4%, 54.3%)" />
         <link rel="manifest" href="/manifest.json" />
         <link
           href="favicon-16x16.png"

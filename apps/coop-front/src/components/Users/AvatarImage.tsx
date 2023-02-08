@@ -1,7 +1,8 @@
-import { Button, Flex, Stack } from "@chakra-ui/react";
+import { Button, Flex, Stack, Tooltip } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import Image from "next/image";
 import { RepeatIcon } from "@chakra-ui/icons";
+import { useTranslation } from "next-i18next";
 
 const AvatarImage = ({
   avatarIndex,
@@ -12,6 +13,7 @@ const AvatarImage = ({
   borderColor: string;
   randomAvatarHandler?: () => void;
 }) => {
+  const { t } = useTranslation("common");
   return (
     <Flex
       className="avatar_image"
@@ -45,16 +47,18 @@ const AvatarImage = ({
         ></Image>
       </Stack>
       {randomAvatarHandler && (
-        <Button
-          css={css`
-            position: absolute;
-            right: 0;
-            bottom: 0;
-          `}
-          onClick={randomAvatarHandler}
-        >
-          <RepeatIcon />
-        </Button>
+        <Tooltip label={t("tooltip.hover.profile.change")}>
+          <Button
+            css={css`
+              position: absolute;
+              right: 0;
+              bottom: 0;
+            `}
+            onClick={randomAvatarHandler}
+          >
+            <RepeatIcon />
+          </Button>
+        </Tooltip>
       )}
     </Flex>
   );
