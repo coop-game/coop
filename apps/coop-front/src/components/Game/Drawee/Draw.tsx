@@ -60,13 +60,11 @@ function Draw() {
     gamePagesIndex !== undefined &&
       doc.transact(() => {
         const question = yQuestionsState.get(gamePagesIndex);
-        console.log("question 이거", question);
         if (question === undefined) return;
         const newQuestion = {
           ...question,
           isQuestionEnd: true,
         };
-        console.log("changePagePageIndex", gamePagesIndex);
         yQuestionsState.delete(gamePagesIndex);
         yQuestionsState.insert(gamePagesIndex, [newQuestion]);
       });

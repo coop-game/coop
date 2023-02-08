@@ -26,7 +26,6 @@ const useSyncPageFromGameState = () => {
         router.push("/");
       }
     } else if (gameState.path && gameState.path !== router.pathname) {
-      console.log("useSyncPageFromGameState", gameState.path, router.pathname);
       router.push(gameState.path);
     }
   }, [gameState, router]);
