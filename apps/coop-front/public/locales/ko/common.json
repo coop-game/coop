@@ -91,8 +91,10 @@
   "tooltip.hover.profile.change": "프로필 바꾸기",
 
   "seo.main.title": "Drawee",
-  "seo.main.description": "모두 다같이 함께 그림을 그리며 즐기는 웹 게임 Drawee입니다.",
+  "seo.main.description": "WebRTC, Next.js, i18n 지원 및 Yjs를 사용하여 멀티플레이어 캐치 마인드 게임에 참여하세요. 실시간으로 전 세계의 플레이어와 경쟁하고 누가 가장 많은 마음을 사로잡을 수 있는지 확인하세요.",
   "seo.main.opengraph.images.alt": "Drawee 로고 이미지",
+  "seo.welcome.keywords": "multiplayer catch mind game, WebRTC, Next.js, i18n support, Yjs, real-time, competition",
+  "seo.welcome.author": "startPlayUp",
 
   "seo.lobby.title": "Drawee 로비",
 

@@ -90,8 +90,10 @@
   "tooltip.hover.profile.change": "Profile change",
 
   "seo.main.title": "Drawee",
-  "seo.main.description": "Drawee is a web game that everyone enjoys drawing together.",
+  "seo.main.description": "Join the multiplayer catch mind game using WebRTC, Next.js, i18n support, and Yjs. Compete with players from around the world in real-time and see who can catch the most minds.",
   "seo.main.opengraph.images.alt": "Drawee logo image",
+  "seo.welcome.keywords": "multiplayer catch mind game, WebRTC, Next.js, i18n support, Yjs, real-time, competition",
+  "seo.welcome.author": "startPlayUp",
 
   "seo.lobby.title": "Drawee lobby",
 
@@ -103,7 +105,7 @@
   "seo.relay.race.title": "Relay Race",
 
   "seo.welcome.title": "Welcome to Drawee!",
-  "seo.welcome.description": "Drawee is a web game that everyone enjoys drawing together.",
+  "seo.welcome.description": "Join the multiplayer catch mind game using WebRTC, Next.js, i18n support, and Yjs. Compete with players from around the world in real-time and see who can catch the most minds.",
 
   "lobby.game.selected": "selected"
 }

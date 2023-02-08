@@ -101,8 +101,8 @@ const PostIt = ({ children }) => {
                 transform: rotate(-20deg);
                 position: absolute;
                 z-index: 1000;
-                top: -60px;
-                left: calc(50% - 55px);
+                top: -45px;
+                left: calc(50% - 60px);
               `}
             >
               <PutPin></PutPin>

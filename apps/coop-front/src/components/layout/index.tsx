@@ -2,6 +2,7 @@ import { Badge, Flex } from "@chakra-ui/react";
 import { yjsGameState } from "@common/recoil/recoil.atom";
 import Logo from "@components/Animation/Logo/Logo";
 import LanguageButton from "@components/Button/LanguageButton";
+import Copyright from "@components/Copyright";
 import SideMenuModal from "@components/Modal/SideMenuModal";
 import { css } from "@emotion/react";
 import { useTranslation } from "next-i18next";
@@ -102,9 +103,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <SideMenuModal></SideMenuModal>
           </Flex>
         </Flex>
-        {children}
+        <div
+          css={css`
+            width: 100%;
+            height: 100%;
+            overflow: hidden scroll;
+          `}
+        >
+          {children}
+        </div>
+        <Copyright />
       </Flex>
-      {/* <ToggleTheme></ToggleTheme> */}
     </Flex>
   );
 };

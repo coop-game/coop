@@ -31,7 +31,7 @@ const PutPin = () => {
             }
           }
           & > .move {
-            animation: movePin 0.2s ease-out;
+            animation: movePin 0.2s ease-out 0.5s;
             animation-fill-mode: forwards;
           }
         `}
