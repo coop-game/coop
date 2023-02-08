@@ -26,7 +26,7 @@ const SEO = {
     url: URL,
     images: [
       {
-        url: "/icon-192x192.png",
+        url: "/images/logo.png",
         width: 285,
         height: 167,
         alt: "Drawee로고",

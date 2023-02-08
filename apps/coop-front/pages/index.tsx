@@ -83,11 +83,11 @@ export default function Home({
           description: t("seo.main.description"),
           images: [
             {
-              url: `/images/logo.svg`,
+              url: `/images/logo.png`,
               width: 800,
               height: 600,
               alt: t("seo.main.opengraph.images.alt"),
-              type: "image/svg+xml",
+              type: "image/png",
             },
           ],
         }}
