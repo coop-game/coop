@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
-import DraweeLogo from "@asset/images/DraweeLogo.png";
 import lodashRandom from "lodash/random";
 
 import {
@@ -23,12 +22,10 @@ import useHistoryBack from "@hooks/usehistoryBack";
 import { css } from "@emotion/react";
 import PostIt from "@components/layout/PostIt/PostIt";
 import Description from "@components/Game/common/Description";
-import Logo from "@components/Animation/Logo/Logo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { GetServerSideProps } from "next/types";
 import { NextSeo } from "next-seo";
-import Head from "next/head";
 
 const URL = process.env.NEXT_PUBLIC_HOSTNAME || "http://localhost:3001";
 
@@ -61,9 +58,6 @@ export default function Home({
   const pushLobbyHander = () => {
     if (nickname !== "") {
       providerState.createProvider(roomId);
-      // if (!providerState.provider) {
-      //   providerState.clearProvider();
-      // }
       const utcTimeStamp = getUtcTimeStamp();
       setUserState({ roomId, nickname, avatarIndex, color, utcTimeStamp });
       router.push("/lobby");
@@ -110,7 +104,6 @@ export default function Home({
             w={{ base: "100%", md: "350px", xl: "600px" }}
             height="100%"
             rounded="md"
-            // p={10}
             flexDirection={"column"}
             minHeight={"500px"}
             position="relative"
@@ -153,7 +146,9 @@ export default function Home({
                     )}
                   </Flex>
                   <Flex width={"100%"} justifyContent={"flex-end"}>
-                    <Button onClick={pushLobbyHander}>GO LOBBY</Button>
+                    <Button boxShadow={"base"} onClick={pushLobbyHander}>
+                      GO LOBBY
+                    </Button>
                   </Flex>
                 </FormControl>
                 <div

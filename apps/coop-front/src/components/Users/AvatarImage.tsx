@@ -49,15 +49,22 @@ const AvatarImage = ({
       {randomAvatarHandler && (
         <Tooltip label={t("tooltip.hover.profile.change")}>
           <Button
+            boxShadow={"base"}
             aria-label={t("tooltip.hover.profile.change")}
             css={css`
               position: absolute;
               right: 0;
               bottom: 0;
+              background: #c5deda;
             `}
             onClick={randomAvatarHandler}
           >
-            <RepeatIcon />
+            <RepeatIcon
+              css={css`
+                width: 25px;
+                height: 25px;
+              `}
+            />
           </Button>
         </Tooltip>
       )}
