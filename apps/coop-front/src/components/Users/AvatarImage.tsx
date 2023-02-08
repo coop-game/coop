@@ -49,6 +49,7 @@ const AvatarImage = ({
       {randomAvatarHandler && (
         <Tooltip label={t("tooltip.hover.profile.change")}>
           <Button
+            aria-label={t("tooltip.hover.profile.change")}
             css={css`
               position: absolute;
               right: 0;
