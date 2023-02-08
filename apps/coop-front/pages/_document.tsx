@@ -4,6 +4,7 @@ import { ColorModeScript } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import theme from "@theme/theme";
 import { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 export default function Document() {
   return (
@@ -28,6 +29,20 @@ export default function Document() {
         ></link>
         <meta name="msapplication-TileColor" content="#721480b2"></meta>
       </Head>
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-T4WXH4W8CT"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){window.dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config','G-T4WXH4W8CT');
+              `}
+      </Script>
       <body>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <Main />
