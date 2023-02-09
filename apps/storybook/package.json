@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
+    "@chakra-ui/storybook-addon": "^4.0.16",
     "@coop/core": "*",
     "@coop/draw": "*",
     "@storybook/addon-actions": "^6.5.14",
@@ -47,7 +48,10 @@
     "@storybook/manager-webpack5": "^6.5.14",
     "@storybook/react": "^6.5.14",
     "@storybook/testing-library": "^0.0.13",
-    "babel-loader": "^8.3.0"
+    "babel-loader": "^8.3.0",
+    "i18next-browser-languagedetector": "^7.0.1",
+    "i18next-http-backend": "^2.1.1",
+    "storybook-react-i18next": "^1.1.2"
   },
   "scripts": {
     "dev": "start-storybook -p 6006",

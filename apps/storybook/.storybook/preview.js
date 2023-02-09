@@ -2,39 +2,28 @@ import "../../coop-front/styles/globals.css";
 import * as NextImage from "next/image";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 
-import i18n from 'i18next'
-import { initReactI18next } from 'react-i18next'
+import i18n from "./i18next.js";
+import { RecoilRoot } from "recoil";
 
+const theme = require("../../../apps/coop-front/src/theme/theme.ts");
 export const decorators = [
-  // ... other decorators
   (Story, Context) => {
-    i18n.use(initReactI18next).init({
-      lng: 'en',
-      fallbackLng: 'en',
-
-      // have a common namespace used around the full app
-      ns: ['translations'],
-      defaultNS: 'translations',
-
-      // debug: true,
-
-      interpolation: {
-        escapeValue: false, // not needed for react!!
-      },
-
-      // TODO: load actual translations from the *.json files
-      resources: { en: { translations: {} } },
-    })
-
-    return <Story />
+    return (
+      <RecoilRoot>
+        <Story />
+      </RecoilRoot>
+    );
   },
-]
+];
 
 NextImage.defaultProps = {
   unoptimized: true,
 };
 
 export const parameters = {
+  chakra: {
+    theme,
+  },
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {
@@ -42,8 +31,14 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  i18n,
+  locale: "en",
+  locales: {
+    en: "English",
+    ko: "한국어",
+  },
   nextRouter: {
     Provider: RouterContext.Provider,
-    locale: "en" // optional
+    // locale: "en", // optional
   },
 };
