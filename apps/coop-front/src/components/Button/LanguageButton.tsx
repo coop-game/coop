@@ -7,9 +7,7 @@ import { css } from "@emotion/react";
 import { Tooltip } from "@chakra-ui/react";
 
 const LanguageButton = ({ t, i18n }) => {
-  // const { t } = useTranslation("common");
   const router = useRouter();
-  console.log(t, i18n, router.locale);
   return (
     <Tooltip label={t("tooltip.hover.language")}>
       <button

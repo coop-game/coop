@@ -1,44 +1,35 @@
 <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <title>Graph</title>
-    </head>
-    <body>
-      <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2-pre.1/viz.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2-pre.1/full.render.js"></script>
-      <script>const s = `digraph {
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Graph</title>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2-pre.1/viz.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2-pre.1/full.render.js"></script>
+    <script>
+      const s = `digraph {
 	compound = "true"
 	newrank = "true"
 	subgraph "root" {
 		"[root] @coop/core#build" -> "[root] @coop/tsconfig#build"
-		"[root] @coop/core#build" -> "[root] eslint-preset-my#build"
-		"[root] @coop/core#lint" -> "[root] ___ROOT___"
-		"[root] @coop/core#test" -> "[root] ___ROOT___"
 		"[root] @coop/draw#build" -> "[root] ___ROOT___#build"
-		"[root] @coop/draw#lint" -> "[root] ___ROOT___"
-		"[root] @coop/draw#test" -> "[root] ___ROOT___"
 		"[root] @coop/tsconfig#build" -> "[root] ___ROOT___#build"
-		"[root] @coop/tsconfig#lint" -> "[root] ___ROOT___"
-		"[root] @coop/tsconfig#test" -> "[root] ___ROOT___"
 		"[root] ___ROOT___#build" -> "[root] ___ROOT___"
 		"[root] coop-front#build" -> "[root] @coop/core#build"
 		"[root] coop-front#build" -> "[root] @coop/draw#build"
-		"[root] coop-front#lint" -> "[root] ___ROOT___"
-		"[root] coop-front#test" -> "[root] ___ROOT___"
-		"[root] eslint-preset-my#build" -> "[root] ___ROOT___#build"
-		"[root] eslint-preset-my#lint" -> "[root] ___ROOT___"
-		"[root] eslint-preset-my#test" -> "[root] ___ROOT___"
 		"[root] nodeBe#build" -> "[root] ___ROOT___#build"
-		"[root] nodeBe#lint" -> "[root] ___ROOT___"
-		"[root] nodeBe#test" -> "[root] ___ROOT___"
 		"[root] storybook#build" -> "[root] @coop/core#build"
 		"[root] storybook#build" -> "[root] @coop/draw#build"
-		"[root] storybook#lint" -> "[root] ___ROOT___"
-		"[root] storybook#test" -> "[root] ___ROOT___"
 	}
 }
-`.replace(/\_\_\_ROOT\_\_\_/g, "Root").replace(/\[root\]/g, "");new Viz().renderSVGElement(s).then(el => document.body.appendChild(el)).catch(e => console.error(e));
+`
+        .replace(/\_\_\_ROOT\_\_\_/g, "Root")
+        .replace(/\[root\]/g, "");
+      new Viz()
+        .renderSVGElement(s)
+        .then((el) => document.body.appendChild(el))
+        .catch((e) => console.error(e));
     </script>
   </body>
-  </html>
+</html>
