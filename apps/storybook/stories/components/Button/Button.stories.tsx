@@ -1,5 +1,4 @@
 import React from "react";
-
 import LanguageButton from "@components/Button/LanguageButton";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -15,9 +14,9 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template = (args) => <LanguageButton {...args} />;
 
-export const Primary = Template.bind({});
+export const test = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
+test.args = {
   primary: true,
   label: "LanguageButton",
 };
