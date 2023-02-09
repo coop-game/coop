@@ -12,7 +12,7 @@
       "outputs": []
     },
     "dev": {
-      "cache": true,
-    },
+      "cache": true
+    }
   }
 }
