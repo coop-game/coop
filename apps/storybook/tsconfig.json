@@ -24,7 +24,7 @@
   },
   "include": [
     "types",
-    "next-env.d.ts",
+    "../coop-front/next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "next-sitemap.config.js"

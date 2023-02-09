@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";

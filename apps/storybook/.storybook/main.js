@@ -93,6 +93,12 @@ module.exports = {
     );
     config.resolve.fallback.fs = false;
 
+    config.module.rules.push({
+      test: /\.mjs$/,
+      include: /node_modules/,
+      type: "javascript/auto",
+    });
+
     return config;
   },
 };
