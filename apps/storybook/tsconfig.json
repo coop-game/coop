@@ -1,0 +1,41 @@
+{
+  "extends": "@coop/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@common/*": ["../coop-front/src/common/*"],
+      "@assets/*": ["../coop-front/src/assets/*"],
+      "@asset/*": ["../coop-front/src/asset/*"],
+      "@asset": ["../coop-front/src/asset/images/index.ts"],
+      "@components/*": ["../coop-front/src/components/*"],
+      "@theme/*": ["../coop-front/src/theme/*"],
+      "@styles/*": ["../coop-front/styles/*"],
+      "@pages/*": ["../coop-front/pages/*"],
+      "@types": ["../coop-front/types/index"],
+      "@coop/draw": ["../../packages/coop-draw/*"],
+      "@translations/*": ["translations/*"],
+      "@translations/": ["../coop-front/src/translations/index"],
+      "@hooks/*": ["../coop-front/src/hooks/*"]
+    },
+    "jsxImportSource": "@emotion/react",
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "types",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "next-sitemap.config.js"
+  ],
+  "exclude": ["node_modules"],
+  "references": [
+    {
+      "path": "../../packages/coop-draw"
+    },
+    {
+      "path": "../../packages/coop-core"
+    }
+  ]
+}

@@ -1,7 +1,6 @@
 import React from "react";
 
 import LanguageButton from "@components/Button/LanguageButton";
-import { useTranslation } from "next-i18next";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

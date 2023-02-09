@@ -1521,7 +1521,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.20.6, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.19.4, @babel/runtime@npm:^7.20.6, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
   version: 7.20.13
   resolution: "@babel/runtime@npm:7.20.13"
   dependencies:
@@ -2549,6 +2549,24 @@ __metadata:
     "@chakra-ui/system": ">=2.0.0"
     react: ">=18"
   checksum: 1fa7defc7bf86674cfdca5c95143067fecc6ea248e1378f5b4661f7904d0582d5616abe03fc95742624d80034d8c82aeb018134af0239d03c054ecd50ee3eeb7
+  languageName: node
+  linkType: hard
+
+"@chakra-ui/storybook-addon@npm:^4.0.16":
+  version: 4.0.17
+  resolution: "@chakra-ui/storybook-addon@npm:4.0.17"
+  peerDependencies:
+    "@chakra-ui/react": 0.0.0-dev-20230112160451
+    "@storybook/addons": ">=6.4"
+    "@storybook/api": ">=6.4"
+    "@storybook/components": ">=6.4"
+    react: ">=16.8.x"
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 20e425b3415baeaa9aed2b2bd1d5a829f01df280d7acd7c3f2f57cd382f13ef54f8b29df010cbe87a11201261ef786188942dc40538fa9779282d634669ef8b8
   languageName: node
   linkType: hard
 
@@ -9649,6 +9667,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cross-fetch@npm:3.1.5":
+  version: 3.1.5
+  resolution: "cross-fetch@npm:3.1.5"
+  dependencies:
+    node-fetch: 2.6.7
+  checksum: f6b8c6ee3ef993ace6277fd789c71b6acf1b504fd5f5c7128df4ef2f125a429e29cd62dc8c127523f04a5f2fa4771ed80e3f3d9695617f441425045f505cf3bb
+  languageName: node
+  linkType: hard
+
 "cross-spawn@npm:^6.0.0":
   version: 6.0.5
   resolution: "cross-spawn@npm:6.0.5"
@@ -12993,10 +13020,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"i18next-browser-languagedetector@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "i18next-browser-languagedetector@npm:7.0.1"
+  dependencies:
+    "@babel/runtime": ^7.19.4
+  checksum: 03129614be8761988df59b630359ded4f7c989eec4553781b5968139fd898de1eb09128c4c69c1365b547649ad829ff9abe1f60161658f8789668bcc623adcf0
+  languageName: node
+  linkType: hard
+
 "i18next-fs-backend@npm:^2.1.0":
   version: 2.1.1
   resolution: "i18next-fs-backend@npm:2.1.1"
   checksum: fe606df2639b3ea49501b5bc947553e4bfbce67290c91ab22a8b9ecee4d11b8ae78179980720998881f117f0321d3ba0f739fb93a0ab95613cd79b85ffb014f5
+  languageName: node
+  linkType: hard
+
+"i18next-http-backend@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "i18next-http-backend@npm:2.1.1"
+  dependencies:
+    cross-fetch: 3.1.5
+  checksum: 15b5b83636c1144bb9f1b43e97aa72028746cf13e9a6fa2c698d989a9020962154aab548efabad8cf1449230d5df7807b42d67756c61b58cf408ab2ab5e4bfe6
   languageName: node
   linkType: hard
 
@@ -15678,6 +15723,20 @@ __metadata:
   dependencies:
     minimatch: ^3.0.2
   checksum: 29de9560e52cdac8d3f794d38d782f6799e13d4d11aaf96d3da8c28458e1c5e33bb5f8edfb42dc34172ec5516c50c5b8850c9e1526542616757a969267263328
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:2.6.7":
+  version: 2.6.7
+  resolution: "node-fetch@npm:2.6.7"
+  dependencies:
+    whatwg-url: ^5.0.0
+  peerDependencies:
+    encoding: ^0.1.0
+  peerDependenciesMeta:
+    encoding:
+      optional: true
+  checksum: 8d816ffd1ee22cab8301c7756ef04f3437f18dace86a1dae22cf81db8ef29c0bf6655f3215cb0cdb22b420b6fe141e64b26905e7f33f9377a7fa59135ea3e10b
   languageName: node
   linkType: hard
 
@@ -18926,6 +18985,52 @@ __metadata:
   languageName: node
   linkType: hard
 
+"storybook-i18n@npm:^1.1.2":
+  version: 1.1.4
+  resolution: "storybook-i18n@npm:1.1.4"
+  peerDependencies:
+    "@storybook/addons": ">=6.5.0"
+    "@storybook/api": ">=6.5.0"
+    "@storybook/components": ">=6.5.0"
+    "@storybook/core-events": ">=6.5.0"
+    "@storybook/theming": ">=6.5.0"
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: bcc79a35677936ff3ab9545ea0ef348e025c37fa5bb4e7a60a8560144969c21ebd5472857265e175a1b049b1462e90c1b4dfde645b2cca419c43e97cdbd8e4d0
+  languageName: node
+  linkType: hard
+
+"storybook-react-i18next@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "storybook-react-i18next@npm:1.1.2"
+  dependencies:
+    storybook-i18n: ^1.1.2
+  peerDependencies:
+    "@storybook/addons": ">=6.5.0"
+    "@storybook/api": ">=6.5.0"
+    "@storybook/components": ">=6.5.0"
+    "@storybook/core-events": ">=6.5.0"
+    "@storybook/theming": ">=6.5.0"
+    i18next: ">=21.0.0"
+    i18next-browser-languagedetector: ^6.1.4
+    i18next-http-backend: ^1.4.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-i18next: ^11.17.1
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 05688901b5af0fed702ca4b80422f5e1d91beb334c562a0bbe7fccb5f16447ebca328b64a8f3deaee69e19bc0873769a4ea5e7429e6832d8a6fa434986d4f4b8
+  languageName: node
+  linkType: hard
+
 "storybook@workspace:apps/storybook":
   version: 0.0.0-use.local
   resolution: "storybook@workspace:apps/storybook"
@@ -18933,6 +19038,7 @@ __metadata:
     "@babel/core": ^7.20.5
     "@chakra-ui/icons": ^2.0.13
     "@chakra-ui/react": ^2.4.2
+    "@chakra-ui/storybook-addon": ^4.0.16
     "@coop/core": "*"
     "@coop/draw": "*"
     "@emotion/react": 11
@@ -18950,6 +19056,8 @@ __metadata:
     babel-loader: ^8.3.0
     framer-motion: 6
     i18next: ^22.4.9
+    i18next-browser-languagedetector: ^7.0.1
+    i18next-http-backend: ^2.1.1
     lib0: ^0.2.58
     lodash: ^4.17.21
     nanoid: ^4.0.0
@@ -18965,6 +19073,7 @@ __metadata:
     react-transition-group: ^4.4.5
     recoil: ^0.7.6
     storybook-addon-next-router: ^4.0.2
+    storybook-react-i18next: ^1.1.2
     typescript: 4.9.3
     y-protocols: ^1.0.5
     y-webrtc: ^10.2.3

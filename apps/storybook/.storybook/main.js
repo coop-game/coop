@@ -10,35 +10,19 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "storybook-addon-next-router",
+    "@chakra-ui/storybook-addon",
+    "storybook-react-i18next",
   ],
   staticDirs: ["../../coop-front/public"],
   framework: "@storybook/react",
   core: {
     builder: "@storybook/builder-webpack5",
   },
-
-  // webpackFinal: async (config) => {
-  //   [].push.apply(config.resolve.plugins, [
-  //     new TsconfigPathsPlugin({ extensions: config.resolve.extensions }),
-  //   ]);
-
-  //   return config;
-  // },
+  features: {
+    emotionAlias: false,
+  },
 
   webpackFinal: async (config) => {
-
-
-
-    // config.resolve.alias["next/router"] = require.resolve(
-    //   "../__mocks__/next/router.js"
-    // );
-    // config.resolve.alias["next/link"] = require.resolve(
-    //   "../__mocks__/next/link.js"
-    // );
-    // config.resolve.alias["next/image"] = require.resolve(
-    //   "../__mocks__/next/image.js"
-    // );
-
     config.resolve.alias["/images/pencil/cursor.png"] = path.resolve(
       __dirname,
       "../../coop-front/public/images/pencil/cursor.png"
@@ -108,17 +92,7 @@ module.exports = {
       "../../src/hooks/"
     );
     config.resolve.fallback.fs = false;
-    
+
     return config;
   },
-  // webpackFinal: async (config) => ({
-  //   ...config,
-  //   resolve: {
-  //     ...config.resolve,
-  //     alias: {
-  //       ...config.resolve?.alias,
-  //       "~": path.resolve(__dirname, "/apps/coop-front/public"),
-  //     },
-  //   },
-  // }),
 };
