@@ -11,6 +11,7 @@
     "build:core": "cross-env turbo run build --filter=@coop/core",
     "build:draw": "cross-env turbo run build --filter=@coop/draw",
     "dev:front": "cross-env turbo run dev --parallel --no-cache --filter=coop-front",
+    "dev:storybook": "cross-env turbo run dev --parallel --filter=storybook",
     "start:drawee": "yarn start ./apps/coop-front",
     "prepare": "husky install",
     "dev": "turbo run dev --no-cache --parallel --continue",
