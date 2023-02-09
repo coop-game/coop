@@ -18926,9 +18926,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook@workspace:apps/storybook":
+"storybook@workspace:apps/storybook2":
   version: 0.0.0-use.local
-  resolution: "storybook@workspace:apps/storybook"
+  resolution: "storybook@workspace:apps/storybook2"
   dependencies:
     "@babel/core": ^7.20.5
     "@chakra-ui/icons": ^2.0.13
