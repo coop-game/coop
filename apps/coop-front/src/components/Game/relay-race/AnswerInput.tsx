@@ -66,7 +66,7 @@ const AnswerInput = ({
         callback={() => {
           doc.transact(() => {
             const temp: CPGameRelayRaceAnswer = {
-              answer: "응답 없음",
+              answer: " ",
               id: doc.clientID,
               nickname: user.nickname,
               isDraw: false,
@@ -107,7 +107,7 @@ const AnswerInput = ({
           {t("relay.race.answer.suggest")}
         </Text>
       )}
-      <Text fontSize={"sm"}>한국어,영어,숫자 포함 최대 20자</Text>
+      <Text fontSize={"sm"}>{t("relay.race.answer.alert")}</Text>
       <Input
         placeholder={t("relay.race.answer.input.placeholder")}
         onChange={(e) => {

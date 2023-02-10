@@ -52,6 +52,7 @@
   "relay.race.answer.suggest": "Plase enter the answer",
   "relay.race.answer.relay.input": "What do you think? plase enter the answer",
   "relay.race.answer.submit": "Submit answer",
+  "relay.race.answer.alert":"Can write 20 characters including Korean, English and numbers.",
 
   "relay.race.draw.answer": "Draw the answer",
   "relay.race.draw.submit": "Submit picture",
