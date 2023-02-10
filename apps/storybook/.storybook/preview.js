@@ -4,14 +4,28 @@ import { RouterContext } from "next/dist/shared/lib/router-context";
 
 import i18n from "./i18next.js";
 import { RecoilRoot } from "recoil";
+import { css } from "@emotion/react";
+import { ChakraProvider } from "@chakra-ui/react";
+import { Button, useColorMode } from "@chakra-ui/react";
 
 const theme = require("../../../apps/coop-front/src/theme/theme.ts");
+
 export const decorators = [
   (Story, Context) => {
+    const { toggleColorMode } = useColorMode();
     return (
-      <RecoilRoot>
-        <Story />
-      </RecoilRoot>
+      <ChakraProvider theme={theme}>
+        <RecoilRoot>
+          <div
+            id="root-modal"
+            css={css`
+              position: relative;
+              z-index: 1000;
+            `}
+          ></div>
+          <Story />
+        </RecoilRoot>
+      </ChakraProvider>
     );
   },
 ];
@@ -23,6 +37,13 @@ NextImage.defaultProps = {
 export const parameters = {
   chakra: {
     theme,
+    colorModeSwitch: {
+      //default values
+      enable: true,
+      position: "top-right",
+      margin: "1rem",
+      zIndex: 9999,
+    },
   },
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {

@@ -22,7 +22,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import Progress from "../common/Progress";
 import Solver from "./Solver";
 import useQuestionUpdate from "@hooks/gameHooks/updateState/useQuestionUpdate";
-import AnswerModal from "../../Modal/AnswerModal";
+import AnswerModal from "../../Modal/AnswerModal/AnswerModal";
 import { CPGameDrawee } from "@types";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
 import DrawEditor from "./DrawEditor";

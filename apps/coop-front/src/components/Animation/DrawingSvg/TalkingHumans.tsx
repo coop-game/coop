@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { transitionPageAnimationState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
 import { motion } from "framer-motion";

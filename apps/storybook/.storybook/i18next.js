@@ -7,7 +7,6 @@ const ns = ["common"];
 const supportedLngs = ["en", "ko"];
 const resources = ns.reduce((acc, n) => {
   supportedLngs.forEach((lng) => {
-    console.log(n);
     if (!acc[lng]) acc[lng] = {};
     acc[lng] = {
       ...acc[lng],

@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { Box, useColorMode } from "@chakra-ui/react";
 import { providerState } from "@common/yjsStore/userStore";
 import { css } from "@emotion/react";

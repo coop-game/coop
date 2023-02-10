@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { Box, useColorModeValue } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import { MutableRefObject, useCallback, useEffect, useState } from "react";
@@ -68,7 +69,6 @@ const ScrollBottomButton = ({
               display: flex;
               justify-content: center;
               border-radius: 8px;
-              /* border: 1px solid gray; */
               backdrop-filter: blur(3px);
               gap: 5px;
             `}

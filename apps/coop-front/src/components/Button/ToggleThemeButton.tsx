@@ -1,4 +1,5 @@
-import { Button, css, Tooltip, useColorMode, useTheme } from "@chakra-ui/react";
+/** @jsxImportSource @emotion/react */
+import { Button, css, Tooltip, useColorMode } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { useEffect } from "react";
 import Image from "next/image";

@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { Box, Button, Flex, Input, useColorMode } from "@chakra-ui/react";
 import { ChattingSelector, userSelector } from "@common/recoil/recoil.atom";
 import { doc, providerState } from "@common/yjsStore/userStore";
@@ -52,7 +53,7 @@ const Chatting = () => {
         <div
           css={css`
             position: absolute;
-            width: 200px;
+            width: 250px;
             height: 30px;
             bottom: 70px;
             left: 50%;

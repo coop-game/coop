@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { Button, Tooltip, useColorModeValue } from "@chakra-ui/react";
 import { soundVolumeState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";

@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useRef } from "react";
 import ObserverBox from "./ObserverBox";
@@ -34,7 +35,7 @@ const HistoryScroll = ({ history }: { history: string[] }) => {
       <div
         css={css`
           position: absolute;
-          width: 200px;
+          width: 250px;
           left: 50%;
           bottom: 0px;
           transform: translateX(-50%);

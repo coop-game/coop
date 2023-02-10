@@ -79,17 +79,17 @@ module.exports = {
 
     config.resolve.alias["@translations"] = path.resolve(
       __dirname,
-      "../../translations/"
+      "../../coop-front/translations/"
     );
 
     config.resolve.alias["@translations"] = path.resolve(
       __dirname,
-      "../../src/translations/index"
+      "../../coop-front/src/translations/index"
     );
 
     config.resolve.alias["@hooks"] = path.resolve(
       __dirname,
-      "../../src/hooks/"
+      "../../coop-front/src/hooks/"
     );
     config.resolve.fallback.fs = false;
 

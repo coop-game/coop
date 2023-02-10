@@ -1,6 +1,7 @@
+/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { motion, useMotionValue } from "framer-motion";
-import {  useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 type ObserverBoxPropsType = {
   value: string;
