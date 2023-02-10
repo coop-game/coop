@@ -6,13 +6,11 @@ import i18n from "./i18next.js";
 import { RecoilRoot } from "recoil";
 import { css } from "@emotion/react";
 import { ChakraProvider } from "@chakra-ui/react";
-import { Button, useColorMode } from "@chakra-ui/react";
 
 const theme = require("../../../apps/coop-front/src/theme/theme.ts");
 
 export const decorators = [
   (Story, Context) => {
-    const { toggleColorMode } = useColorMode();
     return (
       <ChakraProvider theme={theme}>
         <RecoilRoot>

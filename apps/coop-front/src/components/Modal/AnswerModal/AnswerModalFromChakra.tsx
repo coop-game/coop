@@ -22,12 +22,15 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { useTranslation } from "next-i18next";
 
-type ChakraModalPropsType = {
+type AnswerModalFromChakraPropsType = {
   children?: React.ReactNode;
   onCloseHandler: () => void;
 };
 
-const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
+const AnswerModalFromChakra = ({
+  children,
+  onCloseHandler,
+}: AnswerModalFromChakraPropsType) => {
   const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
   const { t } = useTranslation("common");
   const initialRef = React.useRef(null);
@@ -116,4 +119,4 @@ const ChakraModal = ({ children, onCloseHandler }: ChakraModalPropsType) => {
     </>
   );
 };
-export default ChakraModal;
+export default AnswerModalFromChakra;

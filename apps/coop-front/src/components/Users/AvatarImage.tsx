@@ -56,6 +56,12 @@ const AvatarImage = ({
               right: 0;
               bottom: 0;
               background: #c5deda;
+              &:hover {
+                & > svg {
+                  transform: rotate(-360deg);
+                  transition-duration: 1s;
+                }
+              }
             `}
             onClick={randomAvatarHandler}
           >

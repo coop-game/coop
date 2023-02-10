@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import ChakraModal from "@components/Modal/ChakraModal";
 import useAnswer from "@hooks/gameHooks/DRAWEE/useAnswer";
 import useSolver from "@hooks/gameHooks/DRAWEE/useSolver";
 import { Dispatch, SetStateAction, useEffect } from "react";
+import AnswerModalFromChakra from "./AnswerModalFromChakra";
 import AnswerResult from "./AnswerResult";
 
 type AnswerModalPropsType = {
@@ -25,13 +25,13 @@ const AnswerModal = (props: AnswerModalPropsType) => {
   }, [props]);
 
   return (
-    <ChakraModal onCloseHandler={props.onClose}>
+    <AnswerModalFromChakra onCloseHandler={props.onClose}>
       <AnswerResult
         solverNickname={solverNickname}
         answer={answer}
         isCorrect={isAnswerInArray()}
       ></AnswerResult>
-    </ChakraModal>
+    </AnswerModalFromChakra>
   );
 };
 export default AnswerModal;

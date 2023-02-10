@@ -3,6 +3,7 @@ import { yjsGameState } from "@common/recoil/recoil.atom";
 import Logo from "@components/Animation/Logo/Logo";
 import LanguageButton from "@components/Button/LanguageButton";
 import Copyright from "@components/Copyright";
+import ChattingModal from "@components/Modal/ChattingModal";
 import SideMenuModal from "@components/Modal/SideMenuModal";
 import { css } from "@emotion/react";
 import { useTranslation } from "next-i18next";
@@ -37,7 +38,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         `}
       >
         <Flex
-          w={{ base: "100%", md: "750px", xl: "1200px" }}
+          w={{ base: "100%", md: "750px", xl: "1000px" }}
           css={css`
             width: 100%;
             justify-content: space-around;
@@ -64,9 +65,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <Flex
             css={css`
               margin-left: 80px;
-              @media screen and (max-width: 600px) {
-                margin-left: 0px;
-              }
             `}
           ></Flex>
           <Flex
@@ -99,7 +97,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               }
             `}
           >
-            <LanguageButton></LanguageButton>
+            <ChattingModal></ChattingModal>
             <SideMenuModal></SideMenuModal>
           </Flex>
         </Flex>

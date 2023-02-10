@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { css } from "@emotion/react";
 import { useState } from "react";
 import AnswerResult from "@components/Modal/AnswerModal/AnswerResult";
-import ChakraModal from "@components/Modal/ChakraModal";
+import AnswerModalFromChakra from "@components/Modal/AnswerModal/AnswerModalFromChakra";
 
 export default {
   title: "Modal/AnswerModal",
@@ -20,13 +20,13 @@ const Template = (args) => {
         position: relative;
       `}
     >
-      <ChakraModal onCloseHandler={() => {}}>
+      <AnswerModalFromChakra onCloseHandler={() => {}}>
         <AnswerResult
           solverNickname={"solverNickname"}
           answer={"answer"}
           isCorrect={args.isCorrect}
         ></AnswerResult>
-      </ChakraModal>
+      </AnswerModalFromChakra>
     </div>
   );
 };
