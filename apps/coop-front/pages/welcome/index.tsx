@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { Box, Flex } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import TopContent from "@components/Welcome/TopContent";

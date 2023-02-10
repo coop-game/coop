@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import MiddleContentPictureSlide from "./src/contents";
@@ -125,7 +126,7 @@ function MiddleContent({ nextContent }: { nextContent: nextContentType }) {
             </motion.div>
           </Flex>
           <Box position="absolute" w="100%" top="15vh">
-            <MiddleContentPictureSlide index={nowDetect} images={images} />
+            <MiddleContentPictureSlide index={nowDetect} />
           </Box>
         </Box>
       </Box>

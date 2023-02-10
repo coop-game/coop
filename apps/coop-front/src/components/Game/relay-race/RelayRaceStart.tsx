@@ -157,7 +157,7 @@ const RelayRaceStart = () => {
               w={"100%"}
               h="100%"
               maxW={"1000px"}
-              maxH={"800px"}
+              maxH={"850px"}
               justifyContent={"center"}
               alignItems={"center"}
             >
