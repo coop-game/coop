@@ -89,7 +89,7 @@ module.exports = {
 
     config.resolve.alias["@hooks"] = path.resolve(
       __dirname,
-      "../../src/hooks/"
+      "../../coop-front/src/hooks"
     );
     config.resolve.fallback.fs = false;
 
