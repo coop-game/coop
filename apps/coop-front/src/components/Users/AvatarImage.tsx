@@ -4,8 +4,6 @@ import Image from "next/image";
 import { RepeatIcon } from "@chakra-ui/icons";
 import { useTranslation } from "next-i18next";
 import { motion, useAnimationControls } from "framer-motion";
-import { transitionPageAnimationState } from "@common/recoil/recoil.atom";
-import { useRecoilValue } from "recoil";
 
 const AvatarImage = ({
   avatarIndex,
@@ -16,8 +14,6 @@ const AvatarImage = ({
   borderColor: string;
   randomAvatarHandler?: () => void;
 }) => {
-  const isAnimationend = useRecoilValue(transitionPageAnimationState);
-
   const { t } = useTranslation("common");
   const controls = useAnimationControls();
   return (
@@ -83,7 +79,6 @@ const AvatarImage = ({
               position: absolute;
               right: 0;
               bottom: 0;
-              background: #c5deda;
               &:hover {
                 & > svg {
                   transform: rotate(-360deg);
