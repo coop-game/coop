@@ -88,6 +88,7 @@
   "tooltip.hover.language": "Language",
 
   "tooltip.hover.profile.change": "Profile change",
+  "tooltip.hover.chatting": "Chatting",
 
   "seo.main.title": "Drawee",
   "seo.main.description": "Join the multiplayer catch mind game using WebRTC, Next.js, i18n support, and Yjs. Compete with players from around the world in real-time and see who can catch the most minds.",

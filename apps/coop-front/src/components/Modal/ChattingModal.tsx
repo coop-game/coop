@@ -88,7 +88,7 @@ const ChattingModal = ({
             </ModalContent>
           </Modal>
           <TooltipButton
-            label={"tooltip.hover.message"}
+            label={"tooltip.hover.chatting"}
             emotionCss={css`
               background: ${buttonBackgroundColor};
             `}
