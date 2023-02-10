@@ -23,6 +23,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import AnswerHistory from "./AnswerHistory";
 import Image from "next/image";
+import { isSpecialCharacters } from "@common/regex";
 
 const Solver = () => {
   const [answer, setAnswer] = useState("");
@@ -91,7 +92,13 @@ const Solver = () => {
                 }
               }}
               onChange={(e) => {
-                setAnswer(e.target.value.slice(0, 20));
+                console.log(isSpecialCharacters(e.target.value.trim()));
+                if (
+                  e.target.value.trim().length > 0 &&
+                  !isSpecialCharacters(e.target.value.trim())
+                ) {
+                  setAnswer(e.target.value.trim().slice(0, 20));
+                }
                 setIsError(e.target.value === "" || e.target.value.length > 20);
               }}
             />

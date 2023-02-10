@@ -3,6 +3,9 @@ import { css } from "@emotion/react";
 import Image from "next/image";
 import { RepeatIcon } from "@chakra-ui/icons";
 import { useTranslation } from "next-i18next";
+import { motion, useAnimationControls } from "framer-motion";
+import { transitionPageAnimationState } from "@common/recoil/recoil.atom";
+import { useRecoilValue } from "recoil";
 
 const AvatarImage = ({
   avatarIndex,
@@ -13,7 +16,10 @@ const AvatarImage = ({
   borderColor: string;
   randomAvatarHandler?: () => void;
 }) => {
+  const isAnimationend = useRecoilValue(transitionPageAnimationState);
+
   const { t } = useTranslation("common");
+  const controls = useAnimationControls();
   return (
     <Flex
       className="avatar_image"
@@ -27,6 +33,14 @@ const AvatarImage = ({
       gap="10px"
       position="relative"
     >
+      <motion.div animate={controls} transition={{ duration: 1 }}>
+        <Image
+          width={60}
+          height={60}
+          src={"/images/svg/arrow-bottom.svg"}
+          alt={"arrow bottom"}
+        ></Image>
+      </motion.div>
       <Stack
         width="200px"
         height="200px"
@@ -51,6 +65,20 @@ const AvatarImage = ({
           <Button
             boxShadow={"base"}
             aria-label={t("tooltip.hover.profile.change")}
+            onMouseEnter={() => {
+              controls.start({
+                rotateY: 360,
+                translateY: [0, 15, 0, 15, 0],
+              });
+            }}
+            onMouseLeave={() => {
+              controls.start("hidden");
+              controls.start({
+                rotateY: 0,
+                translateY: 0,
+                transition: { duration: 0 },
+              });
+            }}
             css={css`
               position: absolute;
               right: 0;

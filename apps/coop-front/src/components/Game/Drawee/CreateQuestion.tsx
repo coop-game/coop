@@ -25,10 +25,15 @@ import { useTranslation } from "next-i18next";
 import { css } from "@emotion/react";
 import Chatting from "../../Chat/Chatting";
 import { DRAWEE_QUESTION_TIME } from "src/constant/games";
+import { isSpecialCharacters } from "@common/regex";
 
 const CreateQuestion = () => {
   const { provider } = providerState;
-  const callbackInput = (value: string) => {
+  const callbackInput = (prev: string, value: string) => {
+    console.log(prev, value, isSpecialCharacters(value));
+    if (isSpecialCharacters(value)) {
+      return prev;
+    }
     return value.slice(0, 20);
   };
   const { input, setInput, onChangeHandler } = useInput("", callbackInput);

@@ -2,11 +2,14 @@ import { useState } from "react";
 
 const useInput = <T>(
   defaultValue: T,
-  inputCallBack = ((value: string) => value) as (value: string) => T
+  inputCallBack = ((prev: T, value: string) => value) as (
+    prev: T,
+    value: string
+  ) => T
 ) => {
   const [input, setInput] = useState<T>(defaultValue);
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(inputCallBack(e.target.value));
+    setInput((prev) => inputCallBack(prev, e.target.value));
   };
   return { input, setInput, onChangeHandler };
 };
