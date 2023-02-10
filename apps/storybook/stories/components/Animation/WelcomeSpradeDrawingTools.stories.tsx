@@ -7,15 +7,8 @@ export default {
 };
 
 const Template = (args) => (
-  <Center w="100%" h="100vh">
-    <Flex direction="column">
-      <Center
-        marginTop={{ base: "50px", sm: "150px", md: "250px" }}
-        position="relative"
-      >
-        <MotionDrawTools />
-      </Center>
-    </Flex>
+  <Center w="100vw" h="100vh" marginTop={{ md: "450px" }} position="relative">
+    <MotionDrawTools />
   </Center>
 );
 

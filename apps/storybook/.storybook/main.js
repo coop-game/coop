@@ -13,7 +13,7 @@ module.exports = {
     "@chakra-ui/storybook-addon",
     "storybook-react-i18next",
   ],
-  staticDirs: ["../../coop-front/public"],
+  staticDirs: ["../../coop-front/public","../../coop-front/src/asset"],
   framework: "@storybook/react",
   core: {
     builder: "@storybook/builder-webpack5",
@@ -79,12 +79,12 @@ module.exports = {
 
     config.resolve.alias["@translations"] = path.resolve(
       __dirname,
-      "../../translations/"
+      "../../coop-front/translations/"
     );
 
     config.resolve.alias["@translations"] = path.resolve(
       __dirname,
-      "../../src/translations/index"
+      "../../coop-front/src/translations/index"
     );
 
     config.resolve.alias["@hooks"] = path.resolve(
