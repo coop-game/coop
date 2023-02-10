@@ -107,7 +107,7 @@ const AnswerDraw = ({
           </Flex>
         )}
       </Flex>
-      <Box w="100%" h={{ sm: "78%", md: "65%" }} position={"relative"}>
+      <Box w="100%" h={{ sm: "80%", md: "65%" }} position={"relative"}>
         <DrawEditor
           pageIndex={gamepageIndex}
           useOnChangePresence={false}

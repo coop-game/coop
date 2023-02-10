@@ -3,11 +3,12 @@ import { yjsRelayRaceAnswerState } from "@common/recoil/recoil.atom";
 import { doc } from "@common/yjsStore/userStore";
 import Progress from "@components/Game/common/Progress";
 import { CPGameRelayRaceAnswer } from "@types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import CanvasViewer from "@components/Tldraw/CanvasViewer";
 import { userState } from "@common/recoil/recoil.atom";
 import { useTranslation } from "next-i18next";
+import { regex } from "@common/regex";
 
 const AnswerInput = ({
   pushArrayHandler,
@@ -24,39 +25,74 @@ const AnswerInput = ({
   >(yjsRelayRaceAnswerState);
   const user = useRecoilValue(userState);
   const { t } = useTranslation("common");
+  const [answerPassState, setAnswerPassState] = useState<boolean | undefined>(
+    undefined
+  );
 
   const onClick = async () => {
-    doc.transact(() => {
-      const temp: CPGameRelayRaceAnswer = {
-        answer: answer,
-        id: doc.clientID,
-        nickname: user.nickname,
-        isDraw: false,
-        avatarIndex: user.avatarIndex,
-        color: user.color,
-      };
-      pushArrayHandler(temp);
-    });
-    setAnswer("");
+    if (answerPassState) {
+      doc.transact(() => {
+        const temp: CPGameRelayRaceAnswer = {
+          answer: answer,
+          id: doc.clientID,
+          nickname: user.nickname,
+          isDraw: false,
+          avatarIndex: user.avatarIndex,
+          color: user.color,
+        };
+        pushArrayHandler(temp);
+      });
+      setAnswer("");
+    } else {
+    }
   };
+
+  useEffect(() => {
+    if (
+      regex.test(answer) &&
+      answer.trim().length > 0 &&
+      answer.trim().length <= 20
+    ) {
+      setAnswerPassState(true);
+    } else {
+      setAnswerPassState(false);
+    }
+  }, [answer]);
+
   return (
     <Flex width="100%" height="100%" flexDirection={"column"}>
       <Progress
         time={20000}
-        callback={onClick}
+        callback={() => {
+          doc.transact(() => {
+            const temp: CPGameRelayRaceAnswer = {
+              answer: "응답 없음",
+              id: doc.clientID,
+              nickname: user.nickname,
+              isDraw: false,
+              avatarIndex: user.avatarIndex,
+              color: user.color,
+            };
+            pushArrayHandler(temp);
+          });
+        }}
         play={"running"}
         startTime={startTime}
       />
       <Flex width="100%" padding={"2%"} flexDirection="column">
         {relayRaceAnswerState.length > 0 && (
-          <Box flexGrow="1" flexBasis="500px" width="100%">
+          <Box
+            flexGrow="1"
+            flexBasis={{ sm: "300px", md: "500px" }}
+            width="100%"
+          >
             <CanvasViewer pageIndex={gamepageIndex - 1} />
           </Box>
         )}
       </Flex>
       {gamepageIndex > 1 ? (
         <Text
-          fontSize={{ base: "xl", md: "5xl" }}
+          fontSize={{ base: "md", md: "5xl" }}
           fontWeight="bold"
           textAlign={"center"}
         >
@@ -64,14 +100,14 @@ const AnswerInput = ({
         </Text>
       ) : (
         <Text
-          fontSize={{ base: "xl", md: "5xl" }}
+          fontSize={{ base: "md", md: "5xl" }}
           fontWeight="bold"
           textAlign={"center"}
         >
           {t("relay.race.answer.suggest")}
         </Text>
       )}
-
+      <Text fontSize={"sm"}>한국어,영어,숫자 포함 최대 20자</Text>
       <Input
         placeholder={t("relay.race.answer.input.placeholder")}
         onChange={(e) => {
