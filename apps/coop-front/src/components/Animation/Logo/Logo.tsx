@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { ForwardRefComponent, motion, SVGMotionProps } from "framer-motion";
 import React from "react";
