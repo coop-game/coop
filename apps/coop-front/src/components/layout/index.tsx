@@ -65,6 +65,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <Flex
             css={css`
               margin-left: 80px;
+              @media screen and (max-width: 600px) {
+                margin-left: 0px;
+              }
             `}
           ></Flex>
           <Flex
