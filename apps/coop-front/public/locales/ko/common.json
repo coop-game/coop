@@ -53,6 +53,7 @@
   "relay.race.answer.suggest": "당신이 생각한 것을 입력해주세요",
   "relay.race.answer.relay.input": "그림을 보고 생각나는 것을 입력해주세요",
   "relay.race.answer.submit": "정답 제출하기",
+  "relay.race.answer.alert":"한국어,영어,숫자 포함 최대 20자",
 
   "relay.race.draw.answer": "다음 주제를 그려주세요!",
   "relay.race.draw.submit": "그림 제출하기",
