@@ -65,9 +65,7 @@ export const LobbyMain = () => {
   const lobbyToastInviteTitle = t("lobby.toast.invite.title");
   const lobbyToastInviteDescription = t("lobby.toast.invite.description");
   const toast = useToast();
-  useCheckCreatedProvider(
-    "/ErrorPage/?statusCode=403"
-  );
+  useCheckCreatedProvider("/games/ErrorPage/?statusCode=403");
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);
   const { provider } = providerState;

@@ -21,7 +21,7 @@ const ErrorPage = ({ statusCode }: ErrorPagePropsType) => {
     if (isAnimationEnd === false) return;
     const interval = setInterval(() => {
       if (second === 0) {
-        router.push("/");
+        router.push("/games");
       } else {
         setSecond((prev) => prev - 1);
       }
