@@ -25,7 +25,7 @@ const BackgroundSound = () => {
         loop={true}
         muted={!useVolume}
       >
-        <source src={"/sound/yippee.mp3"} type="audio/mpeg" />
+        <source src={"/sound/pianoMan.mp3"} type="audio/mpeg" />
       </audio>
     </div>
   );
