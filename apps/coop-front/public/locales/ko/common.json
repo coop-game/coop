@@ -114,5 +114,7 @@
 
   "error.404.oops": "저런!",
   "error.404.page.not.found": "페이지를 찾을 수 없습니다.",
-  "error.404.after.move": "초 뒤에 이동합니다."
+  "error.second.after.move": "초 뒤에 이동합니다.",
+  "error.page.wrong.access": "잘못된 연결입니다.",
+  "error.page.back.button": "돌아가기"
 }

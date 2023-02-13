@@ -113,5 +113,7 @@
 
   "error.404.oops": "Oops!",
   "error.404.page.not.found": "Page Not Found",
-  "error.404.after.move": "second after move"
+  "error.404.after.move": "second after move",
+  "error.page.wrong.access": "Wrong Access",
+  "error.page.back.button": "Back"
 }

@@ -66,7 +66,7 @@ export const LobbyMain = () => {
   const lobbyToastInviteDescription = t("lobby.toast.invite.description");
   const toast = useToast();
   useCheckCreatedProvider(
-    "/ErrorPage/?errorMessage=잘못된 접근입니다.&statusCode=403"
+    "/ErrorPage/?statusCode=403"
   );
   const { roomId } = useRecoilValue(userSelector) ?? {};
   const { isOwner, userProfiles } = useRecoilValue(userProfilesSelector);

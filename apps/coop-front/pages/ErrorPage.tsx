@@ -1,50 +1,86 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import Head from "next/head";
 import Image from "next/image";
+import { transitionPageAnimationState } from "@common/recoil/recoil.atom";
+import { useRecoilValue } from "recoil";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 type ErrorPagePropsType = {
-  statusCode: string | null;
-  errorMessage: string | null;
+  statusCode?: string | null;
 };
 
-const ErrorPage = ({ statusCode, errorMessage }: ErrorPagePropsType) => {
+const ErrorPage = ({ statusCode }: ErrorPagePropsType) => {
   const { t } = useTranslation("common");
   const router = useRouter();
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     router.push("/");
-  //   }, 3000);
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, [router]);
+  const isAnimationEnd = useRecoilValue(transitionPageAnimationState);
+  const [second, setSecond] = useState(3);
+  useEffect(() => {
+    if (isAnimationEnd === false) return;
+    const interval = setInterval(() => {
+      if (second === 0) {
+        router.push("/");
+      } else {
+        setSecond((prev) => prev - 1);
+      }
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [router, second, isAnimationEnd]);
   return (
-    <div>
+    <>
       <Head>
         <meta property="og:title" content={t("seo.error.title")} />
       </Head>
-      <div>statusCode</div>
-      <div>{statusCode}</div>
-      <Image width={450} height={150} src={"/images/svg/404.svg"} alt={"404"} />
-      <div>errorMessage</div>
-      <div>{errorMessage}</div>
-      <Button onClick={() => router.push("/")}>빠르게 돌아가기</Button>
-    </div>
+      <Flex
+        flexDirection={"column"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        width={"100%"}
+        height={"100%"}
+        fontWeight={"700"}
+        fontSize={"3rem"}
+        gap={"30px"}
+      >
+        <Flex
+          justifyContent={"center"}
+          fontSize={"5rem"}
+          color={"blueViolet"}
+          userSelect={"none"}
+          pointerEvents={"none"}
+        >
+          {statusCode}
+        </Flex>
+        <Flex
+          justifyContent={"center"}
+          userSelect={"none"}
+          pointerEvents={"none"}
+        >
+          {t("error.page.wrong.access")}
+        </Flex>
+        <Flex
+          justifyContent={"center"}
+          userSelect={"none"}
+          pointerEvents={"none"}
+        >{`${second} ${t("error.second.after.move")}`}</Flex>
+        <Button onClick={() => router.push("/")}>
+          {t("error.page.back.button")}
+        </Button>
+      </Flex>
+    </>
   );
 };
 export default ErrorPage;
 
-ErrorPage.getInitialProps = ({ res, req, err }) => {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-  const errorMessage = res ? res.errorMessage : err ? err.errorMessage : 404;
-
+export const getServerSideProps = async ({ query, locale }) => {
+  const { statusCode } = query;
   return {
     props: {
-      statusCode,
-      errorMessage,
+      statusCode: statusCode ?? "404",
+      ...(await serverSideTranslations(locale ?? "ko", ["common"])),
     },
   };
 };

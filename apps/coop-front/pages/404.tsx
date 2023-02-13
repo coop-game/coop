@@ -50,7 +50,7 @@ const Error404Page = () => {
       <Flex justifyContent={"center"}>{t("error.404.oops")}</Flex>
       <Flex justifyContent={"center"}>{t("error.404.page.not.found")}</Flex>
       <Flex justifyContent={"center"}>{`${second} ${t(
-        "error.404.after.move"
+        "error.second.after.move"
       )}`}</Flex>
     </Flex>
   );
