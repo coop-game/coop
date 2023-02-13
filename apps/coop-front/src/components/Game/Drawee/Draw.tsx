@@ -47,7 +47,7 @@ function Draw() {
       const gamePagesIndex = yGameState.get(roomId).gamePagesIndex;
       const newGameState = {};
       if (gamePagesIndex + 1 >= yQuestionsState.length) {
-        newGameState["path"] = "/result";
+        newGameState["path"] = "/games/result";
       } else {
         newGameState["gamePagesIndex"] = gamePagesIndex + 1;
       }
@@ -94,7 +94,7 @@ function Draw() {
   return (
     <>
       {gameState &&
-        gameState.path === "/draw" &&
+        gameState.path === "/games/drawee/draw" &&
         questionsState.length > gameState.gamePagesIndex &&
         questionsState[gameState.gamePagesIndex].isQuestionEnd && (
           <AnswerModal

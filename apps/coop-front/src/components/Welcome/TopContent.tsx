@@ -58,7 +58,7 @@ function TopContent() {
             width="150px"
             bg="colors.third"
             onClick={() => {
-              router.push("/");
+              router.push("/games");
             }}
           >
             {t("welcome.site.start.button")}

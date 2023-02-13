@@ -8,7 +8,7 @@ import stock2 from "../../../../src/asset/stock2.jpg";
 import stock3 from "../../../../src/asset/stock3.jpg";
 import stock4 from "../../../../src/asset/stock4.jpg";
 import { motion, Variants } from "framer-motion";
-import { nextContentType } from "@pages/welcome";
+import { nextContentType } from "@pages/index";
 import Image from "next/image";
 import { css } from "@emotion/react";
 import { useRouter } from "next/dist/client/router";

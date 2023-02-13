@@ -8,6 +8,7 @@ import SideMenuModal from "@components/Modal/SideMenuModal";
 import { css } from "@emotion/react";
 import { useTranslation } from "next-i18next";
 import { useRecoilValue } from "recoil";
+import BackgroundNote from "./backgroundNote";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const gameState = useRecoilValue(yjsGameState);

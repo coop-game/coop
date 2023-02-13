@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { nextContentType } from "@pages/welcome";
+import { nextContentType } from "@pages/index";
 import useObserver from "@hooks/useObserver";
 import { useEffect } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";

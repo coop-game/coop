@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import Head from "next/head";
+import Image from "next/image";
 
 type ErrorPagePropsType = {
   statusCode: string | null;
@@ -12,14 +13,14 @@ type ErrorPagePropsType = {
 const ErrorPage = ({ statusCode, errorMessage }: ErrorPagePropsType) => {
   const { t } = useTranslation("common");
   const router = useRouter();
-  useEffect(() => {
-    const interval = setInterval(() => {
-      router.push("/");
-    }, 3000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [router]);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     router.push("/");
+  //   }, 3000);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, [router]);
   return (
     <div>
       <Head>
@@ -27,6 +28,7 @@ const ErrorPage = ({ statusCode, errorMessage }: ErrorPagePropsType) => {
       </Head>
       <div>statusCode</div>
       <div>{statusCode}</div>
+      <Image width={450} height={150} src={"/images/svg/404.svg"} alt={"404"} />
       <div>errorMessage</div>
       <div>{errorMessage}</div>
       <Button onClick={() => router.push("/")}>빠르게 돌아가기</Button>

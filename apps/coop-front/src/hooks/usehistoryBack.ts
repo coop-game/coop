@@ -11,7 +11,7 @@ const useHistoryBack = () => {
       window.history.pushState(null, "", router.asPath);
       const isConfirmed = confirm(t("backspace"));
       if (isConfirmed) {
-        window.location.href = "/";
+        window.location.href = "/games";
       }
       return isConfirmed;
     });

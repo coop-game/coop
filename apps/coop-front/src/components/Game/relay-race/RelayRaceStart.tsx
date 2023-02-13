@@ -59,7 +59,7 @@ const RelayRaceStart = () => {
     if (isOwner && relayRaceAnswerState && relayRaceAnswerState.length !== 0) {
       if (relayRaceAnswerState.length >= gameState.gameOrderNumber.length) {
         changeGameStateHandler({
-          path: "/result",
+          path: "/games/result",
         });
       } else if (isOwner) {
         changeGameStateHandler({

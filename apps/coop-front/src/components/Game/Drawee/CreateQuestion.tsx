@@ -89,7 +89,7 @@ const CreateQuestion = () => {
             questioner: provider.awareness.clientID,
             isQuestionEnd: false,
             solver: nextUserClientId,
-            path: "/draw",
+            path: "/games/drawee/draw",
           };
           pushQuestionHandler(newQuestion);
         }
@@ -104,7 +104,7 @@ const CreateQuestion = () => {
 
   const routePush_lobby = useCallback(() => {
     const newGameState: Partial<CPGameDrawee> = {};
-    newGameState.path = "/lobby";
+    newGameState.path = "/games/lobby";
     newGameState.isGameStart = false;
     changeGameStateHandler(newGameState);
   }, [changeGameStateHandler]);
@@ -112,7 +112,7 @@ const CreateQuestion = () => {
   const nextPageHandler = useCallback(() => {
     yAgreeState.clear();
     doc.transact(() => {
-      changeGameStateHandler({ path: "/draw", gamePagesIndex: 0 });
+      changeGameStateHandler({ path: "/games/drawee/draw", gamePagesIndex: 0 });
     });
   }, [changeGameStateHandler]);
 

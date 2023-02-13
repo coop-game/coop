@@ -109,7 +109,7 @@ export const LobbyMain = () => {
 
   const onClickInviteHandler = () => {
     navigator.clipboard.writeText(
-      `${process.env.NEXT_PUBLIC_HOSTNAME}/?roomId=${roomId}`
+      `${process.env.NEXT_PUBLIC_HOSTNAME}/games/?roomId=${roomId}`
     );
     toast({
       title: lobbyToastInviteTitle,
@@ -126,7 +126,7 @@ export const LobbyMain = () => {
         isGameStart: true,
         gamePagesIndex: 0,
         gameType: "DRAWEE",
-        path: "/start",
+        path: "/games/drawee/start",
       };
       changeGameStateHandler(partialDrawee);
     }

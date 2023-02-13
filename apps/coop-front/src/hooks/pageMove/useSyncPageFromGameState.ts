@@ -22,8 +22,8 @@ const useSyncPageFromGameState = () => {
 
   useEffect(() => {
     if (!gameState) {
-      if (router.pathname !== "/lobby") {
-        router.push("/");
+      if (router.pathname !== "/games/lobby") {
+        router.push("/games");
       }
     } else if (gameState.path && gameState.path !== router.pathname) {
       router.push(gameState.path);

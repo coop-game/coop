@@ -1,86 +1,60 @@
-import { useRouter } from "next/router";
-import { useCallback, useState } from "react";
-import lodashRandom from "lodash/random";
-
-import {
-  Button,
-  Flex,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  Input,
-} from "@chakra-ui/react";
-import { userSelector } from "@common/recoil/recoil.atom";
-import { nanoid } from "nanoid";
-import { useRecoilState } from "recoil";
-import AvatarImage from "@components/Users/AvatarImage";
-import { providerState } from "@common/yjsStore/userStore";
-import getUtcTimeStamp from "@common/lib/getUtcTimeStamp";
-import Layout from "@components/layout";
-import useHistoryBack from "@hooks/usehistoryBack";
+/** @jsxImportSource @emotion/react */
+import { Box, Flex } from "@chakra-ui/react";
 import { css } from "@emotion/react";
-import PostIt from "@components/layout/PostIt/PostIt";
-import Description from "@components/Game/common/Description";
+import TopContent from "@components/Welcome/TopContent";
+import MiddleContent from "@components/Welcome/MiddleContent/index";
+import { useState } from "react";
+import MiddleLowContent from "@components/Welcome/MiddleContent/src/lowContent";
+import stock1 from "@asset/stock1.jpg";
+import stock2 from "@asset/stock2.jpg";
+import stock3 from "@asset/stock3.jpg";
+import stock4 from "@asset/stock4.jpg";
+import stock5 from "@asset/stock6.jpg";
+import stock6 from "@asset/stock5.jpg";
+import stock7 from "@asset/stock7.jpg";
+import stock8 from "@asset/stock8.jpg";
+import BottomContent from "@components/Welcome/BottomContent";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useTranslation } from "next-i18next";
-import { GetServerSideProps } from "next/types";
 import { NextSeo } from "next-seo";
 
-const URL = process.env.NEXT_PUBLIC_HOSTNAME || "http://localhost:3001";
+export type nextContentType = {
+  ratio: number | undefined;
+  detect: boolean | undefined;
+};
 
-export default function Home({
-  roomId,
-  isCreater,
-}: {
-  roomId: string;
-  isCreater: boolean;
-}) {
+const URL =
+  process.env.NEXT_PUBLIC_HOSTNAME + "/welcome" ||
+  "http://localhost:3001/welcome";
+
+function Welcome() {
   const { t } = useTranslation("common");
-  const [_, setUserState] = useRecoilState(userSelector);
-  const router = useRouter();
+  const [nextContent, setNextContent] = useState<nextContentType>({
+    ratio: undefined,
+    detect: false,
+  });
+  const images = [stock1, stock2, stock3, stock4];
+  const images2 = [stock5, stock6, stock7, stock8];
 
-  const [nickname, setNickname] = useState("");
-  const [isError, setIsError] = useState(true);
-  const [avatarIndex, setAvatarIndex] = useState(0);
-  const [color, setColor] = useState("#000000");
-
-  const getRandomColor = () =>
-    "#" + Math.floor(Math.random() * 16777215).toString(16);
-
-  const randomAvatarHandler = useCallback(() => {
-    setAvatarIndex(lodashRandom(9));
-    setColor(getRandomColor());
-  }, []);
-
-  useHistoryBack();
-
-  const pushLobbyHander = () => {
-    if (nickname !== "") {
-      providerState.createProvider(roomId);
-      const utcTimeStamp = getUtcTimeStamp();
-      setUserState({ roomId, nickname, avatarIndex, color, utcTimeStamp });
-      router.push("/lobby");
-    } else {
-      setIsError(true);
-    }
+  const setRatio = ({ ratio, detect }: nextContentType) => {
+    setNextContent({ ratio, detect });
   };
-
   return (
     <>
       <NextSeo
-        title={t("seo.main.title")}
-        description={t("seo.main.description")}
+        title={t("seo.welcome.title")}
+        description={t("seo.welcome.description")}
         openGraph={{
           url: URL,
-          title: t("seo.main.title"),
-          description: t("seo.main.description"),
+          title: t("seo.welcome.title"),
+          description: t("seo.welcome.description"),
           images: [
             {
               url: `/images/logo.png`,
               width: 397,
               height: 156,
-              alt: t("seo.main.opengraph.images.alt"),
+              alt: t("main.seo.opengraph.images.alt"),
               type: "image/png",
             },
           ],
@@ -91,117 +65,45 @@ export default function Home({
           cardType: "summary_large_image",
         }}
       />
-      <Layout>
-        <Flex
-          w={"100%"}
-          h={"100%"}
-          minHeight={"500px"}
-          justifyContent={"center"}
-          flexDirection={{ base: "column", md: "row" }}
-          gap={{ base: "10px", md: "20px" }}
-        >
-          <Flex
-            w={{ base: "100%", md: "350px", xl: "600px" }}
-            height="100%"
-            rounded="md"
-            flexDirection={"column"}
-            minHeight={"500px"}
-            position="relative"
-          >
-            <PostIt>
-              <Flex
-                css={css`
-                  height: 100%;
-                  width: 100%;
-                  flex-direction: column;
-                  justify-content: space-between;
-                  padding: 0 10% 10% 10%;
-                  align-items: space-between;
-                `}
-              >
-                <AvatarImage
-                  avatarIndex={avatarIndex}
-                  borderColor={color}
-                  randomAvatarHandler={randomAvatarHandler}
-                ></AvatarImage>
-                <FormControl isInvalid={isError}>
-                  <FormLabel>{t("user.nickname")}</FormLabel>
-                  <Input
-                    type="email"
-                    value={nickname}
-                    onChange={(e) => {
-                      setNickname(e.target.value);
-                      setIsError(e.target.value === "");
-                    }}
-                  />
-                  <Flex ml={5}>
-                    {!isError ? (
-                      <FormHelperText>
-                        {t("user.success.nickname")}
-                      </FormHelperText>
-                    ) : (
-                      <FormErrorMessage>
-                        {t("user.required.nickname")}
-                      </FormErrorMessage>
-                    )}
-                  </Flex>
-                  <Flex width={"100%"} justifyContent={"flex-end"}>
-                    <Button boxShadow={"base"} onClick={pushLobbyHander}>
-                      GO LOBBY
-                    </Button>
-                  </Flex>
-                </FormControl>
-                <div
-                  css={css`
-                    & {
-                      position: absolute;
-                      content: "";
-                      top: -5px;
-                      left: 0;
-                      height: 10px;
-                      width: 11px;
-                      background-size: 9px 12px;
-                      background-image: radial-gradient(
-                        circle at 5% 40%,
-                        transparent 70%,
-                        #555 20%
-                      );
-                      transform: rotateX(90deg);
-                    }
-                  `}
-                ></div>
-              </Flex>
-            </PostIt>
-          </Flex>
-          <Flex
-            display={{ base: "none", md: "flex" }}
-            w={{ base: "100%", md: "350px", xl: "600px" }}
-            height="100%"
-          >
-            <PostIt>
-              <div
-                css={css`
-                  width: 100%;
-                  height: calc(100% - 200px);
-                `}
-              >
-                <Description></Description>
-              </div>
-            </PostIt>
-          </Flex>
+      <Box bg="colors.primary" w="100%" minH="100vh" color="black" p={4}>
+        {/* 최상단 부분  */}
+        <Flex direction="column">
+          <TopContent />
         </Flex>
-      </Layout>
+        {/* 중간 그린다 부분 */}
+        <Flex
+          direction="column"
+          w="100%"
+          display="flex"
+          alignItems="center"
+          css={css`
+            position: relative;
+            z-index: 10;
+          `}
+          sx={{
+            opacity: `${
+              nextContent.detect && nextContent.ratio !== undefined
+                ? 1 - nextContent.ratio * 5
+                : 1
+            }`,
+          }}
+        >
+          <MiddleContent nextContent={nextContent}></MiddleContent>
+        </Flex>
+        {/* 중간 맞춘다 부분 */}
+        <MiddleLowContent setRatio={setRatio} images={images2} />
+        {/* 최하단 시작해보기 부분 */}
+        <Flex direction="column" h="100vh">
+          <BottomContent />
+        </Flex>
+      </Box>
     </>
   );
 }
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale ?? "ko", ["common"])),
+  },
+});
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const roomId = context.query?.roomId;
-  return {
-    props: {
-      ...(await serverSideTranslations(context.locale ?? "ko", ["common"])),
-      roomId: roomId === undefined ? nanoid() : roomId,
-      isCreater: roomId === undefined,
-    },
-  };
-};
+export default Welcome;

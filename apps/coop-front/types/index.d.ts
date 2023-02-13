@@ -7,8 +7,6 @@ export type CPUserType = {
   isOwner?: boolean;
 };
 
-
-
 export type CPChatType = {
   id: number;
   nickname: string;
@@ -34,10 +32,10 @@ export type CPGameRelayRaceAnswer = {
 export type CPGameRelayRaceAnswers = CPGameRelayRaceAnswer[];
 
 export type CPPageType =
-  | "/lobby"
-  | "/start"
-  | "/draw"
-  | "/result"
+  | "/games/lobby"
+  | "/games/drawee/start"
+  | "/games/drawee/draw"
+  | "/games/result"
   | "/games/relay-race";
 
 export type CPGameQuestion = {

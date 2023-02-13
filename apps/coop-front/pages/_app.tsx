@@ -14,12 +14,18 @@ import { css } from "@emotion/react";
 
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+
+  const getSetOfUnusedAnimationPath = () => {
+    return new Set(["/"]);
+  };
+
+  const setOfUnusedAnimationPath = getSetOfUnusedAnimationPath();
   return (
     <>
       <ChakraProvider theme={theme}>
         <DefaultSeo {...SEO} />
         <RecoilRoot>
-          {router.pathname === "/welcome" ? (
+          {setOfUnusedAnimationPath.has(router.pathname) ? (
             <Component {...pageProps} />
           ) : (
             <Transition location={router.pathname}>
