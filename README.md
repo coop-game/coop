@@ -136,3 +136,8 @@ Vercel을 통해 배포하였으며, 관련 도메인도 vercel을 통해 관리
 ## [turborepo](https://github.com/coop-game/coop/blob/main/document/turborepo.md)
 
 ## [useInView](https://github.com/coop-game/coop/blob/main/document/useInView.md)
+
+# reference
+
+images: [svgrepo](https://www.svgrepo.com/)
+music: [piano man](https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13073767&menuNo=200020)
