@@ -13,20 +13,20 @@ export default function Document() {
         <meta name="theme-color" content="hsl(24.3, 97.4%, 54.3%)" />
         <link rel="manifest" href="/manifest.json" />
         <link
-          href="favicon-16x16.png"
+          href="/favicon-16x16.png"
           rel="icon"
           type="image/png"
           sizes="16x16"
         />
         <link
-          href="favicon-32x32.png"
+          href="/favicon-32x32.png"
           rel="icon"
           type="image/png"
           sizes="32x32"
         />
         <link
           rel="apple-touch-icon"
-          href="images/icons/icon-192x192.png"
+          href="/images/icons/icon-192x192.png"
         ></link>
         <meta name="msapplication-TileColor" content="#721480b2"></meta>
       </Head>
