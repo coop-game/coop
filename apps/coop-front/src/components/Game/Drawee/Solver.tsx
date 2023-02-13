@@ -92,7 +92,6 @@ const Solver = () => {
                 }
               }}
               onChange={(e) => {
-                console.log(isSpecialCharacters(e.target.value.trim()));
                 if (
                   e.target.value.trim().length > 0 &&
                   !isSpecialCharacters(e.target.value.trim())

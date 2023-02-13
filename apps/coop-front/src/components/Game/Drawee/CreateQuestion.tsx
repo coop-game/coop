@@ -30,7 +30,6 @@ import { isSpecialCharacters } from "@common/regex";
 const CreateQuestion = () => {
   const { provider } = providerState;
   const callbackInput = (prev: string, value: string) => {
-    console.log(prev, value, isSpecialCharacters(value));
     if (isSpecialCharacters(value)) {
       return prev;
     }

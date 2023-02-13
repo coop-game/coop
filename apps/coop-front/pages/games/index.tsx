@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import lodashRandom from "lodash/random";
 
 import {
@@ -45,6 +45,8 @@ export default function Home({
   const [avatarIndex, setAvatarIndex] = useState(0);
   const [color, setColor] = useState("#000000");
 
+  const backgroundAudioRef = useRef(null);
+
   const getRandomColor = () =>
     "#" + Math.floor(Math.random() * 16777215).toString(16);
 
@@ -60,11 +62,18 @@ export default function Home({
       providerState.createProvider(roomId);
       const utcTimeStamp = getUtcTimeStamp();
       setUserState({ roomId, nickname, avatarIndex, color, utcTimeStamp });
+      backgroundAudioRef.current && backgroundAudioRef.current.play();
       router.push("/games/lobby");
     } else {
       setIsError(true);
     }
   };
+
+  useEffect(() => {
+    backgroundAudioRef.current = document.getElementById(
+      "background_audio"
+    ) as HTMLAudioElement | null;
+  }, []);
 
   return (
     <>

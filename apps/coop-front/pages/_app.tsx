@@ -11,6 +11,7 @@ import { appWithTranslation } from "next-i18next";
 import { DefaultSeo } from "next-seo";
 import SEO from "next-seo-config";
 import { css } from "@emotion/react";
+import BackgroundSound from "@components/Sound/BackgroundSound";
 
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -25,6 +26,7 @@ function App({ Component, pageProps }: AppProps) {
       <ChakraProvider theme={theme}>
         <DefaultSeo {...SEO} />
         <RecoilRoot>
+          <BackgroundSound></BackgroundSound>
           {setOfUnusedAnimationPath.has(router.pathname) ? (
             <Component {...pageProps} />
           ) : (

@@ -5,6 +5,7 @@ import MuteButton from "@components/Button/MuteButton";
 import SideModalPortal from "./SideModalPortal";
 import ToggleThemeButton from "@components/Button/ToggleThemeButton";
 import LanguageButton from "@components/Button/LanguageButton";
+import SliderBar from "@components/Button/SliderBar";
 
 const SideMenuModal = () => {
   return (
@@ -20,6 +21,10 @@ const SideMenuModal = () => {
           `}
         >
           <MuteButton />
+          <SliderBar
+            audioId={"background_audio"}
+            translationLabel="tooltip.background.sound"
+          />
           <ToggleThemeButton />
           <LanguageButton />
         </Flex>
