@@ -65,11 +65,11 @@ Vercel을 통해 배포하였으며, 관련 도메인도 vercel을 통해 관리
 
 ![shocked-emoji-svgrepo-com (1).png](<document/images/shocked-emoji-svgrepo-com_(1).png>)
 
-### [\*\*장석찬](https://github.com/jsc7727) : TurboRepo 활용하여 프로젝트 기반과 기초 설계, Yjs, Tldraw 활용, 로비 페이지, SCSS, Drawee 모드 제작, Vercel 활용한 배포\*\*
+### [장석찬](https://github.com/jsc7727) : TurboRepo 활용하여 프로젝트 기반과 기초 설계, Yjs, Tldraw 활용, 로비 페이지, SCSS, Drawee 모드 제작, Vercel 활용한 배포\*\*
 
 ![bug-svgrepo-com.png](document/images/bug-svgrepo-com.png)
 
-### [\*\*정진](https://github.com/TypingOK) : 메인 페이지, 이어달리기 모드, 게임 결과 페이지 제작, PWA 및 SEO 최적화, 다국어 지원\*\*
+### [정진](https://github.com/TypingOK) : 메인 페이지, 이어달리기 모드, 게임 결과 페이지 제작, PWA 및 SEO 최적화, 다국어 지원\*\*
 
 ### **Common : React-Framer 사용하여 CSS, SVG 애니메이션 제작**
 
