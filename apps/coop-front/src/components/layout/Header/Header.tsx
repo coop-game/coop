@@ -6,13 +6,11 @@ import ChattingModal from "@components/Modal/ChattingModal";
 import SideMenuModal from "@components/Modal/SideMenuModal";
 import { css } from "@emotion/react";
 import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 
 const Header = () => {
   const gameState = useRecoilValue(yjsGameState);
   const { t } = useTranslation("common");
-  const router = useRouter();
   return (
     <Flex
       w={{ base: "100%", md: "750px", xl: "1000px" }}

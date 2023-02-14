@@ -97,6 +97,9 @@ const Logo = ({
           stroke: ${color};
           fill: ${color};
         }
+        &:hover {
+          cursor: pointer;
+        }
       `}
       onClick={() => {
         onClickHandler && onClickHandler();
