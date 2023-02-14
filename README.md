@@ -137,6 +137,8 @@ Vercel을 통해 배포하였으며, 관련 도메인도 vercel을 통해 관리
 
 ## [useInView](https://github.com/coop-game/coop/blob/main/document/useInView.md)
 
+## [Framer-motion](https://github.com/coop-game/coop/blob/main/document/Framer-motion.md)
+
 # reference
 
 images: [svgrepo](https://www.svgrepo.com/)
