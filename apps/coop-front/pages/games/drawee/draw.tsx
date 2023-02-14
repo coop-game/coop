@@ -7,7 +7,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
-import Copyright from "@components/Copyright";
+import Copyright from "@components/layout/Footer/Copyright";
 
 function DrawPage() {
   useHistoryBack();

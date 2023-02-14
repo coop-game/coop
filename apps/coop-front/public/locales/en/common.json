@@ -86,12 +86,15 @@
   "tooltip.hover.darkmode": "Darkmode",
   "tooltip.hover.lightmode": "Lightmode",
 
-  "tooltip.hover.language": "Language",
+  "tooltip.hover.language": "Change language",
 
   "tooltip.hover.profile.change": "Profile change",
   "tooltip.hover.chatting": "Chatting",
 
-  "tooltip.background.sound": "BGM",
+  "side.menu.button.title.mute": "Mute",
+  "side.menu.button.title.sound": "BGM",
+  "side.menu.button.title.theme": "Theme",
+  "side.menu.button.title.language": "Language",
 
   "seo.main.title": "Drawee",
   "seo.main.description": "Join the multiplayer catch mind game using WebRTC, Next.js, i18n support, and Yjs. Compete with players from around the world in real-time and see who can catch the most minds.",

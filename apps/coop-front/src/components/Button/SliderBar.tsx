@@ -6,21 +6,27 @@ import {
   Box,
   Tooltip,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "next-i18next";
+import { SlideMenuButtonLayout } from "@components/Modal/SideMenuModal";
 
 const SliderBar = ({
   audioId,
-  translationLabel,
+  titleLabel,
+  color,
 }: {
   audioId: string;
-  translationLabel: string;
+  titleLabel: string;
+  color: string;
 }) => {
   const backgroundAudioRef = useRef(null);
   const { t } = useTranslation("common");
+  const [volume, setVolume] = useState(20);
+  const [showTooltip, setShowTooltip] = useState(false);
   const onChangehandler = (val: number) => {
     backgroundAudioRef.current.volume = val / 100;
+    setVolume(val);
   };
 
   useEffect(() => {
@@ -31,20 +37,36 @@ const SliderBar = ({
   }, []);
 
   return (
-    <Tooltip label={t(translationLabel)}>
+    <SlideMenuButtonLayout>
+      <Box color={color}>{t(titleLabel)}</Box>
       <Box width="100%" paddingLeft={"10px"} paddingRight={"10px"}>
         <Slider
+          id="slider"
           aria-label="slider-ex-1"
-          defaultValue={20}
+          colorScheme="teal"
+          defaultValue={volume}
           onChange={onChangehandler}
+          min={0}
+          max={100}
+          onMouseEnter={() => setShowTooltip(true)}
+          onMouseLeave={() => setShowTooltip(false)}
         >
           <SliderTrack>
             <SliderFilledTrack />
           </SliderTrack>
-          <SliderThumb />
+          <Tooltip
+            hasArrow
+            bg="teal.500"
+            color="white"
+            placement="top"
+            isOpen={showTooltip}
+            label={`${volume}%`}
+          >
+            <SliderThumb />
+          </Tooltip>
         </Slider>
       </Box>
-    </Tooltip>
+    </SlideMenuButtonLayout>
   );
 };
 export default React.memo(SliderBar);

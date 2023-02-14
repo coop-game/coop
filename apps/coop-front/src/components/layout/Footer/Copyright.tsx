@@ -1,6 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { css } from "@emotion/react";
-import GithubButton from "./Button/GithubButton";
+import GithubButton from "../../Button/GithubButton";
 
 const Copyright = () => {
   return (

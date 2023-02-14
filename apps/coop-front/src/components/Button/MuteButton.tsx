@@ -1,11 +1,18 @@
 /** @jsxImportSource @emotion/react */
-import { Button, Tooltip, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Tooltip,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { soundVolumeState } from "@common/recoil/recoil.atom";
 import { css } from "@emotion/react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { useRecoilState } from "recoil";
-const MuteButton = () => {
+import { SlideMenuButtonLayout } from "@components/Modal/SideMenuModal";
+const MuteButton = ({ color }: { color: string }) => {
   const [soundVolume, setSoundVolume] = useRecoilState(soundVolumeState);
   const { t } = useTranslation("common");
   const onClickHandler = (e: any) => {
@@ -13,7 +20,8 @@ const MuteButton = () => {
     setSoundVolume((prev) => !prev);
   };
   return (
-    <>
+    <SlideMenuButtonLayout>
+      <Box color={color}>{t("side.menu.button.title.mute")}</Box>
       <Tooltip
         label={t(
           soundVolume ? "tooltip.sound.up.hover" : "tooltip.sound.mute.hover"
@@ -60,7 +68,7 @@ const MuteButton = () => {
           ></Image>
         </button>
       </Tooltip>
-    </>
+    </SlideMenuButtonLayout>
   );
 };
 export default MuteButton;

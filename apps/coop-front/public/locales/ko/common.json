@@ -87,11 +87,15 @@
 
   "tooltip.hover.darkmode": "다크모드",
   "tooltip.hover.lightmode": "라이트모드",
-  "tooltip.hover.language": "언어",
+  "tooltip.hover.language": "언어 바꾸기",
 
   "tooltip.hover.profile.change": "프로필 바꾸기",
   "tooltip.hover.chatting": "채팅",
-  "tooltip.background.sound": "BGM",
+
+  "side.menu.button.title.mute": "음소거",
+  "side.menu.button.title.sound": "배경음악",
+  "side.menu.button.title.theme": "테마",
+  "side.menu.button.title.language": "언어",
 
   "seo.main.title": "Drawee",
   "seo.main.description": "WebRTC, Next.js, i18n 지원 및 Yjs를 사용하여 멀티플레이어 캐치 마인드 게임에 참여하세요. 실시간으로 전 세계의 플레이어와 경쟁하고 누가 가장 많은 마음을 사로잡을 수 있는지 확인하세요.",
