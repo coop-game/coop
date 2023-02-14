@@ -25,7 +25,7 @@
 
 Client : Recoil, React, Nextjs, Framer-motion, typescript, chakra, i18n, pwa, webRtc, Tldraw
 
-Server : socket,
+Server : nginx, node, socket
 
 Game Sturcture : YJS
 
