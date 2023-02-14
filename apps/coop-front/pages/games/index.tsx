@@ -59,6 +59,7 @@ export default function Home({
 
   const pushLobbyHander = () => {
     if (nickname !== "") {
+      providerState.clearProvider();
       providerState.createProvider(roomId);
       const utcTimeStamp = getUtcTimeStamp();
       setUserState({ roomId, nickname, avatarIndex, color, utcTimeStamp });

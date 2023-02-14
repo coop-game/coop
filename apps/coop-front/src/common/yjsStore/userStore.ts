@@ -65,10 +65,14 @@ export class providerClass {
   }
 
   clearProvider = () => {
-    this.provider.destroy();
-    this.provider = null;
-    this.room.destroy();
-    this.room = null;
+    if (this.provider !== null) {
+      this.provider.destroy();
+      this.provider = null;
+    }
+    if (this.room !== null) {
+      this.room.destroy();
+      this.room = null;
+    }
   };
 
   disconnectProvider = () => {

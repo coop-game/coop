@@ -1,15 +1,18 @@
 import { Badge, Flex } from "@chakra-ui/react";
 import { yjsGameState } from "@common/recoil/recoil.atom";
+import { providerState } from "@common/yjsStore/userStore";
 import Logo from "@components/Animation/Logo/Logo";
 import ChattingModal from "@components/Modal/ChattingModal";
 import SideMenuModal from "@components/Modal/SideMenuModal";
 import { css } from "@emotion/react";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 
 const Header = () => {
   const gameState = useRecoilValue(yjsGameState);
   const { t } = useTranslation("common");
+  const router = useRouter();
   return (
     <Flex
       w={{ base: "100%", md: "750px", xl: "1000px" }}
@@ -56,7 +59,16 @@ const Header = () => {
           }
         `}
       >
-        <Logo color={"#721480"}></Logo>
+        <Logo
+          color={"#721480"}
+          onClickHandler={() => {
+            const confirm = window.confirm(t("backspace"));
+            if (confirm === true) {
+              providerState.clearProvider();
+              window.location.href = "/games";
+            }
+          }}
+        ></Logo>
       </Flex>
       <Flex
         css={css`

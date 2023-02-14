@@ -7,7 +7,13 @@ import LetterLineRightE from "./LetterLineRightE";
 import LetterPath from "./LetterPath";
 import LogoPencil from "./LogoPenCil";
 
-const Logo = ({ color }: { color: string }) => {
+const Logo = ({
+  color,
+  onClickHandler,
+}: {
+  color: string;
+  onClickHandler?: () => void;
+}) => {
   const wordsArray: Array<{ d: string; coverline: React.ReactNode }> = [
     {
       d: D,
@@ -92,6 +98,9 @@ const Logo = ({ color }: { color: string }) => {
           fill: ${color};
         }
       `}
+      onClick={() => {
+        onClickHandler && onClickHandler();
+      }}
     >
       <motion.svg
         width={svgWidth}

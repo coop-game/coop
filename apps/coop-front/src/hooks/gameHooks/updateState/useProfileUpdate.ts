@@ -16,6 +16,10 @@ const useProfileUpdate = () => {
   const { provider, room } = providerState;
 
   const filterMap = useCallback(() => {
+    console.log("filterMap", !!provider, provider);
+    if (!provider) {
+      return { isOwner: null, userProfiles: [] };
+    }
     // const state = provider?.awareness.meta;
     const state = provider?.awareness.getStates();
     let userProfiles: CPUserProfile[] = [];
@@ -38,7 +42,8 @@ const useProfileUpdate = () => {
       return { isOwner, ...v };
     });
     const isOwner =
-      Number(userProfiles[0]?.id) === providerState.provider.awareness.clientID;
+      Number(userProfiles[0]?.id) ===
+      providerState.provider?.awareness?.clientID;
     return { isOwner, userProfiles };
   }, [provider]);
 
@@ -46,11 +51,9 @@ const useProfileUpdate = () => {
     const observeFunction = (eventType: any, transaction: any) => {
       setUserProfiles({ ...filterMap() });
     };
-    yUserProfilesState.observe(observeFunction);
-
+    provider && yUserProfilesState.observe(observeFunction);
     provider && provider.awareness.on("update", observeFunction);
-
-    if (provider) {
+    provider &&
       yUserProfilesState.set(String(provider.awareness.clientID), {
         id: provider.awareness.clientID,
         nickname,
@@ -59,7 +62,6 @@ const useProfileUpdate = () => {
         isBanned: false,
         utcTimeStamp,
       });
-    }
 
     return () => {
       yUserProfilesState.unobserve(observeFunction);
