@@ -77,7 +77,7 @@ const DraweeResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
     >
       <Flex
         w={{ sm: "100%", md: "20%" }}
-        h={{ sm: "20%", md: "100%" }}
+        h={{ sm: "150px", md: "100%" }}
         maxH="500px"
         flexDirection={{ sm: "row", md: "column" }}
         marginTop={{ sm: "0%", md: "5%" }}
@@ -109,11 +109,12 @@ const DraweeResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
                   <Avatar
                     size={"xl"}
                     css={css`
+                      display: flex;
                       border-radius: 100%;
                       border: 3px solid
                         ${answerState[nowPageIndex].questionerColor};
                     `}
-                    src={`./images/avatar/${answerState[nowPageIndex].questionerAvatar}.png`}
+                    src={`/images/avatar/${answerState[nowPageIndex].questionerAvatar}.png`}
                   ></Avatar>
                   <Text textAlign="center">
                     {answerState[nowPageIndex].questionerNickname}
@@ -126,14 +127,19 @@ const DraweeResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
                 {t("drawee.result.question.solver")}
               </Text>
               {answerState[nowPageIndex].solverNickname && (
-                <Flex w="100%" h="100%" direction={"column"}>
+                <Flex
+                  w="100%"
+                  h="100%"
+                  direction={"column"}
+                  alignItems={"center"}
+                >
                   <Avatar
                     size={"xl"}
                     css={css`
                       border-radius: 100%;
                       border: 3px solid ${answerState[nowPageIndex].solverColor};
                     `}
-                    src={`./images/avatar/${answerState[nowPageIndex].solverAvatar}.png`}
+                    src={`/images/avatar/${answerState[nowPageIndex].solverAvatar}.png`}
                   ></Avatar>
                   <Text textAlign="center">
                     {answerState[nowPageIndex].solverNickname}
@@ -162,10 +168,11 @@ const DraweeResult = ({ nowPageIndex }: { nowPageIndex: number }) => {
       {animation && (
         <Flex
           w={{ sm: "100%", md: "75%" }}
-          height={{ sm: "70%", md: "100%" }}
+          height={{ sm: "500px", md: "100%" }}
           justifyContent={"center"}
           alignItems={"center"}
-          marginTop={{ sm: "2%", md: "5%" }}
+          marginTop={{ sm: "0%", md: "5%" }}
+          marginBottom={{ sm: "3%", md: "0%" }}
         >
           <CanvasViewer pageIndex={nowPageIndex} />
         </Flex>

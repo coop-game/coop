@@ -114,7 +114,12 @@ const AnswerDraw = ({
           useSideBarDraw={false}
         />
       </Box>
-      <Flex w={"100%"} justifyContent="center" alignItems={"center"}>
+      <Flex
+        w={"100%"}
+        h={{ sm: "15%", md: "25%" }}
+        justifyContent="center"
+        alignItems={"center"}
+      >
         <Button onClick={drawEnd}>{t("relay.race.draw.submit")}</Button>
       </Flex>
     </Box>

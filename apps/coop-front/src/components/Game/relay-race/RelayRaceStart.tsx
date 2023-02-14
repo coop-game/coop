@@ -174,18 +174,18 @@ const RelayRaceStart = () => {
       return (
         <Flex
           w="100%"
-          h="100%"
+          h={{ sm: "850px", md: "100%" }}
           position={"absolute"}
           justifyContent={"center"}
           alignItems={"center"}
         >
           <LineNote
             maxWidth="1200px"
-            maxHeight="900px"
+            maxHeight="800px"
             display="flex"
             justifyContent="center"
           >
-            <Box w="100%" h="100%" maxW={"1000px"} maxH={"800px"}>
+            <Box w="100%" h="100%" maxW={"1000px"} maxH={"700px"}>
               <AnswerDraw
                 gamepageIndex={gameState.gamePagesIndex}
                 pushArrayHandler={pushArrayHandler}

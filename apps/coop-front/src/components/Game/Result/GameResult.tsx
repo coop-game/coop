@@ -67,10 +67,10 @@ const Result = () => {
     >
       <Box w="100%" h="100%" maxW={"1200px"}>
         <Box w="100%">{t("result")}</Box>
-        <Box w="100%">
+        <Box w="100%" h="50px">
           {isPlay && (
             <Progress
-              time={5000}
+              time={10000}
               callback={timerReset}
               play={isAnimationEnd ? "running" : "pause"}
               startTime={startTime}
