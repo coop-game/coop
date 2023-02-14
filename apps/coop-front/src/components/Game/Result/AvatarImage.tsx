@@ -21,7 +21,7 @@ const AvatarImage = ({
           border-radius: 100%;
           border: 3px solid ${userProfile.color};
         `}
-        src={`./images/avatar/${userProfile.avatarIndex}.png`}
+        src={`/images/avatar/${userProfile.avatarIndex}.png`}
       ></Avatar>
       <Box ml="3" display={"block"}>
         <Text fontWeight={"bold"}>{userProfile.nickname}</Text>

@@ -6,8 +6,6 @@ import {
 import AvatarImage from "@components/Game/Result/AvatarImage";
 import { CPGameRelayRaceAnswer } from "@types";
 import { useRecoilValue } from "recoil";
-import { motion } from "framer-motion";
-import { css } from "@emotion/react";
 import { useTranslation } from "next-i18next";
 
 const SideUserBar = ({ nowPageIndex }: { nowPageIndex: number }) => {
@@ -23,7 +21,6 @@ const SideUserBar = ({ nowPageIndex }: { nowPageIndex: number }) => {
       h="100%"
       maxH={{ base: "200px", lg: "400px" }}
       justifyContent={"center"}
-      // alignItems="center"
       position={"relative"}
       flexDirection="column"
     >
@@ -32,46 +29,23 @@ const SideUserBar = ({ nowPageIndex }: { nowPageIndex: number }) => {
           {t("relay.race.result.answer.solver")}
         </Text>
       </Flex>
-      <Box w="100%" h="80%" maxH={{ base: "200px", lg: "400px" }}>
-        <Flex
-          w={"100%"}
-          h="75%"
-          alignItems={"center"}
-          flexDirection="column"
-          position={"absolute"}
-          bgColor={colorMode === "light" ? "#E2E0A5" : "#b3b18a"}
-          overflow="hidden"
-          boxShadow={"dark-lg"}
-          borderRadius="8px"
-        >
-          <motion.div
-            animate={{
-              y: `${+nowPageIndex * -100 + 10}%`,
-            }}
-            transition={{ ease: "easeOut", duration: 1 }}
-            css={css`
-              width: 100%;
-              height: 100%;
-            `}
+      {relayRaceState[nowPageIndex] !== undefined && (
+        <Box w="100%" h="80%" maxH={{ base: "200px", lg: "400px" }}>
+          <Flex
+            w={"100%"}
+            h="75%"
+            alignItems={"center"}
+            flexDirection="column"
+            position={"absolute"}
+            bgColor={colorMode === "light" ? "#E2E0A5" : "#b3b18a"}
+            overflow="hidden"
+            boxShadow={"dark-lg"}
+            borderRadius="8px"
           >
-            <div
-              css={css`
-                position: relative;
-                display: flex;
-                flex-direction: column;
-                height: ${100 * userProfiles.length}%;
-                width: 100%;
-              `}
-            >
-              {Object.keys(relayRaceState).map((e, i) => (
-                <Flex key={i} w={"100%"} h={"100%"} direction={"column"}>
-                  <AvatarImage userProfile={relayRaceState[e]} />
-                </Flex>
-              ))}
-            </div>
-          </motion.div>
-        </Flex>
-      </Box>
+            <AvatarImage userProfile={relayRaceState[nowPageIndex]} />
+          </Flex>
+        </Box>
+      )}
     </Flex>
   );
 };

@@ -17,7 +17,7 @@ function TopContent() {
   const { t } = useTranslation("common");
   const router = useRouter();
   return (
-    <Center w="100%" h="max-content">
+    <Center w="100%" h="100vh">
       <Flex direction="column">
         <Center marginTop={{ base: "50px", sm: "10px", md: "50px" }}>
           <Logo color={"blueviolet"}></Logo>
