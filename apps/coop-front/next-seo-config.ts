@@ -14,6 +14,12 @@ const SEO = {
       sizes: "32x32",
     },
   ],
+  // languageAlternates: [
+  //   {
+  //     hrefLang: "de-AT",
+  //     href: "https://www.canonical.ie/de",
+  //   },
+  // ],
   additionalMetaTags: [
     {
       name: "theme-color",

@@ -1,4 +1,4 @@
-import { Button, Center, Flex, Text } from "@chakra-ui/react";
+import { Button, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import { css, keyframes } from "@emotion/react";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
@@ -23,9 +23,9 @@ function TopContent() {
           <Logo color={"blueviolet"}></Logo>
         </Center>
         <Center marginTop={{ base: "40px", sm: "20px", md: "40px" }}>
-          <Text fontSize={{ base: "6xl", sm: "3xl", md: "6xl" }}>
+          <Heading fontSize={{ base: "6xl", sm: "3xl", md: "6xl" }}>
             {t("welcome.site.title")}
-          </Text>
+          </Heading>
         </Center>
         <Center marginTop={{ base: "40px", sm: "20px", md: "40px" }}>
           <Text
