@@ -36,6 +36,7 @@ const Solver = () => {
   const questionsState = useRecoilValue(yjsQuestionsState);
 
   const answerChangeHandler = () => {
+    if (answer.length === 0) return;
     doc.transact(() => {
       const gamePagesIndex = gameState.gamePagesIndex;
       const question = yQuestionsState.get(gamePagesIndex);
@@ -92,10 +93,7 @@ const Solver = () => {
                 }
               }}
               onChange={(e) => {
-                if (
-                  e.target.value.trim().length > 0 &&
-                  !isSpecialCharacters(e.target.value.trim())
-                ) {
+                if (!isSpecialCharacters(e.target.value.trim())) {
                   setAnswer(e.target.value.trim().slice(0, 20));
                 }
                 setIsError(e.target.value === "" || e.target.value.length > 20);

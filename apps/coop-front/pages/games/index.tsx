@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 import lodashRandom from "lodash/random";
 
 import {
+  Box,
   Button,
   Flex,
   FormControl,
@@ -58,7 +59,7 @@ export default function Home({
   useHistoryBack();
 
   const pushLobbyHander = () => {
-    if (nickname !== "") {
+    if (nickname.length > 0 && nickname.length <= 15) {
       providerState.clearProvider();
       providerState.createProvider(roomId);
       const utcTimeStamp = getUtcTimeStamp();
@@ -66,6 +67,16 @@ export default function Home({
       backgroundAudioRef.current && backgroundAudioRef.current.play();
       router.push("/games/lobby");
     } else {
+      setIsError(true);
+    }
+  };
+
+  const onChangeNicknameHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const newNickname = e.target.value;
+    if (newNickname.length >= 0 && newNickname.length <= 15) {
+      setNickname(newNickname);
+    }
+    if (newNickname.length === 0) {
       setIsError(true);
     }
   };
@@ -135,14 +146,26 @@ export default function Home({
                   randomAvatarHandler={randomAvatarHandler}
                 ></AvatarImage>
                 <FormControl isInvalid={isError}>
-                  <FormLabel>{t("user.nickname")}</FormLabel>
+                  <FormLabel
+                    display={"flex"}
+                    gap={"10px"}
+                    justifyContent={"space-between"}
+                  >
+                    <Flex fontSize={"1.3rem"} fontWeight={5000}>
+                      {t("user.nickname")}
+                    </Flex>
+                    <Flex
+                      fontSize={"0.8rem"}
+                      justifyContent={"center"}
+                      alignItems={"flex-end"}
+                    >
+                      {t("user.nickname.description")}
+                    </Flex>
+                  </FormLabel>
                   <Input
                     type="email"
                     value={nickname}
-                    onChange={(e) => {
-                      setNickname(e.target.value);
-                      setIsError(e.target.value === "");
-                    }}
+                    onChange={onChangeNicknameHandler}
                   />
                   <Flex ml={5}>
                     {!isError ? (

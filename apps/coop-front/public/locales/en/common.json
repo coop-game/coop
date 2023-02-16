@@ -11,6 +11,8 @@
   "room.id": "Room Title",
 
   "user.nickname": "Nickname",
+  "user.nickname.description": "(Max 15 Characters)",
+
   "user.success.nickname": "GOGO Lobby",
   "user.required.nickname": "Nickname is required",
 
