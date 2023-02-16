@@ -18,15 +18,12 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useTranslation } from "next-i18next";
 import { NextSeo } from "next-seo";
+import { URL } from "@constant/games";
 
 export type nextContentType = {
   ratio: number | undefined;
   detect: boolean | undefined;
 };
-
-const URL =
-  process.env.NEXT_PUBLIC_HOSTNAME + "/welcome" ||
-  "http://localhost:3001/welcome";
 
 function Welcome() {
   const { t } = useTranslation("common");

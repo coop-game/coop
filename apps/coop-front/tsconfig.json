@@ -15,7 +15,8 @@
       "@coop/draw": ["../../packages/coop-draw/*"],
       "@translations/*": ["translations/*"],
       "@translations/": ["src/translations/index"],
-      "@hooks/*": ["src/hooks/*"]
+      "@hooks/*": ["src/hooks/*"],
+      "@constant/*": ["src/constant/*"]
     },
     "jsxImportSource": "@emotion/react",
     "strict": false,

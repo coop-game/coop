@@ -27,8 +27,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { GetServerSideProps } from "next/types";
 import { NextSeo } from "next-seo";
-
-const URL = process.env.NEXT_PUBLIC_HOSTNAME || "http://localhost:3001";
+import { URL } from "@constant/games";
 
 export default function Home({
   roomId,

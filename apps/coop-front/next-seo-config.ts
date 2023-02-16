@@ -1,4 +1,4 @@
-const URL = process.env.NEXT_PUBLIC_HOSTNAME || "http://localhost:3001";
+import { URL } from "@constant/games";
 
 const SEO = {
   title: "Drawee",

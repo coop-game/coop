@@ -59,6 +59,7 @@ import DraweeInformationAnimation from "../../Animation/GameInformation/Drawee";
 import RelayRaceInformationAnimation from "../../Animation/GameInformation/RelayRace";
 import LinkSVG from "@asset/LinkSVG";
 import useGameSelector from "@hooks/gameHooks/updateState/useGameSelector";
+import { URL } from "@constant/games";
 
 export const LobbyMain = () => {
   const { t } = useTranslation("common");
@@ -106,9 +107,7 @@ export const LobbyMain = () => {
   }
 
   const onClickInviteHandler = () => {
-    navigator.clipboard.writeText(
-      `${process.env.NEXT_PUBLIC_HOSTNAME}/games/?roomId=${roomId}`
-    );
+    navigator.clipboard.writeText(`${URL}/games/?roomId=${roomId}`);
     toast({
       title: lobbyToastInviteTitle,
       description: lobbyToastInviteDescription,

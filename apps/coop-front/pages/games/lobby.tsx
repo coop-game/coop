@@ -7,8 +7,7 @@ import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { NextSeo } from "next-seo";
 import { useTranslation } from "next-i18next";
-
-const URL = process.env.NEXT_PUBLIC_HOSTNAME || "http://localhost:3001";
+import { URL } from "@constant/games";
 
 const Lobby = (_props: InferGetStaticPropsType<typeof getStaticProps>) => {
   useHistoryBack();
