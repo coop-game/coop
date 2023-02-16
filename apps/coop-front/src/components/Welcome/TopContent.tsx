@@ -24,6 +24,7 @@ function TopContent() {
         </Center>
         <Center marginTop={{ base: "40px", sm: "20px", md: "40px" }}>
           <Heading
+            as={"h1"}
             fontWeight={500}
             fontSize={{ base: "6xl", sm: "3xl", md: "6xl" }}
           >
