@@ -37,7 +37,8 @@ function MiddleContentPictureSlide({ index }: { index: number }) {
           return (
             <Image
               css={css`
-                margin-right: 10px;
+                padding-right: 5px;
+                padding-left: 5px;
               `}
               key={idx}
               width="1280"
