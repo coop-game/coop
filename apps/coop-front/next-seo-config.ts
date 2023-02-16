@@ -1,8 +1,10 @@
 const URL = process.env.NEXT_PUBLIC_HOSTNAME || "http://localhost:3001";
+
 const SEO = {
   title: "Drawee",
   defaultTitle: "Drawee",
   description: "다함께 그림을 그리면서 즐기는 게임!",
+  titleTemplate: "Drawee - %s",
   additionalLinkTags: [
     {
       rel: "icon",
@@ -14,12 +16,16 @@ const SEO = {
       sizes: "32x32",
     },
   ],
-  // languageAlternates: [
-  //   {
-  //     hrefLang: "de-AT",
-  //     href: "https://www.canonical.ie/de",
-  //   },
-  // ],
+  languageAlternates: [
+    {
+      hrefLang: "ko",
+      href: `${URL}`,
+    },
+    {
+      hrefLang: "en",
+      href: `${URL}/en`,
+    },
+  ],
   additionalMetaTags: [
     {
       name: "theme-color",

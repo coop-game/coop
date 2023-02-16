@@ -1,4 +1,3 @@
-import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Layout from "@components/layout";

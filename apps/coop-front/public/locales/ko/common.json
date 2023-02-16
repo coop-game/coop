@@ -63,9 +63,9 @@
   "relay.race.draw.submit.answer": "제출한 답변",
   "relay.race.result.answer.solver": "정답자",
 
-  "main.description.draw": "그린다!",
-  "main.description.communicate": "소통한다!",
-  "main.description.corrent": "맞춘다!",
+  "games.main.description.draw": "그린다!",
+  "games.main.description.communicate": "소통한다!",
+  "games.main.description.corrent": "맞춘다!",
 
   "alert.warning.multiple.instances": "다른 탭에서 이미 사용중입니다.",
 
@@ -97,9 +97,9 @@
   "side.menu.button.title.theme": "테마",
   "side.menu.button.title.language": "언어",
 
-  "seo.main.title": "Drawee",
-  "seo.main.description": "WebRTC, Next.js, i18n 지원 및 Yjs를 사용하여 멀티플레이어 캐치 마인드 게임에 참여하세요. 실시간으로 전 세계의 플레이어와 경쟁하고 누가 가장 많은 마음을 사로잡을 수 있는지 확인하세요.",
-  "seo.main.opengraph.images.alt": "Drawee 로고 이미지",
+  "seo.games.main.title": "Drawee",
+  "seo.games.main.description": "Drawee는 WebRTC, Next.js, i18n 지원, Yjs 등의 최신 웹 기술을 활용하여 사용자들에게 뛰어난 그림 그리기 경험을 제공하는 멀티플레이어 그림 그리기 게임 웹사이트입니다. 다양한 난이도의 그림 그리기 게임과 릴레이 레이스 게임을 즐기며, 전 세계의 플레이어들과 실시간으로 경쟁할 수 있습니다. 또한 채팅 기능을 통해 플레이어들끼리 소통할 수 있습니다. Drawee는 사용자 친화적인 인터페이스를 제공하여, 모든 연령층과 레벨의 플레이어들이 쉽게 접근하여 멀티플레이어 그림 그리기 게임을 즐길 수 있는 캐치 마인드 게임에 참여하세요.",
+  "seo.games.main.opengraph.images.alt": "Multiplayer drawing game website",
   "seo.welcome.keywords": "multiplayer catch mind game, WebRTC, Next.js, i18n support, Yjs, real-time, competition",
   "seo.welcome.author": "startPlayUp",
 
@@ -112,8 +112,8 @@
   "seo.error.title": "에러페이지",
   "seo.relay.race.title": "이어달리기",
 
-  "seo.welcome.title": "Drawee",
-  "seo.welcome.description": "모두 다같이 함께 그림을 그리며 즐기는 웹 게임 Drawee입니다.",
+  "seo.welcome.title": "멀티플레이어 그림 그리기 게임 웹사이트",
+  "seo.welcome.description": "Drawee는 WebRTC, Next.js, i18n 지원, Yjs 등의 최신 웹 기술을 활용하여 사용자들에게 뛰어난 그림 그리기 경험을 제공하는 멀티플레이어 그림 그리기 게임 웹사이트입니다. 다양한 난이도의 그림 그리기 게임과 릴레이 레이스 게임을 즐기며, 전 세계의 플레이어들과 실시간으로 경쟁할 수 있습니다. 또한 채팅 기능을 통해 플레이어들끼리 소통할 수 있습니다. Drawee는 사용자 친화적인 인터페이스를 제공하여, 모든 연령층과 레벨의 플레이어들이 쉽게 접근하여 멀티플레이어 그림 그리기 게임을 즐길 수 있는 캐치 마인드 게임에 참여하세요.",
 
   "lobby.game.selected": "선택됨",
 

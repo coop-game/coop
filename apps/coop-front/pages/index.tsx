@@ -54,7 +54,7 @@ function Welcome() {
               url: `/images/logo.png`,
               width: 397,
               height: 156,
-              alt: t("main.seo.opengraph.images.alt"),
+              alt: t("games.main.seo.opengraph.images.alt"),
               type: "image/png",
             },
           ],

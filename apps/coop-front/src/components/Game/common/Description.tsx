@@ -20,12 +20,10 @@ const Description = ({
   const [number, setNumber] = useState<number>(0);
 
   const textArray = [
-    "main.description.draw",
-    "main.description.communicate",
-    "main.description.corrent",
+    "games.main.description.draw",
+    "games.main.description.communicate",
+    "games.main.description.corrent",
   ];
-
-  const router = useRouter();
 
   return (
     <div
@@ -35,7 +33,7 @@ const Description = ({
         position: relative;
       `}
     >
-      <div
+      <h1
         css={css`
           display: flex;
           justify-content: center;
@@ -44,7 +42,7 @@ const Description = ({
         `}
       >
         {t(textArray[number])}
-      </div>
+      </h1>
       <div
         css={css`
           width: 100%;

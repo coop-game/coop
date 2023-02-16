@@ -104,9 +104,9 @@ const theme = extendTheme({
   sizes,
   colors: { ...customColor },
   fonts: {
-    body: `'Jua', sans-serif`,
-    heading: "Georgia, serif",
-    mono: "Menlo, monospace",
+    body: `Jua, sans-serif`,
+    heading: "Jua, Georgia, serif",
+    mono: "Jua, Menlo, monospace",
   },
   fontSizes: {
     xs: "0.75rem",

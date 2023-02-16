@@ -23,17 +23,22 @@ function TopContent() {
           <Logo color={"blueviolet"}></Logo>
         </Center>
         <Center marginTop={{ base: "40px", sm: "20px", md: "40px" }}>
-          <Heading fontSize={{ base: "6xl", sm: "3xl", md: "6xl" }}>
+          <Heading
+            fontWeight={500}
+            fontSize={{ base: "6xl", sm: "3xl", md: "6xl" }}
+          >
             {t("welcome.site.title")}
           </Heading>
         </Center>
         <Center marginTop={{ base: "40px", sm: "20px", md: "40px" }}>
-          <Text
+          <Heading
+            as={"h2"}
+            fontWeight={500}
             fontSize={{ base: "4xl", sm: "2xl", md: "4xl" }}
             textAlign="center"
           >
             {t("welcome.site.tutorial1")}
-          </Text>
+          </Heading>
         </Center>
         <Center marginTop={{ base: "20px", sm: "10px", md: "20px" }}>
           <Text

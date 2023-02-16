@@ -79,18 +79,18 @@ export default function Home({
   return (
     <>
       <NextSeo
-        title={t("seo.main.title")}
-        description={t("seo.main.description")}
+        title={t("seo.games.main.title")}
+        description={t("seo.games.main.description")}
         openGraph={{
           url: URL,
-          title: t("seo.main.title"),
-          description: t("seo.main.description"),
+          title: t("seo.games.main.title"),
+          description: t("seo.games.main.description"),
           images: [
             {
               url: `/images/logo.png`,
               width: 397,
               height: 156,
-              alt: t("seo.main.opengraph.images.alt"),
+              alt: t("seo.games.main.opengraph.images.alt"),
               type: "image/png",
             },
           ],
