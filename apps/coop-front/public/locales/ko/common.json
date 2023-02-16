@@ -98,7 +98,7 @@
   "side.menu.button.title.theme": "테마",
   "side.menu.button.title.language": "언어",
 
-  "seo.games.main.title": "Drawee",
+  "seo.games.main.title": "Games",
   "seo.games.main.description": "Drawee는 WebRTC, Next.js, i18n 지원, Yjs 등의 최신 웹 기술을 활용하여 사용자들에게 뛰어난 그림 그리기 경험을 제공하는 멀티플레이어 그림 그리기 게임 웹사이트입니다. 다양한 난이도의 그림 그리기 게임과 릴레이 레이스 게임을 즐기며, 전 세계의 플레이어들과 실시간으로 경쟁할 수 있습니다. 또한 채팅 기능을 통해 플레이어들끼리 소통할 수 있습니다. Drawee는 사용자 친화적인 인터페이스를 제공하여, 모든 연령층과 레벨의 플레이어들이 쉽게 접근하여 멀티플레이어 그림 그리기 게임을 즐길 수 있는 캐치 마인드 게임에 참여하세요.",
   "seo.games.main.opengraph.images.alt": "Multiplayer drawing game website",
   "seo.welcome.keywords": "multiplayer catch mind game, WebRTC, Next.js, i18n support, Yjs, real-time, competition",
